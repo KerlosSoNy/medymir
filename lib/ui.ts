@@ -58,6 +58,11 @@ export const UI = {
   categories: "Categories",
   allRightsReserved: "All rights reserved.",
   menu: "Menu",
+  close: "Close",
+  expand: "show sub-categories",
+  collapse: "hide sub-categories",
+  requestAQuote: "Request a quote",
+  featuredBrands: "Featured brands",
   previous: "Previous",
   nextSlide: "Next",
 };

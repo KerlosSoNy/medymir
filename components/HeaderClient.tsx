@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { getAuth } from "@/lib/client-api";
 import { UI } from "@/lib/ui";
 import { useQuoteList } from "./QuoteListProvider";
@@ -71,37 +71,5 @@ export function QuoteListLink() {
         <strong>{UI.quoteList}</strong>
       </span>
     </Link>
-  );
-}
-
-export function CategoryMenuButton({ label, categories }: { label: string; categories: { name: string; slug: string }[] }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const path = usePathname();
-  useEffect(() => setOpen(false), [path]);
-  useEffect(() => {
-    const close = (e: MouseEvent) => !ref.current?.contains(e.target as Node) && setOpen(false);
-    document.addEventListener("click", close);
-    return () => document.removeEventListener("click", close);
-  }, []);
-  return (
-    <div className="allcats" ref={ref}>
-      <button type="button" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-        <img src="/icons/menu.svg" width={17} height={17} alt="" />
-        {label}
-      </button>
-      {open && (
-        <ul className="allcats-menu">
-          {categories.map((c) => (
-            <li key={c.slug}>
-              <Link href={`/category/${c.slug}`}>{c.name}</Link>
-            </li>
-          ))}
-          <li className="sep">
-            <Link href="/categories">{UI.categories} →</Link>
-          </li>
-        </ul>
-      )}
-    </div>
   );
 }

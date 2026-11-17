@@ -15,7 +15,7 @@ Preview: run `npm run build && npm run start`, then open http://localhost:3000. 
 ### Website (this folder)
 - [x] New Next.js site, English only, built from the Figma home page (Desktop 1440)
 - [x] Header: announcement bar, MedyMar wordmark, search with category dropdown, account link, quote list with counter
-- [x] Category bar ("Ready Stock Offers" highlighted) with an "All categories" dropdown
+- [x] Category bar ("Ready Stock Offers" highlighted) with the Figma mega menus: "All categories" (12 numbered groups) and a panel per category (sub-categories, "view all" link, quote card, featured brands). Opens on hover or keyboard focus on computers and closes with Esc. Tablets and phones get a hamburger menu that slides in from the side. Menu texts are in `lib/menu.ts`
 - [x] Home page sections: hero slider, popular searches, features, shop by category carousel, Abbott banner and section, shop by brand carousel, "Lines buyers ask for most", exclusive brands in Oman, Stryker section, orthopaedic surgery callout, Medtronic banner, solutions, WhatsApp banner, quotation form, quotation details, procurement contact card
 - [x] Footer: wordmark, about text, categories, top brands, contact, About & Support links, policy links, copyright
 - [x] Quote list instead of a shopping cart (add to quote list, quote list page, list lines sent with the request)

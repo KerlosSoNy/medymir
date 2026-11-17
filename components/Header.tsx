@@ -1,13 +1,12 @@
 // Announcement bar + main header + category bar (Figma nodes 9:9, 9:22, 9:56).
 // Announcement items and extra category-bar links come from the CMS "site-layout" page;
 // categories come from the catalogue.
-import Link from "next/link";
 import type { Category, Tenant } from "@/lib/api";
 import { tr } from "@/lib/format";
 import { UI } from "@/lib/ui";
 import { Logo } from "./Logo";
-import { SmartLink } from "./SmartLink";
-import { HeaderSearch, QuoteListLink, AccountLink, CategoryMenuButton } from "./HeaderClient";
+import { HeaderSearch, QuoteListLink, AccountLink } from "./HeaderClient";
+import { CategoryNav, MobileMenu, type NavCategory, type NavExtra } from "./CategoryNav";
 
 export function Header({
   tenant,
@@ -21,7 +20,8 @@ export function Header({
   const announcement: any[] = layout.announcement?.items ?? [];
   const nav = layout["category-nav"];
   const highlight: string | undefined = nav?.highlight;
-  const extra: any[] = nav?.items ?? [];
+  const navCats: NavCategory[] = categories.map((c) => ({ name: c.name, slug: c.slug ?? c.id }));
+  const extras: NavExtra[] = (nav?.items ?? []).map((x: any) => ({ label: tr(x.label), link: x.link }));
 
   return (
     <header className="site-header">
@@ -41,6 +41,7 @@ export function Header({
       )}
 
       <div className="header-main">
+        <MobileMenu categories={navCats} extras={extras} />
         <Logo tenant={tenant} />
         <HeaderSearch categories={categories.map((c) => ({ id: c.id, name: c.name }))} />
         <div className="header-actions">
@@ -49,21 +50,7 @@ export function Header({
         </div>
       </div>
 
-      <nav className="category-bar" aria-label={UI.categories}>
-        <div className="category-bar-inner">
-          <CategoryMenuButton label={tr(nav?.title) || UI.allCategories} categories={categories.map((c) => ({ name: c.name, slug: c.slug ?? c.id }))} />
-          {categories.map((c) => (
-            <Link key={c.id} href={`/category/${c.slug ?? c.id}`} className={c.slug === highlight ? "hl" : undefined}>
-              {c.name}
-            </Link>
-          ))}
-          {extra.map((x, i) => (
-            <SmartLink key={i} to={x.link}>
-              {tr(x.label)}
-            </SmartLink>
-          ))}
-        </div>
-      </nav>
+      <CategoryNav title={tr(nav?.title) || UI.allCategories} categories={navCats} highlight={highlight} extras={extras} />
     </header>
   );
 }
