@@ -14,6 +14,7 @@ Read these, in this order:
 2. **[SPECS.md](SPECS.md)**: stack, breakpoints, design tokens, styling rules, data flow, project structure.
 3. **[FEATURES.md](FEATURES.md)**: what the site does, page by page.
 4. **[README.md](README.md)**: how to run it and where content is edited in TheCoins.
+5. **[CMS-WIDGETS.md](CMS-WIDGETS.md)**: every TheCoins page-builder widget type, its fields, and which ones our site supports. Read it before adding or changing any CMS section.
 
 Then look at the Figma frame for the screen you're working on (section 2) **before** writing UI code.
 
@@ -75,7 +76,7 @@ If a document turns out to be wrong, rewrite the wrong part. Don't just add a co
 - **Caching:** public data is cached for 60 s, so store changes can take up to a minute to appear.
 - **Brand attribute:** products get their brand from the dynamic attribute `brand` (pick-from-list). A brand must be added to the list before a product can use it. Extra product info must come from dynamic attributes, never hard-coded.
 - **Brands come from the store**, never from code or project files: the Brand detail (`get-product-attributes`, `getBrands()`), and per category the `brand` filter of `get-category-products`. Never add brand names, logos or brand pictures to the code or `public/`.
-- **Banners:** a banner/hero slide only renders real text + button when its button text (`cta_text`) is set in the CMS; otherwise the picture is shown as-is. Don't overlay text on pictures that already contain text.
+- **Banners:** a banner/hero slide only renders real text + button when its button text (`cta_text`) is set in the CMS; otherwise the picture is shown as-is. The "Banners" widget can't carry a button text, and "Hero Banner" reaches the site empty, so a banner with a real button must be a **one-slide Carousel** (see CMS-WIDGETS.md §4).
 - **Sub-categories:** the store has only 8 top-level categories. Menu sub-categories link to the category page with a search.
 - **Two dev servers:** to run a second one, use `NEXT_DIST_DIR=.next-test npx next dev -p 3001` so it doesn't clash with `.next`.
 - The old café website is archived at `../heliopolisHub-cafe-site`. Don't build against café data.

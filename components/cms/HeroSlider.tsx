@@ -65,12 +65,17 @@ export function HeroSlider({ slides, autoplay, interval }: { slides: HeroSlide[]
                 {pic}
               </SmartLink>
             );
+          // Real title/subtitle/button on a solid navy panel; the picture's art shows on the right (on phones
+          // the art sits on top and the text below), so text drawn into the picture isn't shown twice.
           return (
-            <div key={k} className="relative min-h-[260px] snap-start md:aspect-[3/1] md:min-h-0">
-              {pic}
-              <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgb(8_22_52/0.88),rgb(8_22_52/0.5)_50%,transparent_80%)]" />
-              <div className="relative flex h-full max-w-[640px] flex-col justify-center gap-3 px-6 py-8 text-white md:px-12 lg:px-[78px]">
-                {s.title && <h2 className="font-head text-[26px] font-bold leading-tight md:text-[40px] lg:text-[52px]">{s.title}</h2>}
+            <div key={k} className="relative flex snap-start flex-col bg-[#0b1f3f] md:block md:aspect-[3/1]">
+              <div className="relative aspect-[16/9] overflow-hidden md:absolute md:inset-0 md:aspect-auto [&_img]:object-right">{pic}</div>
+              <div
+                aria-hidden
+                className="absolute inset-0 hidden bg-[linear-gradient(90deg,#0b1f3f_0%,#0b1f3f_50%,rgb(11_31_63/0)_64%)] md:block"
+              />
+              <div className="relative flex flex-col justify-center gap-3 px-6 py-7 text-white md:h-full md:max-w-[52%] md:px-6 lg:pl-14 xl:pl-[78px]">
+                {s.title && <h2 className="font-head text-[26px] font-bold leading-tight md:text-[34px] lg:text-[46px] xl:text-[52px]">{s.title}</h2>}
                 {s.subtitle && <p className="text-[15px] text-white/85 md:text-lg">{s.subtitle}</p>}
                 <SmartLink to={s.link} className={btn("gold", "lg", "mt-2 self-start text-ink")}>
                   {s.ctaText}

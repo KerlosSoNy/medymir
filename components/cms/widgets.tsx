@@ -227,7 +227,8 @@ function Carousel({ w }: P) {
 }
 
 /*
- * Banners (TheCoins "Banners" / "Hero Banner" → small-banner cards).
+ * Banners (TheCoins "Banners" / "Hero Banner" → small-banner cards). Only the "Hero Banner" type keeps a
+ * button text, so a banner that needs a real button must be a Hero Banner in the page builder.
  * Two modes, chosen by the CMS content:
  *  - Card WITH a button text (cta_text): the picture is background art only. Badge, title, description
  *    and a real button are rendered as page content on top of it; the button's link makes the whole card clickable.
@@ -264,7 +265,7 @@ function Banners({ w, ctx }: P) {
     <div className="grid grid-cols-1 gap-4">
       {cards.map((c, i) =>
         c.cta ? (
-          <BannerWithContent key={i} c={c} frame={frame} tall={!!ctx.beside} picture={picture} />
+          <BannerWithContent key={i} c={c} frame={frame} tall={!!ctx.beside} full={!boxed} picture={picture} />
         ) : (
           <SmartLink key={i} to={c.link} ariaLabel={tr(c.title) || undefined} className={frame}>
             {picture(
@@ -284,43 +285,80 @@ function Banners({ w, ctx }: P) {
   );
 }
 
-/** Banner whose text and button are real page content over background art (see Banners). */
-function BannerWithContent({ c, frame, tall, picture }: { c: any; frame: string; tall: boolean; picture: (c: any, cls: string) => React.ReactNode }) {
-  // Card theme from the CMS: "light" (default) = white text for dark art; "dark" = dark text for light art.
-  const light = c.theme === "dark";
-  return (
-    <article className={cn(frame, tall ? "min-h-[460px] md:aspect-[720/560] md:min-h-0 lg:aspect-[503/712]" : "min-h-[300px] md:aspect-[3/1] md:min-h-0")}>
-      {picture(c, "absolute inset-0 size-full object-cover transition duration-500 ease-out group-hover:scale-[1.015]")}
-      <div
-        aria-hidden
-        className={cn(
-          "absolute inset-0",
-          light
-            ? "bg-[linear-gradient(90deg,rgb(255_255_255/0.92),rgb(255_255_255/0.6)_45%,transparent_75%)]"
-            : tall
-              ? "bg-[linear-gradient(180deg,rgb(8_22_52/0.85),rgb(8_22_52/0.2)_45%,rgb(8_22_52/0.85))]"
-              : "bg-[linear-gradient(90deg,rgb(8_22_52/0.9),rgb(8_22_52/0.55)_45%,transparent_75%)]",
-        )}
-      />
-      <div
-        className={cn(
-          "relative flex h-full flex-col gap-3 p-6 md:p-10",
-          tall ? "justify-between" : "max-w-[560px] justify-center",
-          light ? "text-ink" : "text-white",
-        )}
-      >
-        <div className="flex flex-col gap-3">
-          {c.badge && <p className={cn("text-xs font-semibold uppercase tracking-[0.18em]", light ? "text-gold-text" : "text-gold-soft")}>{tr(c.badge)}</p>}
-          {c.title && <h2 className="font-head text-[26px] font-bold leading-tight md:text-[34px] lg:text-[40px]">{tr(c.title)}</h2>}
-          {c.description && <p className={cn("text-[15px] leading-relaxed md:text-base", light ? "text-muted" : "text-white/85")}>{tr(c.description)}</p>}
+/**
+ * Banner whose title, text and button are real page content (see Banners).
+ * The picture's art is shown on the side away from the text and the text sits on a solid panel, so a
+ * picture that still has its own drawn text/button (Figma exports) doesn't show it twice:
+ *  - wide banner: phone = picture (right part) on top + text panel below; tablet/desktop = text panel on
+ *    the left fading into the picture's right part.
+ *  - tall promo (beside products): text panel at the top, button panel at the bottom, art in between.
+ */
+function BannerWithContent({
+  c,
+  frame,
+  tall,
+  full,
+  picture,
+}: {
+  c: any;
+  frame: string;
+  tall: boolean;
+  /** Full-width row: the text lines up with the page's side margin. */
+  full: boolean;
+  picture: (c: any, cls: string) => React.ReactNode;
+}) {
+  // Card theme from the CMS: "light" = light panel with dark text; "dark" (or none) = navy panel with white text.
+  const lightPanel = c.theme === "light";
+  const panel = lightPanel ? "bg-surface-alt text-ink" : "bg-[#0b1f3f] text-white";
+  const fadeX = lightPanel
+    ? "md:bg-[linear-gradient(90deg,#f5f7fa_0%,#f5f7fa_44%,rgb(245_247_250/0)_66%)]"
+    : "md:bg-[linear-gradient(90deg,#0b1f3f_0%,#0b1f3f_44%,rgb(11_31_63/0)_66%)]";
+  const fadeY = lightPanel
+    ? "bg-[linear-gradient(180deg,#f5f7fa_0%,#f5f7fa_40%,rgb(245_247_250/0)_56%,rgb(245_247_250/0)_80%,#f5f7fa_90%)]"
+    : "bg-[linear-gradient(180deg,#0b1f3f_0%,#0b1f3f_40%,rgb(11_31_63/0)_56%,rgb(11_31_63/0)_80%,#0b1f3f_90%)]";
+
+  const text = (
+    <div className="flex flex-col gap-3">
+      {c.badge && (
+        <p className={cn("text-xs font-semibold uppercase tracking-[0.18em]", lightPanel ? "text-gold-text" : "text-gold-soft")}>{tr(c.badge)}</p>
+      )}
+      {c.title && <h2 className="font-head text-[26px] font-bold leading-tight md:text-[32px] lg:text-[40px]">{tr(c.title)}</h2>}
+      {c.description && (
+        <p className={cn("text-[15px] leading-relaxed md:text-base", lightPanel ? "text-muted" : "text-white/85")}>{tr(c.description)}</p>
+      )}
+    </div>
+  );
+  const button = (
+    <SmartLink
+      to={c.link}
+      className={btn(lightPanel ? "dark" : "white", "lg", "mt-2 self-start rounded-full after:absolute after:inset-0 after:content-['']")}
+    >
+      {c.cta}
+      <Icon name={lightPanel ? "arrow-right-white" : "arrow-right-navy"} size={16} />
+    </SmartLink>
+  );
+
+  if (tall)
+    return (
+      <article className={cn(frame, panel, "flex min-h-[520px] flex-col md:aspect-[720/560] md:min-h-0 lg:aspect-[503/712]")}>
+        {picture(c, "absolute inset-0 size-full object-cover transition duration-500 ease-out group-hover:scale-[1.015]")}
+        <div aria-hidden className={cn("absolute inset-0", fadeY)} />
+        <div className="relative flex h-full flex-1 flex-col justify-between gap-6 p-6 md:p-8">
+          {text}
+          {button}
         </div>
-        <SmartLink
-          to={c.link}
-          className={btn(light ? "dark" : "white", "lg", "mt-2 self-start rounded-full after:absolute after:inset-0 after:content-['']")}
-        >
-          {c.cta}
-          <Icon name={light ? "arrow-right-white" : "arrow-right-navy"} size={16} />
-        </SmartLink>
+      </article>
+    );
+
+  return (
+    <article className={cn(frame, panel, "flex flex-col md:block md:aspect-[3/1]")}>
+      <div className="relative aspect-[16/10] overflow-hidden md:absolute md:inset-0 md:aspect-auto">
+        {picture(c, "absolute inset-0 size-full object-cover object-right transition duration-500 ease-out group-hover:scale-[1.015]")}
+      </div>
+      <div aria-hidden className={cn("absolute inset-0 hidden md:block", fadeX)} />
+      <div className={cn("relative flex flex-col justify-center gap-3 p-6 md:h-full md:max-w-[46%] md:p-10", full && "md:pl-6 lg:pl-14 xl:pl-[132px] lg:pr-6")}>
+        {text}
+        {button}
       </div>
     </article>
   );
@@ -717,6 +755,8 @@ const REGISTRY: Record<string, React.FC<P>> = {
   "text-image": TextImage,
   "categories-grid": Categories,
   banners: Banners,
+  // "Hero Banner" also arrives as small-banner cards; unlike "Banners" it keeps a button text (cta_text).
+  "hero-banner": Banners,
   "products-by-category": Products,
   "featured-products": Products,
   "recommended-products": Products,

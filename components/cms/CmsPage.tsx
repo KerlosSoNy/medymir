@@ -31,7 +31,7 @@ function rowKind(row: any): RowKind {
   const kinds = ws.map(kindOf);
   if (kinds.some((k) => k === "stats-counter/chips" || k === "stats-counter/features")) return "compact";
   if (kinds.some((k) => k.startsWith("categories-grid/") || k === "testimonials/brand-carousel")) return "bleed";
-  if (ws.length > 0 && kinds.every((k) => k.startsWith("banners/"))) return "banner";
+  if (ws.length > 0 && kinds.every((k) => k.startsWith("banners/") || k.startsWith("hero-banner/"))) return "banner";
   return "boxed";
 }
 
