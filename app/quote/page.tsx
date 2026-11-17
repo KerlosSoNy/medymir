@@ -1,6 +1,8 @@
 import { CmsSlot } from "@/components/CmsSlot";
 import { QuoteListView } from "@/components/QuoteListView";
 import { UI } from "@/lib/ui";
+import { cn } from "@/lib/cn";
+import { container, pageTitle } from "@/lib/styles";
 
 export const metadata = { title: "Quote list", robots: { index: false } };
 
@@ -8,8 +10,8 @@ export const metadata = { title: "Quote list", robots: { index: false } };
 export default function QuotePage() {
   return (
     <>
-      <div className="container narrow">
-        <h1 className="page-title">{UI.quoteList}</h1>
+      <div className={cn(container, "max-w-[820px]")}>
+        <h1 className={pageTitle}>{UI.quoteList}</h1>
         <QuoteListView />
       </div>
       <CmsSlot slug="quote" />

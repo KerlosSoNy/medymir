@@ -147,6 +147,9 @@ export const CATEGORY_MENUS: Record<string, CategoryMenu> = {
   },
 };
 
+/** Footer line of the phone/tablet menu drawer (Figma 136:129 "Delivering to"). */
+export const DELIVERING_TO = { label: "Delivering to", value: "Oman · Rwanda · Kenya" };
+
 /** Where "Request a quote" in the promo cards goes (the quotation form on the home page). */
 export const QUOTE_LINK = "/#quote";
 

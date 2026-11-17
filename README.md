@@ -19,6 +19,7 @@ Connection settings: `.env.local` (public storefront keys, see `.env.example`).
 | Announcement bar, footer texts, footer links, brand list, payment logos | Page builder → page **site-layout** |
 | Category bar, category pages, footer categories | Categories (name, description, image, order) |
 | Products, prices (OMR), photos, REF/SKU | Products |
+| A product's brand; the list of brands to pick from | Products → product details → **Brand** (add new brands to the Brand list first) |
 | Quotation form fields | Contact form settings |
 | Store name, colours, logo, contact email | Store settings / branding |
 | Extra pages (About, FAQ, policies…) | Page builder → new page with that slug, e.g. `about`, `faq`, `privacy-policy` |

@@ -70,7 +70,7 @@ Styles are written **phone first**, then adjusted for bigger screens with Tailwi
 Rules:
 - No sideways page scroll at any width from 360px to 1440px (carousels may scroll inside themselves).
 - Tablet and phone use the ☰ menu drawer; the category bar with mega menus shows from `lg:` up.
-- Page side padding: 16px phone · 32px tablet · 56px laptop · 132px at 1440 (`sectionX` in `lib/styles.ts`).
+- Side padding (from Figma): home sections 16px phone · 24px tablet · 56px laptop · 132px at 1440 (`sectionX`). Other pages use `container`: 16 · 24 · 32px, max content width 1176px. Both are in `lib/styles.ts`.
 
 ---
 
@@ -121,9 +121,11 @@ Defined in `app/globals.css` (`@theme`). Use them as Tailwind classes, e.g. `tex
 - **Tailwind utilities only.** Don't add new CSS files or global class names. Shared recipes live in `lib/styles.ts`:
   - `btn(variant, size, extra)`: buttons (`dark`, `navy`, `outline`, `white`, `gold`, `plain`; sizes `sm`, `md`, `lg`)
   - `container`, `sectionX`, `pageTitle`, `pageIntro`, `notice()`, `linkBtn`, `field`, `input`
+  - CMS sections have their own recipes in `components/cms/classes.ts` (section headers, eyebrows, carousel tracks)
 - Use `cn()` (from `lib/cn.ts`) to combine or conditionally apply classes.
 - **The only global classes:** `.rich` (styles HTML that comes from the CMS, which we can't put classes on) and the `fade-down` animation.
 - Use tokens, not hex codes, whenever a token exists. One-off Figma values may use arbitrary values, e.g. `text-[15.5px]`.
+- **Icons:** Figma SVGs use `preserveAspectRatio="none"`, so always give them their exact width and height plus `shrink-0` (the `Icon` component in `components/SmartLink.tsx` does this). Otherwise they get squeezed in flex rows.
 - Images: always inside a fixed aspect-ratio frame. Use `object-cover` for photos and `object-contain` with padding for product shots and logos. Every image slot needs a styled fallback for when there's no image.
 - Accessibility: visible focus ring (global), `alt` text on content images (empty `alt` on decorative icons), menus usable by keyboard (Tab, ↓, Esc), and reduced motion respected.
 
@@ -164,7 +166,7 @@ app/                  routes (pages)
   categories/ category/[slug]/ products/ search/ brands/ brand/[slug]/
   product/[id]/ quote/ account/ not-found.tsx
 components/           shared UI (Header, CategoryNav, Footer, ProductCard, Filters, …)
-  cms/                CMS page renderer + one component per section variant
+  cms/                CMS page renderer, section components, classes.ts (shared CMS class recipes)
 lib/
   api.ts              server reads (public data)
   client-api.ts       browser calls (quote list, login, forms)
@@ -173,6 +175,7 @@ lib/
   ui.ts               UI labels
   styles.ts, cn.ts    Tailwind helpers
 public/icons/         Figma icons
+public/placeholders/  temporary placeholder images (e.g. brand cards) until real photos are uploaded in TheCoins
 design-assets/        Figma image exports
 ```
 

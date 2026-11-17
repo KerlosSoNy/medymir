@@ -5,8 +5,18 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { contactFormApi, type FormField } from "@/lib/client-api";
+import { cn } from "@/lib/cn";
+import { btn, notice } from "@/lib/styles";
 import { UI } from "@/lib/ui";
 import { useQuoteList } from "../QuoteListProvider";
+import { Icon } from "../SmartLink";
+import { card, eyebrow } from "./classes";
+
+const control =
+  "w-full rounded-[7px] border border-input-border bg-white px-[15px] py-[13px] text-sm text-ink-2 transition placeholder:text-muted-3 focus:border-blue focus:outline-none focus:ring-2 focus:ring-blue/15";
+const fieldCls = "grid grid-cols-1 content-start gap-2";
+const full = "md:col-span-2";
+const infoBox = "flex items-center gap-4 rounded-lg px-5 [&_strong]:text-sm [&_strong]:font-semibold [&>div]:grid [&>div]:gap-[3px] [&_span]:text-[12.5px] [&_span]:text-muted [&_img]:shrink-0";
 
 const SHORT = new Set(["text", "email", "tel", "phone", "number", "select", "dropdown", "date", "url"]);
 
@@ -21,24 +31,24 @@ function Field({ f }: { f: FormField }) {
   const t = f.field_type?.toLowerCase();
   const common = { name: f.field_name, required: f.is_required, placeholder: f.placeholder ?? undefined, id: `qf-${f.id}` };
   const label = (
-    <label htmlFor={common.id} className="qf-label">
+    <label htmlFor={common.id} className="text-[13px] font-semibold text-ink-2">
       {f.field_label}
       {f.is_required && " *"}
     </label>
   );
   if (t === "textarea")
     return (
-      <div className="qf-field full">
+      <div className={cn(fieldCls, full)}>
         {label}
-        <textarea {...common} rows={4} />
+        <textarea {...common} rows={4} className={cn(control, "min-h-[92px] resize-y")} />
       </div>
     );
   if (t === "select" || t === "dropdown")
     return (
-      <div className="qf-field">
+      <div className={fieldCls}>
         {label}
-        <div className="qf-select">
-          <select {...common} defaultValue="">
+        <div className="relative">
+          <select {...common} defaultValue="" className={cn(control, "cursor-pointer appearance-none pr-10")}>
             <option value="" disabled>
               {f.placeholder ?? ""}
             </option>
@@ -46,15 +56,15 @@ function Field({ f }: { f: FormField }) {
               <option key={o}>{o}</option>
             ))}
           </select>
-          <img src="/icons/form-chevron-down.svg" width={15} height={15} alt="" />
+          <img src="/icons/form-chevron-down.svg" width={15} height={15} alt="" className="pointer-events-none absolute right-4 top-1/2 size-[15px] max-w-none -translate-y-1/2" />
         </div>
       </div>
     );
   const type = t === "phone" ? "tel" : SHORT.has(t) ? t : "text";
   return (
-    <div className={`qf-field ${SHORT.has(t) || !t ? "" : "full"}`}>
+    <div className={cn(fieldCls, !(SHORT.has(t) || !t) && full)}>
       {label}
-      <input {...common} type={type} pattern={f.validation_regex ?? undefined} title={f.validation_message ?? undefined} />
+      <input {...common} type={type} pattern={f.validation_regex ?? undefined} title={f.validation_message ?? undefined} className={control} />
     </div>
   );
 }
@@ -86,8 +96,8 @@ export function QuoteForm(p: {
   const lines = data?.items ?? [];
 
   const status = (
-    <div className="qf-status">
-      <img src="/icons/quote-file-text.svg" width={22} height={22} alt="" />
+    <div className={cn(infoBox, "border border-[#cfddf3] bg-[#ebf2fc] py-[18px] [&_a]:font-semibold [&_a]:text-blue-link [&_a:hover]:underline")}>
+      <Icon name="quote-file-text" size={22} />
       <div>
         {count > 0 ? (
           <>
@@ -128,44 +138,44 @@ export function QuoteForm(p: {
   }
 
   return (
-    <div className="card quote-form" id={p.anchor}>
-      {p.eyebrow && <p className="eyebrow eb-gold wide">{p.eyebrow}</p>}
-      {p.title && <h2>{p.title}</h2>}
-      {p.subtitle && <p className="qf-sub">{p.subtitle}</p>}
+    <div className={cn(card, "flex scroll-mt-6 flex-col gap-4 px-[18px] py-6 md:px-[34px] md:pb-[34px] md:pt-9")} id={p.anchor}>
+      {p.eyebrow && <p className={eyebrow("gold", true)}>{p.eyebrow}</p>}
+      {p.title && <h2 className="font-head text-[28px] font-bold tracking-[-0.02em] text-ink-2 md:text-[37px]">{p.title}</h2>}
+      {p.subtitle && <p className="text-[15.5px] text-muted">{p.subtitle}</p>}
 
       {state === "done" ? (
-        <p className="notice ok">{UI.quoteSent}</p>
+        <p className={notice("ok")}>{UI.quoteSent}</p>
       ) : fields === null ? (
-        <p className="muted">{UI.loading}</p>
+        <p className="text-muted">{UI.loading}</p>
       ) : fields.length === 0 ? (
         <>
           {status}
-          <p className="notice">
+          <p className={notice()}>
             {UI.formNotReady} {p.fallbackEmail && <a href={`mailto:${p.fallbackEmail}`}>{p.fallbackEmail}</a>}
           </p>
         </>
       ) : (
-        <form onSubmit={submit} className="qf-grid">
+        <form onSubmit={submit} className="grid grid-cols-1 gap-x-[18px] gap-y-4 md:grid-cols-2">
           {fields.map((f, i) => (
             <FieldWithStatus key={f.id} f={f} status={i === firstTextarea ? status : null} />
           ))}
-          {firstTextarea < 0 && <div className="full">{status}</div>}
+          {firstTextarea < 0 && <div className={full}>{status}</div>}
           {(p.attachTitle || p.attachText) && (
-            <div className="qf-attach full">
-              <img src="/icons/paperclip.svg" width={22} height={22} alt="" />
+            <div className={cn(infoBox, full, "border border-dashed border-input-border bg-[#f8f9fb] py-3.5 [&_strong]:text-[#4b5565]")}>
+              <Icon name="paperclip" size={22} />
               <div>
                 <strong>{p.attachTitle}</strong>
                 <span>{p.attachText}</span>
               </div>
             </div>
           )}
-          {state === "error" && <p className="notice err full">{err}</p>}
-          <div className="qf-submit full">
-            <button className="btn btn-gold btn-lg" disabled={state === "busy"}>
+          {state === "error" && <p className={cn(notice("err"), full)}>{err}</p>}
+          <div className={cn(full, "flex flex-col items-stretch gap-3 md:flex-row md:flex-wrap md:items-center md:gap-5")}>
+            <button className={btn("gold", "lg")} disabled={state === "busy"}>
               {state === "busy" ? UI.sending : p.submitText || UI.requestQuote}
-              <img src="/icons/arrow-right-submit.svg" width={16} height={16} alt="" />
+              <Icon name="arrow-right-submit" size={16} />
             </button>
-            {p.privacyNote && <small>{p.privacyNote}</small>}
+            {p.privacyNote && <small className="text-xs text-muted">{p.privacyNote}</small>}
           </div>
         </form>
       )}
@@ -176,7 +186,7 @@ export function QuoteForm(p: {
 function FieldWithStatus({ f, status }: { f: FormField; status: React.ReactNode }) {
   return (
     <>
-      {status && <div className="full">{status}</div>}
+      {status && <div className={full}>{status}</div>}
       <Field f={f} />
     </>
   );

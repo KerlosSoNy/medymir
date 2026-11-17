@@ -63,6 +63,10 @@ export const UI = {
   collapse: "hide sub-categories",
   requestAQuote: "Request a quote",
   featuredBrands: "Featured brands",
+  viewAll: "View all",
   previous: "Previous",
   nextSlide: "Next",
+  noImage: "No product image yet",
+  viewStore: "View store",
+  itemsForQuotation: (n: number) => `Items for quotation (${n})`,
 };

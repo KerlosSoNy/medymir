@@ -20,7 +20,7 @@ Technical details: [SPECS.md](SPECS.md). Status by Figma screen: [PROGRESS.md](P
 | **Mega menus** (computer) | ✅ | Opens on hover or keyboard focus; "All categories" opens on click too; closes with Esc, outside click or a link click |
 | └ All categories panel | ✅ | 12 numbered groups with sub-categories |
 | └ Category panels (7) | ✅ | Sub-categories, "View all" link, "Request a quote" card, featured brands |
-| **Menu drawer** (tablet & phone) | ✅ | ☰ button, slides in, categories expand to show sub-categories |
+| **Menu drawer** (tablet & phone) | ✅ | As in Figma: ☰ button, slides in, categories open into groups and sub-categories, Brands list, "Delivering to" line; closes with ×, Esc, backdrop or a link |
 | Footer | ✅ | About text, categories, top brands, contact, About & Support links, policy links, payment logos |
 | Brand colours from the store settings | ✅ | Changing colours in TheCoins changes the site |
 | Tracking pixels from TheCoins | ✅ | Loaded on every page |
@@ -53,15 +53,15 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 
 | Feature | Status | Notes |
 |---|---|---|
-| All categories page (`/categories`) | ✅ | Category tiles with photo, name, description |
+| All categories page (`/categories`) | ✅ | Category tiles with photo, name, description; tiles without a photo show initials |
 | Category page (`/category/…`) | ✅ | Products, filters, sorting by API, pagination |
 | Sub-category links from the menus | ✅ | Open the category with a search for the sub-category name (store has no real sub-categories yet) |
 | All products (`/products`) | ✅ | |
 | Search results (`/search?q=…`) | ✅ | Includes "no results" message |
 | Filters (sub-category, price range, on sale, featured, in stock) | ✅ | Filters come from the store settings; collapsible on phones |
 | Pagination | ✅ | |
-| Brands page (`/brands`) and brand page (`/brand/…`) | ✅ | Brand page searches products by brand name until products have a "Brand" field |
-| Product cards | ✅ | Photo in a fixed frame (any photo size fits), placeholder when no photo, REF/SKU, name, short text, price, sale price, "Add to quote list" |
+| Brands page (`/brands`) and brand page (`/brand/…`) | ✅ | Brand page searches products by brand name until products have their "Brand" detail filled in (the detail exists in the store) |
+| Product cards | ✅ | Figma design: REF/SKU, photo shown whole in a fixed frame (any photo size fits), "No product image yet" placeholder, name and text cut to 2 lines, price or "Request a quotation", full-width "Add to quote list"; all cards in a row line up |
 | Product page (`/product/…`) | ✅ | Photo gallery, REF, price, sale price, description, options (size/pack), quantity, add to quote list, "currently unavailable" state |
 | Ready Stock page design (special offer cards) | ⬜ | Uses the normal category page for now |
 

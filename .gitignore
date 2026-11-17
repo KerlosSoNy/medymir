@@ -6,3 +6,4 @@ out
 next-env.d.ts
 design-assets/figma-originals/
 .next-preview
+.next-test

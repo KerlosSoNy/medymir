@@ -36,5 +36,16 @@ export function SmartLink({
 
 /** Figma icons live in /public/icons; keeps their native size. */
 export function Icon({ name, size, alt = "" }: { name: string; size: number; alt?: string }) {
-  return <img src={`/icons/${name}.svg`} width={size} height={size} alt={alt} className="icon" />;
+  // Figma SVGs use preserveAspectRatio="none": pin the size so flex rows and Tailwind's
+  // img { max-width:100%; height:auto } can never stretch or squeeze them.
+  return (
+    <img
+      src={`/icons/${name}.svg`}
+      width={size}
+      height={size}
+      alt={alt}
+      className="block shrink-0 grow-0 max-w-none self-center"
+      style={{ width: size, height: size }}
+    />
+  );
 }

@@ -22,9 +22,5 @@ export default async function ContentPage({ params }: Props) {
   if (RESERVED.has(slug)) notFound();
   const [page, ctx] = await Promise.all([getCmsPage(slug), widgetCtx()]);
   if (!page) notFound();
-  return (
-    <div className="content-page">
-      <CmsPage page={page} ctx={ctx} />
-    </div>
-  );
+  return <CmsPage page={page} ctx={ctx} firstRowClass="pt-12 md:pt-12" />;
 }

@@ -2,8 +2,17 @@
 // Renders filters[] from get-category-products exactly as returned (order, labels, types)
 // and maps each to the API's query params via the URL. No client-side product filtering.
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import type { Filter } from "@/lib/api";
+import { cn } from "@/lib/cn";
 import { tr } from "@/lib/format";
+import { btn } from "@/lib/styles";
+
+const fLabel = "mb-1.5 block text-[13px] font-semibold";
+const fBlock = "m-0 grid grid-cols-1 border-0 p-0 gap-0";
+const check = "flex cursor-pointer items-center gap-2 py-1 text-sm [&_input]:size-4 [&_input]:accent-dark";
+const fInput = "w-full min-w-0 rounded-[7px] border border-input-border bg-white px-2.5 py-2 text-sm focus:border-blue focus:outline-none";
+const chip = "cursor-pointer rounded-full border border-chip-border bg-chip-bg px-2.5 py-1 text-xs font-medium whitespace-nowrap text-ink-3 hover:border-ink-3";
 
 const BOOL_PARAM: Record<string, string> = { on_sale: "on_sale", is_featured: "is_featured", in_stock: "in_stock" };
 
@@ -34,6 +43,7 @@ export function Filters({
   const router = useRouter();
   const path = usePathname();
   const sp = useSearchParams();
+  const [open, setOpen] = useState(false);
 
   const push = (mut: (p: URLSearchParams) => void) => {
     const p = new URLSearchParams(sp.toString());
@@ -54,15 +64,28 @@ export function Filters({
   };
 
   return (
-    <aside className="filters">
-      <details open>
-        <summary>{labels.filters}</summary>
+    <aside className="grid grid-cols-1 gap-3 lg:sticky lg:top-4">
+      <button
+        type="button"
+        className="flex w-full cursor-pointer items-center justify-between rounded-xl border border-line bg-white px-4 py-3 text-left font-bold lg:hidden"
+        aria-expanded={open}
+        aria-controls="filters-panel"
+        onClick={() => setOpen((o) => !o)}
+      >
+        <span>
+          {labels.filters}
+          {chips.length > 0 && <span className="ml-2 rounded-full bg-dark px-2 py-0.5 text-xs text-white">{chips.length}</span>}
+        </span>
+        <img src="/icons/chevron-down.svg" width={14} height={14} alt="" className={cn("size-3.5 shrink-0 transition-transform", open && "rotate-180")} />
+      </button>
+      <div id="filters-panel" className={cn("gap-4 rounded-xl border border-line p-3.5 lg:grid lg:grid-cols-1", open ? "grid grid-cols-1" : "hidden")}>
+        <p className="hidden font-bold lg:block">{labels.filters}</p>
         {filters.map((f) => {
           const key = paramFor(f);
           const label = tr(f.label) || f.name;
           if (f.type === "boolean")
             return (
-              <label key={f.name} className="check">
+              <label key={f.name} className={check}>
                 <input type="checkbox" checked={sp.get(key) === "true"} onChange={(e) => set(key, e.target.checked ? "true" : null)} />
                 {label}
               </label>
@@ -71,7 +94,6 @@ export function Filters({
             return (
               <form
                 key={f.name}
-                className="range"
                 onSubmit={(e) => {
                   e.preventDefault();
                   const fd = new FormData(e.currentTarget);
@@ -83,19 +105,19 @@ export function Filters({
                   });
                 }}
               >
-                <span className="f-label">{label}</span>
-                <div className="range-row">
-                  <input name="price_min" type="number" inputMode="numeric" min={f.min} max={f.max} placeholder={`${labels.min} ${f.min ?? ""}`} defaultValue={sp.get("price_min") ?? ""} />
-                  <input name="price_max" type="number" inputMode="numeric" min={f.min} max={f.max} placeholder={`${labels.max} ${f.max ?? ""}`} defaultValue={sp.get("price_max") ?? ""} />
-                  <button className="btn btn-sm">{labels.apply}</button>
+                <span className={fLabel}>{label}</span>
+                <div className="flex gap-1.5">
+                  <input className={fInput} name="price_min" type="number" inputMode="numeric" min={f.min} max={f.max} placeholder={`${labels.min} ${f.min ?? ""}`} defaultValue={sp.get("price_min") ?? ""} />
+                  <input className={fInput} name="price_max" type="number" inputMode="numeric" min={f.min} max={f.max} placeholder={`${labels.max} ${f.max ?? ""}`} defaultValue={sp.get("price_max") ?? ""} />
+                  <button className={btn("dark", "sm")}>{labels.apply}</button>
                 </div>
               </form>
             );
           if (f.type === "range")
             return (
-              <label key={f.name} className="f-block">
-                <span className="f-label">{label}</span>
-                <input type="number" min={f.min} max={f.max} defaultValue={sp.get(key) ?? ""} onBlur={(e) => set(key, e.target.value || null)} />
+              <label key={f.name} className={fBlock}>
+                <span className={fLabel}>{label}</span>
+                <input className={fInput} type="number" min={f.min} max={f.max} defaultValue={sp.get(key) ?? ""} onBlur={(e) => set(key, e.target.value || null)} />
               </label>
             );
           const values = (f.values ?? []).map((v: any) =>
@@ -103,9 +125,9 @@ export function Filters({
           );
           if (f.type === "select")
             return (
-              <label key={f.name} className="f-block">
-                <span className="f-label">{label}</span>
-                <select value={sp.get(key) ?? ""} onChange={(e) => set(key, e.target.value || null)}>
+              <label key={f.name} className={fBlock}>
+                <span className={fLabel}>{label}</span>
+                <select className={fInput} value={sp.get(key) ?? ""} onChange={(e) => set(key, e.target.value || null)}>
                   <option value="">—</option>
                   {values.map((v) => (
                     <option key={v.id} value={v.id}>
@@ -118,10 +140,10 @@ export function Filters({
           // multi_select: comma-joined values, sent exactly as returned
           const current = new Set((sp.get(key) ?? "").split(",").filter(Boolean));
           return (
-            <fieldset key={f.name} className="f-block">
-              <legend className="f-label">{label}</legend>
+            <fieldset key={f.name} className={fBlock}>
+              <legend className={fLabel}>{label}</legend>
               {values.map((v) => (
-                <label key={v.id} className="check">
+                <label key={v.id} className={check}>
                   <input
                     type="checkbox"
                     checked={current.has(f.name === "sub_category" ? v.id : v.name)}
@@ -137,15 +159,15 @@ export function Filters({
             </fieldset>
           );
         })}
-      </details>
+      </div>
       {chips.length > 0 && (
-        <div className="chips">
+        <div className="flex flex-wrap gap-2">
           {chips.map(([k, v]) => (
-            <button key={k} className="chip" onClick={() => set(k, null)}>
+            <button type="button" key={k} className={chip} onClick={() => set(k, null)}>
               {chipLabel(k, v)} ✕
             </button>
           ))}
-          <button className="chip clear" onClick={() => push((p) => [...p.keys()].forEach((k) => k !== "q" && p.delete(k)))}>
+          <button type="button" className={cn(chip, "bg-white underline")} onClick={() => push((p) => [...p.keys()].forEach((k) => k !== "q" && p.delete(k)))}>
             {labels.clear}
           </button>
         </div>

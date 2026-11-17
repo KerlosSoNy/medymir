@@ -1,5 +1,7 @@
 import { getTenant } from "@/lib/api";
 import { UI } from "@/lib/ui";
+import { cn } from "@/lib/cn";
+import { container, pageTitle } from "@/lib/styles";
 import { Account } from "@/components/Account";
 import { CmsSlot } from "@/components/CmsSlot";
 
@@ -9,8 +11,8 @@ export default async function AccountPage() {
   const tenant = await getTenant();
   return (
     <>
-      <div className="container narrow">
-        <h1 className="page-title">{UI.account}</h1>
+      <div className={cn(container, "max-w-[820px]")}>
+        <h1 className={pageTitle}>{UI.account}</h1>
         <Account currency={tenant?.locale.currency ?? null} />
       </div>
       <CmsSlot slug="account" />
