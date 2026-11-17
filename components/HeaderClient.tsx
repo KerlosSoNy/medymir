@@ -1,0 +1,107 @@
+"use client";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { getAuth } from "@/lib/client-api";
+import { UI } from "@/lib/ui";
+import { useQuoteList } from "./QuoteListProvider";
+
+export function HeaderSearch({ categories }: { categories: { id: string; name: string }[] }) {
+  const router = useRouter();
+  const [cat, setCat] = useState("");
+  return (
+    <form
+      className="search"
+      role="search"
+      onSubmit={(e) => {
+        e.preventDefault();
+        const q = String(new FormData(e.currentTarget).get("q") ?? "").trim();
+        const p = new URLSearchParams();
+        if (q) p.set("q", q);
+        if (cat) p.set("category_id", cat);
+        router.push(`/search${p.size ? `?${p}` : ""}`);
+      }}
+    >
+      <label className="search-cat">
+        <span className="sr-only">{UI.categories}</span>
+        <select value={cat} onChange={(e) => setCat(e.target.value)}>
+          <option value="">{UI.all}</option>
+          {categories.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+        <img src="/icons/chevron-down.svg" width={14} height={14} alt="" />
+      </label>
+      <input name="q" type="search" placeholder={UI.searchPlaceholder} aria-label={UI.searchPlaceholder} />
+      <button type="submit" className="search-btn" aria-label={UI.searchPlaceholder}>
+        <img src="/icons/search-white.svg" width={19} height={19} alt="" />
+      </button>
+    </form>
+  );
+}
+
+export function AccountLink() {
+  const [name, setName] = useState<string | null>(null);
+  useEffect(() => setName(getAuth()?.customer?.name ?? null), []);
+  return (
+    <Link href="/account" className="hdr-action">
+      <img src="/icons/user.svg" width={22} height={22} alt="" />
+      <span className="hdr-action-text">
+        <small>{name ? `Hello, ${name.split(" ")[0]}` : UI.signInHello}</small>
+        <strong>{UI.accountAndQuotes}</strong>
+      </span>
+    </Link>
+  );
+}
+
+export function QuoteListLink() {
+  const { count } = useQuoteList();
+  return (
+    <Link href="/quote" className="hdr-action">
+      <span className="quote-icon">
+        <img src="/icons/clipboard.svg" width={22} height={22} alt="" />
+        <span className="quote-badge" aria-label={`${count}`}>
+          {count}
+        </span>
+      </span>
+      <span className="hdr-action-text">
+        <small>{UI.your}</small>
+        <strong>{UI.quoteList}</strong>
+      </span>
+    </Link>
+  );
+}
+
+export function CategoryMenuButton({ label, categories }: { label: string; categories: { name: string; slug: string }[] }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const path = usePathname();
+  useEffect(() => setOpen(false), [path]);
+  useEffect(() => {
+    const close = (e: MouseEvent) => !ref.current?.contains(e.target as Node) && setOpen(false);
+    document.addEventListener("click", close);
+    return () => document.removeEventListener("click", close);
+  }, []);
+  return (
+    <div className="allcats" ref={ref}>
+      <button type="button" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+        <img src="/icons/menu.svg" width={17} height={17} alt="" />
+        {label}
+      </button>
+      {open && (
+        <ul className="allcats-menu">
+          {categories.map((c) => (
+            <li key={c.slug}>
+              <Link href={`/category/${c.slug}`}>{c.name}</Link>
+            </li>
+          ))}
+          <li className="sep">
+            <Link href="/categories">{UI.categories} →</Link>
+          </li>
+        </ul>
+      )}
+    </div>
+  );
+}

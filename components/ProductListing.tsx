@@ -1,0 +1,86 @@
+// Product listing driven entirely by get-category-products: products, filters[] (rendered
+// exactly as configured in the dashboard), pagination and SEO.
+import Link from "next/link";
+import { Suspense } from "react";
+import { getCategoryProducts, getTenant } from "@/lib/api";
+import { UI } from "@/lib/ui";
+import { ProductCard } from "./ProductCard";
+import { Filters } from "./Filters";
+
+export type SearchParams = Record<string, string | string[] | undefined>;
+
+const PASS = /^(page|per_page|order_by|order|price_min|price_max|filter|brand|rating_min|exclude_allergens|on_sale|is_featured|in_stock|search|branch_id|attr_.+|category_id)$/;
+
+export function listingQuery(sp: SearchParams) {
+  const q: Record<string, string> = {};
+  for (const [k, v] of Object.entries(sp)) {
+    const val = Array.isArray(v) ? v.join(",") : v;
+    if (val && PASS.test(k)) q[k] = val;
+  }
+  if (sp.q && !q.search) q.search = String(sp.q);
+  return q;
+}
+
+export async function ProductListing({
+  basePath,
+  categoryId,
+  search,
+  heading,
+  intro,
+  sp,
+}: {
+  basePath: string;
+  categoryId?: string;
+  search?: string;
+  heading?: string;
+  intro?: string;
+  sp: SearchParams;
+}) {
+  const q = listingQuery(sp);
+  const query = { per_page: 24, ...q, category_id: q.category_id || categoryId, search: q.search || search };
+  const [data, tenant] = await Promise.all([getCategoryProducts(query), getTenant()]);
+  const currency = tenant?.locale.currency ?? null;
+  if (!data) return <p className="container empty">{UI.error}</p>;
+
+  const title = heading || data.seo?.heading || data.category?.name || "";
+  const { page = 1, total_pages = 1 } = data.pagination ?? ({} as any);
+  const pageHref = (n: number) => {
+    const p = new URLSearchParams(Object.entries(sp).flatMap(([k, v]) => (v == null ? [] : [[k, String(v)]])));
+    p.set("page", String(n));
+    return `${basePath}?${p}`;
+  };
+
+  return (
+    <div className="container listing">
+      {title && <h1 className="page-title">{title}</h1>}
+      {(intro || data.category?.description) && <p className="page-intro">{intro || data.category?.description}</p>}
+      <div className={`listing-layout ${data.filters?.length ? "" : "no-filters"}`}>
+        {data.filters?.length > 0 && (
+          <Suspense>
+            <Filters filters={data.filters} labels={{ filters: UI.filters, clear: UI.clearFilters, min: UI.min, max: UI.max, apply: UI.apply }} />
+          </Suspense>
+        )}
+        <div>
+          {data.products?.length ? (
+            <div className="pgrid" style={{ ["--cols" as any]: 3 }}>
+              {data.products.map((p) => (
+                <ProductCard key={p.id} p={p} currency={currency} />
+              ))}
+            </div>
+          ) : (
+            <p className="products-empty">{UI.noProducts}</p>
+          )}
+          {total_pages > 1 && (
+            <nav className="pager" aria-label={UI.page}>
+              {page > 1 && <Link href={pageHref(page - 1)}>{UI.prev}</Link>}
+              <span>
+                {page} / {total_pages}
+              </span>
+              {page < total_pages && <Link href={pageHref(page + 1)}>{UI.next}</Link>}
+            </nav>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

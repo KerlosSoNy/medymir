@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "thecoins": {
+      "type": "http",
+      "url": "https://connector.thecoins.app"
+    }
+  }
+}

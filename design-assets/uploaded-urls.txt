@@ -1,0 +1,11 @@
+18-banner-medtronic.webp https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/connector/9ae64d39-2d59-4253-b3b5-c58da4dee99f.webp
+23-banner-whatsapp.webp https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/connector/53b02b3c-ad77-4dca-943b-79ff19c65d04.webp
+04-category-endoscopy.webp https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/connector/98c06bdd-50b4-4174-af42-2ac57a2f2f07.webp
+19-solution-doctors.webp https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/connector/c333aa50-6102-47e8-98b6-a3c8c5aa7939.webp
+24-payments.webp https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/connector/c4fb4f68-191c-4e01-9f84-76a1860992e3.webp
+22-solution-hospitals.webp https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/connector/8653fee3-2095-4a01-85ee-a32cf9ce99fd.webp
+20-solution-clinics.webp https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/connector/946dd46b-53e5-4029-9ac1-d4add3859f23.webp
+21-solution-imaging.webp https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/connector/ae7d7a22-2d7b-4eaf-b149-42dab495826e.webp
+01-hero-slide-1.webp https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/connector/a560ce0e-5e0b-4602-a6fa-bca9c74450ff.webp
+05-banner-abbott.webp https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/connector/1501cf44-9fe3-4946-a199-a2fb376a0813.webp
+07-brand-card-1.webp https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/connector/939aa64f-6e5c-48c9-8f9d-686feb64c788.webp
