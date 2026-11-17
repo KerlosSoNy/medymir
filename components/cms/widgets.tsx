@@ -1,8 +1,5 @@
-// One component per TheCoins page-builder widget type (and per MedyMar `variant`).
-// Unknown types render nothing, so new widgets added in the dashboard never break a page.
-// Field names follow the LIVE API responses (some differ from the docs; see notes inline).
 import DOMPurify from "isomorphic-dompurify";
-import type { Category } from "@/lib/api";
+import type { Brand, Category } from "@/lib/api";
 import { cn } from "@/lib/cn";
 import { tr } from "@/lib/format";
 import { btn } from "@/lib/styles";
@@ -15,19 +12,17 @@ import { BrandCarousel } from "./BrandCarousel";
 import { QuoteForm } from "./QuoteForm";
 import { card, cardHover, coverImg, eyebrow, initials, noScrollbar, sideCard, sideTitle } from "./classes";
 
-/** Row layout chosen by CmsPage from the widgets a row holds. */
 export type RowKind = "full" | "boxed" | "banner" | "compact" | "bleed";
 
 export interface WidgetCtx {
   currency: string | null;
   categories: Category[];
+  /** The store's Brand list (with logos), used to show a brand's logo on its card. */
+  brands: Brand[];
   productCount: number;
   contactEmail: string | null;
-  /** Set by CmsPage for each row. */
   row?: RowKind;
-  /** The widget's row has more than one column (e.g. products + promo banner). */
   beside?: boolean;
-  /** The row also holds the brand carousel, whose arrows sit beside the section header. */
   withArrows?: boolean;
 }
 type P = { w: any; ctx: WidgetCtx };
@@ -52,7 +47,6 @@ function SectionHeader({ w, ctx }: P) {
       className={cn(
         "flex flex-col items-start gap-4 md:flex-row md:items-end md:justify-between md:gap-6",
         center && "items-center text-center md:justify-center",
-        // In carousel rows the row has no right padding, so the header adds it (plus room for the brand arrows).
         ctx.row === "bleed" && "pr-4 md:pr-6 lg:pr-14 xl:pr-[132px]",
         ctx.withArrows && "md:pr-[204px] lg:pr-[236px] xl:pr-[312px]",
       )}
@@ -187,7 +181,7 @@ function Stats({ w }: P) {
     case "footer-column":
     case "footer-links":
     case "legal-links":
-      return null; // rendered by the site header / footer
+      return null;
     default:
       return (
         <div className="grid grid-cols-1 gap-4">
@@ -212,7 +206,6 @@ function Stats({ w }: P) {
   }
 }
 
-/* ---------- Hero slider (carousel; live API: type "swiper", images[{desk,tab,mobile,...}]) ---------- */
 function Carousel({ w }: P) {
   const raw: any[] = w.slides ?? w.images ?? [];
   const slides = raw
@@ -223,6 +216,8 @@ function Carousel({ w }: P) {
         tab: url(s.tab ?? s.tabletImageUrl) || desk,
         mobile: url(s.mobile ?? s.mobileImageUrl) || desk,
         title: tr(s.title),
+        subtitle: tr(s.subtitle),
+        ctaText: tr(s.cta_text ?? s.ctaText),
         link: s.cta_link ?? s.ctaLink ?? s.link ?? "",
       };
     })
@@ -231,48 +226,106 @@ function Carousel({ w }: P) {
   return <HeroSlider slides={slides} autoplay={w.autoplay !== false} interval={Number(w.interval) || 6} />;
 }
 
-/* ---------- Image banners (banners; live API: type "small-banner", cards[{image,link,...}]) ---------- */
+/*
+ * Banners (TheCoins "Banners" / "Hero Banner" → small-banner cards).
+ * Two modes, chosen by the CMS content:
+ *  - Card WITH a button text (cta_text): the picture is background art only. Badge, title, description
+ *    and a real button are rendered as page content on top of it; the button's link makes the whole card clickable.
+ *  - Card WITHOUT a button text: the picture is shown as it is (it may contain its own text) and the
+ *    whole picture links to the card's link.
+ * So a banner only gets real text/button once its text-free background picture is uploaded and its
+ * button text is filled in. That way text never appears twice.
+ */
 function Banners({ w, ctx }: P) {
   const cards: any[] = (w.cards ?? w.items ?? [])
-    .map((c: any) => ({ ...c, image: url(c.image ?? c.imageUrl), mobile: url(c.mobile_image ?? c.mobileImageUrl) }))
+    .map((c: any) => ({
+      ...c,
+      image: url(c.image ?? c.imageUrl),
+      mobile: url(c.mobile_image ?? c.mobileImageUrl),
+      tablet: url(c.tablet_image ?? c.tabletImageUrl),
+      cta: tr(c.cta_text ?? c.ctaText),
+    }))
     .filter((c: any) => c.image);
   if (!cards.length) return null;
   const boxed = ctx.row !== "full";
+  const frame = cn(
+    "group relative block overflow-hidden",
+    boxed && "rounded-2xl shadow-card",
+    ctx.row === "banner" && "rounded-[20px] md:rounded-[26px]",
+  );
+  const picture = (c: any, cls: string) => (
+    <picture>
+      {c.mobile && <source media="(max-width:640px)" srcSet={c.mobile} />}
+      {c.tablet && <source media="(max-width:1024px)" srcSet={c.tablet} />}
+      <img src={c.image} alt={c.cta ? "" : tr(c.title)} loading="lazy" className={cls} />
+    </picture>
+  );
   return (
     <div className="grid grid-cols-1 gap-4">
-      {cards.map((c, i) => (
-        <SmartLink
-          key={i}
-          to={c.link}
-          ariaLabel={tr(c.title) || undefined}
-          className={cn(
-            "group block overflow-hidden",
-            boxed && "rounded-2xl shadow-card",
-            ctx.row === "banner" && "rounded-[20px] md:rounded-[26px]",
-          )}
-        >
-          <picture>
-            {c.mobile && <source media="(max-width:640px)" srcSet={c.mobile} />}
-            <img
-              src={c.image}
-              alt={tr(c.title)}
-              loading="lazy"
-              className={cn(
+      {cards.map((c, i) =>
+        c.cta ? (
+          <BannerWithContent key={i} c={c} frame={frame} tall={!!ctx.beside} picture={picture} />
+        ) : (
+          <SmartLink key={i} to={c.link} ariaLabel={tr(c.title) || undefined} className={frame}>
+            {picture(
+              c,
+              cn(
                 "block h-auto w-full",
                 boxed && "transition duration-500 ease-out group-hover:scale-[1.015]",
                 // A tall promo poster beside products would stretch to full width on tablets and get very
                 // tall, so crop it to the Figma tablet frame (720×560) and keep the brand logo in view.
                 ctx.beside && "sm:max-lg:aspect-[720/560] sm:max-lg:object-cover sm:max-lg:object-[50%_8%]",
-              )}
-            />
-          </picture>
-        </SmartLink>
-      ))}
+              ),
+            )}
+          </SmartLink>
+        ),
+      )}
     </div>
   );
 }
 
-/* ---------- Categories (categories-grid; live API: data[{id,slug,title,image,link}]) ---------- */
+/** Banner whose text and button are real page content over background art (see Banners). */
+function BannerWithContent({ c, frame, tall, picture }: { c: any; frame: string; tall: boolean; picture: (c: any, cls: string) => React.ReactNode }) {
+  // Card theme from the CMS: "light" (default) = white text for dark art; "dark" = dark text for light art.
+  const light = c.theme === "dark";
+  return (
+    <article className={cn(frame, tall ? "min-h-[460px] md:aspect-[720/560] md:min-h-0 lg:aspect-[503/712]" : "min-h-[300px] md:aspect-[3/1] md:min-h-0")}>
+      {picture(c, "absolute inset-0 size-full object-cover transition duration-500 ease-out group-hover:scale-[1.015]")}
+      <div
+        aria-hidden
+        className={cn(
+          "absolute inset-0",
+          light
+            ? "bg-[linear-gradient(90deg,rgb(255_255_255/0.92),rgb(255_255_255/0.6)_45%,transparent_75%)]"
+            : tall
+              ? "bg-[linear-gradient(180deg,rgb(8_22_52/0.85),rgb(8_22_52/0.2)_45%,rgb(8_22_52/0.85))]"
+              : "bg-[linear-gradient(90deg,rgb(8_22_52/0.9),rgb(8_22_52/0.55)_45%,transparent_75%)]",
+        )}
+      />
+      <div
+        className={cn(
+          "relative flex h-full flex-col gap-3 p-6 md:p-10",
+          tall ? "justify-between" : "max-w-[560px] justify-center",
+          light ? "text-ink" : "text-white",
+        )}
+      >
+        <div className="flex flex-col gap-3">
+          {c.badge && <p className={cn("text-xs font-semibold uppercase tracking-[0.18em]", light ? "text-gold-text" : "text-gold-soft")}>{tr(c.badge)}</p>}
+          {c.title && <h2 className="font-head text-[26px] font-bold leading-tight md:text-[34px] lg:text-[40px]">{tr(c.title)}</h2>}
+          {c.description && <p className={cn("text-[15px] leading-relaxed md:text-base", light ? "text-muted" : "text-white/85")}>{tr(c.description)}</p>}
+        </div>
+        <SmartLink
+          to={c.link}
+          className={btn(light ? "dark" : "white", "lg", "mt-2 self-start rounded-full after:absolute after:inset-0 after:content-['']")}
+        >
+          {c.cta}
+          <Icon name={light ? "arrow-right-white" : "arrow-right-navy"} size={16} />
+        </SmartLink>
+      </div>
+    </article>
+  );
+}
+
 function Categories({ w, ctx }: P) {
   const byId = new Map(ctx.categories.map((c) => [c.id, c]));
   const cats = (w.data ?? w.categories ?? []).map((c: any) => {
@@ -289,7 +342,6 @@ function Categories({ w, ctx }: P) {
   return <CategoryCarousel cats={cats} label={UI.exploreCategory} footnote={UI.exploreCategories(cats.length)} />;
 }
 
-/* ---------- Product grids (products-by-category / featured / recommended; live: data[]) ---------- */
 function Products({ w, ctx }: P) {
   const products: any[] = w.data ?? [];
   if (!products.length)
@@ -318,11 +370,15 @@ const BRAND_STYLE: Record<string, string> = {
   italic: "font-sans italic",
 };
 
-function Testimonials({ w }: P) {
+function Testimonials({ w, ctx }: P) {
   const items: any[] = w.items ?? [];
   if (!items.length) return null;
   if (w.variant === "brand-carousel") {
-    const cards = items.map((it) => ({ name: tr(it.name), image: url(it.avatar), link: it.link ?? "" })).filter((c) => c.image || c.name);
+    // Name, tagline, link and (optional) photo come from the CMS; the logo comes from the store's Brand list.
+    const logoOf = (link: string) => ctx.brands.find((b) => link === `/brand/${b.slug}`)?.logo ?? null;
+    const cards = items
+      .map((it) => ({ name: tr(it.name), image: url(it.avatar), link: it.link ?? "", logo: logoOf(it.link ?? "") }))
+      .filter((c) => c.image || c.name);
     if (!cards.length) return null;
     return <BrandCarousel cards={cards} />;
   }
@@ -575,6 +631,83 @@ function Gallery({ w }: P) {
   );
 }
 
+/* ---------- Two-One Grid: two titled groups (2/3 + 1/3) of brand / product / category entries ---------- */
+function TwoOneGrid({ w, ctx }: P) {
+  const groups = [
+    { title: tr(w["one-section-title"] ?? w.oneSectionTitle), items: (w["one-grid-data"] ?? w.oneGridData ?? []) as any[] },
+    { title: tr(w["second-section-title"] ?? w.secondSectionTitle), items: (w["second-grid-data"] ?? w.secondGridData ?? []) as any[] },
+  ].filter((g) => g.items.length > 0);
+  if (!groups.length) return null;
+  const wide = groups.length === 1;
+  return (
+    <div className={cn("grid grid-cols-1 gap-10", !wide && "lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-8")}>
+      {groups.map((g, gi) => (
+        <section key={gi} className="flex min-w-0 flex-col gap-5">
+          {g.title && <h2 className="font-head text-[26px] font-bold text-ink md:text-[30px] lg:text-[34px]">{g.title}</h2>}
+          <div
+            className={cn(
+              "grid grid-cols-2 gap-3 md:gap-4",
+              wide ? "md:grid-cols-3 lg:grid-cols-4" : gi === 0 ? "md:grid-cols-3" : "md:grid-cols-2",
+            )}
+          >
+            {g.items.map((e, i) => (
+              <GridEntry key={i} e={e} ctx={ctx} />
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+function GridEntry({ e, ctx }: { e: any; ctx: WidgetCtx }) {
+  const d = e.data ?? e;
+  if (e.type === "product") return <ProductCard p={d} currency={ctx.currency} />;
+  if (e.type === "category") {
+    const cat = ctx.categories.find((c) => c.id === d.id);
+    const name = tr(d.name ?? d.title) || cat?.name || "";
+    const img = url(d.image_url ?? d.image) || cat?.image_url || "";
+    return (
+      <SmartLink to={`/category/${d.slug ?? cat?.slug ?? d.id}`} className={cn("group flex flex-col overflow-hidden rounded-[14px] border border-line bg-white", cardHover)}>
+        <span className="relative aspect-[4/3] overflow-hidden bg-[linear-gradient(135deg,#10306f,#0a1d47)]">
+          {img ? (
+            <img src={img} alt="" loading="lazy" className={coverImg} />
+          ) : (
+            <span aria-hidden className="absolute inset-0 grid grid-cols-1 place-items-center font-head text-4xl font-bold text-white/70">
+              {initials(name)}
+            </span>
+          )}
+        </span>
+        <span className="p-4 text-[15px] font-semibold text-ink-2">{name}</span>
+      </SmartLink>
+    );
+  }
+  // Brand entry: name and logo from the store's Brand list.
+  const name = tr(d.value ?? d.name ?? e.brandName);
+  if (!name) return null;
+  const brand = ctx.brands.find((b) => b.name === name);
+  const logo = url(d.image_url ?? e.brandLogo) || brand?.logo || "";
+  const count = Number(d.products_count);
+  return (
+    <SmartLink
+      to={`/brand/${brand?.slug ?? d.slug ?? name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+      className={cn("group flex flex-col items-center gap-3 rounded-[14px] border border-line bg-white p-5 text-center", cardHover)}
+    >
+      <span className="flex h-20 w-full items-center justify-center">
+        {logo ? (
+          <img src={logo} alt="" loading="lazy" className="max-h-full max-w-[85%] object-contain transition-transform duration-300 group-hover:scale-[1.04]" />
+        ) : (
+          <span className="font-head text-xl font-bold text-dark">{name}</span>
+        )}
+      </span>
+      <span className="flex flex-col gap-0.5">
+        <span className="text-[15px] font-semibold text-ink-2">{name}</span>
+        {count > 0 && <span className="text-[13px] text-muted">{UI.productCount(count)}</span>}
+      </span>
+    </SmartLink>
+  );
+}
+
 const Spacer = ({ w }: P) => <div style={{ height: Number(w.height) || 0 }} aria-hidden />;
 const Divider = () => <hr className="border-0 border-t border-line" />;
 
@@ -594,6 +727,7 @@ const REGISTRY: Record<string, React.FC<P>> = {
   gallery: Gallery,
   spacer: Spacer,
   divider: Divider,
+  "two-one-grid": TwoOneGrid,
 };
 
 export function WidgetRenderer({ w, ctx }: P) {

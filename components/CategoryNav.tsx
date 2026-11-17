@@ -22,6 +22,8 @@ import { SmartLink } from "./SmartLink";
 
 export type NavCategory = { name: string; slug: string };
 export type NavExtra = { label: string; link: string };
+/** A brand link in the menus (from the store's Brand product detail). */
+export type NavBrand = { name: string; slug: string };
 
 const ALL = "__all";
 const OPEN_DELAY = 90;
@@ -45,11 +47,14 @@ export function CategoryNav({
   categories,
   highlight,
   extras,
+  featuredBrands = {},
 }: {
   title: string;
   categories: NavCategory[];
   highlight?: string;
   extras: NavExtra[];
+  /** Brands that have products in each category, keyed by category slug (store data, not hard-coded). */
+  featuredBrands?: Record<string, NavBrand[]>;
 }) {
   const path = usePathname();
   const [open, setOpen] = useState<string | null>(null);
@@ -160,7 +165,7 @@ export function CategoryNav({
           onClick={(e) => (e.target as Element).closest("a") && close()}
         >
           <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-[42px] pb-5 pt-8">
-            {open === ALL ? <AllCategoriesPanel /> : menu && <CategoryPanel slug={open} menu={menu} />}
+            {open === ALL ? <AllCategoriesPanel /> : menu && <CategoryPanel slug={open} menu={menu} brands={featuredBrands[open] ?? []} />}
           </div>
         </div>
       )}
@@ -218,11 +223,11 @@ function AllCategoriesPanel() {
 }
 
 /** Figma 14:594 / 14:729 / 14:873 — groups, "view all" link, promo card, featured brands. */
-function CategoryPanel({ slug, menu }: { slug: string; menu: (typeof CATEGORY_MENUS)[string] }) {
+function CategoryPanel({ slug, menu, brands }: { slug: string; menu: (typeof CATEGORY_MENUS)[string]; brands: NavBrand[] }) {
   const groups = menu.groups.map(groupByTitle).filter((g): g is MenuGroup => !!g);
   // A single long group is split over two columns, as in the Cardiovascular design.
   const split = groups.length === 1 && groups[0].items.length > 5;
-  const spread = (menu.brands?.length ?? 0) > 3;
+  const spread = brands.length > 3;
   return (
     <>
       <div className="flex items-start gap-10">
@@ -255,7 +260,7 @@ function CategoryPanel({ slug, menu }: { slug: string; menu: (typeof CATEGORY_ME
           </aside>
         )}
       </div>
-      {!!menu.brands?.length && (
+      {brands.length > 0 && (
         <div
           className={cn(
             "flex items-center overflow-x-auto whitespace-nowrap border-t border-line pt-6 [scrollbar-width:none]",
@@ -263,13 +268,13 @@ function CategoryPanel({ slug, menu }: { slug: string; menu: (typeof CATEGORY_ME
           )}
         >
           <span className={cn("text-[13.5px] text-muted", !spread && "mr-[30px]")}>{UI.featuredBrands}</span>
-          {menu.brands.map((b) => (
+          {brands.map((b) => (
             <Link
-              key={b}
-              href={`/brand/${slugify(b)}`}
+              key={b.slug}
+              href={`/brand/${b.slug}`}
               className="font-head text-[22px] font-bold tracking-[-0.01em] text-brandgrey transition-colors hover:text-ink-2"
             >
-              {b}
+              {b.name}
             </Link>
           ))}
         </div>
@@ -449,7 +454,7 @@ export function MobileMenu({
           })}
 
           {extras.map((x, i) => {
-            // The "Brands" link expands into the brand list (same list as the footer).
+            // The "Brands" link expands into the store's brand list, plus a link to all brands.
             const expandable = x.link === "/brands" && brands.length > 0;
             const key = `extra-${i}`;
             const isOpen = expanded === key;
@@ -471,11 +476,16 @@ export function MobileMenu({
                       <ul id={`mm-${key}`} className="pb-2.5 pl-3.5">
                         {brands.map((b, j) => (
                           <li key={j}>
-                            <SmartLink to={b.link} className={cn(subLink, b.link === x.link && cn("font-semibold", drawerText))}>
+                            <SmartLink to={b.link} className={subLink}>
                               {b.label}
                             </SmartLink>
                           </li>
                         ))}
+                        <li>
+                          <SmartLink to={x.link} className={cn(subLink, "font-semibold", drawerText)}>
+                            {UI.allBrands} →
+                          </SmartLink>
+                        </li>
                       </ul>
                     )}
                   </>

@@ -1,6 +1,7 @@
 // Mega menu content for the category bar (Figma "Menus" row: nodes 12:413, 14:514, 14:649, 14:793).
-// The store only has the 8 top-level categories, so the sub-category lists, promo cards and
-// featured brands live here. Each sub-category links to its store category with a search term.
+// The store only has the 8 top-level categories, so the sub-category lists and promo cards live
+// here. Each sub-category links to its store category with a search term.
+// "Featured brands" are NOT here: they come from the store (the Brand detail of each category's products).
 // Menus are matched to store categories by slug; a category without an entry here is a plain link.
 
 export interface MenuGroup {
@@ -17,7 +18,6 @@ export interface CategoryMenu {
   /** "View all … products →" link text. Omitted = no link. */
   viewAll?: string;
   promo?: { title: string; text: string };
-  brands?: string[];
 }
 
 /** "All categories" panel: 12 numbered cards (Figma 12:476). */
@@ -109,7 +109,6 @@ export const CATEGORY_MENUS: Record<string, CategoryMenu> = {
       title: "Cath lab & structural heart",
       text: "Send your case list for pricing, availability and product documentation.",
     },
-    brands: ["Abbott", "Medtronic", "Boston Scientific", "Terumo", "Edwards", "Biotronik"],
   },
   surgical: {
     groups: ["Surgery & Operating Room", "Specialty Surgery"],
@@ -133,7 +132,6 @@ export const CATEGORY_MENUS: Record<string, CategoryMenu> = {
     groups: ["Orthopedics & Trauma"],
     viewAll: "View all orthopedics & trauma products →",
     promo: { title: "Implants and trauma systems", text: "Sizes and sets are confirmed in the quotation." },
-    brands: ["stryker", "MicroPort Orthopedics"],
   },
   "critical-care-infusion": {
     groups: ["Critical Care, Respiratory & Nutrition", "Infusion & Vascular Access"],

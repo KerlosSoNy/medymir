@@ -21,3 +21,7 @@ export const PUBLIC_REVALIDATE_SECONDS = 60;
 
 // CMS page that holds site-wide content (announcement bar, category bar extras, footer).
 export const SITE_LAYOUT_SLUG = "site-layout";
+
+// Key of the store's "Brand" product detail (dynamic attribute). Brand pages, the brands page and the
+// mega-menu "Featured brands" all read brands from it.
+export const BRAND_ATTRIBUTE = "brand";

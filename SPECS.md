@@ -136,6 +136,8 @@ Defined in `app/globals.css` (`@theme`). Use them as Tailwind classes, e.g. `tex
 | Data | Where it is read | Caching |
 |---|---|---|
 | Store info, branding, currency | `get-tenant-info` (`lib/api.ts`) | 60 s |
+| Brands (name, slug, logo) | `get-product-attributes` → the **Brand** detail (`BRAND_ATTRIBUTE` in `lib/config.ts`) via `getBrands()` | 60 s |
+| Brands per category (mega-menu "Featured brands") | the `brand` filter values of `get-category-products?category_id=` via `getCategoryBrands()` | 60 s |
 | CMS pages (home, site-layout, any slug) | `get-cms-pages` | 60 s |
 | Categories | `get-full-menu` + `get-category-products` (for slugs) | 60 s |
 | Product lists, filters, pagination, search | `get-category-products` | 60 s |
@@ -149,9 +151,13 @@ Defined in `app/globals.css` (`@theme`). Use them as Tailwind classes, e.g. `tex
 - Public data is read on the server (`lib/api.ts`, marked `server-only`). Private data (quote list, login) is read in the browser (`lib/client-api.ts`).
 - The site never hard-codes store content. Texts, links and images come from TheCoins. Exceptions:
   - button and form labels: `lib/ui.ts`
-  - mega-menu sub-categories, promo cards and featured brands: `lib/menu.ts`, because the store has no sub-categories yet
+  - mega-menu sub-categories and promo cards: `lib/menu.ts`, because the store has no sub-categories yet. **Featured brands are NOT hard-coded**; they come from the store (brands of each category's products).
 - **CMS widget variants:** home sections use TheCoins widget types that keep extra settings (text-image, stats-counter, button-cta, testimonials, contact-form, faq) and add a `variant` key. `components/cms/widgets.tsx` picks the layout from that variant. Some widget types (hero-banner, logo-cloud, gallery) drop extra keys, so we don't use them.
-- Site-wide content (announcement bar, category-bar extras, footer, brand list, payment logos) comes from the CMS page **`site-layout`**.
+- Site-wide content (announcement bar, category-bar extras, footer, footer brand links, payment logos) comes from the CMS page **`site-layout`**.
+- **Brands** come from the store's Brand detail: `/brands` lists them with their uploaded logos, `/brand/[slug]` filters products by `brand=<name>` (falls back to a name search for brands only linked from the CMS, e.g. exclusive brands), the drawer's Brands row and each mega menu use them, and brand cards in the home carousel show the brand's logo.
+- **Never put content images in the project** (`public/`). Every content picture is uploaded to TheCoins and referenced from the CMS. `public/icons/` holds only UI icons.
+- **Banners and hero slides** (`components/cms/widgets.tsx` → `Banners`, `HeroSlider`): a card/slide **with a button text** (`cta_text`) is treated as background art; its badge, title, description/subtitle and a real button are rendered as page content. A card **without** button text is shown as a picture (it may contain its own text) and the whole picture is the link. Card theme `dark` = dark text for light art; anything else = white text.
+- **Two-One Grid** (`two-one-grid`): two titled groups (2/3 + 1/3, or full width when one is empty) of brand, product or category entries.
 
 ---
 
@@ -175,7 +181,6 @@ lib/
   ui.ts               UI labels
   styles.ts, cn.ts    Tailwind helpers
 public/icons/         Figma icons
-public/placeholders/  temporary placeholder images (e.g. brand cards) until real photos are uploaded in TheCoins
 design-assets/        Figma image exports
 ```
 

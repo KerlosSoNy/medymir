@@ -27,6 +27,7 @@ export async function ProductListing({
   basePath,
   categoryId,
   search,
+  filter,
   heading,
   intro,
   sp,
@@ -34,12 +35,14 @@ export async function ProductListing({
   basePath: string;
   categoryId?: string;
   search?: string;
+  /** Fixed filters for this page, e.g. { brand: "Stryker" } on a brand page. */
+  filter?: Record<string, string>;
   heading?: string;
   intro?: string;
   sp: SearchParams;
 }) {
   const q = listingQuery(sp);
-  const query = { per_page: 24, ...q, category_id: q.category_id || categoryId, search: q.search || search };
+  const query = { per_page: 24, ...q, ...filter, category_id: q.category_id || categoryId, search: q.search || search };
   const [data, tenant] = await Promise.all([getCategoryProducts(query), getTenant()]);
   const currency = tenant?.locale.currency ?? null;
   if (!data) return <p className={cn(container, "py-16 text-center text-muted")}>{UI.error}</p>;

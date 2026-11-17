@@ -1,6 +1,3 @@
-// Renders a TheCoins CMS page: rows -> columns (12-col grid) -> widgets via the registry.
-// Supports both the tree shape (page.rows) and the legacy flat list (page.content).
-// Row spacing depends on what the row holds (see rowKind), so the page builder needs no CSS.
 import { cn } from "@/lib/cn";
 import { sectionX } from "@/lib/styles";
 import { WidgetRenderer, type RowKind, type WidgetCtx } from "./widgets";
@@ -38,16 +35,13 @@ function rowKind(row: any): RowKind {
   return "boxed";
 }
 
-// Site gutter: 16 phone / 24 tablet (Figma 768) / 56 small desktop / 132 desktop 1440.
 const GUTTER_X = sectionX;
 
 const ROW: Record<RowKind, string> = {
   full: "p-0",
   boxed: cn("py-12 md:py-[72px]", GUTTER_X),
   banner: cn("pt-12 pb-6 md:pt-[72px]", GUTTER_X),
-  // Popular searches + features strip is compact (Figma: 24 / 28px).
   compact: "pt-6 pb-7 px-[22px] md:px-8",
-  // Carousels bleed off the right edge (Figma: left padding only).
   bleed: "py-12 md:py-[72px] pl-4 md:pl-6 lg:pl-14 xl:pl-[132px] pr-0",
 };
 

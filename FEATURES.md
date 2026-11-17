@@ -19,7 +19,7 @@ Technical details: [SPECS.md](SPECS.md). Status by Figma screen: [PROGRESS.md](P
 | Category bar with all store categories | ✅ | "Ready Stock Offers" highlighted in gold; "Brands" link from CMS |
 | **Mega menus** (computer) | ✅ | Opens on hover or keyboard focus; "All categories" opens on click too; closes with Esc, outside click or a link click |
 | └ All categories panel | ✅ | 12 numbered groups with sub-categories |
-| └ Category panels (7) | ✅ | Sub-categories, "View all" link, "Request a quote" card, featured brands |
+| └ Category panels (7) | ✅ | Sub-categories, "View all" link, "Request a quote" card, featured brands (from the store: the brands of that category's products) |
 | **Menu drawer** (tablet & phone) | ✅ | As in Figma: ☰ button, slides in, categories open into groups and sub-categories, Brands list, "Delivering to" line; closes with ×, Esc, backdrop or a link |
 | Footer | ✅ | About text, categories, top brands, contact, About & Support links, policy links, payment logos |
 | Brand colours from the store settings | ✅ | Changing colours in TheCoins changes the site |
@@ -33,12 +33,14 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 
 | Section | Status | Notes |
 |---|---|---|
-| Hero slider | ✅ | Slides, arrows, dots |
+| Hero slider | ✅ | Slides, arrows, dots. A slide with button text gets a real title, subtitle and button (see Banners below) |
 | Popular searches (chips) | ✅ | Each chip runs a search |
 | Features strip (3 benefits) | ✅ | |
 | Shop by category carousel | 🟡 | 5 of 8 categories have no photo yet |
 | Abbott banner + Abbott products + promo | ✅ | |
-| Shop by brand carousel | ✅ | |
+| Shop by brand carousel | ✅ | Name, tagline and link from the CMS; brand logo from the store's Brand list; a CMS photo replaces the card when uploaded |
+| Banners with real text and button | 🟡 | Built: a banner with button text shows a real title, text and button. Waits for the designer's clean background pictures (current pictures have text drawn in) |
+| Top Products (Two-One Grid) | ✅ | Brand cards with logo and product count, product cards or category tiles, as set in the page builder |
 | "Lines buyers ask for most" (tabs + products) | ✅ | |
 | Exclusive brands in Oman | ✅ | |
 | Stryker section (products + promo) | ✅ | |
@@ -60,7 +62,8 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 | Search results (`/search?q=…`) | ✅ | Includes "no results" message |
 | Filters (sub-category, price range, on sale, featured, in stock) | ✅ | Filters come from the store settings; collapsible on phones |
 | Pagination | ✅ | |
-| Brands page (`/brands`) and brand page (`/brand/…`) | ✅ | Brand page searches products by brand name until products have their "Brand" detail filled in (the detail exists in the store) |
+| Brands page (`/brands`) | ✅ | The store's Brand list with each brand's uploaded logo |
+| Brand page (`/brand/…`) | ✅ | Exactly the products whose Brand detail is that brand, plus a Brand filter. Brands not in the store's Brand list (e.g. Hermann) fall back to a name search |
 | Product cards | ✅ | Figma design: REF/SKU, photo shown whole in a fixed frame (any photo size fits), "No product image yet" placeholder, name and text cut to 2 lines, price or "Request a quotation", full-width "Add to quote list"; all cards in a row line up |
 | Product page (`/product/…`) | ✅ | Photo gallery, REF, price, sale price, description, options (size/pack), quantity, add to quote list, "currently unavailable" state |
 | Ready Stock page design (special offer cards) | ⬜ | Uses the normal category page for now |

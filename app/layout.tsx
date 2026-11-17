@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import { getCategories, getSiteLayout, getTenant } from "@/lib/api";
+import { getBrands, getCategories, getCategoryBrands, getSiteLayout, getTenant } from "@/lib/api";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { QuoteListProvider } from "@/components/QuoteListProvider";
@@ -28,13 +28,19 @@ function themeVars(t: Awaited<ReturnType<typeof getTenant>>): React.CSSPropertie
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [tenant, layout, categories] = await Promise.all([getTenant(), getSiteLayout(), getCategories()]);
+  const [tenant, layout, categories, brands, categoryBrands] = await Promise.all([
+    getTenant(),
+    getSiteLayout(),
+    getCategories(),
+    getBrands(),
+    getCategoryBrands(),
+  ]);
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`} style={themeVars(tenant)}>
       <body>
         <PixelLoader />
         <QuoteListProvider>
-          <Header tenant={tenant} layout={layout} categories={categories} />
+          <Header tenant={tenant} layout={layout} categories={categories} brands={brands} categoryBrands={categoryBrands} />
           <main>{children}</main>
           <Footer tenant={tenant} layout={layout} categories={categories} />
         </QuoteListProvider>

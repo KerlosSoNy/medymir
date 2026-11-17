@@ -1,29 +1,40 @@
 // Announcement bar + main header + category bar (Figma nodes 9:9, 9:22, 9:56).
 // Announcement items and extra category-bar links come from the CMS "site-layout" page;
 // categories come from the catalogue.
-import type { Category, Tenant } from "@/lib/api";
+import type { Brand, Category, Tenant } from "@/lib/api";
 import { tr } from "@/lib/format";
 import { UI } from "@/lib/ui";
 import { Logo } from "./Logo";
 import { HeaderSearch, QuoteListLink, AccountLink } from "./HeaderClient";
-import { CategoryNav, MobileMenu, type NavCategory, type NavExtra } from "./CategoryNav";
+import { CategoryNav, MobileMenu, type NavBrand, type NavCategory, type NavExtra } from "./CategoryNav";
 
 export function Header({
   tenant,
   layout,
   categories,
+  brands: storeBrands,
+  categoryBrands,
 }: {
   tenant: Tenant | null;
   layout: Record<string, any>;
   categories: Category[];
+  /** The store's Brand list (Products → product details → Brand). */
+  brands: Brand[];
+  /** Brand names that have products in each category, keyed by category slug. */
+  categoryBrands: Record<string, string[]>;
 }) {
   const announcement: any[] = layout.announcement?.items ?? [];
   const nav = layout["category-nav"];
   const highlight: string | undefined = nav?.highlight;
   const navCats: NavCategory[] = categories.map((c) => ({ name: c.name, slug: c.slug ?? c.id }));
   const extras: NavExtra[] = (nav?.items ?? []).map((x: any) => ({ label: tr(x.label), link: x.link }));
-  // Brand list for the "Brands" row of the phone/tablet menu (same list as the footer's brand column).
-  const brands: NavExtra[] = (layout["footer-column"]?.items ?? []).map((x: any) => ({ label: tr(x.label), link: x.link }));
+  // Brands come from the store's Brand list: the drawer's "Brands" row lists them all, and each mega menu
+  // features the brands that actually have products in that category.
+  const brands: NavExtra[] = storeBrands.map((b) => ({ label: b.name, link: `/brand/${b.slug}` }));
+  const bySlug = new Map(storeBrands.map((b) => [b.name, b]));
+  const featuredBrands: Record<string, NavBrand[]> = Object.fromEntries(
+    Object.entries(categoryBrands).map(([cat, names]) => [cat, names.map((n) => bySlug.get(n)).filter((b): b is Brand => !!b)]),
+  );
 
   return (
     <header>
@@ -58,7 +69,7 @@ export function Header({
         </div>
       </div>
 
-      <CategoryNav title={tr(nav?.title) || UI.allCategories} categories={navCats} highlight={highlight} extras={extras} />
+      <CategoryNav title={tr(nav?.title) || UI.allCategories} categories={navCats} highlight={highlight} extras={extras} featuredBrands={featuredBrands} />
     </header>
   );
 }

@@ -1,10 +1,13 @@
 "use client";
 // Full-width hero slider (Figma node 9:70): image slides, round navy arrows, gold active dot.
 // Slides are 3:1 at every size (Figma: 1440×480, 768×256, 390×130).
+// A slide with a button text (cta_text) in the CMS is background art: its title, subtitle and button
+// are rendered as real content. A slide without one is shown as a picture that links to cta_link.
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
 import { UI } from "@/lib/ui";
-import { SmartLink } from "../SmartLink";
+import { btn } from "@/lib/styles";
+import { Icon, SmartLink } from "../SmartLink";
 import { snapTrack } from "./classes";
 import { useScroller } from "./useScroller";
 
@@ -13,6 +16,8 @@ export interface HeroSlide {
   tab: string;
   mobile: string;
   title: string;
+  subtitle: string;
+  ctaText: string;
   link: string;
 }
 
@@ -40,21 +45,41 @@ export function HeroSlider({ slides, autoplay, interval }: { slides: HeroSlide[]
       aria-roledescription="carousel"
     >
       <div className={cn(snapTrack, "auto-cols-[100%]")} ref={ref}>
-        {slides.map((s, k) => (
-          <SmartLink key={k} to={s.link} className="block aspect-[3/1] snap-start" ariaLabel={s.title || `${k + 1} / ${slides.length}`}>
+        {slides.map((s, k) => {
+          const pic = (
             <picture>
               <source media="(max-width:640px)" srcSet={s.mobile} />
               <source media="(max-width:1024px)" srcSet={s.tab} />
               <img
                 src={s.desk}
-                alt={s.title}
+                alt={s.ctaText ? "" : s.title}
                 loading={k === 0 ? "eager" : "lazy"}
                 fetchPriority={k === 0 ? "high" : "auto"}
-                className="size-full object-cover"
+                className="absolute inset-0 size-full object-cover"
               />
             </picture>
-          </SmartLink>
-        ))}
+          );
+          if (!s.ctaText)
+            return (
+              <SmartLink key={k} to={s.link} className="relative block aspect-[3/1] snap-start" ariaLabel={s.title || `${k + 1} / ${slides.length}`}>
+                {pic}
+              </SmartLink>
+            );
+          return (
+            <div key={k} className="relative min-h-[260px] snap-start md:aspect-[3/1] md:min-h-0">
+              {pic}
+              <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgb(8_22_52/0.88),rgb(8_22_52/0.5)_50%,transparent_80%)]" />
+              <div className="relative flex h-full max-w-[640px] flex-col justify-center gap-3 px-6 py-8 text-white md:px-12 lg:px-[78px]">
+                {s.title && <h2 className="font-head text-[26px] font-bold leading-tight md:text-[40px] lg:text-[52px]">{s.title}</h2>}
+                {s.subtitle && <p className="text-[15px] text-white/85 md:text-lg">{s.subtitle}</p>}
+                <SmartLink to={s.link} className={btn("gold", "lg", "mt-2 self-start text-ink")}>
+                  {s.ctaText}
+                  <Icon name="arrow-right-navy" size={16} />
+                </SmartLink>
+              </div>
+            </div>
+          );
+        })}
       </div>
       {slides.length > 1 && (
         <>

@@ -3,7 +3,8 @@
 // never goes through here — see lib/client-api.ts.
 import "server-only";
 import { cache } from "react";
-import { API_KEY, API_URL, PUBLIC_REVALIDATE_SECONDS, SITE_LAYOUT_SLUG, TENANT_ID } from "./config";
+import { API_KEY, API_URL, BRAND_ATTRIBUTE, PUBLIC_REVALIDATE_SECONDS, SITE_LAYOUT_SLUG, TENANT_ID } from "./config";
+import { slugify } from "./format";
 
 type Query = Record<string, string | number | boolean | undefined | null>;
 
@@ -121,4 +122,41 @@ export async function getProduct(id: string) {
 export const getProductCount = cache(async () => {
   const r = await getCategoryProducts({ per_page: 1 });
   return r?.pagination?.products_count ?? 0;
+});
+
+/* ---------- Brands: the store's "Brand" product detail (dynamic attribute) ---------- */
+
+export interface Brand {
+  /** Brand name as stored on products, e.g. "Boston Scientific". */
+  name: string;
+  slug: string;
+  /** Logo uploaded for the brand in TheCoins (Products → product details → Brand). */
+  logo: string | null;
+}
+
+/** All active brands from the store's Brand list, in the store's order. */
+export const getBrands = cache(async (): Promise<Brand[]> => {
+  const r = await get<{ success: boolean; attributes: any[] }>("get-product-attributes");
+  const attr = r?.attributes?.find((a) => a.name === BRAND_ATTRIBUTE);
+  return (attr?.values ?? [])
+    .filter((v: any) => v.is_active !== false && v.value)
+    .sort((a: any, b: any) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+    .map((v: any) => ({ name: v.value, slug: v.slug || slugify(v.value), logo: v.image_url || null }));
+});
+
+export async function resolveBrand(slug: string): Promise<Brand | null> {
+  return (await getBrands()).find((b) => b.slug === slug) ?? null;
+}
+
+/** Brands that have products in each category (the category's Brand filter), keyed by category slug. */
+export const getCategoryBrands = cache(async (): Promise<Record<string, string[]>> => {
+  const cats = await getCategories();
+  const entries = await Promise.all(
+    cats.map(async (c) => {
+      const r = await getCategoryProducts({ category_id: c.id, per_page: 1 });
+      const f = r?.filters?.find((x) => x.name === BRAND_ATTRIBUTE);
+      return [c.slug ?? c.id, (f?.values ?? []).map(String)] as const;
+    }),
+  );
+  return Object.fromEntries(entries);
 });

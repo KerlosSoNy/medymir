@@ -80,7 +80,9 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 
 | # | Task | Why it matters |
 |---|---|---|
-| 1 | **Replace the Abbott promo picture** with `design-assets/upload/06-promo-abbott-fixed.webp` | Removes the white strip beside it |
+| 1 | **Get clean background pictures from the designer** (no drawn-in text or buttons) for the hero, Abbott wide banner, Abbott promo and WhatsApp banner; upload them and fill each banner's title / description / button text | Real, clickable buttons and real text are built and switch on when a banner has button text. The hero already has button text, so its title shows twice until its clean picture is uploaded |
+| 1b | **Replace the Abbott promo picture** with `design-assets/upload/06-promo-abbott-fixed.webp` (until the clean art arrives) | Removes the white strip beside it |
+| 1c | **Upload tightly cropped brand logos** (Products → product details → Brand) for Boston Scientific, Terumo, Biotronik and Edwards; add a logo for MicroPort Orthopedics | These logo files have large empty margins, so the logos look small on the site |
 | 2 | **Upload the missing photos** (section 2) | Cards show placeholders until then |
 | 3 | **Set up the quotation form fields** (Contact form settings) | The form can only show fields configured there. Suggested: Full name*, Organisation, Work email*, Phone / WhatsApp, You are buying as (dropdown), Delivery city & country, What do you need?* (long text) |
 | 4 | **Add real products** (name, Brand, REF/SKU, category, price in OMR, photo) and remove the demo ones | The site currently shows demo products |
@@ -119,12 +121,16 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | 17 Nov | Created product detail (dynamic attribute) **Brand** (`brand`, pick-from-list, shown on product page, optional) with 8 brands: Abbott, Medtronic, Stryker, Boston Scientific, Terumo, Edwards, Biotronik, MicroPort Orthopedics |
 | 17 Nov | Home page "Shop by brand": added 4 cards (Terumo, Edwards, Biotronik, MicroPort Orthopedics) and pointed 7 cards at **temporary placeholder images** in the website folder (`public/placeholders/brands/`). Stryker keeps its real photo |
 | 17 Nov | Store now has 25 demo products and photos for 7 categories and several home sections (added in the dashboard or another session; not logged in detail) |
+| 17 Nov | _(Owner approved)_ Set the **Brand** detail on 10 demo products: Abbott ×2, Boston Scientific ×2, Medtronic, MicroPort Orthopedics, Stryker ×3, Terumo |
+| 17 Nov | _(Owner)_ Hero slide: added button text "Explore all brands"; added a **Two-One Grid** "Top Products" section (4 brands) at the bottom of the home page |
+| 17 Nov | _(Owner approved)_ Home page "Shop by brand": removed 7 picture paths that pointed at files inside the website project (`/placeholders/brands/…`); those cards now show the brand logo, name and tagline |
 
 Nothing was deleted by the developer. TheCoins has no delete action.
 
 ---
 
 ## 6. Known issues
+- **Hero text shows twice** until the hero's clean background picture is uploaded (it has button text now, so the site draws a real title and button over a picture that still has its own).
 - **Abbott promo strip:** see section 3, item 1.
 - **Drafts are public:** TheCoins serves draft pages through the public API, so unpublished builder edits can appear on the site.
 - **Some section types drop settings:** the public API drops or renames some fields (Hero Banner, Logo Cloud, Gallery). The site uses section types that keep everything; see SPECS.md §7.
