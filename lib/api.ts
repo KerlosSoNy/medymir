@@ -108,6 +108,15 @@ export async function getCategoryProducts(query: Query) {
 }
 
 /** Category links may use an id or a slug. Resolve both to an id. */
+/** Active sub-categories of a category (store categories whose parent is this one), in the store's order. */
+export async function getSubcategories(parentId: string): Promise<Category[]> {
+  const menu = await getFullMenu();
+  return (menu?.categories ?? [])
+    .filter((c) => c.parent_category_id === parentId && c.is_active !== false)
+    .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+    .map((c) => ({ ...c, slug: c.slug || slugify(c.name) }));
+}
+
 export async function resolveCategory(slugOrId: string): Promise<Category | null> {
   const cats = await getCategories();
   return cats.find((c) => c.id === slugOrId || c.slug === slugOrId) ?? null;

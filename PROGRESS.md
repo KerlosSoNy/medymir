@@ -1,6 +1,6 @@
 # MedyMar website: progress
 
-_Last updated: 18 November 2026 (About, Contact, FAQ live; policy pages built, texts waiting for approval; home "Shop by brand" now reads the Brand list; both home carousels on Swiper)_
+_Last updated: 18 November 2026 (fixed the "500" error on Vercel by replacing the HTML cleaner; About, Contact, FAQ live; policy pages built, texts waiting for approval; home "Shop by brand" now reads the Brand list; both home carousels on Swiper)_
 
 Where we are, measured against the Figma file. Also see [FEATURES.md](FEATURES.md) (what the site does), [SPECS.md](SPECS.md) (how it's built) and [AGENTS.md](AGENTS.md) (rules for AI assistants).
 
@@ -35,7 +35,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | **Footer** | ✅ | ✅ | ✅ | Payment logos hidden until uploaded |
 | **Home** | ✅ | ✅ | ✅ | See section 2 for missing photos |
 | Categories | 🟡 | 🟡 | 🟡 | Category tiles match Figma; the rest of the page layout is simplified |
-| Category (e.g. Endoscopy) | 🟡 | 🟡 | 🟡 | Products, filters and pagination work. Figma's category header and featured brands are not built |
+| Category (e.g. Endoscopy) | ✅ | ✅ | ✅ | Matches Figma (checked at 360–1440): trail, hero (category name, description, picture), sub-category tiles (shown once the store has sub-categories), Featured brands (brands with products in the category), store filters, Products toolbar with Sort by, cards. Per-category promo banner / callout go in an optional CMS page `category-<slug>` (none made yet) |
 | Ready Stock | 🟡 | 🟡 | 🟡 | Built to match Figma and live at `/category/ready-stock-offers` (checked at 360–1440). Hero photo not uploaded (`design-assets/upload/R01-hero-ready-stock.png`). Sidebar shows the store's filters (price, on sale, featured, in stock), not Figma's Categories/Brand/Pack size |
 | Brands | 🟡 | 🟡 | 🟡 | Brand tiles match the card design; the full Figma page is not built |
 | Product: ready stock / quotation / sold out | 🟡 | 🟡 | 🟡 | Gallery, price, REF, options, add to quote list and "unavailable" all work. Figma's tabs and extra blocks are not built |
@@ -147,7 +147,6 @@ Nothing was deleted by the developer. TheCoins has no delete action.
 ---
 
 ## 6. Known issues
-- **Live site (Vercel): every page built on request fails with "500"** (search, all products, category, brand and product pages; seen 18 Nov). Pages built in advance work (home, About, Contact, FAQ, quote list, account, brands, categories). The same build works on the developer's computer. Most likely cause: `isomorphic-dompurify` (needs `jsdom`) failing on Vercel's servers; the proposed fix is to replace it with `xss` (waiting for the owner's OK to add the package, or the Vercel error log to confirm).
 - **Hero text shows twice** until the hero's clean background picture is uploaded (it has button text now, so the site draws a real title and button over a picture that still has its own).
 - **Abbott promo strip:** see section 3, item 1.
 - **Drafts are public:** TheCoins serves draft pages through the public API, so unpublished builder edits can appear on the site.

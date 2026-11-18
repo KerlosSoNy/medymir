@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import DOMPurify from "isomorphic-dompurify";
+import { sanitize } from "@/lib/sanitize";
 import { getProduct, getTenant } from "@/lib/api";
 import { money, plain } from "@/lib/format";
 import { UI } from "@/lib/ui";
@@ -66,7 +66,7 @@ export default async function ProductPage({ params }: Props) {
             </p>
           )}
           {p.description && (
-            <div className="rich text-[15px] text-[#3a4252]" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(p.description) }} />
+            <div className="rich text-[15px] text-[#3a4252]" dangerouslySetInnerHTML={{ __html: sanitize(p.description) }} />
           )}
           {attrs.length > 0 && (
             <dl className="m-0 grid grid-cols-1 border-t border-line text-sm gap-0">

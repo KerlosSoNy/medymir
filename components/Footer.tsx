@@ -1,6 +1,6 @@
 // Footer (Figma node 11:359). Texts and links come from the CMS "site-layout" page,
 // categories from the catalogue, store name / tagline from TheCoins branding.
-import DOMPurify from "isomorphic-dompurify";
+import { sanitize } from "@/lib/sanitize";
 import type { Category, Tenant } from "@/lib/api";
 import { tr } from "@/lib/format";
 import { UI } from "@/lib/ui";
@@ -59,7 +59,7 @@ export function Footer({ tenant, layout, categories }: { tenant: Tenant | null; 
             {about?.content && (
               <div
                 className="max-w-[340px] text-sm leading-[22px] opacity-[0.88] lg:max-w-[300px]"
-                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(tr(about.content)) }}
+                dangerouslySetInnerHTML={{ __html: sanitize(tr(about.content)) }}
               />
             )}
           </div>

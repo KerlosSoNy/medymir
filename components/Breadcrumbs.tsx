@@ -2,12 +2,13 @@
 // ("Home › Policies & information › Shipping policy").
 import Link from "next/link";
 import { UI } from "@/lib/ui";
-import { sectionX } from "@/lib/styles";
+import { container, sectionX } from "@/lib/styles";
 import { Icon } from "./SmartLink";
 
-export function Breadcrumbs({ current, parent }: { current: string; parent?: string }) {
+/** shop: align with the shop pages (container width) instead of the page-builder sections. */
+export function Breadcrumbs({ current, parent, shop }: { current: string; parent?: string; shop?: boolean }) {
   return (
-    <nav aria-label={UI.breadcrumb} className={sectionX}>
+    <nav aria-label={UI.breadcrumb} className={shop ? container : sectionX}>
       <ol className="mx-auto flex max-w-[1176px] items-center gap-2.5 pt-7 text-[13px]">
         <li>
           <Link href="/" className="text-slate hover:underline">

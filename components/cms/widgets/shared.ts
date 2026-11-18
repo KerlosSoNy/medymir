@@ -1,5 +1,5 @@
 // Shared types and helpers for all CMS widgets.
-import DOMPurify from "isomorphic-dompurify";
+import { sanitize } from "@/lib/sanitize";
 import type { Brand, Category } from "@/lib/api";
 import { tr } from "@/lib/format";
 
@@ -22,5 +22,5 @@ export interface WidgetCtx {
 }
 export type P = { w: any; ctx: WidgetCtx };
 
-export const html = (s: unknown) => DOMPurify.sanitize(tr(s), { USE_PROFILES: { html: true } });
+export const html = (s: unknown) => sanitize(tr(s));
 export const url = (u: unknown) => (typeof u === "string" && /^(https?:|\/)/.test(u) ? u : "");

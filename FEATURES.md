@@ -56,7 +56,7 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 | Feature | Status | Notes |
 |---|---|---|
 | All categories page (`/categories`) | ✅ | Category tiles with photo, name, description; tiles without a photo show initials |
-| Category page (`/category/…`) | ✅ | Products, filters, sorting by API, pagination |
+| Category page (`/category/…`) | ✅ | Figma layout: hero from the store category (name, description, picture), sub-category tiles (when the store has sub-categories), Featured brands (brands of this category's products, with logos, linking to brand pages), store filters, "Products" + count + Sort by (Featured, price, newest, biggest saving, name), pagination. Optional CMS page `category-<slug>` adds sections under the products (e.g. promo banner, "Equipping your … unit?" bar) |
 | Sub-category links from the menus | ✅ | Open the category with a search for the sub-category name (store has no real sub-categories yet) |
 | All products (`/products`) | ✅ | |
 | Search results (`/search?q=…`) | ✅ | Includes "no results" message |

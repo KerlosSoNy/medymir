@@ -15,7 +15,7 @@ This is the reference for **what the site is built with and the rules it follows
 | Language | TypeScript (strict) | 5.9 |
 | Styling | Tailwind CSS v4 (via `@tailwindcss/postcss`) | 4.3 |
 | Class helpers | `clsx` + `tailwind-merge` → `cn()` in `lib/cn.ts` | 2.1 / 3.7 |
-| HTML sanitising (CMS rich text) | `isomorphic-dompurify` | 2.36 |
+| HTML sanitising (CMS rich text, product descriptions) | `xss` via `sanitize()` in `lib/sanitize.ts` (pure JS; the earlier `isomorphic-dompurify`/jsdom crashed request-time pages on Vercel) | 1.0.17 |
 | Carousels ("Shop by brand", "Shop by category") | `swiper` (React build, core CSS only: `swiper/css`) | 14.4 |
 | Backend | TheCoins storefront API (Supabase edge functions) | — |
 | Fonts | Inter (body), Poppins (headings), loaded with `next/font/google` | — |
@@ -181,7 +181,8 @@ app/                  routes (pages)
   privacy-policy/ shipping-policy/ refund-policy/ terms-of-service/ contact-information/
                       policy pages: same, plus "Policies & information" in the trail and ctx.path (menu highlight)
                       (a new info page, e.g. privacy-policy, needs its own folder with the same page.tsx)
-  categories/ category/[slug]/ products/ search/ brands/ brand/[slug]/
+  categories/ category/[slug]/ (Breadcrumbs + CategoryHeader + listing with toolbar + CMS "category-<slug>")
+  products/ search/ brands/ brand/[slug]/
   product/[id]/ quote/ account/ not-found.tsx
   dev/                local-only tools: widgets/ (section gallery), preview/[slug]/ (draft preview)
 components/           shared UI (Header, CategoryNav, Footer, ProductCard, Filters, …)

@@ -8,6 +8,7 @@ import { cn } from "@/lib/cn";
 import { container, pageIntro, pageTitle } from "@/lib/styles";
 import { ProductCard } from "./ProductCard";
 import { Filters } from "./Filters";
+import { SortSelect } from "./SortSelect";
 
 export type SearchParams = Record<string, string | string[] | undefined>;
 
@@ -31,6 +32,7 @@ export async function ProductListing({
   heading,
   intro,
   sp,
+  toolbar,
 }: {
   basePath: string;
   categoryId?: string;
@@ -40,6 +42,8 @@ export async function ProductListing({
   heading?: string;
   intro?: string;
   sp: SearchParams;
+  /** Category page (Figma 87:203): no page title here (the header above has it); "Products", count and Sort by instead. */
+  toolbar?: boolean;
 }) {
   const q = listingQuery(sp);
   const query = { per_page: 24, ...q, ...filter, category_id: q.category_id || categoryId, search: q.search || search };
@@ -60,8 +64,8 @@ export async function ProductListing({
 
   return (
     <div className={cn(container, "pb-14 md:pb-[72px]")}>
-      {title && <h1 className={pageTitle}>{title}</h1>}
-      {(intro || data.category?.description) && <p className={pageIntro}>{intro || data.category?.description}</p>}
+      {!toolbar && title && <h1 className={pageTitle}>{title}</h1>}
+      {!toolbar && (intro || data.category?.description) && <p className={pageIntro}>{intro || data.category?.description}</p>}
       <div className={cn("grid grid-cols-1 items-start gap-5 lg:gap-7", hasFilters && "lg:grid-cols-[240px_minmax(0,1fr)]")}>
         {hasFilters && (
           <Suspense>
@@ -69,6 +73,17 @@ export async function ProductListing({
           </Suspense>
         )}
         <div className="min-w-0">
+          {toolbar && (
+            <div className="mb-3.5 flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <h2 className="font-head text-2xl leading-[1.15] font-bold text-[#202b40]">{UI.products}</h2>
+                <p className="mt-0.5 text-[13px] text-[#5f6b7d]">{UI.productsCount(data.pagination?.products_count ?? data.products?.length ?? 0)}</p>
+              </div>
+              <Suspense>
+                <SortSelect />
+              </Suspense>
+            </div>
+          )}
           {data.products?.length ? (
             <div className="grid grid-cols-2 gap-2.5 sm:gap-4 md:grid-cols-3">
               {data.products.map((p) => (
