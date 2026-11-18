@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CmsPage } from "../../components/cms/CmsPage";
+import { getCmsPage } from "@/lib/api";
+import { tr } from "@/lib/format";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { widgetCtx } from "@/lib/ctx";
 
 // About page = CMS page with slug "about", built in the TheCoins page builder (Figma "About").
 const SLUG = "about";
