@@ -142,6 +142,7 @@ Nothing was deleted by the developer. TheCoins has no delete action.
 ---
 
 ## 6. Known issues
+- **Live site (Vercel): every page built on request fails with "500"** (search, all products, category, brand and product pages; seen 18 Nov). Pages built in advance work (home, About, Contact, FAQ, quote list, account, brands, categories). The same build works on the developer's computer. Most likely cause: `isomorphic-dompurify` (needs `jsdom`) failing on Vercel's servers; the proposed fix is to replace it with `xss` (waiting for the owner's OK to add the package, or the Vercel error log to confirm).
 - **Hero text shows twice** until the hero's clean background picture is uploaded (it has button text now, so the site draws a real title and button over a picture that still has its own).
 - **Abbott promo strip:** see section 3, item 1.
 - **Drafts are public:** TheCoins serves draft pages through the public API, so unpublished builder edits can appear on the site.

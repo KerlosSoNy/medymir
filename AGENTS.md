@@ -81,6 +81,7 @@ If a document turns out to be wrong, rewrite the wrong part. Don't just add a co
 - **Brands come from the store**, never from code or project files: the Brand detail (`get-product-attributes`, `getBrands()`), and per category the `brand` filter of `get-category-products`. Never add brand names, logos or brand pictures to the code or `public/`.
 - **Banners:** a banner/hero slide only renders real text + button when its button text (`cta_text`) is set in the CMS; otherwise the picture is shown as-is. The "Banners" widget can't carry a button text, and "Hero Banner" reaches the site empty, so a banner with a real button must be a **one-slide Carousel** (full width) or a **Button CTA with `variant: "banner"`** (boxed, with label and note). See CMS-WIDGETS.md §4.
 - **One form-field list:** the quotation form (home, `/quote`) and the Contact page form both show the fields from TheCoins → Contact form settings. Changing them changes both forms.
+- **Info pages need a route file:** `/about`, `/contact`, `/faq` each have `app/<slug>/page.tsx` (Breadcrumbs + CmsPage). There is no catch-all route any more (owner's decision, 18 Nov), so a new CMS info page also needs its own folder.
 - **Sub-categories:** the store has only 8 top-level categories. Menu sub-categories link to the category page with a search.
 - **Two dev servers:** to run a second one, use `NEXT_DIST_DIR=.next-test npx next dev -p 3001` so it doesn't clash with `.next`.
 - The old café website is archived at `../heliopolisHub-cafe-site`. Don't build against café data.

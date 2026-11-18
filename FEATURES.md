@@ -91,9 +91,9 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 
 | Feature | Status | Notes |
 |---|---|---|
-| Any page made in the page builder (`/about`, `/faq`, `/privacy-policy`, …) | 🟡 | Works, but these pages don't exist in TheCoins yet. Footer links show "page not found" |
+| Info pages from the page builder | 🟡 | Each has its own route file (About, Contact, FAQ so far). Policy and other footer pages don't exist yet and show "page not found" |
 | About page (`/about`) | 🟡 | Built from Figma (hero, intro, 3 link cards, "Two ways to buy", closing band); texts editable in Page builder → About. Hero photo not uploaded yet |
-| Breadcrumbs on page-builder pages | ✅ | "Home › Page title" above every standalone page (About, FAQ, policies…) |
+| Breadcrumbs on info pages | ✅ | "Home › Page title" above About, Contact, FAQ (and future info pages) |
 | FAQ page (`/faq`) | ✅ | Built from Figma: search box, topic buttons, 13 questions that open and close, "Still have a question?" bar. Questions, answers and topics editable in Page builder → FAQ |
 | Contact page (form, sent, error) | 🟡 | Live at `/contact`, built from Figma: enquiry form, navy contact panel, "Have a product list?" card, thank-you and error messages. Its fields are the store's Contact form fields, the same list as the quotation form. Texts editable in Page builder → Contact |
 | Policy pages with side menu | ⬜ | In Figma, not built |

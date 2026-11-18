@@ -16,7 +16,7 @@ Arguments: `$ARGUMENTS` (first word = page slug, e.g. `about`, `home`, `faq`, `c
 - **Draft file:** `cms-drafts/<slug>.json` = `{ "title": "...", "layout": [ ...rows ] }` (the `manage_page_layout` write shape).
 - **Draft preview:** `http://localhost:3000/dev/preview/<slug>` shows the draft file with real products/categories/brands.
 - **Reference:** `CMS-WIDGETS.md` (all widget fields, traps). `AGENTS.md` §5 (known traps).
-- Template pages show their CMS page as extra sections: `products`, `category`, `product`, `quote`, `search`, `account`, `brands`, `categories`, `brand-<slug>` (see `components/CmsSlot.tsx`). Any other slug becomes its own page at `/<slug>`. `home` and `site-layout` are special.
+- Template pages show their CMS page as extra sections: `products`, `category`, `product`, `quote`, `search`, `account`, `brands`, `categories`, `brand-<slug>` (see `components/CmsSlot.tsx`). Any other slug is an info page at `/<slug>`: it needs its own route file `app/<slug>/page.tsx` (copy `app/faq/page.tsx` and change `SLUG`), with Breadcrumbs + CmsPage. Without that file the page shows "page not found". `home` and `site-layout` are special.
 
 ## Steps
 
