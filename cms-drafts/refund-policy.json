@@ -1,0 +1,83 @@
+{
+  "title": "Refund policy",
+  "layout": [
+    {
+      "id": "row-refund-policy",
+      "columns": [
+        {
+          "id": "col-refund-policy-menu",
+          "span": 3,
+          "widgets": [
+            {
+              "id": "w-refund-policy-menu",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "policy-menu",
+                "title": "Policies & information",
+                "columns": 1,
+                "items": [
+                  {
+                    "label": "Privacy policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/privacy-policy"
+                  },
+                  {
+                    "label": "Shipping policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/shipping-policy"
+                  },
+                  {
+                    "label": "Refund policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/refund-policy"
+                  },
+                  {
+                    "label": "Terms of service",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/terms-of-service"
+                  },
+                  {
+                    "label": "Contact information",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/contact-information"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "col-refund-policy-text",
+          "span": 9,
+          "widgets": [
+            {
+              "id": "w-refund-policy-text",
+              "type": "text-image",
+              "settings": {
+                "variant": "policy",
+                "eyebrow": "Policies & information",
+                "title": "Refund policy",
+                "content": "<h2>Returns, Refunds &amp; Warranty Policy</h2><p>MedyMar supplies sterile, single-use, implantable and durable medical products to healthcare facilities, distributors and clinicians across Oman &amp; the Gulf, Rwanda and East Africa. This policy protects patient safety and product traceability while treating our clinical partners fairly.</p><h3>1. Damaged, defective or short-shipped orders</h3><p>Check every consignment against the packing list on delivery. If any item arrives damaged, defective or missing, notify us within <strong>48 hours</strong> of delivery with the order number, lot numbers and photographs of the product and packaging. We arrange a replacement or a full credit at no cost to you.</p><h3>2. Sterile and single-use products</h3><p>For patient-safety reasons, sterile and single-use products cannot be returned once the outer packaging has been opened or the sterile barrier compromised. Unopened, undamaged sterile stock in its original packaging may be returned within <strong>14 days</strong> of delivery, subject to lot verification and a restocking assessment.</p><h3>3. Cold-chain and temperature-sensitive products</h3><p>Cold-chain items ship in monitored packaging with temperature indicators. If an excursion is indicated on arrival, do not use the product: contact us immediately and we will replace the affected units.</p><h3>4. Implants and custom-specified devices</h3><p>Implants, devices made to individual specification and products ordered specially for a tender are non-returnable, except where a manufacturing defect is covered under warranty.</p><h3>5. Equipment and manufacturer warranty</h3><p>Equipment and durable devices carry the original manufacturer's warranty, typically 12 to 24 months from installation or delivery as stated on the quotation. MedyMar manages warranty claims on your behalf directly with the authorised manufacturer, including service, parts and replacement where the warranty applies. Warranty does not cover damage from misuse, unauthorised modification or servicing by non-authorised personnel.</p><h3>6. Refunds and credits</h3><p>Approved returns are refunded to the original payment method or credited to your account within 10 working days of the goods being received and verified. Shipping charges are refunded only where the return is due to our error or a defective product.</p><h3>7. How to start a return or claim</h3><p>Contact your account manager, email <a href=\"mailto:milani@shamhabib.com\">milani@shamhabib.com</a> or message us on WhatsApp with your order number. We respond within one working day to authorise the return and arrange collection or replacement. Please do not return goods without a return authorisation reference.</p>",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

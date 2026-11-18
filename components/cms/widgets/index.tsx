@@ -16,6 +16,7 @@ import { Gallery } from "./Gallery";
 import { Spacer } from "./Spacer";
 import { Divider } from "./Divider";
 import { TwoOneGrid } from "./TwoOneGrid";
+import { ProductAttributes } from "./ProductAttributes";
 
 export type { RowKind, WidgetCtx } from "./shared";
 
@@ -38,6 +39,7 @@ const REGISTRY: Record<string, React.FC<P>> = {
   spacer: Spacer,
   divider: Divider,
   "two-one-grid": TwoOneGrid,
+  "product-attributes": ProductAttributes,
 };
 
 export function WidgetRenderer({ w, ctx }: P) {

@@ -1,0 +1,83 @@
+{
+  "title": "Shipping policy",
+  "layout": [
+    {
+      "id": "row-shipping-policy",
+      "columns": [
+        {
+          "id": "col-shipping-policy-menu",
+          "span": 3,
+          "widgets": [
+            {
+              "id": "w-shipping-policy-menu",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "policy-menu",
+                "title": "Policies & information",
+                "columns": 1,
+                "items": [
+                  {
+                    "label": "Privacy policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/privacy-policy"
+                  },
+                  {
+                    "label": "Shipping policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/shipping-policy"
+                  },
+                  {
+                    "label": "Refund policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/refund-policy"
+                  },
+                  {
+                    "label": "Terms of service",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/terms-of-service"
+                  },
+                  {
+                    "label": "Contact information",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/contact-information"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "col-shipping-policy-text",
+          "span": 9,
+          "widgets": [
+            {
+              "id": "w-shipping-policy-text",
+              "type": "text-image",
+              "settings": {
+                "variant": "policy",
+                "eyebrow": "Policies & information",
+                "title": "Shipping policy",
+                "content": "<h2>Shipping &amp; Delivery Policy</h2><p>MedyMar supplies medical and surgical products to healthcare facilities, distributors and clinicians across Oman &amp; the Gulf, Rwanda and East Africa. This policy explains how delivery is quoted, shipped and confirmed.</p><h3>1. Delivery dates are quoted, not guessed</h3><p>Every quotation shows a delivery date calculated for the destination city or country entered in the quote request. The date is confirmed on the order acknowledgement and updated if the manufacturer's lead time changes before dispatch.</p><h3>2. Shipping terms</h3><p>Orders are quoted on one of the following terms, stated on the quotation: <strong>DDP</strong> (delivered duty paid to your facility, customs cleared), <strong>CIF</strong> (cost, insurance and freight to your port or airport of entry) or <strong>EXW</strong> (ex-works, collected by your own forwarder). Landed shipping is included in the price shown on DDP and CIF quotations.</p><h3>3. Regions and lead times</h3><ul><li><strong>Oman &amp; the Gulf</strong> - Muscat and GCC lead times as shown on your quotation.</li><li><strong>Rwanda</strong> - Kigali and district lead times as shown on your quotation.</li><li><strong>East Africa</strong> - per-country, cross-border delivery dates for Kenya, Uganda, Tanzania, DRC and Burundi.</li></ul><h3>4. Sterile and cold-chain products</h3><p>Sterile products ship in protected outer packaging with lot numbers recorded per consignment. Cold-chain items travel in monitored packaging with temperature indicators. Do not use any product whose sterile barrier is broken or whose temperature indicator shows an excursion - contact us immediately for replacement.</p><h3>5. Receiving your order</h3><p>Each delivery carries a packing list that matches the quotation line by line. Please check quantities and packaging on receipt and report any damage, shortage or discrepancy within 48 hours with your order number and photographs.</p><h3>6. Customs, duties and registration</h3><p>Where an order is quoted CIF or EXW, import duties, clearance and any in-country registration requirements are the buyer's responsibility unless otherwise agreed in writing. We provide conformity certificates and registration references on request to support clearance.</p><h3>7. Questions</h3><p>Email <a href=\"mailto:milani@shamhabib.com\">milani@shamhabib.com</a> or message us on WhatsApp with your order number and we will confirm timing and tracking.</p>",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

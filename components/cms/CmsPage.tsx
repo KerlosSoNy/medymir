@@ -24,7 +24,6 @@ const isHeaderOnly = (row: any) => {
   return ws.length > 0 && ws.every(isHeader);
 };
 
-/** Info-page sections (Figma About / FAQ / Contact) sit closer together than home sections. */
 const STACK = new Set([
   "text-image/split-hero",
   "stats-counter/link-cards",
@@ -34,6 +33,8 @@ const STACK = new Set([
   "contact-form/contact-panel",
   "faq-accordion/topics",
   "button-cta/help",
+  "stats-counter/policy-menu",
+  "text-image/policy",
 ]);
 
 /** What kind of row this is decides its padding and width. */
@@ -43,7 +44,7 @@ function rowKind(row: any): RowKind {
   const kinds = ws.map(kindOf);
   if (kinds.some((k) => STACK.has(k))) return "stack";
   if (kinds.some((k) => k === "stats-counter/chips" || k === "stats-counter/features")) return "compact";
-  if (kinds.some((k) => k.startsWith("categories-grid/") || k === "testimonials/brand-carousel")) return "bleed";
+  if (kinds.some((k) => k.startsWith("categories-grid/") || k === "testimonials/brand-carousel" || k.startsWith("product-attributes/"))) return "bleed";
   if (ws.length > 0 && kinds.every((k) => k.startsWith("banners/") || k.startsWith("hero-banner/") || k === "button-cta/banner")) return "banner";
   return "boxed";
 }
@@ -78,7 +79,7 @@ export function CmsPage({ page, ctx, firstRowClass }: { page: any; ctx: WidgetCt
         const headOnly = isHeaderOnly(row);
         const afterHead = ri > 0 && isHeaderOnly(rows[ri - 1]);
         const multiCol = (row.columns ?? []).length > 1;
-        const withArrows = widgetsOf(row).some((w) => kindOf(w) === "testimonials/brand-carousel");
+        const withArrows = widgetsOf(row).some((w) => kindOf(w) === "testimonials/brand-carousel" || kindOf(w).startsWith("product-attributes/"));
         const rowCtx: WidgetCtx = { ...ctx, row: kind, beside: multiCol, withArrows };
         return (
           <section

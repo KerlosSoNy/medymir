@@ -16,6 +16,7 @@ This is the reference for **what the site is built with and the rules it follows
 | Styling | Tailwind CSS v4 (via `@tailwindcss/postcss`) | 4.3 |
 | Class helpers | `clsx` + `tailwind-merge` → `cn()` in `lib/cn.ts` | 2.1 / 3.7 |
 | HTML sanitising (CMS rich text) | `isomorphic-dompurify` | 2.36 |
+| Carousels ("Shop by brand", "Shop by category") | `swiper` (React build, core CSS only: `swiper/css`) | 14.4 |
 | Backend | TheCoins storefront API (Supabase edge functions) | — |
 | Fonts | Inter (body), Poppins (headings), loaded with `next/font/google` | — |
 
@@ -119,7 +120,7 @@ Defined in `app/globals.css` (`@theme`). Use them as Tailwind classes, e.g. `tex
 
 ## 6. Styling rules
 
-- **Tailwind utilities only.** Don't add new CSS files or global class names. Shared recipes live in `lib/styles.ts`:
+- **Tailwind utilities only.** Don't add new CSS files or global class names. (Only exception: Swiper's own core stylesheet `swiper/css`, imported in `components/cms/BrandCarousel.tsx` and `CategoryCarousel.tsx`.) Shared recipes live in `lib/styles.ts`:
   - `btn(variant, size, extra)`: buttons (`dark`, `navy`, `outline`, `white`, `gold`, `plain`; sizes `sm`, `md`, `lg`)
   - `container`, `sectionX`, `pageTitle`, `pageIntro`, `notice()`, `linkBtn`, `field`, `input`
   - CMS sections have their own recipes in `components/cms/classes.ts` (section headers, eyebrows, carousel tracks)
@@ -154,7 +155,7 @@ Defined in `app/globals.css` (`@theme`). Use them as Tailwind classes, e.g. `tex
   - button and form labels: `lib/ui.ts`
   - mega-menu sub-categories and promo cards: `lib/menu.ts`, because the store has no sub-categories yet. **Featured brands are NOT hard-coded**; they come from the store (brands of each category's products).
 - **CMS widget variants:** home sections use TheCoins widget types that keep extra settings (text-image, stats-counter, button-cta, testimonials, contact-form, faq) and add a `variant` key. The widget files in `components/cms/widgets/` pick the layout from that variant. Some widget types (hero-banner, logo-cloud, gallery) drop extra keys, so we don't use them.
-- **Info-page sections:** rows containing the info-page looks (`text-image/split-hero`, `stats-counter/link-cards`, `stats-counter/route-cards`, `button-cta/band`) (and `contact-form/contact`, `contact-form/contact-panel`, `faq-accordion/topics`, `button-cta/help`) use the tighter "stack" row spacing (28–32px top and bottom) from Figma About. Info pages have their own route file (`app/about/page.tsx`, `app/contact/page.tsx`, `app/faq/page.tsx`), built in advance and refreshed every 60 s; each shows a "Home › Page title" trail (`components/Breadcrumbs.tsx`) above `CmsPage`. Their buttons use `goldBtn` / `goldOutlineBtn` from `components/cms/classes.ts`.
+- **Info-page sections:** rows containing the info-page looks (`text-image/split-hero`, `stats-counter/link-cards`, `stats-counter/route-cards`, `button-cta/band`) (and `contact-form/contact`, `contact-form/contact-panel`, `faq-accordion/topics`, `button-cta/help`, `stats-counter/policy-menu`, `text-image/policy`) use the tighter "stack" row spacing (28–32px top and bottom) from Figma About. Info pages have their own route file (`app/about/page.tsx`, `app/contact/page.tsx`, `app/faq/page.tsx`), built in advance and refreshed every 60 s; each shows a "Home › Page title" trail (`components/Breadcrumbs.tsx`) above `CmsPage`. Their buttons use `goldBtn` / `goldOutlineBtn` from `components/cms/classes.ts`.
 - Site-wide content (announcement bar, category-bar extras, footer, footer brand links, payment logos) comes from the CMS page **`site-layout`**.
 - **Brands** come from the store's Brand detail: `/brands` lists them with their uploaded logos, `/brand/[slug]` filters products by `brand=<name>` (falls back to a name search for brands only linked from the CMS, e.g. exclusive brands), the drawer's Brands row and each mega menu use them, and brand cards in the home carousel show the brand's logo.
 - **Never put content images in the project** (`public/`). Every content picture is uploaded to TheCoins and referenced from the CMS. `public/icons/` holds only UI icons.
@@ -175,6 +176,8 @@ app/                  routes (pages)
   globals.css         Tailwind import + theme tokens + .rich
   page.tsx            home (CMS page "home")
   about/ contact/ faq/  info pages: one route file per page, each = Breadcrumbs + CmsPage for its CMS slug
+  privacy-policy/ shipping-policy/ refund-policy/ terms-of-service/ contact-information/
+                      policy pages: same, plus "Policies & information" in the trail and ctx.path (menu highlight)
                       (a new info page, e.g. privacy-policy, needs its own folder with the same page.tsx)
   categories/ category/[slug]/ products/ search/ brands/ brand/[slug]/
   product/[id]/ quote/ account/ not-found.tsx

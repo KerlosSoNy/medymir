@@ -36,9 +36,9 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 | Hero slider | ✅ | Slides, arrows, dots. A slide with button text gets a real title, subtitle and button (see Banners below) |
 | Popular searches (chips) | ✅ | Each chip runs a search |
 | Features strip (3 benefits) | ✅ | |
-| Shop by category carousel | 🟡 | 5 of 8 categories have no photo yet |
+| Shop by category carousel | ✅ | Store categories with photo, description and "Explore category". Built on Swiper: one dot per scroll position (7 on computer/tablet, 8 on phone), so the last dot is reached exactly at the end |
 | Abbott banner + Abbott products + promo | ✅ | |
-| Shop by brand carousel | ✅ | Name, tagline and link from the CMS; brand logo from the store's Brand list; a CMS photo replaces the card when uploaded |
+| Shop by brand carousel | ✅ | Product Attributes section reading the store's Brand list: each brand's banner photo, or its logo, name and description; the section only picks which brands and their order. Built on Swiper: the counter and progress bar count scroll positions (e.g. 1–6 on a computer, 1–8 on a phone), so they never jump |
 | Banners with real text and button | 🟡 | Built: a banner with button text shows a real title, text and button. Waits for the designer's clean background pictures (current pictures have text drawn in) |
 | Top Products (Two-One Grid) | ✅ | Brand cards with logo and product count, product cards or category tiles, as set in the page builder |
 | "Lines buyers ask for most" (tabs + products) | ✅ | |
@@ -96,7 +96,7 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 | Breadcrumbs on info pages | ✅ | "Home › Page title" above About, Contact, FAQ (and future info pages) |
 | FAQ page (`/faq`) | ✅ | Built from Figma: search box, topic buttons, 13 questions that open and close, "Still have a question?" bar. Questions, answers and topics editable in Page builder → FAQ |
 | Contact page (form, sent, error) | 🟡 | Live at `/contact`, built from Figma: enquiry form, navy contact panel, "Have a product list?" card, thank-you and error messages. Its fields are the store's Contact form fields, the same list as the quotation form. Texts editable in Page builder → Contact |
-| Policy pages with side menu | ⬜ | In Figma, not built |
+| Policy pages with side menu | 🟡 | Built from Figma (route files for all 5; menu becomes pill buttons on phones). Drafts for Shipping, Refund, Terms and Contact information (`cms-drafts/`); Privacy text on hold (Figma has a Shopify template). Not saved to the store yet |
 | "Page not found" page | ✅ | |
 
 ## Page-building tools (on the developer's computer only)

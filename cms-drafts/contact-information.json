@@ -1,0 +1,83 @@
+{
+  "title": "Contact information",
+  "layout": [
+    {
+      "id": "row-contact-information",
+      "columns": [
+        {
+          "id": "col-contact-information-menu",
+          "span": 3,
+          "widgets": [
+            {
+              "id": "w-contact-information-menu",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "policy-menu",
+                "title": "Policies & information",
+                "columns": 1,
+                "items": [
+                  {
+                    "label": "Privacy policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/privacy-policy"
+                  },
+                  {
+                    "label": "Shipping policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/shipping-policy"
+                  },
+                  {
+                    "label": "Refund policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/refund-policy"
+                  },
+                  {
+                    "label": "Terms of service",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/terms-of-service"
+                  },
+                  {
+                    "label": "Contact information",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/contact-information"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "col-contact-information-text",
+          "span": 9,
+          "widgets": [
+            {
+              "id": "w-contact-information-text",
+              "type": "text-image",
+              "settings": {
+                "variant": "policy",
+                "eyebrow": "Policies & information",
+                "title": "Contact information",
+                "content": "<h2>Contact information</h2><p><strong>MedyMar</strong> — medical, surgical and hygiene supplies for hospitals, clinics, imaging centres and distributors.</p><p><strong>Email:</strong> <a href=\"mailto:milani@shamhabib.com\">milani@shamhabib.com</a><br><strong>WhatsApp:</strong> send your list through our WhatsApp page<br><strong>Quotes and tenders:</strong> <a href=\"/quote\">Request a quote</a></p><p><strong>Working hours:</strong> Sunday to Thursday, 8:00 to 18:00 Gulf Standard Time (GMT+4). We reply to quotation requests within one working day.</p><p><strong>Regional presence:</strong><br>Oman &amp; the Gulf — Muscat<br>Rwanda — Kigali<br>East Africa — Nairobi hub (Kenya, Uganda, Tanzania)</p><p>Online store: medymar.com</p>",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-// Stats / Counters (stats-counter) and our variants: chips, tabs, features, checklist, link-cards, route-cards.
+// Stats / Counters (stats-counter) and our variants: chips, tabs, features, checklist, link-cards, route-cards, policy-menu.
 import { cn } from "@/lib/cn";
 import { tr } from "@/lib/format";
 import { Icon, SmartLink } from "../../SmartLink";
@@ -22,7 +22,7 @@ const cardIcon = (name: string) => {
 };
 const infoCard = "rounded-xl border border-line-3 bg-white";
 
-export function Stats({ w }: P) {
+export function Stats({ w, ctx }: P) {
   const items: any[] = w.items ?? [];
   if (!items.length) return null;
   switch (w.variant) {
@@ -138,6 +138,32 @@ export function Stats({ w }: P) {
         </div>
         );
       }
+    case "policy-menu":
+      // Figma Policy pages: side menu on desktop, pill buttons on tablet/phone. The page it is on is highlighted.
+      return (
+        <nav aria-label={tr(w.title) || undefined}>
+          <ul className="flex flex-wrap gap-2 lg:w-[240px] lg:flex-col lg:gap-0 lg:overflow-hidden lg:rounded-[10px] lg:border lg:border-line-3">
+            {items.map((it, i) => {
+              const active = !!ctx.path && it.link === ctx.path;
+              return (
+                <li key={i} className="lg:border-b lg:border-line-3 lg:last:border-b-0">
+                  <SmartLink
+                    to={it.link}
+                    className={cn(
+                      "flex items-center rounded-full border px-[17px] py-[11px] text-[14.5px] text-navy-deep transition lg:h-[49px] lg:rounded-none lg:border-0 lg:px-[21px] lg:py-0",
+                      active
+                        ? "border-gold-btn bg-[#fbf5ea] font-bold lg:border-l-[3px] lg:border-solid lg:pl-[18px]"
+                        : "border-[#d5dce6] bg-white hover:border-navy-deep lg:hover:bg-surface-alt",
+                    )}
+                  >
+                    {tr(it.label)}
+                  </SmartLink>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      );
     case "announcement":
     case "category-nav":
     case "footer-column":

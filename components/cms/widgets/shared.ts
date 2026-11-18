@@ -15,6 +15,8 @@ export interface WidgetCtx {
   row?: RowKind;
   beside?: boolean;
   withArrows?: boolean;
+  /** Current page path (e.g. "/shipping-policy"), so a menu can highlight the page it is on. */
+  path?: string;
 }
 export type P = { w: any; ctx: WidgetCtx };
 

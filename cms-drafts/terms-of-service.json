@@ -1,0 +1,83 @@
+{
+  "title": "Terms of service",
+  "layout": [
+    {
+      "id": "row-terms-of-service",
+      "columns": [
+        {
+          "id": "col-terms-of-service-menu",
+          "span": 3,
+          "widgets": [
+            {
+              "id": "w-terms-of-service-menu",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "policy-menu",
+                "title": "Policies & information",
+                "columns": 1,
+                "items": [
+                  {
+                    "label": "Privacy policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/privacy-policy"
+                  },
+                  {
+                    "label": "Shipping policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/shipping-policy"
+                  },
+                  {
+                    "label": "Refund policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/refund-policy"
+                  },
+                  {
+                    "label": "Terms of service",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/terms-of-service"
+                  },
+                  {
+                    "label": "Contact information",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/contact-information"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "col-terms-of-service-text",
+          "span": 9,
+          "widgets": [
+            {
+              "id": "w-terms-of-service-text",
+              "type": "text-image",
+              "settings": {
+                "variant": "policy",
+                "eyebrow": "Policies & information",
+                "title": "Terms of service",
+                "content": "<h2>Terms of Service</h2><p>These terms govern quotations, orders and supply of medical, surgical and hygiene products by MedyMar (\"we\", \"us\") to healthcare facilities, distributors and clinicians (\"you\") across Oman &amp; the Gulf, Rwanda and East Africa. By requesting a quotation or placing an order you accept these terms.</p><h3>1. Professional and institutional use</h3><p>Our products are intended for use by, or under the direction of, qualified healthcare professionals and licensed institutions. Certain products are supplied only to verified facilities or licensed distributors, and we may ask for a trade licence, facility registration or professional credentials before accepting an order.</p><h3>2. Quotations and pricing</h3><p>A quotation is valid for the period stated on it (normally 14 days) and shows unit prices, availability, lead time, shipping terms and a delivery date for the stated destination. Prices are firm for the validity period; after it, prices and availability are reconfirmed. Prices exclude VAT, duties and registration fees unless the quotation states otherwise.</p><h3>3. Orders and acceptance</h3><p>An order is accepted when we issue an order acknowledgement. Orders for implants, custom-specified or specially imported items cannot be cancelled after acknowledgement. Other orders may be cancelled before dispatch, subject to any costs already incurred.</p><h3>4. Payment</h3><p>Verified institutional accounts may purchase on purchase-order and credit terms as agreed in writing. All other orders are payable before dispatch by bank transfer, card or the mobile-money methods available in your region. Overdue amounts may be subject to interest and suspension of supply.</p><h3>5. Delivery, title and risk</h3><p>Delivery is made on the shipping terms stated on the quotation (DDP, CIF or EXW). Risk passes to you on delivery under DDP, or on handover to the carrier under CIF and EXW. Title passes on receipt of full payment. Our <a href=\"/shipping-policy\">Shipping policy</a> sets out delivery dates, regions and inspection on receipt.</p><h3>6. Authenticity, registration and documentation</h3><p>We supply only through authorised channels and provide batch and lot traceability on every line. Conformity certificates, instructions for use and registration references are provided on request. Registration status is stated per market; where a product is pending registration in your country we say so before you buy, and you are responsible for confirming that the product may be imported and used under your local regulations.</p><h3>7. Returns and warranty</h3><p>Returns, replacements, refunds and manufacturer warranties are handled under our <a href=\"/refund-policy\">Returns, refunds and warranty policy</a>.</p><h3>8. Correct use and liability</h3><p>Products must be stored, handled and used in accordance with the manufacturer's instructions for use and applicable clinical guidance. To the extent permitted by law, our liability for any claim arising from a supply is limited to the price paid for the products concerned, and we are not liable for indirect or consequential loss. Nothing in these terms limits liability that cannot be limited by law.</p><h3>9. Tenders and distributor agreements</h3><p>Tender submissions, framework agreements and distributor appointments are governed by the specific written agreement for that engagement; where it conflicts with these terms, the written agreement prevails.</p><h3>10. Privacy</h3><p>We use the details you provide only to prepare quotations, process orders and provide support, as described in our <a href=\"/privacy-policy\">Privacy policy</a>.</p><h3>11. Governing law</h3><p>These terms are governed by the laws of the Sultanate of Oman unless the quotation or a written agreement states otherwise. Disputes will first be referred to good-faith negotiation between the parties.</p><h3>12. Contact</h3><p>MedyMar · Muscat, Oman · Kigali, Rwanda · Nairobi, Kenya · <a href=\"mailto:milani@shamhabib.com\">milani@shamhabib.com</a></p>",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

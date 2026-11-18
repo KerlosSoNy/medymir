@@ -29,6 +29,7 @@ export const UI = {
   notFound: "Page not found",
   backHome: "Back to home",
   home: "Home",
+  policies: "Policies & information",
   breadcrumb: "Breadcrumb",
   loading: "Loading…",
   error: "Something went wrong. Please try again.",

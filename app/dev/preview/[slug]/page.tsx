@@ -7,6 +7,7 @@ import { devOnly, readDraft, withPreviewData } from "@/lib/cms-preview";
 import { widgetCtx } from "@/lib/ctx";
 import { cn } from "@/lib/cn";
 import { container, notice } from "@/lib/styles";
+import { UI } from "@/lib/ui";
 
 export const metadata: Metadata = { title: "Draft preview", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -21,6 +22,7 @@ export default async function DraftPreview({ params }: { params: Promise<{ slug:
   if (!draft) notFound();
   const ctx = await widgetCtx();
   const page = await withPreviewData(layoutToPage(draft.layout, draft.title), ctx);
+  const isPolicy = draft.layout.some((r) => r.columns.some((c) => c.widgets.some((w) => w.settings?.variant === "policy-menu")));
   return (
     <>
       <div className={cn(container, "pt-6")}>
@@ -29,8 +31,8 @@ export default async function DraftPreview({ params }: { params: Promise<{ slug:
           uploaded.
         </p>
       </div>
-      {slug !== "home" && <Breadcrumbs current={draft.title} />}
-      <CmsPage page={page} ctx={ctx} firstRowClass={slug === "home" ? "pt-12 md:pt-12" : "pt-5 md:pt-5"} />
+      {slug !== "home" && <Breadcrumbs parent={isPolicy ? UI.policies : undefined} current={draft.title} />}
+      <CmsPage page={page} ctx={{ ...ctx, path: `/${slug}` }} firstRowClass={slug === "home" ? "pt-12 md:pt-12" : "pt-5 md:pt-5"} />
     </>
   );
 }

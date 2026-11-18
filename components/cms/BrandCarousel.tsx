@@ -1,49 +1,68 @@
 "use client";
-// "Shop by brand" carousel (Figma node 10:62): tall image cards + "01 / 07" progress bar.
-// Card sizes from Figma: 280×520 phone, 300×506 tablet, 343×506 desktop. A photo uploaded in the CMS
-// fills the card. Without a photo the card is built from real content: the brand's logo (store Brand
-// list) on a white plate, the name and tagline from the CMS ("Name — tagline"), and a "Shop brand" link.
-import { cn } from "@/lib/cn";
+// "Shop by brand" carousel (Figma node 10:62): tall image cards + "01 / 05" progress bar, built on Swiper.
+// Card sizes from Figma: 280×520 phone, 300×506 tablet, 343×506 desktop. A brand photo fills the card on
+// its own. Without a photo the card is built from real content: the brand's logo (store Brand list) on a
+// white plate, the name and tagline ("Name — tagline"), and a "Shop brand" link.
+// The counter and progress bar count Swiper's scroll positions (snaps), not cards: when several cards fit
+// on screen there are fewer positions than cards, so the numbers move one step per click and never jump.
+import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperApi } from "swiper";
+import "swiper/css";
 import { UI } from "@/lib/ui";
 import { Icon, SmartLink } from "../SmartLink";
-import { coverImg, roundBtn, snapTrack } from "./classes";
-import { useScroller } from "./useScroller";
+import { coverImg, roundBtn } from "./classes";
 
 export function BrandCarousel({ cards }: { cards: { name: string; image: string; link: string; logo: string | null }[] }) {
-  const { ref, index, atEnd, prev, next } = useScroller(cards.length);
+  const [api, setApi] = useState<SwiperApi | null>(null);
+  const [state, setState] = useState({ step: 0, steps: cards.length, start: true, end: false });
   const pad = (n: number) => String(n).padStart(2, "0");
+  const sync = (s: SwiperApi) =>
+    setState({ step: s.snapIndex, steps: Math.max(1, s.snapGrid.length), start: s.isBeginning, end: s.isEnd });
+  const shown = state.end ? state.steps : state.step + 1;
   return (
     <div className="relative">
       <div className="mb-4 flex gap-3 md:absolute md:-top-[94px] md:right-6 md:mb-0 md:gap-[26px] lg:right-14 xl:right-[132px]">
-        <button className={roundBtn("sm")} aria-label={UI.previous} onClick={prev} disabled={index === 0}>
+        <button className={roundBtn("sm")} aria-label={UI.previous} onClick={() => api?.slidePrev()} disabled={state.start}>
           <Icon name="brand-chevron-left" size={18} />
         </button>
-        <button className={roundBtn("sm", true)} aria-label={UI.nextSlide} onClick={next} disabled={atEnd}>
+        <button className={roundBtn("sm", true)} aria-label={UI.nextSlide} onClick={() => api?.slideNext()} disabled={state.end}>
           <Icon name="brand-chevron-right-white" size={18} />
         </button>
       </div>
-      <div className={cn(snapTrack, "auto-cols-[280px] gap-3 md:auto-cols-[300px] lg:auto-cols-[343px] lg:gap-[18px]")} ref={ref}>
+      <Swiper
+        slidesPerView="auto"
+        spaceBetween={12}
+        breakpoints={{ 1025: { spaceBetween: 18 } }}
+        watchOverflow
+        onSwiper={(s) => {
+          setApi(s);
+          sync(s);
+        }}
+        onSlideChange={sync}
+        onSnapGridLengthChange={sync}
+        onReachEnd={sync}
+        onReachBeginning={sync}
+        onResize={sync}
+      >
         {cards.map((c, k) => (
-          <SmartLink
-            key={k}
-            to={c.link}
-            ariaLabel={c.name}
-            className="group relative block h-[520px] snap-start overflow-hidden rounded-[14px] bg-[linear-gradient(160deg,#10306f,#0a1d47)] md:h-[506px]"
-          >
-            {c.image ? (
-              <img src={c.image} alt={c.name} loading="lazy" className={coverImg} />
-            ) : (
-              <BrandCard name={c.name} logo={c.logo} />
-            )}
-          </SmartLink>
+          <SwiperSlide key={k} className="w-[280px]! md:w-[300px]! lg:w-[343px]!">
+            <SmartLink
+              to={c.link}
+              ariaLabel={c.name}
+              className="group relative block h-[520px] overflow-hidden rounded-[14px] bg-[linear-gradient(160deg,#10306f,#0a1d47)] md:h-[506px]"
+            >
+              {c.image ? <img src={c.image} alt={c.name} loading="lazy" className={coverImg} /> : <BrandCard name={c.name} logo={c.logo} />}
+            </SmartLink>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
       <div className="mt-9 flex items-center gap-4 pr-4 text-[13px] font-semibold text-muted-3 md:gap-12 md:pl-[70px] md:pr-6 lg:pr-14">
         <span className="shrink-0">
-          <b className="text-ink-2">{pad(index + 1)}</b> / {pad(cards.length)}
+          <b className="text-ink-2">{pad(shown)}</b> / {pad(state.steps)}
         </span>
         <div className="h-[5px] flex-1 overflow-hidden rounded-[3px] bg-line-2 md:w-[min(822px,60vw)] md:flex-none">
-          <div className="h-full rounded-[3px] bg-[#e0a93b] transition-[width] duration-300" style={{ width: `${((index + 1) / cards.length) * 100}%` }} />
+          <div className="h-full rounded-[3px] bg-[#e0a93b] transition-[width] duration-300" style={{ width: `${(shown / state.steps) * 100}%` }} />
         </div>
       </div>
     </div>

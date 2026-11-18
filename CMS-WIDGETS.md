@@ -53,9 +53,9 @@ See also: [SPECS.md](SPECS.md) §7 (data flow) and [AGENTS.md](AGENTS.md) §5 (k
 | `recommended-products` | products-slider | Recommended For You | Product suggestions | ✅ (same product grid) |
 | `products-by-category` | products-slider | Products by Category | Products from a category or a ranking | ✅ |
 | `categories-grid` | categories-grid | Categories | Category cards | ✅ category carousel |
-| `text-image` | text-image | Text + Image | Rich text with image | ✅ (+ our `section-header`, `split-hero` variants) |
+| `text-image` | text-image | Text + Image | Rich text with image | ✅ (+ our `section-header`, `split-hero`, `policy` variants) |
 | `testimonials` | testimonials | Testimonials | Customer quotes | ✅ (+ our `brand-carousel`, `exclusive-brands`, `solutions` variants) |
-| `stats-counter` | stats-counter | Stats / Counters | Numbers & metrics | ✅ (+ our `chips`, `features`, `tabs`, `checklist`, `link-cards`, `route-cards` variants) |
+| `stats-counter` | stats-counter | Stats / Counters | Numbers & metrics | ✅ (+ our `chips`, `features`, `tabs`, `checklist`, `link-cards`, `route-cards`, `policy-menu` variants) |
 | `button-cta` | button-cta | Button / CTA | One call-to-action button | ✅ (+ our `note`, `callout`, `banner`, `band`, `help` variants) |
 | `contact-form` | contact-form | Contact Form | Form linked to the Contact Us plugin | ✅ (our `quote`, `contact-card`, `contact`, `contact-panel` variants) |
 | `faq-accordion` | faq-accordion | FAQ / Accordion | Questions & answers saved in the widget | ✅ (+ our `topics` variant) |
@@ -72,7 +72,7 @@ See also: [SPECS.md](SPECS.md) §7 (data flow) and [AGENTS.md](AGENTS.md) §5 (k
 | `offer-card` | offer-card | Offer Card | Offer with price, icon, image | ⬜ |
 | `swiper-grid-cards` | swiper-grid-cards | Swiper Grid Cards | Promo cards with products (slider) | ⬜ |
 | `grid-cards` | grid-cards | Grid Cards | Promo cards with products (grid) | ⬜ |
-| `product-attributes` | product-attributes | Product Attributes | Values of an attribute (e.g. all Brands) | ⬜ |
+| `product-attributes` | product-attributes | Product Attributes | Values of an attribute (e.g. all Brands) | ✅ Brand only: the "Shop by brand" carousel |
 | `order-history` | order-history | Order History | Customer's orders | ⬜ (we have the Account page) |
 | `customer-service-center` | customer-service-center | Customer Service Center | Help center with recent orders | ⬜ |
 | `newsletter-subscription` | newsletter-subscription | Newsletter Subscription | Newsletter plugin form | ⬜ |
@@ -229,7 +229,9 @@ Our site: brand cards (logo, name, product count → brand page), product cards.
 title; attributeId; attributeName; selectedValueIds?; showImages; showDescription;
 columns: 2 | 3 | 4 | 6; style: 'grid' | 'list' | 'chips'; theme; backgroundColor;
 ```
-Server adds: `data: { attribute, values[] }` (active values only). Good fit for a "All brands" logo grid from the store's Brand list.
+Server adds: `data: { attribute, values[] }` (active values only).
+MedyMar: with `attributeName: "brand"` it is the **"Shop by brand" carousel**, filled from the store's Brand list (`getBrands()`): `selectedValueIds` = which brands, in that order (empty = all, in the list's order). Per brand, the card picture is its first **banner** in the Brand list; without one, a card with its **logo**, name and **description** (tagline). `showImages: false` = always the logo card; `showDescription: false` = no tagline. Other attributes are not shown yet.
+⚠️ Public output (tested 18 Nov): settings come back in snake_case (`attribute_id`, `attribute_name`, `show_images`, `show_description`) and **`selectedValueIds` is dropped**; the chosen brands arrive, in the chosen order, as `data.values` (ids). Our renderer reads both shapes.
 
 #### `swiper-grid-cards` / `grid-cards`
 ```ts
@@ -251,7 +253,7 @@ imageUrl; mobileImageUrl; tabletImageUrl; link;
 title; content (rich HTML); imageUrl; mobileImageUrl; tabletImageUrl;
 imagePosition: 'left' | 'right' | 'top' | 'bottom'; backgroundColor;
 ```
-MedyMar also uses `variant: "section-header"` with `eyebrow`, `eyebrowColor`, `size` (`sm` for info pages), `eyebrowLines: false` (no lines beside a centred label), `align`, `linkText`, `linkUrl`, `linkColor`; and `variant: "split-hero"` (info-page hero: navy box, `eyebrow`, `title` as the page heading, `content`, gold button `linkText` + `linkUrl`, picture `imageUrl` / `tabletImageUrl` / `mobileImageUrl`).
+MedyMar also uses `variant: "section-header"` with `eyebrow`, `eyebrowColor`, `size` (`sm` for info pages), `eyebrowLines: false` (no lines beside a centred label), `align`, `linkText`, `linkUrl`, `linkColor`; and `variant: "policy"` (policy page text: `eyebrow`, `title` as the page heading, `content` rich text with h2/h3/p/ul/links); and `variant: "split-hero"` (info-page hero: navy box, `eyebrow`, `title` as the page heading, `content`, gold button `linkText` + `linkUrl`, picture `imageUrl` / `tabletImageUrl` / `mobileImageUrl`).
 
 #### `testimonials`: Testimonials
 ```ts
@@ -263,7 +265,7 @@ MedyMar variants: `brand-carousel` (`name` = "Brand — tagline", `avatar`, `lin
 ```ts
 title; items: { value; label; prefix; suffix }[]; columns: 2 | 3 | 4;
 ```
-MedyMar variants: `chips`, `features` (`icon`), `tabs`, `checklist`, `link-cards` and `route-cards` (info-page cards; `route-cards` + `tone: "plain"` = icon without square, arrow on the button; `label` = title, `value` = sentence, `icon` = cart | file-text | chat | warehouse | quote, `linkText` + `link`), plus `announcement`, `category-nav`, `footer-column`, `footer-links`, `legal-links` on `site-layout`.
+MedyMar variants: `chips`, `features` (`icon`), `tabs`, `checklist`, `policy-menu` (policies menu: `label` + `link` per item; highlights the current page), `link-cards` and `route-cards` (info-page cards; `route-cards` + `tone: "plain"` = icon without square, arrow on the button; `label` = title, `value` = sentence, `icon` = cart | file-text | chat | warehouse | quote, `linkText` + `link`), plus `announcement`, `category-nav`, `footer-column`, `footer-links`, `legal-links` on `site-layout`.
 
 #### `button-cta`: Button / CTA
 ```ts

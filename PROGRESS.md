@@ -1,6 +1,6 @@
 # MedyMar website: progress
 
-_Last updated: 18 November 2026 (About, Contact and FAQ pages built from Figma and live; About photo and form-field fixes waiting on the owner)_
+_Last updated: 18 November 2026 (About, Contact, FAQ live; policy pages built, texts waiting for approval; home "Shop by brand" now reads the Brand list; both home carousels on Swiper)_
 
 Where we are, measured against the Figma file. Also see [FEATURES.md](FEATURES.md) (what the site does), [SPECS.md](SPECS.md) (how it's built) and [AGENTS.md](AGENTS.md) (rules for AI assistants).
 
@@ -45,7 +45,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | About | 🟡 | 🟡 | 🟡 | Built to match Figma and live at `/about` (checked at 360–1440). Waiting on the hero photo (owner task 0) |
 | FAQ | ✅ | ✅ | ✅ | Live at `/faq`, matches Figma (checked at 360–1440; search, topics and open/close tested). Figma had only the first answer; the other 12 were written by the developer and approved by the owner |
 | Contact: form / sent / error | 🟡 | 🟡 | 🟡 | Built to match Figma and live at `/contact` (all 3 states checked at 360–1440; sent/error tested with a fake reply, no real enquiry sent). Shows the store's form fields (currently the quotation fields, not Figma's 6 contact fields); WhatsApp line left out until there is a number |
-| Policies (privacy, shipping, refund, terms, contact info) | ⬜ | ⬜ | ⬜ | |
+| Policies (privacy, shipping, refund, terms, contact info) | 🟡 | 🟡 | 🟡 | Built to match Figma (checked at 360–1440). 4 drafts with Figma texts (`cms-drafts/<slug>.json`), waiting for the owner to confirm the promises in them. Privacy: Figma text is a Shopify template, on hold. Not saved yet |
 | "Page not found" | ✅ | ✅ | ✅ | No Figma frame; built in the same style |
 
 **Cards** (Figma Components page): product card, category card and tile, brand card, exclusive-brand card, solution card, menu list item, menu category card and menu promo card are all ✅. Every card handles any photo size and shows a styled placeholder when there's no photo.
@@ -82,6 +82,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 
 | # | Task | Why it matters |
 |---|---|---|
+| 0b | **Brand list (Products → product details → Brand):** write a short description (tagline) for each brand, and upload a banner photo for the brands that still show the logo card | The home "Shop by brand" cards read both from there |
 | 0 | **Add the About page photo:** Page builder → About → first section (Text & Image) → Image → upload `design-assets/upload/A01-about-hero.png` (from Figma, white corners already trimmed), or a better original from the designer | The About hero shows text only until then. The connector can't upload a photo this size (see AGENTS.md §5) |
 | 1 | **Get clean background pictures from the designer** (no drawn-in text or buttons) for the hero, Abbott wide banner, Abbott promo and WhatsApp banner (the WhatsApp banner already shows real text and button; a clean picture just makes it sharper); upload them and fill each banner's title / description / button text | Real, clickable buttons and real text are built and switch on when a banner has button text. The hero already has button text, so its title shows twice until its clean picture is uploaded |
 | 1b | **Replace the Abbott promo picture** with `design-assets/upload/06-promo-abbott-fixed.webp` (until the clean art arrives) | Removes the white strip beside it |
@@ -136,6 +137,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | 18 Nov | _(Owner approved)_ Created page **"Contact"** (`contact`, draft = shown publicly): heading, enquiry form (fields from Contact form settings), navy contact panel (email, locations, working hours), "Have a product list?" card; texts from Figma. Record: `cms-drafts/contact.json` |
 | 18 Nov | _(Owner approved)_ Site layout: footer "About & Support" → **Contact** link changed from `/#quote` to `/contact` (re-read first; only that link changed, checked by comparing before/after). Record: `cms-drafts/site-layout.json` |
 | 18 Nov | _(Owner approved)_ Created page **"FAQ"** (`faq`, draft = shown publicly): heading, search + 5 topics + 13 questions (FAQ / Accordion, look `topics`), "Still have a question?" bar. Question texts from Figma; answers drafted by the developer, approved by the owner. Record: `cms-drafts/faq.json` |
+| 18 Nov | _(Owner approved)_ Home page: "Shop by brand" changed from a **Testimonials** section (8 typed-in cards with taglines, Stryker photo) to a **Product Attributes** section on the Brand list (same 8 brands, same order). Cards now take each brand's banner photo, logo and description from the Brand list; taglines are gone until descriptions are written there. Re-read first (unchanged since 12:11), nothing else changed. Record: `cms-drafts/home.json` |
 
 Nothing was deleted by the developer. TheCoins has no delete action.
 

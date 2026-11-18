@@ -19,7 +19,6 @@ export function Testimonials({ w, ctx }: P) {
   const items: any[] = w.items ?? [];
   if (!items.length) return null;
   if (w.variant === "brand-carousel") {
-    // Name, tagline, link and (optional) photo come from the CMS; the logo comes from the store's Brand list.
     const logoOf = (link: string) => ctx.brands.find((b) => link === `/brand/${b.slug}`)?.logo ?? null;
     const cards = items
       .map((it) => ({ name: tr(it.name), image: url(it.avatar), link: it.link ?? "", logo: logoOf(it.link ?? "") }))

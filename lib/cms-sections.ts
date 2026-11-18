@@ -409,6 +409,27 @@ export const SECTIONS: SectionRecipe[] = [
     ]),
   },
   {
+    id: "brand-list-carousel",
+    name: "Brand carousel from the Brand list",
+    use: "Big brand cards that scroll sideways, filled automatically from the store's Brand list. Each card shows the brand's banner photo, or its logo, name and description.",
+    notes: "Product Attributes with attributeName 'brand'. Pictures, logos and descriptions are edited on each brand in the Brand list (Products → product details → Brand), not in the section. selectedValueIds = which brands (empty = all, in the list's order). showImages false = always the logo card.",
+    row: one("brand-list", [
+      header("brand-list-head", { size: "lg", title: "Shop by brand", content: "<p>One sentence.</p>", linkText: "View all brands", linkUrl: "/brands" }),
+      w("brand-list", "product-attributes", {
+        title: "",
+        attributeId: "",
+        attributeName: "brand",
+        selectedValueIds: [],
+        showImages: true,
+        showDescription: true,
+        columns: 4,
+        style: "grid",
+        theme: "light",
+        backgroundColor: "",
+      }),
+    ]),
+  },
+  {
     id: "exclusive-cards",
     name: "Name cards with badge and button",
     use: "Cards with a coloured name, a small badge, a picture, one line and a button.",
@@ -670,6 +691,44 @@ export const SECTIONS: SectionRecipe[] = [
     ]),
   },
   {
+    id: "policy-page",
+    name: "Policy page (menu + text)",
+    use: "A policy page: the policies menu on the left (pill buttons on phones) and the policy text on the right.",
+    notes: "Stats / Counters, look 'policy-menu' (label + link per policy; the page you are on is highlighted) and Text + Image, look 'policy' (eyebrow, title, content as rich text: h2, h3, p, ul, links). The page also needs its own route file app/<slug>/page.tsx.",
+    row: {
+      id: "row-policy",
+      columns: [
+        {
+          id: "col-policy-menu",
+          span: 3,
+          widgets: [
+            w("policy-menu", "stats-counter", {
+              variant: "policy-menu",
+              title: "Policies & information",
+              columns: 1,
+              items: [stat("First policy", { link: "/first-policy" }), stat("Second policy", { link: "/second-policy" })],
+            }),
+          ],
+        },
+        {
+          id: "col-policy-text",
+          span: 9,
+          widgets: [
+            w("policy-text", "text-image", {
+              variant: "policy",
+              eyebrow: "Policies & information",
+              title: "Policy title",
+              content: "<h2>Heading</h2><p>A paragraph.</p><h3>1. Section</h3><p>A paragraph with <strong>bold words</strong>.</p><ul><li>A point</li></ul>",
+              ...IMG,
+              imagePosition: "right",
+              backgroundColor: "",
+            }),
+          ],
+        },
+      ],
+    },
+  },
+  {
     id: "gallery",
     name: "Picture gallery",
     use: "A grid of pictures, each optionally a link.",
@@ -758,7 +817,7 @@ export const WIDGET_MENU: { group: string; widgets: MenuWidget[] }[] = [
       { type: "products-by-category", name: "Products by Category", description: "Products from a category or a ranking", support: "yes" },
       { type: "categories-grid", name: "Categories", description: "Category cards", support: "yes" },
       { type: "two-one-grid", name: "Two-One Grid", description: "Products/brands on one side, category images on the other", support: "yes" },
-      { type: "product-attributes", name: "Product Attributes", description: "Values of an attribute (e.g. all Brands)", support: "no" },
+      { type: "product-attributes", name: "Product Attributes", description: "Values of an attribute (e.g. all Brands)", support: "yes", note: "Brand detail only: the brand carousel, straight from the Brand list." },
       { type: "offer-card", name: "Offer Card", description: "Offer with price, icon, image", support: "no" },
     ],
   },

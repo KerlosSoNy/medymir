@@ -132,6 +132,12 @@ export interface Brand {
   slug: string;
   /** Logo uploaded for the brand in TheCoins (Products → product details → Brand). */
   logo: string | null;
+  /** Id of the brand in the Brand list (used by "Product Attributes" sections to pick brands). */
+  id?: string;
+  /** First banner picture uploaded for the brand in the Brand list (a photo, not the logo), if any. */
+  banner?: string | null;
+  /** Description written for the brand in the Brand list (used as its tagline). */
+  description?: string | null;
 }
 
 /** All active brands from the store's Brand list, in the store's order. */
@@ -141,7 +147,14 @@ export const getBrands = cache(async (): Promise<Brand[]> => {
   return (attr?.values ?? [])
     .filter((v: any) => v.is_active !== false && v.value)
     .sort((a: any, b: any) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
-    .map((v: any) => ({ name: v.value, slug: v.slug || slugify(v.value), logo: v.image_url || null }));
+    .map((v: any) => ({
+      id: v.id,
+      name: v.value,
+      slug: v.slug || slugify(v.value),
+      logo: v.image_url || null,
+      banner: (Array.isArray(v.banners) && v.banners.find((b: unknown) => typeof b === "string" && b)) || null,
+      description: typeof v.description === "string" && v.description.trim() ? v.description.trim() : null,
+    }));
 });
 
 export async function resolveBrand(slug: string): Promise<Brand | null> {
