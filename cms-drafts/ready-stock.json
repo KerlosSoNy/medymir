@@ -1,0 +1,322 @@
+{
+  "title": "Ready Stock",
+  "layout": [
+    {
+      "id": "row-rs-top",
+      "columns": [
+        {
+          "id": "col-rs-top",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-rs-hero",
+              "type": "text-image",
+              "settings": {
+                "variant": "stock-hero",
+                "eyebrow": "Available locally in Oman",
+                "title": "Ready stock. Better value.",
+                "content": "<p>Explore selected medical supplies available from our local stock.</p>",
+                "linkText": "Browse available stock",
+                "linkUrl": "#offers",
+                "badge": "Local stock offers",
+                "imageUrl": "",
+                "tabletImageUrl": "",
+                "mobileImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            },
+            {
+              "id": "w-rs-service",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "service-bar",
+                "title": "",
+                "columns": 3,
+                "items": [
+                  {
+                    "label": "Held locally in Oman",
+                    "value": "These offers are from our existing local stock in Oman.",
+                    "prefix": "",
+                    "suffix": "",
+                    "icon": "pin"
+                  },
+                  {
+                    "label": "Quantity confirmed before reservation",
+                    "value": "Available quantities are confirmed with your quotation.",
+                    "prefix": "",
+                    "suffix": "",
+                    "icon": "quantity"
+                  },
+                  {
+                    "label": "Delivery timing confirmed by location",
+                    "value": "Delivery or collection timing is confirmed for your location.",
+                    "prefix": "",
+                    "suffix": "",
+                    "icon": "delivery"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-rs-offers",
+      "columns": [
+        {
+          "id": "col-rs-offers",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-rs-offer-list",
+              "type": "text-image",
+              "settings": {
+                "variant": "offers",
+                "anchor": "offers",
+                "title": "Available stock offers",
+                "content": "",
+                "categoryId": "ea118a70-99a8-4762-aeef-71bd1c7516ed",
+                "categoryName": "Ready Stock Offers",
+                "badge": "Local stock",
+                "note": "Expiry details confirmed with quotation",
+                "buttonText": "Enquire & reserve",
+                "footnote": "Reservation subject to confirmation",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-rs-help",
+      "columns": [
+        {
+          "id": "col-rs-help",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-rs-bulk",
+              "type": "button-cta",
+              "settings": {
+                "variant": "bulk",
+                "title": "Buying for a clinic or placing a bulk order?",
+                "subtitle": "Send your required quantities for a stock check and consolidated quotation.",
+                "text": "Request a bulk quote",
+                "link": "#quote",
+                "style": "primary",
+                "size": "medium",
+                "align": "right",
+                "fullWidth": false
+              }
+            },
+            {
+              "id": "w-rs-steps",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "steps",
+                "title": "How it works",
+                "columns": 3,
+                "items": [
+                  {
+                    "label": "Select your items",
+                    "value": "Browse the ready stock offers and choose the products you need.",
+                    "prefix": "",
+                    "suffix": ""
+                  },
+                  {
+                    "label": "Confirm quantity and details",
+                    "value": "We confirm availability, pack size and expiry where applicable.",
+                    "prefix": "",
+                    "suffix": ""
+                  },
+                  {
+                    "label": "Arrange collection or delivery",
+                    "value": "We confirm collection or delivery timing for your location.",
+                    "prefix": "",
+                    "suffix": ""
+                  }
+                ]
+              }
+            },
+            {
+              "id": "w-rs-info",
+              "type": "button-cta",
+              "settings": {
+                "variant": "info",
+                "title": "Important information",
+                "subtitle": "Offer availability, quantities and product details are confirmed in your quotation.",
+                "text": "",
+                "link": "",
+                "style": "primary",
+                "size": "medium",
+                "align": "left",
+                "fullWidth": false
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-rs-whatsapp",
+      "columns": [
+        {
+          "id": "col-rs-whatsapp",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-rs-whatsapp",
+              "type": "button-cta",
+              "settings": {
+                "variant": "banner",
+                "eyebrow": "Quotations made simple",
+                "title": "Short on time? Send us your list.",
+                "subtitle": "Share a product photo, box label or item list. Our team will help prepare your quotation.",
+                "text": "Request a quote on WhatsApp",
+                "link": "#quote",
+                "icon": "whatsapp",
+                "note": "Replies during working hours",
+                "imageUrl": "https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/connector/53b02b3c-ad77-4dca-943b-79ff19c65d04.webp",
+                "tabletImageUrl": "",
+                "mobileImageUrl": "",
+                "style": "outline",
+                "size": "medium",
+                "align": "left",
+                "fullWidth": false
+              }
+            }
+          ]
+        }
+      ],
+      "backgroundColor": "#f5f7fa"
+    },
+    {
+      "id": "row-rs-quote",
+      "columns": [
+        {
+          "id": "col-rs-quote-form",
+          "span": 7,
+          "widgets": [
+            {
+              "id": "w-rs-quote-form",
+              "type": "contact-form",
+              "settings": {
+                "variant": "quote",
+                "anchor": "quote",
+                "eyebrow": "Enquire & reserve",
+                "title": "Send your ready stock request",
+                "subtitle": "Your selected offers are in the quote list below. We confirm quantity, batch details and collection or delivery timing before anything is reserved.",
+                "attachTitle": "Attach your product list",
+                "attachText": "Email a PDF, Excel sheet or product photos to milani@shamhabib.com",
+                "submitText": "Send reservation request",
+                "privacyNote": "Your details are used to prepare your quotation.",
+                "style": "card",
+                "showMap": false,
+                "mapEmbedUrl": "",
+                "contactInfo": [],
+                "theme": "light",
+                "backgroundColor": "",
+                "pluginSlug": "contact"
+              }
+            }
+          ]
+        },
+        {
+          "id": "col-rs-quote-side",
+          "span": 5,
+          "widgets": [
+            {
+              "id": "w-rs-checklist",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "checklist",
+                "title": "Every reservation request includes",
+                "columns": 1,
+                "items": [
+                  {
+                    "label": "Confirmed quantity in the offer's selling unit",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": ""
+                  },
+                  {
+                    "label": "Batch and expiry details, where applicable",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": ""
+                  },
+                  {
+                    "label": "Collection or delivery timing for your location",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": ""
+                  },
+                  {
+                    "label": "No stock is reserved until we confirm",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": ""
+                  }
+                ]
+              }
+            },
+            {
+              "id": "w-rs-contact",
+              "type": "contact-form",
+              "settings": {
+                "variant": "contact-card",
+                "title": "Contact our procurement team",
+                "subtitle": "",
+                "style": "card",
+                "showMap": false,
+                "mapEmbedUrl": "",
+                "theme": "light",
+                "backgroundColor": "",
+                "pluginSlug": "contact",
+                "contactInfo": [
+                  {
+                    "icon": "email",
+                    "label": "Email",
+                    "value": "milani@shamhabib.com"
+                  },
+                  {
+                    "icon": "hours",
+                    "label": "Hours",
+                    "value": "Sun–Thu · 8:00–18:00 GST"
+                  },
+                  {
+                    "icon": "reply",
+                    "label": "Reply",
+                    "value": "Replies during working hours"
+                  }
+                ],
+                "offices": [
+                  {
+                    "city": "Muscat",
+                    "note": "GMT+4"
+                  },
+                  {
+                    "city": "Kigali",
+                    "note": "GMT+2"
+                  },
+                  {
+                    "city": "Nairobi",
+                    "note": "GMT+3"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "backgroundColor": "#f5f7fa"
+    }
+  ]
+}

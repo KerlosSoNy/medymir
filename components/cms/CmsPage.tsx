@@ -35,6 +35,12 @@ const STACK = new Set([
   "button-cta/help",
   "stats-counter/policy-menu",
   "text-image/policy",
+  "text-image/stock-hero",
+  "stats-counter/service-bar",
+  "stats-counter/steps",
+  "text-image/offers",
+  "button-cta/bulk",
+  "button-cta/info",
 ]);
 
 /** What kind of row this is decides its padding and width. */

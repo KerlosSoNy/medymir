@@ -17,6 +17,8 @@ export interface WidgetCtx {
   withArrows?: boolean;
   /** Current page path (e.g. "/shipping-policy"), so a menu can highlight the page it is on. */
   path?: string;
+  /** Page address filters (?in_stock=1&page=2) for sections that list products, e.g. Ready Stock offers. */
+  sp?: Record<string, string | string[] | undefined>;
 }
 export type P = { w: any; ctx: WidgetCtx };
 

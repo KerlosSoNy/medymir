@@ -66,7 +66,7 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 | Brand page (`/brand/…`) | ✅ | Exactly the products whose Brand detail is that brand, plus a Brand filter. Brands not in the store's Brand list (e.g. Hermann) fall back to a name search |
 | Product cards | ✅ | Figma design: REF/SKU, photo shown whole in a fixed frame (any photo size fits), "No product image yet" placeholder, name and text cut to 2 lines, price or "Request a quotation", full-width "Add to quote list"; all cards in a row line up |
 | Product page (`/product/…`) | ✅ | Photo gallery, REF, price, sale price, description, options (size/pack), quantity, add to quote list, "currently unavailable" state |
-| Ready Stock page design (special offer cards) | ⬜ | Uses the normal category page for now |
+| Ready Stock page (`/category/ready-stock-offers`) | 🟡 | Live, built from Figma (CMS page `ready-stock`, editable in Page builder → Ready Stock): hero, 3 promises, store filters + offer cards (brand, LOCAL STOCK, SAVE %, pack size, price / unit, "Available: X" when stock is tracked, quantity, "Enquire & reserve" adds to the quote list), bulk-order bar, How it works, info line, WhatsApp banner, reservation form. Falls back to the normal category page if that CMS page is removed |
 
 ## Quote list and quotation (instead of a shopping cart)
 

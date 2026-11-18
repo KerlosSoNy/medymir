@@ -53,10 +53,10 @@ See also: [SPECS.md](SPECS.md) §7 (data flow) and [AGENTS.md](AGENTS.md) §5 (k
 | `recommended-products` | products-slider | Recommended For You | Product suggestions | ✅ (same product grid) |
 | `products-by-category` | products-slider | Products by Category | Products from a category or a ranking | ✅ |
 | `categories-grid` | categories-grid | Categories | Category cards | ✅ category carousel |
-| `text-image` | text-image | Text + Image | Rich text with image | ✅ (+ our `section-header`, `split-hero`, `policy` variants) |
+| `text-image` | text-image | Text + Image | Rich text with image | ✅ (+ our `section-header`, `split-hero`, `policy`, `stock-hero`, `offers` variants) |
 | `testimonials` | testimonials | Testimonials | Customer quotes | ✅ (+ our `brand-carousel`, `exclusive-brands`, `solutions` variants) |
-| `stats-counter` | stats-counter | Stats / Counters | Numbers & metrics | ✅ (+ our `chips`, `features`, `tabs`, `checklist`, `link-cards`, `route-cards`, `policy-menu` variants) |
-| `button-cta` | button-cta | Button / CTA | One call-to-action button | ✅ (+ our `note`, `callout`, `banner`, `band`, `help` variants) |
+| `stats-counter` | stats-counter | Stats / Counters | Numbers & metrics | ✅ (+ our `chips`, `features`, `tabs`, `checklist`, `link-cards`, `route-cards`, `policy-menu`, `service-bar`, `steps` variants) |
+| `button-cta` | button-cta | Button / CTA | One call-to-action button | ✅ (+ our `note`, `callout`, `banner`, `band`, `help`, `bulk`, `info` variants) |
 | `contact-form` | contact-form | Contact Form | Form linked to the Contact Us plugin | ✅ (our `quote`, `contact-card`, `contact`, `contact-panel` variants) |
 | `faq-accordion` | faq-accordion | FAQ / Accordion | Questions & answers saved in the widget | ✅ (+ our `topics` variant) |
 | `gallery` | gallery | Image Gallery | Grid of images | ✅ |
@@ -426,6 +426,7 @@ columns: 1 | 2 | 3 | 4; showTitle; backgroundColor;
 |---|---|---|
 | Banner with a real, clickable button | `banners` drops the button text; `hero-banner` returns an empty card publicly | Full-width: a **one-slide `carousel`** (keeps title, subtitle, `ctaText`, `ctaLink`). Boxed, with a small label or a note: `button-cta` variant `banner`. Beside products (side column): the same `button-cta` banner, which then shows as a tall card |
 | Extra keys (our `variant`, `eyebrow`, `linkText`…) | Kept by text-image, stats-counter, button-cta, testimonials, contact-form, faq | Use those types for custom sections |
+| Products by Category with extra settings | Public output keeps only `title`, `subtitle`, `button`, `view_all` and the resolved products (`data`); `variant`, `categoryId` and our texts are dropped (tested 18 Nov) | Custom product areas (e.g. Ready Stock offers) are a `text-image` with our variant that loads its products itself |
 | Strict types | `hero-banner`, `featured-products`, `spacer`, `gallery` reject or drop extra keys | Only send their exact fields |
 | Images | Stored in TheCoins media (`media.thecoins.app/…`) | Never point a widget at files in the website project |
 | Brands | `two-one-grid` brand items resolve to the store's Brand list (logo, product count) | Brands always come from the store's Brand detail |

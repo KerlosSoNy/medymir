@@ -1,4 +1,4 @@
-// Button / CTA (button-cta) and our variants: note, callout, banner, band, help.
+// Button / CTA (button-cta) and our variants: note, callout, banner, band, help, bulk, info.
 import { cn } from "@/lib/cn";
 import { tr } from "@/lib/format";
 import { btn } from "@/lib/styles";
@@ -67,6 +67,38 @@ export function ButtonCta({ w, ctx }: P) {
           </SmartLink>
         )}
       </div>
+    );
+  if (w.variant === "bulk")
+    // Figma Ready Stock "Bulk order banner": light blue bar, icon, title + one line, dark button.
+    return (
+      <div className="flex flex-col items-start gap-4 rounded-xl border border-[#e1e9f2] bg-[#f1f5fa] px-[22px] py-6 md:flex-row md:items-center md:gap-[18px] md:px-[26px] md:py-[25px]">
+        <span className="flex shrink-0">
+          <Icon name="rs-bulk" size={30} />
+        </span>
+        <div className="grid min-w-0 flex-1 grid-cols-1 gap-1">
+          {w.title && <h2 className="font-head text-lg font-bold text-[#202b40] md:text-xl">{tr(w.title)}</h2>}
+          {w.subtitle && <p className="text-sm text-[#3b4a63]">{tr(w.subtitle)}</p>}
+        </div>
+        {w.text && (
+          <SmartLink to={w.link} className="inline-flex h-11 shrink-0 items-center gap-2 rounded-lg bg-[#202b40] px-5 text-[14.5px] font-semibold whitespace-nowrap text-white transition hover:brightness-125">
+            {tr(w.text)}
+            <Icon name="arrow-right-white-14" size={14} />
+          </SmartLink>
+        )}
+      </div>
+    );
+  if (w.variant === "info")
+    // Figma Ready Stock "Important information": grey line with an info icon, bold start and a sentence.
+    return (
+      <p className="flex items-start gap-3 rounded-[10px] bg-surface-alt px-[18px] py-3.5 text-[13.5px] text-[#3b4a63]">
+        <span className="flex shrink-0 pt-px">
+          <Icon name="rs-info" size={18} />
+        </span>
+        <span>
+          {w.title && <strong className="mr-2 font-bold text-[#202b40]">{tr(w.title)}</strong>}
+          {tr(w.subtitle)}
+        </span>
+      </p>
     );
   if (w.variant === "help")
     // Figma FAQ "Still have a question?": grey bar with an icon, title, one line and a gold button.

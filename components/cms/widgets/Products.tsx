@@ -1,4 +1,5 @@
 // Featured / Recommended / Products by Category: product grid.
+// (The Ready Stock offers area is Text + Image variant "offers": this type drops our extra settings publicly.)
 import { UI } from "@/lib/ui";
 import { ProductCard } from "../../ProductCard";
 import { type P } from "./shared";

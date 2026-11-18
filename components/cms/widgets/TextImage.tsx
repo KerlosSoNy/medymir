@@ -1,8 +1,11 @@
-// Text + Image (text-image). Variant "section-header" → SectionHeader, "split-hero" → SplitHero, "policy" → policy text.
+// Text + Image (text-image). Variant "section-header" → SectionHeader, "split-hero" → SplitHero, "policy" → policy text,
+// "stock-hero" → Ready Stock hero, "offers" → Ready Stock offers area (Text + Image keeps all our settings in the
+// public output; Products by Category drops them, so the offers area lives here).
 import { cn } from "@/lib/cn";
 import { tr } from "@/lib/format";
 import { Icon, SmartLink } from "../../SmartLink";
 import { goldBtn } from "../classes";
+import { OfferListing } from "../../OfferListing";
 import { type P, html, url } from "./shared";
 import { SectionHeader } from "./SectionHeader";
 
@@ -18,6 +21,8 @@ const policyText = cn(
 export function TextImage({ w, ctx }: P) {
   if (w.variant === "section-header") return <SectionHeader w={w} ctx={ctx} />;
   if (w.variant === "split-hero") return <SplitHero w={w} />;
+  if (w.variant === "stock-hero") return <StockHero w={w} />;
+  if (w.variant === "offers") return <Offers w={w} ctx={ctx} />;
   if (w.variant === "policy")
     // Figma Policy pages: small gold label, page title (h1) and the policy text (rich text: h2, h3, p, ul, links).
     return (
@@ -83,5 +88,76 @@ function SplitHero({ w }: { w: any }) {
         </div>
       )}
     </article>
+  );
+}
+
+/**
+ * text-image variant "stock-hero" (Figma Ready Stock hero, node 92:120): light blue box, gold label, big
+ * title, one line and a dark button on the left, picture on the right with a small white tag ("badge").
+ * Phone/tablet: picture on top, text below. Fields: eyebrow, title, content, linkText, linkUrl, badge,
+ * imageUrl, tabletImageUrl, mobileImageUrl.
+ */
+function StockHero({ w }: { w: any }) {
+  const desk = url(w.imageUrl);
+  const tab = url(w.tabletImageUrl);
+  const mobile = url(w.mobileImageUrl);
+  const title = tr(w.title);
+  if (!title) return null;
+  return (
+    <article
+      className={cn(
+        "relative flex flex-col overflow-hidden rounded-[14px] border border-[#e1eaf2] bg-[linear-gradient(90deg,#eaf2f8,#f2f7fb_55%,#e4edf6)] lg:min-h-[352px]",
+        desk && "lg:flex-row-reverse",
+      )}
+    >
+      {desk && (
+        <div className="relative h-[220px] shrink-0 sm:h-[280px] lg:h-auto lg:w-1/2">
+          <picture>
+            {mobile && <source media="(max-width:640px)" srcSet={mobile} />}
+            {tab && <source media="(max-width:1024px)" srcSet={tab} />}
+            <img src={desk} alt="" className="absolute inset-0 size-full object-cover" />
+          </picture>
+        </div>
+      )}
+      {w.badge && (
+        <span className="absolute top-3.5 right-3.5 flex h-[29px] items-center gap-1.5 rounded-full bg-white px-3 text-[12.5px] font-semibold text-[#202b40] shadow-sm">
+          <Icon name="rs-tag-pin" size={13} />
+          {tr(w.badge)}
+        </span>
+      )}
+      <div className={cn("flex flex-col justify-center px-6 py-8 md:px-10 lg:py-12 lg:pl-[52px]", desk ? "lg:w-1/2" : "")}>
+        {w.eyebrow && <p className="text-[12.5px] font-bold tracking-[0.14em] text-[#b88a2e] uppercase">{tr(w.eyebrow)}</p>}
+        <h1 className="mt-2.5 max-w-[495px] font-head text-[34px] leading-[1.08] font-bold text-balance text-[#202b40] md:text-[40px] lg:text-[44px]">{title}</h1>
+        {w.content && (
+          <div className="mt-3 max-w-[495px] text-base leading-normal text-[#3b4a63] md:text-[17px]" dangerouslySetInnerHTML={{ __html: html(w.content) }} />
+        )}
+        {w.linkText && (
+          <SmartLink
+            to={w.linkUrl}
+            className="mt-5 inline-flex h-12 items-center gap-2.5 self-start rounded-lg bg-[#202b40] px-5 text-[15px] font-semibold text-white transition hover:brightness-125"
+          >
+            {tr(w.linkText)}
+            <Icon name="rs-arrow-down" size={16} />
+          </SmartLink>
+        )}
+      </div>
+    </article>
+  );
+}
+
+/** text-image variant "offers": store filters + offer cards of one category (categoryId), with the card texts. */
+function Offers({ w, ctx }: P) {
+  if (!w.categoryId) return null;
+  return (
+    <OfferListing
+      categoryId={w.categoryId}
+      basePath={ctx.path ?? "/products"}
+      sp={ctx.sp ?? {}}
+      title={tr(w.title)}
+      currency={ctx.currency}
+      brands={ctx.brands}
+      anchor={w.anchor || "offers"}
+      labels={{ badge: tr(w.badge), note: tr(w.note), button: tr(w.buttonText), footnote: tr(w.footnote) }}
+    />
   );
 }

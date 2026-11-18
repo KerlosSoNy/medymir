@@ -36,7 +36,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | **Home** | ✅ | ✅ | ✅ | See section 2 for missing photos |
 | Categories | 🟡 | 🟡 | 🟡 | Category tiles match Figma; the rest of the page layout is simplified |
 | Category (e.g. Endoscopy) | 🟡 | 🟡 | 🟡 | Products, filters and pagination work. Figma's category header and featured brands are not built |
-| Ready Stock | ⬜ | ⬜ | ⬜ | Uses the normal category page; offer cards (Card/Offer) not built |
+| Ready Stock | 🟡 | 🟡 | 🟡 | Built to match Figma and live at `/category/ready-stock-offers` (checked at 360–1440). Hero photo not uploaded (`design-assets/upload/R01-hero-ready-stock.png`). Sidebar shows the store's filters (price, on sale, featured, in stock), not Figma's Categories/Brand/Pack size |
 | Brands | 🟡 | 🟡 | 🟡 | Brand tiles match the card design; the full Figma page is not built |
 | Product: ready stock / quotation / sold out | 🟡 | 🟡 | 🟡 | Gallery, price, REF, options, add to quote list and "unavailable" all work. Figma's tabs and extra blocks are not built |
 | Search: results / no results / empty | 🟡 | 🟡 | 🟡 | Results and "no results" work; the special "empty" design is not built |
@@ -82,6 +82,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 
 | # | Task | Why it matters |
 |---|---|---|
+| 0c | **Ready Stock:** upload the hero photo (Page builder → Ready Stock → first section → Image; file `design-assets/upload/R01-hero-ready-stock.png`), add the real offers to the Ready Stock Offers category with **Pack size** and **Unit** filled in, and switch on stock tracking where "Available: X" should show | The page and its offer cards read these from the store |
 | 0b | **Brand list (Products → product details → Brand):** write a short description (tagline) for each brand, and upload a banner photo for the brands that still show the logo card | The home "Shop by brand" cards read both from there |
 | 0 | **Add the About page photo:** Page builder → About → first section (Text & Image) → Image → upload `design-assets/upload/A01-about-hero.png` (from Figma, white corners already trimmed), or a better original from the designer | The About hero shows text only until then. The connector can't upload a photo this size (see AGENTS.md §5) |
 | 1 | **Get clean background pictures from the designer** (no drawn-in text or buttons) for the hero, Abbott wide banner, Abbott promo and WhatsApp banner (the WhatsApp banner already shows real text and button; a clean picture just makes it sharper); upload them and fill each banner's title / description / button text | Real, clickable buttons and real text are built and switch on when a banner has button text. The hero already has button text, so its title shows twice until its clean picture is uploaded |
@@ -138,6 +139,8 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | 18 Nov | _(Owner approved)_ Site layout: footer "About & Support" → **Contact** link changed from `/#quote` to `/contact` (re-read first; only that link changed, checked by comparing before/after). Record: `cms-drafts/site-layout.json` |
 | 18 Nov | _(Owner approved)_ Created page **"FAQ"** (`faq`, draft = shown publicly): heading, search + 5 topics + 13 questions (FAQ / Accordion, look `topics`), "Still have a question?" bar. Question texts from Figma; answers drafted by the developer, approved by the owner. Record: `cms-drafts/faq.json` |
 | 18 Nov | _(Owner approved)_ Home page: "Shop by brand" changed from a **Testimonials** section (8 typed-in cards with taglines, Stryker photo) to a **Product Attributes** section on the Brand list (same 8 brands, same order). Cards now take each brand's banner photo, logo and description from the Brand list; taglines are gone until descriptions are written there. Re-read first (unchanged since 12:11), nothing else changed. Record: `cms-drafts/home.json` |
+| 18 Nov | _(Owner approved)_ Created two product details (dynamic attributes) for the Ready Stock offer cards: **Pack size** (`pack_size`, free text, e.g. "10 dressings / pack") and **Unit** (`unit`, pick-from-list: pack, box, unit, tub). Both shown on the product page, optional |
+| 18 Nov | _(Owner approved)_ Created page **"Ready Stock"** (`ready-stock`, draft = shown publicly) for `/category/ready-stock-offers`: hero, 3 promises, offers area, bulk-order bar, How it works, info line, WhatsApp banner, reservation form; texts from Figma. Saved a second time a minute later to move the offers area from Products by Category (drops our settings publicly) to Text + Image look `offers`; nothing else changed. Hero photo still empty. Record: `cms-drafts/ready-stock.json` |
 
 Nothing was deleted by the developer. TheCoins has no delete action.
 

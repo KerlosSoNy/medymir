@@ -729,6 +729,20 @@ export const SECTIONS: SectionRecipe[] = [
     },
   },
   {
+    id: "ready-stock",
+    name: "Ready Stock page parts",
+    use: "The Ready Stock page: hero, three promises, the offers area (store filters + offer cards), bulk-order bar, 'How it works' steps and an info line.",
+    notes: "Looks: Text + Image 'stock-hero' (badge = small white tag on the picture), Stats 'service-bar' (icons pin | quantity | delivery) and 'steps', Text + Image 'offers' (categoryId, title, badge, note, buttonText, footnote — Products by Category would lose these publicly; cards read Brand, Pack size, Unit, price/compare-at price and tracked stock from each product), Button / CTA 'bulk' and 'info'.",
+    row: one("ready-stock", [
+      w("rs-hero", "text-image", { variant: "stock-hero", eyebrow: "Small label", title: "Big title", content: "<p>One sentence.</p>", linkText: "Button text", linkUrl: "#offers", badge: "Small tag", ...IMG, imagePosition: "right", backgroundColor: "" }),
+      w("rs-service", "stats-counter", { variant: "service-bar", title: "", columns: 3, items: [stat("First promise", { icon: "pin", value: "One sentence." }), stat("Second promise", { icon: "quantity", value: "One sentence." }), stat("Third promise", { icon: "delivery", value: "One sentence." })] }),
+      w("rs-offers", "text-image", { variant: "offers", anchor: "offers", title: "Offers title", content: "", categoryId: "", badge: "Local stock", note: "Short note under the price", buttonText: "Button text", footnote: "Small note under the button", ...IMG, imagePosition: "right", backgroundColor: "" }),
+      cta("rs-bulk", { variant: "bulk", title: "Bar title?", subtitle: "One sentence.", text: "Button text", link: "#quote", style: "primary" }),
+      w("rs-steps", "stats-counter", { variant: "steps", title: "How it works", columns: 3, items: [stat("First step", { value: "One sentence." }), stat("Second step", { value: "One sentence." }), stat("Third step", { value: "One sentence." })] }),
+      cta("rs-info", { variant: "info", title: "Bold start", subtitle: "Rest of the sentence.", text: "", link: "" }),
+    ]),
+  },
+  {
     id: "gallery",
     name: "Picture gallery",
     use: "A grid of pictures, each optionally a link.",

@@ -1,4 +1,5 @@
-// Stats / Counters (stats-counter) and our variants: chips, tabs, features, checklist, link-cards, route-cards, policy-menu.
+// Stats / Counters (stats-counter) and our variants: chips, tabs, features, checklist, link-cards, route-cards,
+// policy-menu, service-bar, steps.
 import { cn } from "@/lib/cn";
 import { tr } from "@/lib/format";
 import { Icon, SmartLink } from "../../SmartLink";
@@ -14,6 +15,9 @@ const CARD_ICON: Record<string, [string, number]> = {
   "file-text": ["about-file", 26],
   chat: ["about-chat", 26],
   warehouse: ["about-warehouse", 22],
+  pin: ["rs-local", 24],
+  quantity: ["rs-quantity", 24],
+  delivery: ["rs-delivery", 24],
   quote: ["about-quote", 26],
 };
 const cardIcon = (name: string) => {
@@ -138,6 +142,37 @@ export function Stats({ w, ctx }: P) {
         </div>
         );
       }
+    case "service-bar":
+      // Figma Ready Stock "Service bar": three promises side by side in one white box (stacked on phones).
+      return (
+        <div className="grid grid-cols-1 overflow-hidden rounded-xl border border-[#e3e8ef] bg-white md:grid-cols-3">
+          {items.map((it, i) => (
+            <div key={i} className={cn("flex items-start gap-3.5 px-5 py-[18px]", i > 0 && "border-t border-[#e3e8ef] md:border-t-0 md:border-l")}>
+              {CARD_ICON[it.icon] && <span className="flex shrink-0">{cardIcon(it.icon)}</span>}
+              <div className="grid min-w-0 flex-1 grid-cols-1 gap-[3px]">
+                <p className="text-[15px] font-semibold text-[#202b40]">{tr(it.label)}</p>
+                {it.value && <p className="text-[13px] leading-[1.35] text-[#5f6b7d]">{tr(it.value)}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    case "steps":
+      // Figma Ready Stock "How it works": title, then numbered steps (01, 02, 03) in one white box.
+      return (
+        <div className="flex flex-col gap-5 rounded-xl border border-[#e6eaf0] bg-white px-[22px] py-[22px] lg:flex-row lg:items-center lg:gap-6">
+          {w.title && <h2 className="shrink-0 font-head text-[17px] font-bold text-[#202b40]">{tr(w.title)}</h2>}
+          {items.map((it, i) => (
+            <div key={i} className="flex min-w-0 flex-1 items-start gap-3">
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-[#fbf1dc] text-[13px] font-bold text-[#8a6a23]">{String(i + 1).padStart(2, "0")}</span>
+              <div className="grid min-w-0 flex-1 grid-cols-1 gap-[3px]">
+                <p className="text-[15px] font-semibold text-[#202b40]">{tr(it.label)}</p>
+                {it.value && <p className="text-[13px] leading-[1.35] text-[#5f6b7d]">{tr(it.value)}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
     case "policy-menu":
       // Figma Policy pages: side menu on desktop, pill buttons on tablet/phone. The page it is on is highlighted.
       return (
