@@ -6,6 +6,8 @@ Every page in TheCoins (home, site-layout, about…) is built from **rows → co
 
 See also: [SPECS.md](SPECS.md) §7 (data flow) and [AGENTS.md](AGENTS.md) §5 (known traps).
 
+**Building a page?** Use the `/cms-page` command. Ready-made sections are in `lib/cms-sections.ts` (shown at `/dev/widgets`). When you make a ⬜ type render, add a recipe there too.
+
 ---
 
 ## 1. How widgets reach the website
@@ -54,7 +56,7 @@ See also: [SPECS.md](SPECS.md) §7 (data flow) and [AGENTS.md](AGENTS.md) §5 (k
 | `text-image` | text-image | Text + Image | Rich text with image | ✅ (+ our `section-header` variant) |
 | `testimonials` | testimonials | Testimonials | Customer quotes | ✅ (+ our `brand-carousel`, `exclusive-brands`, `solutions` variants) |
 | `stats-counter` | stats-counter | Stats / Counters | Numbers & metrics | ✅ (+ our `chips`, `features`, `tabs`, `checklist` variants) |
-| `button-cta` | button-cta | Button / CTA | One call-to-action button | ✅ (+ our `note`, `callout` variants) |
+| `button-cta` | button-cta | Button / CTA | One call-to-action button | ✅ (+ our `note`, `callout`, `banner` variants) |
 | `contact-form` | contact-form | Contact Form | Form linked to the Contact Us plugin | ✅ (our `quote`, `contact-card` variants) |
 | `faq-accordion` | faq-accordion | FAQ / Accordion | Questions & answers saved in the widget | ✅ |
 | `gallery` | gallery | Image Gallery | Grid of images | ✅ |
@@ -89,7 +91,7 @@ See also: [SPECS.md](SPECS.md) §7 (data flow) and [AGENTS.md](AGENTS.md) §5 (k
 | `ad-slot` | ad-slot | Ad Slot (Ads Manager) | A campaign from Ads Manager | ⬜ |
 | `custom-html` | custom-html | Custom HTML | Raw HTML block | ⬜ (not allowed through the connector) |
 
-Our renderer is the `REGISTRY` in `components/cms/widgets.tsx`. Adding a ⬜ type means adding a component there.
+Our renderer is the folder `components/cms/widgets/`: one file per widget type, and the `REGISTRY` in `widgets/index.tsx` maps each `widget_type` to its file. Adding a ⬜ type means adding a file there and registering it.
 
 ---
 
@@ -268,7 +270,7 @@ MedyMar variants: `chips`, `features` (`icon`), `tabs`, `checklist`, plus `annou
 text; link; style: 'primary' | 'secondary' | 'outline' | 'ghost';
 size: 'small' | 'medium' | 'large'; align: 'left' | 'center' | 'right'; fullWidth: boolean;
 ```
-MedyMar variants: `note`, `callout` (+ `title`, `subtitle`, `icon`, `tone`).
+MedyMar variants: `note`, `callout` (+ `title`, `subtitle`, `icon`, `tone`), and `banner`: a boxed navy banner with real text over a picture (+ `eyebrow`, `title`, `subtitle`, `note`, `icon: 'whatsapp'`, `imageUrl`, `tabletImageUrl`, `mobileImageUrl`; button = `text` + `link`). Use it for a boxed banner with a label, a button and a note (e.g. the home WhatsApp banner).
 
 #### `faq-accordion`: FAQ / Accordion
 ```ts
@@ -419,7 +421,7 @@ columns: 1 | 2 | 3 | 4; showTitle; backgroundColor;
 
 | What | Result | What to do |
 |---|---|---|
-| Banner with a real, clickable button | `banners` drops the button text; `hero-banner` returns an empty card publicly | Use a **one-slide `carousel`** (keeps title, subtitle, `ctaText`, `ctaLink`) |
+| Banner with a real, clickable button | `banners` drops the button text; `hero-banner` returns an empty card publicly | Full-width: a **one-slide `carousel`** (keeps title, subtitle, `ctaText`, `ctaLink`). Boxed, with a small label or a note: `button-cta` variant `banner`. Beside products (side column): the same `button-cta` banner, which then shows as a tall card |
 | Extra keys (our `variant`, `eyebrow`, `linkText`…) | Kept by text-image, stats-counter, button-cta, testimonials, contact-form, faq | Use those types for custom sections |
 | Strict types | `hero-banner`, `featured-products`, `spacer`, `gallery` reject or drop extra keys | Only send their exact fields |
 | Images | Stored in TheCoins media (`media.thecoins.app/…`) | Never point a widget at files in the website project |

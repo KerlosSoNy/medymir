@@ -1,0 +1,107 @@
+// Stats / Counters (stats-counter) and our variants: chips, tabs, features, checklist.
+import { cn } from "@/lib/cn";
+import { tr } from "@/lib/format";
+import { Icon, SmartLink } from "../../SmartLink";
+import { card, noScrollbar, sideCard, sideTitle } from "../classes";
+import { type P } from "./shared";
+
+/* ---------- stats-counter variants ---------- */
+const FEATURE_ICON: Record<string, string> = { search: "feature-search", "file-text": "feature-file-text", whatsapp: "feature-whatsapp" };
+
+export function Stats({ w }: P) {
+  const items: any[] = w.items ?? [];
+  if (!items.length) return null;
+  switch (w.variant) {
+    case "chips":
+      return (
+        <div className="flex flex-col items-start gap-3 border-b border-line-2 pb-[22px] md:flex-row md:flex-wrap md:items-center">
+          {w.title && <h2 className="text-[19px] font-bold text-ink-2 md:mr-[26px]">{tr(w.title)}</h2>}
+          <div className="flex flex-wrap gap-2 md:gap-3">
+            {items.map((it, i) => (
+              <SmartLink
+                key={i}
+                to={it.link}
+                className="whitespace-nowrap rounded-full border border-chip-border bg-chip-bg px-4 py-2.5 text-[13px] font-medium text-ink-3 transition-colors hover:border-ink-3 hover:bg-white md:px-[22px] md:py-[11px] md:text-sm"
+              >
+                {tr(it.label)}
+              </SmartLink>
+            ))}
+          </div>
+        </div>
+      );
+    case "tabs":
+      return (
+        <div className={cn("-mr-4 flex gap-2 overflow-x-auto pr-4 md:mr-0 md:flex-wrap md:pr-0", noScrollbar)} role="list">
+          {items.map((it, i) => (
+            <SmartLink
+              key={i}
+              to={it.link}
+              className={cn(
+                "shrink-0 rounded-full border px-[17px] py-[11px] text-[13px] font-semibold transition-colors",
+                i === 0 ? "border-dark bg-dark text-white" : "border-[#e3ded3] bg-[#f7f5f0] text-ink-3 hover:border-ink-3",
+              )}
+            >
+              {tr(it.label)}
+            </SmartLink>
+          ))}
+        </div>
+      );
+    case "features":
+      return (
+        <div className="grid grid-cols-1 gap-[18px] lg:grid-cols-3 lg:gap-0">
+          {items.map((it, i) => (
+            <div key={i} className={cn("flex items-start gap-[18px] lg:pr-6", i > 0 && "lg:border-l lg:border-line-2 lg:pl-10")}>
+              {FEATURE_ICON[it.icon] && <Icon name={FEATURE_ICON[it.icon]} size={28} />}
+              <div className="min-w-0 flex-1">
+                <h3 className="mb-1.5 text-[17px] font-semibold text-ink-2">{tr(it.label)}</h3>
+                <p className="max-w-[330px] text-sm leading-[22px] text-muted-2">{tr(it.value)}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    case "checklist":
+      return (
+        <div className={sideCard}>
+          {w.title && <h3 className={sideTitle}>{tr(w.title)}</h3>}
+          <ul className="grid grid-cols-1 gap-4 text-[14.5px] text-[#3a4252]">
+            {items.map((it, i) => (
+              <li key={i} className="flex items-center gap-4">
+                <span className="grid grid-cols-1 size-[30px] shrink-0 place-items-center rounded-full bg-[#e3f4ec]">
+                  <Icon name="check" size={14} />
+                </span>
+                {tr(it.label)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    case "announcement":
+    case "category-nav":
+    case "footer-column":
+    case "footer-links":
+    case "legal-links":
+      return null;
+    default:
+      return (
+        <div className="grid grid-cols-1 gap-4">
+          {w.title && <h2 className="font-head text-[26px] font-bold text-ink lg:text-[34px]">{tr(w.title)}</h2>}
+          <div
+            className="grid grid-cols-2 gap-4 lg:grid-cols-[repeat(var(--cols),minmax(0,1fr))]"
+            style={{ ["--cols" as any]: w.columns ?? 3 }}
+          >
+            {items.map((it, i) => (
+              <div key={i} className={cn(card, "grid grid-cols-1 gap-1 p-5")}>
+                <strong className="font-head text-[28px] font-bold text-ink lg:text-[34px]">
+                  {it.prefix}
+                  {it.value}
+                  {it.suffix}
+                </strong>
+                <span className="text-sm text-muted">{tr(it.label)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+  }
+}

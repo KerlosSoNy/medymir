@@ -45,6 +45,7 @@ Then look at the Figma frame for the screen you're working on (section 2) **befo
 - **Responsive:** phone first. Every change must work at 360, 390, 768, 1024 and 1440 wide with no sideways page scroll.
 - **Content comes from TheCoins.** Don't hard-code store texts, links or images in components. Exceptions: UI labels go in `lib/ui.ts` and mega-menu content in `lib/menu.ts`.
 - **Private data** (quote list, login, forms) only goes through `lib/client-api.ts` in the browser. Public data goes through `lib/api.ts` on the server.
+- **CMS pages:** build or change them with the `/cms-page` command (`.claude/skills/cms-page/SKILL.md`): sections come from `lib/cms-sections.ts`, the plan is previewed at `/dev/preview/<slug>` before it is saved.
 - **Store writes** (TheCoins products, pages, settings) need the owner's approval first. Log every store change in PROGRESS.md §4.
 - **English only** (no Arabic / right-to-left).
 - **Verify before saying it's done:** `npm run typecheck`, then look at the changed pages in a browser at phone, tablet and desktop sizes. If you can't verify something, say so.
@@ -71,12 +72,13 @@ If a document turns out to be wrong, rewrite the wrong part. Don't just add a co
 
 ## 5. Known traps
 
-- **TheCoins public API:** hero-banner, logo-cloud, gallery and some strict widget types drop or reject extra keys. Home sections therefore use text-image, stats-counter, button-cta, testimonials, contact-form and faq with a custom `variant` key (see `components/cms/widgets.tsx`).
+- **TheCoins public API:** hero-banner, logo-cloud, gallery and some strict widget types drop or reject extra keys. Home sections therefore use text-image, stats-counter, button-cta, testimonials, contact-form and faq with a custom `variant` key (see `components/cms/widgets/`).
+- **Saving a page replaces the whole page:** always re-read the page right before saving and change only your part of that fresh copy. Saving from an older copy or a draft file silently undoes other people's changes (this reverted the home WhatsApp banner on 18 Nov).
 - **Draft pages are public:** the API serves draft CMS pages, so unpublished builder edits show on the site.
 - **Caching:** public data is cached for 60 s, so store changes can take up to a minute to appear.
 - **Brand attribute:** products get their brand from the dynamic attribute `brand` (pick-from-list). A brand must be added to the list before a product can use it. Extra product info must come from dynamic attributes, never hard-coded.
 - **Brands come from the store**, never from code or project files: the Brand detail (`get-product-attributes`, `getBrands()`), and per category the `brand` filter of `get-category-products`. Never add brand names, logos or brand pictures to the code or `public/`.
-- **Banners:** a banner/hero slide only renders real text + button when its button text (`cta_text`) is set in the CMS; otherwise the picture is shown as-is. The "Banners" widget can't carry a button text, and "Hero Banner" reaches the site empty, so a banner with a real button must be a **one-slide Carousel** (see CMS-WIDGETS.md §4).
+- **Banners:** a banner/hero slide only renders real text + button when its button text (`cta_text`) is set in the CMS; otherwise the picture is shown as-is. The "Banners" widget can't carry a button text, and "Hero Banner" reaches the site empty, so a banner with a real button must be a **one-slide Carousel** (full width) or a **Button CTA with `variant: "banner"`** (boxed, with label and note). See CMS-WIDGETS.md §4.
 - **Sub-categories:** the store has only 8 top-level categories. Menu sub-categories link to the category page with a search.
 - **Two dev servers:** to run a second one, use `NEXT_DIST_DIR=.next-test npx next dev -p 3001` so it doesn't clash with `.next`.
 - The old café website is archived at `../heliopolisHub-cafe-site`. Don't build against café data.

@@ -1,6 +1,6 @@
 # MedyMar website: features
 
-_Last updated: 17 November 2026_
+_Last updated: 18 November 2026_
 
 What the website does, page by page. ✅ = working · 🟡 = works but waits for content or setup in TheCoins · ⬜ = not built yet.
 Technical details: [SPECS.md](SPECS.md). Status by Figma screen: [PROGRESS.md](PROGRESS.md).
@@ -97,3 +97,11 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 | Contact page (form, sent, error) | ⬜ | In Figma, not built |
 | Policy pages with side menu | ⬜ | In Figma, not built |
 | "Page not found" page | ✅ | |
+
+## Page-building tools (on the developer's computer only)
+
+| Feature | Status | Notes |
+|---|---|---|
+| Section gallery `/dev/widgets` | ✅ | Follows the TheCoins "Add widget" menu: all 44 widgets with their menu names, a badge (on our website / don't use / not yet), and under each widget the looks our site gives it, with sample content. Search box like the menu |
+| Draft preview `/dev/preview/<page>` | ✅ | Shows a planned page from `cms-drafts/<page>.json` before it is saved to TheCoins |
+| `/cms-page` command in Claude Code | ✅ | Step-by-step: plan → draft → preview → owner approves → save to TheCoins → log |

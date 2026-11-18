@@ -1,0 +1,87 @@
+{
+  "title": "Home: Abbott side picture with title, subtitle and button (planned change)",
+  "layout": [
+    {
+      "id": "row-abbott",
+      "backgroundColor": "#f5f7fa",
+      "columns": [
+        {
+          "id": "col-abbott-head",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-abbott-head",
+              "type": "text-image",
+              "settings": {
+                "variant": "section-header",
+                "eyebrow": "MEDYMAR  /  ABBOTT VASCULAR",
+                "eyebrowColor": "grey",
+                "title": "Coronary & Cath Lab Essentials",
+                "content": "<p>Selected devices for coronary intervention and diagnostic assessment</p>",
+                "imageUrl": "https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/cms/1794917106461-526wj.png",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": "",
+                "linkText": "View all Abbott products",
+                "linkUrl": "/brand/abbott",
+                "linkColor": "blue"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-abbott-body",
+      "backgroundColor": "#f5f7fa",
+      "columns": [
+        {
+          "id": "col-abbott-products",
+          "span": 7,
+          "widgets": [
+            {
+              "id": "w-abbott-products",
+              "type": "products-by-category",
+              "settings": {
+                "title": "", "subtitle": "",
+                "categoryId": "a483b737-b560-4480-bdf1-207d1f33c90c",
+                "categoryName": "Cardiovascular",
+                "includeSubcategories": true, "featuredOnly": false, "inStockOnly": false,
+                "minPrice": null, "maxPrice": null, "limit": 4, "columns": 2, "mobileColumns": 2,
+                "sortBy": "sort_order", "style": "grid", "showPrice": true, "showDescription": false,
+                "showRating": false, "showAddToCart": true, "showCategoryBadge": false, "showDiscountBadge": true,
+                "showViewAll": false, "viewAllText": "", "viewAllLink": "", "theme": "light", "backgroundColor": "", "skus": []
+              }
+            }
+          ]
+        },
+        {
+          "id": "col-abbott-promo",
+          "span": 5,
+          "widgets": [
+            {
+              "id": "w-abbott-promo",
+              "type": "button-cta",
+              "settings": {
+                "variant": "banner",
+                "theme": "dark",
+                "eyebrow": "",
+                "title": "Abbott — Precision for every procedure",
+                "subtitle": "Coronary and vascular devices, quoted to your cath lab's needs.",
+                "text": "View Abbott products",
+                "link": "/brand/abbott",
+                "icon": "",
+                "note": "",
+                "imageUrl": "https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/cms/1794994528138-jl9u19.jpeg",
+                "tabletImageUrl": "",
+                "mobileImageUrl": "",
+                "style": "primary", "size": "large", "align": "left", "fullWidth": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

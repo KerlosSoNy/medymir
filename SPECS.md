@@ -1,6 +1,6 @@
 # MedyMar website: technical specs
 
-_Last updated: 17 November 2026_
+_Last updated: 18 November 2026_
 
 This is the reference for **what the site is built with and the rules it follows**. For what the site can do, see [FEATURES.md](FEATURES.md). For what is finished, see [PROGRESS.md](PROGRESS.md).
 
@@ -152,12 +152,16 @@ Defined in `app/globals.css` (`@theme`). Use them as Tailwind classes, e.g. `tex
 - The site never hard-codes store content. Texts, links and images come from TheCoins. Exceptions:
   - button and form labels: `lib/ui.ts`
   - mega-menu sub-categories and promo cards: `lib/menu.ts`, because the store has no sub-categories yet. **Featured brands are NOT hard-coded**; they come from the store (brands of each category's products).
-- **CMS widget variants:** home sections use TheCoins widget types that keep extra settings (text-image, stats-counter, button-cta, testimonials, contact-form, faq) and add a `variant` key. `components/cms/widgets.tsx` picks the layout from that variant. Some widget types (hero-banner, logo-cloud, gallery) drop extra keys, so we don't use them.
+- **CMS widget variants:** home sections use TheCoins widget types that keep extra settings (text-image, stats-counter, button-cta, testimonials, contact-form, faq) and add a `variant` key. The widget files in `components/cms/widgets/` pick the layout from that variant. Some widget types (hero-banner, logo-cloud, gallery) drop extra keys, so we don't use them.
 - Site-wide content (announcement bar, category-bar extras, footer, footer brand links, payment logos) comes from the CMS page **`site-layout`**.
 - **Brands** come from the store's Brand detail: `/brands` lists them with their uploaded logos, `/brand/[slug]` filters products by `brand=<name>` (falls back to a name search for brands only linked from the CMS, e.g. exclusive brands), the drawer's Brands row and each mega menu use them, and brand cards in the home carousel show the brand's logo.
 - **Never put content images in the project** (`public/`). Every content picture is uploaded to TheCoins and referenced from the CMS. `public/icons/` holds only UI icons.
-- **Banners and hero slides** (`components/cms/widgets.tsx` → `Banners`, `HeroSlider`): a card/slide **with a button text** (`cta_text`) is treated as background art; its badge, title, description/subtitle and a real button are rendered as page content. A card **without** button text is shown as a picture (it may contain its own text) and the whole picture is the link. Only the **Hero Banner** type keeps a button text (the plain "Banners" type drops it), so a banner that needs a real button must be a Hero Banner. Theme `dark` = navy panel with white text, `light` = light panel with dark text.
+- **Banners and hero slides** (`components/cms/widgets/Banners.tsx`, `Carousel.tsx` → `HeroSlider`): a card/slide **with a button text** (`cta_text`) is treated as background art; its badge, title, description/subtitle and a real button are rendered as page content. A card **without** button text is shown as a picture (it may contain its own text) and the whole picture is the link. The plain "Banners" type drops the button text and "Hero Banner" reaches the site empty, so a banner that needs a real button must be a **one-slide Carousel** (see CMS-WIDGETS.md §4). Theme `dark` = navy panel with white text, `light` = light panel with dark text.
 - **Two-One Grid** (`two-one-grid`): two titled groups (2/3 + 1/3, or full width when one is empty) of brand, product or category entries.
+- **Page builder kit** (building CMS pages, not showing them):
+  - `lib/cms-sections.ts`: `WIDGET_MENU` = the 44 widgets of the TheCoins "Add widget" menu (menu names, groups, whether our site shows them) and the **section catalog** `SECTIONS`. One recipe ("look") per supported section style, each a ready-to-save row in the `manage_page_layout` write shape (`{ id, columns[{ id, span, widgets[{ id, type, settings }] }] }`), plus `layoutToPage()`, which turns that shape into the public shape `CmsPage` renders. When the site learns a new section, add its recipe here too.
+  - `/dev/widgets`: gallery of every recipe with sample content. `/dev/preview/<slug>`: shows `cms-drafts/<slug>.json` (`{ title, layout }`) before it is saved to the store. Both use `lib/cms-preview.ts`, which adds what the server normally adds (products, categories, brands) and fills empty pictures with neutral sample photos. Both return 404 in production (`devOnly()`).
+  - `.claude/skills/cms-page/SKILL.md`: the `/cms-page <slug>` command, the step-by-step process (read → plan → draft file → preview → owner approval → save → check → log).
 
 ---
 
@@ -171,10 +175,14 @@ app/                  routes (pages)
   [slug]/             any page made in the page builder (about, faq, policies…)
   categories/ category/[slug]/ products/ search/ brands/ brand/[slug]/
   product/[id]/ quote/ account/ not-found.tsx
+  dev/                local-only tools: widgets/ (section gallery), preview/[slug]/ (draft preview)
 components/           shared UI (Header, CategoryNav, Footer, ProductCard, Filters, …)
-  cms/                CMS page renderer, section components, classes.ts (shared CMS class recipes)
+  cms/                CMS page renderer (CmsPage), carousels, classes.ts (shared CMS class recipes)
+    widgets/          one file per CMS widget type; index.tsx = REGISTRY (widget_type → component), shared.ts = types + helpers
 lib/
   api.ts              server reads (public data)
+  cms-sections.ts     section catalog (recipes for building CMS pages)
+  cms-preview.ts      helpers for the dev gallery / draft preview
   client-api.ts       browser calls (quote list, login, forms)
   config.ts           env vars, cache time
   menu.ts             mega-menu content
@@ -182,6 +190,8 @@ lib/
   styles.ts, cn.ts    Tailwind helpers
 public/icons/         Figma icons
 design-assets/        Figma image exports
+cms-drafts/           planned CMS pages (<slug>.json), previewed at /dev/preview/<slug>
+.claude/skills/       Claude Code commands (cms-page)
 ```
 
 ---

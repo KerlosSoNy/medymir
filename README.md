@@ -28,6 +28,15 @@ Some sections use extra settings (e.g. `variant`, `eyebrow`, `linkText`) that th
 
 Changes can take up to 60 seconds to appear.
 
+## Building pages with Claude
+
+1. Run the site (`npm run dev`) and open **http://localhost:3000/dev/widgets** to see every section style the site supports.
+2. In Claude Code, type **`/cms-page <page>`** plus what you want, e.g. `/cms-page about — intro text with a picture, then questions & answers`.
+3. Claude writes a draft and shows it at **http://localhost:3000/dev/preview/<page>**. Nothing is saved to TheCoins yet.
+4. When you say yes, Claude saves it to TheCoins and logs the change in PROGRESS.md.
+
+These `/dev/…` pages only exist on your computer, not on the live site.
+
 ## Design assets
 
 `design-assets/` holds the images exported from Figma (`webp/` is ready to upload). `public/icons/` holds the Figma icons used by the site.

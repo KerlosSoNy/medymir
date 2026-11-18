@@ -1,6 +1,6 @@
 # MedyMar website: progress
 
-_Last updated: 17 November 2026 (Tailwind conversion, cards, menus)_
+_Last updated: 18 November 2026 (Abbott side card on the home page now has a subtitle and button)_
 
 Where we are, measured against the Figma file. Also see [FEATURES.md](FEATURES.md) (what the site does), [SPECS.md](SPECS.md) (how it's built) and [AGENTS.md](AGENTS.md) (rules for AI assistants).
 
@@ -15,6 +15,7 @@ Where we are, measured against the Figma file. Also see [FEATURES.md](FEATURES.m
   - all card designs (product, category, brand, exclusive brand, solution)
 - **Shop pages work, with simpler layouts:** category, search, product, quote list, account, brands. Their larger Figma page layouts are not built yet.
 - **Not built yet:** About, FAQ, Contact, Policy pages and the special Ready Stock page.
+- **Page builder kit (18 Nov):** a section gallery (`/dev/widgets`, 27 section styles), a draft preview (`/dev/preview/<page>`) and the `/cms-page` command, so new pages (About, FAQ…) can be planned, previewed and approved before anything is saved to the store. Local only; checked at 360–1440 wide.
 - **Still waiting on store content:** some photos, the quotation form fields, real products and the info pages.
 
 Preview: `npm run dev` → http://localhost:3000. Production check: `npm run build && npm run start`.
@@ -80,7 +81,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 
 | # | Task | Why it matters |
 |---|---|---|
-| 1 | **Get clean background pictures from the designer** (no drawn-in text or buttons) for the hero, Abbott wide banner, Abbott promo and WhatsApp banner; upload them and fill each banner's title / description / button text | Real, clickable buttons and real text are built and switch on when a banner has button text. The hero already has button text, so its title shows twice until its clean picture is uploaded |
+| 1 | **Get clean background pictures from the designer** (no drawn-in text or buttons) for the hero, Abbott wide banner, Abbott promo and WhatsApp banner (the WhatsApp banner already shows real text and button; a clean picture just makes it sharper); upload them and fill each banner's title / description / button text | Real, clickable buttons and real text are built and switch on when a banner has button text. The hero already has button text, so its title shows twice until its clean picture is uploaded |
 | 1b | **Replace the Abbott promo picture** with `design-assets/upload/06-promo-abbott-fixed.webp` (until the clean art arrives) | Removes the white strip beside it |
 | 1c | **Upload tightly cropped brand logos** (Products → product details → Brand) for Boston Scientific, Terumo, Biotronik and Edwards; add a logo for MicroPort Orthopedics | These logo files have large empty margins, so the logos look small on the site |
 | 2 | **Upload the missing photos** (section 2) | Cards show placeholders until then |
@@ -92,7 +93,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | 8 | **Delete the page "ZZ widget test"** | Leftover test page; the connector can't delete pages |
 | 9 | **Delete or rename the old "Header" menu** (café menu items) | Not used by the new site |
 | 10 | Replace the 7 **placeholder brand cards** in "Shop by brand" (Home page) with real brand photos | They're simple navy cards with the brand name, made by the developer, not official logos |
-| 11 | Give the **WhatsApp number** for the "Request a quote on WhatsApp" banner | The banner link currently goes to the quote form |
+| 11 | Give the **WhatsApp number** for the "Request a quote on WhatsApp" banner | The banner's button currently goes to the quote form. With the number it becomes a WhatsApp link (Page builder → home → WhatsApp banner → link) |
 | 12 | **Check the mega-menu texts** for Endoscopy, Dialysis & Urology, Critical Care & Infusion and Hospital Supplies (`lib/menu.ts`) | These 4 menus aren't in Figma; we wrote their texts |
 
 ---
@@ -124,6 +125,10 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | 17 Nov | _(Owner approved)_ Set the **Brand** detail on 10 demo products: Abbott ×2, Boston Scientific ×2, Medtronic, MicroPort Orthopedics, Stryker ×3, Terumo |
 | 17 Nov | _(Owner)_ Hero slide: added button text "Explore all brands"; added a **Two-One Grid** "Top Products" section (4 brands) at the bottom of the home page |
 | 17 Nov | _(Owner approved)_ Home page "Shop by brand": removed 7 picture paths that pointed at files inside the website project (`/placeholders/brands/…`); those cards now show the brand logo, name and tagline |
+| 18 Nov | _(Owner approved)_ Home page: the WhatsApp banner ("Short on time? Send us your list.") changed from a picture-only **Banners** section to a **Button CTA** with look `banner`: real label, title, text, button ("Request a quote on WhatsApp", still links to the quote form) and note; the old picture is kept as the art on the right. Record: `cms-drafts/home-whatsapp-banner.json` |
+| 18 Nov | _(Owner approved)_ Home page, Abbott block: the right-hand picture beside the products changed from a picture-only **Banners** section to a **Button CTA** with look `banner` (shown as a tall card beside products): title "Abbott — Precision for every procedure", subtitle "Coronary and vascular devices, quoted to your cath lab's needs.", button "View Abbott products" → /brand/abbott; same picture. The hero banner's unused "mid-widget" tag was dropped (the save tool doesn't accept it). Record: `cms-drafts/home-abbott-promo.json` |
+| 18 Nov | _(Owner approved)_ Home page: the WhatsApp banner had gone back to the picture-only **Banners** section (page saved at 11:20 UTC, probably the Abbott save above built from an older copy of the page). Put the **Button CTA** look `banner` back (same texts as `cms-drafts/home-whatsapp-banner.json`); nothing else changed. Checked at 390, 768 and 1440 |
+
 
 Nothing was deleted by the developer. TheCoins has no delete action.
 

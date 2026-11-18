@@ -1,0 +1,30 @@
+{
+  "title": "Example page",
+  "layout": [
+    {
+      "id": "row-example-intro",
+      "columns": [
+        {
+          "id": "col-example-intro",
+          "span": 12,
+          "widgets": [
+            { "id": "w-example-head", "type": "text-image", "settings": { "variant": "section-header", "eyebrow": "EXAMPLE", "eyebrowColor": "blue", "size": "lg", "title": "An example draft page", "content": "<p>This file shows the draft format. Copy sections from lib/cms-sections.ts.</p>", "imageUrl": "", "mobileImageUrl": "", "tabletImageUrl": "", "imagePosition": "right", "backgroundColor": "", "linkText": "", "linkUrl": "" } },
+            { "id": "w-example-text", "type": "text-image", "settings": { "title": "Text + picture", "content": "<p>A paragraph next to a picture.</p>", "imageUrl": "", "mobileImageUrl": "", "tabletImageUrl": "", "imagePosition": "right", "backgroundColor": "" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-example-faq",
+      "columns": [
+        {
+          "id": "col-example-faq",
+          "span": 12,
+          "widgets": [
+            { "id": "w-example-faq", "type": "faq-accordion", "settings": { "title": "Questions & answers", "items": [ { "question": "Is this saved to the store?", "answer": "<p>No. Drafts are only on this computer until they are approved and saved.</p>" } ] } }
+          ]
+        }
+      ]
+    }
+  ]
+}

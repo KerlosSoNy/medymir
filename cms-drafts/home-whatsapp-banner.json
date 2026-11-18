@@ -1,0 +1,38 @@
+{
+  "title": "Home: WhatsApp banner (planned change)",
+  "layout": [
+    {
+      "id": "row-quote-banner",
+      "backgroundColor": "#f5f7fa",
+      "columns": [
+        {
+          "id": "col-quote-banner",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-whatsapp-banner",
+              "type": "button-cta",
+              "settings": {
+                "variant": "banner",
+                "eyebrow": "Quotations made simple",
+                "title": "Short on time? Send us your list.",
+                "subtitle": "Share a product photo, box label or item list. Our team will help prepare your quotation.",
+                "text": "Request a quote on WhatsApp",
+                "link": "#quote",
+                "icon": "whatsapp",
+                "note": "Replies during working hours",
+                "imageUrl": "https://wyugrtlpvoeszmaqsbsc.supabase.co/storage/v1/object/public/tenant-assets/5b3f23ea-4250-49ed-8626-39d607e435bc/connector/53b02b3c-ad77-4dca-943b-79ff19c65d04.webp",
+                "tabletImageUrl": "",
+                "mobileImageUrl": "",
+                "style": "outline",
+                "size": "medium",
+                "align": "left",
+                "fullWidth": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
