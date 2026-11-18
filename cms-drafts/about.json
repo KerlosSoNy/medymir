@@ -1,0 +1,146 @@
+{
+  "title": "About",
+  "layout": [
+    {
+      "id": "row-about-hero",
+      "columns": [
+        {
+          "id": "col-about-hero",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-about-hero",
+              "type": "text-image",
+              "settings": {
+                "variant": "split-hero",
+                "eyebrow": "About MedyMar",
+                "title": "Healthcare procurement. Simplified.",
+                "content": "<p>Medical products and sourcing support for healthcare organisations.</p>",
+                "linkText": "Contact our team",
+                "linkUrl": "/contact",
+                "imageUrl": "",
+                "tabletImageUrl": "",
+                "mobileImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-about-intro",
+      "columns": [
+        {
+          "id": "col-about-intro",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-about-intro-head",
+              "type": "text-image",
+              "settings": {
+                "variant": "section-header",
+                "align": "center",
+                "size": "sm",
+                "eyebrow": "",
+                "title": "Sourcing support for healthcare teams",
+                "content": "<p>MedyMar supplies medical, surgical and hygiene products to hospitals, clinics, medical centres and laboratories. Browse the catalogue, buy Ready Stock products online when they are available, or send a quote list for everything else and our team confirms pricing and supply.</p>",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": "",
+                "linkText": "",
+                "linkUrl": ""
+              }
+            },
+            {
+              "id": "w-about-cards",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "link-cards",
+                "title": "",
+                "columns": 3,
+                "items": [
+                  { "icon": "cart", "label": "Explore products", "value": "Browse our range of medical products and equipment by category or brand.", "prefix": "", "suffix": "", "linkText": "Browse categories", "link": "/categories" },
+                  { "icon": "file-text", "label": "Build your quote list", "value": "Add products and quantities, then send your requirements in one request.", "prefix": "", "suffix": "", "linkText": "Open your quote list", "link": "/quote" },
+                  { "icon": "chat", "label": "Discuss your requirements", "value": "Get in touch with our team for sourcing support and product enquiries.", "prefix": "", "suffix": "", "linkText": "Contact our team", "link": "/contact" }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-about-routes",
+      "columns": [
+        {
+          "id": "col-about-routes",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-about-routes-head",
+              "type": "text-image",
+              "settings": {
+                "variant": "section-header",
+                "align": "center",
+                "size": "sm",
+                "eyebrow": "",
+                "title": "Two ways to buy",
+                "content": "<p>Every product shows which route applies.</p>",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": "",
+                "linkText": "",
+                "linkUrl": ""
+              }
+            },
+            {
+              "id": "w-about-routes",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "route-cards",
+                "title": "",
+                "columns": 2,
+                "items": [
+                  { "icon": "warehouse", "label": "Ready Stock", "value": "Purchase locally held products online when they are available.", "prefix": "", "suffix": "", "linkText": "Browse ready stock", "link": "/category/ready-stock-offers" },
+                  { "icon": "quote", "label": "Request a Quotation", "value": "Submit products, quantities and requirements for confirmed pricing and supply.", "prefix": "", "suffix": "", "linkText": "Build a quote list", "link": "/quote" }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-about-band",
+      "columns": [
+        {
+          "id": "col-about-band",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-about-band",
+              "type": "button-cta",
+              "settings": {
+                "variant": "band",
+                "title": "One partner for your procurement needs",
+                "subtitle": "From everyday consumables to specialised equipment, tell us what your organisation needs.",
+                "text": "Contact our team",
+                "link": "/contact",
+                "style": "primary",
+                "size": "medium",
+                "align": "center",
+                "fullWidth": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

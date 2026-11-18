@@ -20,7 +20,7 @@ const infoBox = "flex items-center gap-4 rounded-lg px-5 [&_strong]:text-sm [&_s
 
 const SHORT = new Set(["text", "email", "tel", "phone", "number", "select", "dropdown", "date", "url"]);
 
-function options(f: FormField): string[] {
+export function options(f: FormField): string[] {
   const o = f.options;
   if (Array.isArray(o)) return o.map((x: any) => (typeof x === "object" ? String(x.label ?? x.value ?? "") : String(x))).filter(Boolean);
   if (typeof o === "string") return o.split(/[\n,]/).map((s) => s.trim()).filter(Boolean);

@@ -4,6 +4,7 @@ import { getCmsPage } from "@/lib/api";
 import { widgetCtx } from "@/lib/ctx";
 import { tr } from "@/lib/format";
 import { CmsPage } from "@/components/cms/CmsPage";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -22,5 +23,10 @@ export default async function ContentPage({ params }: Props) {
   if (RESERVED.has(slug)) notFound();
   const [page, ctx] = await Promise.all([getCmsPage(slug), widgetCtx()]);
   if (!page) notFound();
-  return <CmsPage page={page} ctx={ctx} firstRowClass="pt-12 md:pt-12" />;
+  return (
+    <>
+      <Breadcrumbs current={tr(page.title)} />
+      <CmsPage page={page} ctx={ctx} firstRowClass="pt-5 md:pt-5" />
+    </>
+  );
 }

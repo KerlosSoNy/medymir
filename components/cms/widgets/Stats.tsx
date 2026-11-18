@@ -1,12 +1,26 @@
-// Stats / Counters (stats-counter) and our variants: chips, tabs, features, checklist.
+// Stats / Counters (stats-counter) and our variants: chips, tabs, features, checklist, link-cards, route-cards.
 import { cn } from "@/lib/cn";
 import { tr } from "@/lib/format";
 import { Icon, SmartLink } from "../../SmartLink";
-import { card, noScrollbar, sideCard, sideTitle } from "../classes";
+import { card, goldOutlineBtn, noScrollbar, sideCard, sideTitle } from "../classes";
 import { type P } from "./shared";
 
 /* ---------- stats-counter variants ---------- */
 const FEATURE_ICON: Record<string, string> = { search: "feature-search", "file-text": "feature-file-text", whatsapp: "feature-whatsapp" };
+
+/** Icons for the info-page cards (Figma About), with their native size. */
+const CARD_ICON: Record<string, [string, number]> = {
+  cart: ["about-cart", 26],
+  "file-text": ["about-file", 26],
+  chat: ["about-chat", 26],
+  warehouse: ["about-warehouse", 22],
+  quote: ["about-quote", 26],
+};
+const cardIcon = (name: string) => {
+  const icon = CARD_ICON[name];
+  return icon ? <Icon name={icon[0]} size={icon[1]} /> : null;
+};
+const infoCard = "rounded-xl border border-line-3 bg-white";
 
 export function Stats({ w }: P) {
   const items: any[] = w.items ?? [];
@@ -76,6 +90,54 @@ export function Stats({ w }: P) {
           </ul>
         </div>
       );
+    case "link-cards":
+      // Figma About "Cards": icon, title, text and an underlined link. label = title, value = text.
+      return (
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          {items.map((it, i) => (
+            <div key={i} className={cn(infoCard, "flex flex-col px-[19px] py-[27px] md:p-[27px]")}>
+              {CARD_ICON[it.icon] && <span className="grid size-11 place-items-center">{cardIcon(it.icon)}</span>}
+              <h3 className="mt-2 font-head text-[17px] font-bold text-navy-deep">{tr(it.label)}</h3>
+              {it.value && <p className="mt-2 text-[14.5px] leading-normal text-slate">{tr(it.value)}</p>}
+              {it.linkText && (
+                <SmartLink
+                  to={it.link}
+                  className="mt-3 self-start text-[14.5px] font-semibold text-gold-link underline underline-offset-2 hover:no-underline"
+                >
+                  {tr(it.linkText)} <span aria-hidden>→</span>
+                </SmartLink>
+              )}
+            </div>
+          ))}
+        </div>
+      );
+    case "route-cards":
+      // Figma About "Two ways to buy": icon in a gold square, title, text and an outlined button.
+      // tone "plain" (Figma Contact "Have a product list?"): icon without the square, button with an arrow.
+      {
+        const plain = w.tone === "plain";
+        return (
+        <div className={cn("grid grid-cols-1 gap-4", items.length > 1 && "md:grid-cols-2")}>
+          {items.map((it, i) => (
+            <div key={i} className={cn(infoCard, "flex items-start gap-4", plain ? "p-5 md:p-[27px]" : "px-[18px] py-[26px] md:p-[26px]")}>
+              {CARD_ICON[it.icon] && (
+                <span className={cn("grid shrink-0 place-items-center", plain ? "size-11" : "size-10 rounded-lg bg-gold-tint")}>{cardIcon(it.icon)}</span>
+              )}
+              <div className="flex min-w-0 flex-1 flex-col">
+                <h3 className="font-head text-[17px] font-bold text-navy-deep">{tr(it.label)}</h3>
+                {it.value && <p className={cn("leading-normal text-slate", plain ? "mt-1.5 text-[14.5px]" : "mt-2 text-[15px]")}>{tr(it.value)}</p>}
+                {it.linkText && (
+                  <SmartLink to={it.link} className={cn(goldOutlineBtn, plain ? "mt-4 h-12 gap-2.5 px-[22px]" : "mt-[18px]")}>
+                    {tr(it.linkText)}
+                    {plain && <Icon name="arrow-right-gold-14" size={14} />}
+                  </SmartLink>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+        );
+      }
     case "announcement":
     case "category-nav":
     case "footer-column":

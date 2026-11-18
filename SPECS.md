@@ -104,6 +104,7 @@ Defined in `app/globals.css` (`@theme`). Use them as Tailwind classes, e.g. `tex
 | `blue` / `blue-link` | `#2f5dd0` / `#1e4fb5` | Bullets, focus ring / links |
 | `gold-btn`, `gold-text`, `gold-link`, `gold-menu`, `gold-soft`, `gold-hl`, `gold-line` | `#b8862e`, `#9a6b1e`, `#8a5a12`, `#b07e22`, `#e0ae52`, `#f2b544`, `#d9a54a` | Gold buttons, texts, highlights, active underline |
 | `teal`, `sky` | `#2a9db0`, `#2f7fd0` | Accents |
+| `navy-deep`, `slate`, `line-3`, `gold-tint`, `mist` | `#0b1b3a`, `#4a5873`, `#e1e6ee`, `#fbf3e2`, `#dce5f5` | Info pages (About, FAQ, Contact, Policies): headings, text, card borders, icon squares, light text on navy |
 
 **Type**
 
@@ -153,6 +154,7 @@ Defined in `app/globals.css` (`@theme`). Use them as Tailwind classes, e.g. `tex
   - button and form labels: `lib/ui.ts`
   - mega-menu sub-categories and promo cards: `lib/menu.ts`, because the store has no sub-categories yet. **Featured brands are NOT hard-coded**; they come from the store (brands of each category's products).
 - **CMS widget variants:** home sections use TheCoins widget types that keep extra settings (text-image, stats-counter, button-cta, testimonials, contact-form, faq) and add a `variant` key. The widget files in `components/cms/widgets/` pick the layout from that variant. Some widget types (hero-banner, logo-cloud, gallery) drop extra keys, so we don't use them.
+- **Info-page sections:** rows containing the info-page looks (`text-image/split-hero`, `stats-counter/link-cards`, `stats-counter/route-cards`, `button-cta/band`) (and `contact-form/contact`, `contact-form/contact-panel`) use the tighter "stack" row spacing (28–32px top and bottom) from Figma About. Standalone CMS pages (`app/[slug]`) show a "Home › Page title" trail (`components/Breadcrumbs.tsx`). Their buttons use `goldBtn` / `goldOutlineBtn` from `components/cms/classes.ts`.
 - Site-wide content (announcement bar, category-bar extras, footer, footer brand links, payment logos) comes from the CMS page **`site-layout`**.
 - **Brands** come from the store's Brand detail: `/brands` lists them with their uploaded logos, `/brand/[slug]` filters products by `brand=<name>` (falls back to a name search for brands only linked from the CMS, e.g. exclusive brands), the drawer's Brands row and each mega menu use them, and brand cards in the home carousel show the brand's logo.
 - **Never put content images in the project** (`public/`). Every content picture is uploaded to TheCoins and referenced from the CMS. `public/icons/` holds only UI icons.

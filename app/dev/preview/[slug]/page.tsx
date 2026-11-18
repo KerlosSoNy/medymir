@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CmsPage } from "@/components/cms/CmsPage";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { layoutToPage } from "@/lib/cms-sections";
 import { devOnly, readDraft, withPreviewData } from "@/lib/cms-preview";
 import { widgetCtx } from "@/lib/ctx";
@@ -28,7 +29,8 @@ export default async function DraftPreview({ params }: { params: Promise<{ slug:
           uploaded.
         </p>
       </div>
-      <CmsPage page={page} ctx={ctx} firstRowClass="pt-12 md:pt-12" />
+      {slug !== "home" && <Breadcrumbs current={draft.title} />}
+      <CmsPage page={page} ctx={ctx} firstRowClass={slug === "home" ? "pt-12 md:pt-12" : "pt-5 md:pt-5"} />
     </>
   );
 }

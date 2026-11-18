@@ -8,6 +8,7 @@ import { type P, html } from "./shared";
 const LINK_ICON: Record<string, string> = { blue: "arrow-right-blue", gold: "arrow-right-gold", default: "arrow-right-navy" };
 const LINK_COLOR: Record<string, string> = { blue: "text-blue-link", gold: "text-gold-link", default: "text-ink-2" };
 const TITLE_SIZE: Record<string, string> = {
+  sm: "text-[22px] lg:text-[26px] font-bold text-navy-deep",
   md: "text-[26px] md:text-[30px] lg:text-[34px] font-bold",
   lg: "text-[26px] md:text-[30px] lg:text-[40px] font-bold",
   xl: "text-[26px] md:text-[36px] lg:text-[46px] font-semibold",
@@ -28,9 +29,9 @@ export function SectionHeader({ w, ctx }: P) {
       <div className={cn("grid grid-cols-1 gap-2 max-w-[640px]", center && "justify-items-center max-w-[760px]")}>
         {w.eyebrow && (
           <p className={eyebrow(w.eyebrowColor)}>
-            {center && <span className="w-[26px] h-[1.5px] bg-current" aria-hidden />}
+            {center && w.eyebrowLines !== false && <span className="w-[26px] h-[1.5px] bg-current" aria-hidden />}
             {tr(w.eyebrow)}
-            {center && <span className="w-[26px] h-[1.5px] bg-current" aria-hidden />}
+            {center && w.eyebrowLines !== false && <span className="w-[26px] h-[1.5px] bg-current" aria-hidden />}
           </p>
         )}
         {w.title && (
@@ -39,7 +40,9 @@ export function SectionHeader({ w, ctx }: P) {
           </h2>
         )}
         {w.content && (
-          <div className="text-muted text-[14.5px] leading-[23px]" dangerouslySetInnerHTML={{ __html: html(w.content) }} />
+          <div
+            className={cn("text-muted text-[14.5px] leading-[23px]", w.size === "sm" && "text-slate text-[15px] md:text-base leading-[1.6]")}
+            dangerouslySetInnerHTML={{ __html: html(w.content) }} />
         )}
       </div>
       {linkText && w.linkUrl && (

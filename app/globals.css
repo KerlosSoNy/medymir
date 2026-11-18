@@ -48,6 +48,12 @@
   --color-surface-alt: #f5f7fa;
   --color-chip-bg: #f2f4f7;
   --color-chip-border: #e2e6ec;
+  /* Info pages (About, FAQ, Contact, Policies) */
+  --color-navy-deep: #0b1b3a;
+  --color-slate: #4a5873;
+  --color-line-3: #e1e6ee;
+  --color-gold-tint: #fbf3e2;
+  --color-mist: #dce5f5;
   --color-blue: #2f5dd0;
   --color-blue-link: #1e4fb5;
   --color-teal: #2a9db0;

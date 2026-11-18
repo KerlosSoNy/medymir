@@ -28,6 +28,10 @@ export const card = "bg-white border border-line rounded-2xl";
 export const sideCard = cn(card, "grid grid-cols-1 gap-4 p-[22px] md:p-[30px]");
 export const sideTitle = "font-head font-bold text-[22px] md:text-2xl tracking-[-0.01em] text-ink-2";
 
+/** Info-page buttons (Figma About / FAQ / Contact): square-ish gold button and its outlined twin. */
+export const goldBtn = "inline-flex h-12 items-center gap-2.5 self-start rounded-lg border border-gold-btn bg-gold-btn px-5 text-[15px] font-bold whitespace-nowrap text-white transition hover:brightness-110";
+export const goldOutlineBtn = "inline-flex h-11 items-center self-start rounded-lg border border-gold-btn bg-white px-5 text-[15px] font-bold whitespace-nowrap text-gold-link transition hover:bg-gold-tint";
+
 /** Round arrow button used by the carousels. */
 export const roundBtn = (size: "md" | "sm" = "md", dark = false) =>
   cn(

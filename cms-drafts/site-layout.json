@@ -1,0 +1,315 @@
+{
+  "title": "Site layout (header & footer)",
+  "layout": [
+    {
+      "id": "row-header",
+      "columns": [
+        {
+          "id": "col-header",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-announcement",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "announcement",
+                "title": "",
+                "columns": 4,
+                "items": [
+                  {
+                    "label": "AUTHORISED DISTRIBUTION ONLY",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": ""
+                  },
+                  {
+                    "label": "BATCH & LOT TRACEABILITY ON EVERY LINE",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": ""
+                  },
+                  {
+                    "label": "REGISTRATION DOCUMENTS WITH EVERY QUOTATION",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": ""
+                  },
+                  {
+                    "label": "QUOTES WITHIN ONE WORKING DAY",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": ""
+                  }
+                ]
+              }
+            },
+            {
+              "id": "w-category-nav",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "category-nav",
+                "title": "All categories",
+                "columns": 4,
+                "highlight": "ready-stock-offers",
+                "items": [
+                  {
+                    "label": "Brands",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/brands"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-footer",
+      "columns": [
+        {
+          "id": "col-footer",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-footer-about",
+              "type": "text-image",
+              "settings": {
+                "variant": "footer-about",
+                "title": "",
+                "content": "<p>Medical, surgical and hygiene supplies for hospitals, clinics and procurement teams.</p>",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            },
+            {
+              "id": "w-footer-brands",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "footer-column",
+                "title": "TOP BRANDS",
+                "columns": 2,
+                "items": [
+                  {
+                    "label": "Abbott",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/brand/abbott"
+                  },
+                  {
+                    "label": "Medtronic",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/brand/medtronic"
+                  },
+                  {
+                    "label": "Boston Scientific",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/brand/boston-scientific"
+                  },
+                  {
+                    "label": "Stryker",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/brand/stryker"
+                  },
+                  {
+                    "label": "MicroPort Orthopedics",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/brand/microport-orthopedics"
+                  },
+                  {
+                    "label": "Terumo",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/brand/terumo"
+                  },
+                  {
+                    "label": "Hermann",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/brand/hermann"
+                  },
+                  {
+                    "label": "See more brands →",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/brands",
+                    "highlight": true
+                  }
+                ]
+              }
+            },
+            {
+              "id": "w-footer-support",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "footer-links",
+                "title": "ABOUT & SUPPORT",
+                "columns": 4,
+                "items": [
+                  {
+                    "label": "About MedyMar",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/about"
+                  },
+                  {
+                    "label": "Tender desk",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/tender-desk"
+                  },
+                  {
+                    "label": "Request a quote",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/#quote"
+                  },
+                  {
+                    "label": "Verify a batch",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/verify-batch"
+                  },
+                  {
+                    "label": "Distributor enquiries",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/distributors"
+                  },
+                  {
+                    "label": "Help centre",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/help"
+                  },
+                  {
+                    "label": "FAQ",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/faq"
+                  },
+                  {
+                    "label": "Contact",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/contact"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "w-footer-legal",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "legal-links",
+                "title": "",
+                "columns": 4,
+                "items": [
+                  {
+                    "label": "Privacy policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/privacy-policy"
+                  },
+                  {
+                    "label": "Shipping policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/shipping-policy"
+                  },
+                  {
+                    "label": "Refund policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/refund-policy"
+                  },
+                  {
+                    "label": "Terms of service",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/terms-of-service"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "w-footer-contact",
+              "type": "contact-form",
+              "settings": {
+                "variant": "footer-contact",
+                "title": "CONTACT",
+                "subtitle": "",
+                "style": "inline",
+                "showMap": false,
+                "mapEmbedUrl": "",
+                "theme": "dark",
+                "backgroundColor": "",
+                "pluginSlug": "contact",
+                "contactInfo": [
+                  {
+                    "icon": "mail",
+                    "label": "Email",
+                    "value": "milani@shamhabib.com"
+                  },
+                  {
+                    "icon": "pin",
+                    "label": "Offices",
+                    "value": "Muscat · Kigali · Nairobi"
+                  },
+                  {
+                    "icon": "clock",
+                    "label": "Hours",
+                    "value": "Sun–Thu · 8:00–18:00 GST"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "w-footer-payments",
+              "type": "text-image",
+              "settings": {
+                "variant": "payments",
+                "title": "",
+                "content": "",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

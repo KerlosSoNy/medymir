@@ -1,9 +1,9 @@
-// Button / CTA (button-cta) and our variants: note, callout, banner.
+// Button / CTA (button-cta) and our variants: note, callout, banner, band.
 import { cn } from "@/lib/cn";
 import { tr } from "@/lib/format";
 import { btn } from "@/lib/styles";
 import { Icon, SmartLink } from "../../SmartLink";
-import { card } from "../classes";
+import { card, goldBtn } from "../classes";
 import { BannerWithContent } from "./Banners";
 import { type P, url } from "./shared";
 
@@ -54,6 +54,20 @@ export function ButtonCta({ w, ctx }: P) {
       </div>
     );
   }
+  if (w.variant === "band")
+    // Figma About "Partner band": grey box with a centred title, one line and a gold button.
+    return (
+      <div className="flex flex-col items-center rounded-[14px] bg-surface-alt px-6 py-10 text-center">
+        {w.title && <h2 className="font-head text-[22px] font-bold text-balance text-navy-deep lg:text-[26px]">{tr(w.title)}</h2>}
+        {w.subtitle && <p className="mt-2.5 max-w-[480px] text-[15.5px] leading-[1.55] text-slate">{tr(w.subtitle)}</p>}
+        {w.text && (
+          <SmartLink to={w.link} className={cn(goldBtn, "mt-[22px] self-center")}>
+            {tr(w.text)}
+            <Icon name="arrow-right-white-14" size={14} />
+          </SmartLink>
+        )}
+      </div>
+    );
   if (w.variant === "banner") return ctx.beside ? <TallCtaBanner w={w} /> : <CtaBanner w={w} />;
   if (!w.text) return null;
   return (

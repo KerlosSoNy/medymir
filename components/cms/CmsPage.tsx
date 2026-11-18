@@ -24,11 +24,22 @@ const isHeaderOnly = (row: any) => {
   return ws.length > 0 && ws.every(isHeader);
 };
 
+/** Info-page sections (Figma About / FAQ / Contact) sit closer together than home sections. */
+const STACK = new Set([
+  "text-image/split-hero",
+  "stats-counter/link-cards",
+  "stats-counter/route-cards",
+  "button-cta/band",
+  "contact-form/contact",
+  "contact-form/contact-panel",
+]);
+
 /** What kind of row this is decides its padding and width. */
 function rowKind(row: any): RowKind {
   if (row.full_width) return "full";
   const ws = widgetsOf(row);
   const kinds = ws.map(kindOf);
+  if (kinds.some((k) => STACK.has(k))) return "stack";
   if (kinds.some((k) => k === "stats-counter/chips" || k === "stats-counter/features")) return "compact";
   if (kinds.some((k) => k.startsWith("categories-grid/") || k === "testimonials/brand-carousel")) return "bleed";
   if (ws.length > 0 && kinds.every((k) => k.startsWith("banners/") || k.startsWith("hero-banner/") || k === "button-cta/banner")) return "banner";
@@ -42,6 +53,7 @@ const ROW: Record<RowKind, string> = {
   boxed: cn("py-12 md:py-[72px]", GUTTER_X),
   banner: cn("pt-12 pb-6 md:pt-[72px]", GUTTER_X),
   compact: "pt-6 pb-7 px-[22px] md:px-8",
+  stack: cn("py-7 md:py-8", GUTTER_X),
   bleed: "py-12 md:py-[72px] pl-4 md:pl-6 lg:pl-14 xl:pl-[132px] pr-0",
 };
 
@@ -50,6 +62,7 @@ const GRID: Record<RowKind, string> = {
   boxed: "max-w-[1176px] mx-auto gap-x-[23px]",
   banner: "max-w-[1176px] mx-auto gap-x-[23px]",
   compact: "",
+  stack: "max-w-[1176px] mx-auto gap-x-[23px]",
   bleed: "xl:ml-[max(0px,calc((100vw-1176px-264px)/2))]",
 };
 
@@ -69,19 +82,19 @@ export function CmsPage({ page, ctx, firstRowClass }: { page: any; ctx: WidgetCt
           <section
             key={row.row_id ?? ri}
             id={row.row_id ?? undefined}
-            className={cn(ROW[kind], headOnly && "pb-0 md:pb-0", afterHead && "pt-[34px] md:pt-[34px]", ri === 0 && firstRowClass)}
+            className={cn(ROW[kind], headOnly && "pb-0 md:pb-0", afterHead && "pt-[34px] md:pt-[34px]", ri === 0 && (headOnly ? "pt-8 md:pt-12" : firstRowClass))}
             style={{ background: row.background_color || undefined, padding: row.padding || undefined }}
           >
             <div className={cn("grid grid-cols-12 gap-y-6 lg:gap-y-0", GRID[kind])}>
               {(row.columns ?? []).map((col: any, ci: number) => {
                 const ws: any[] = col.widgets ?? [];
-                const sideCards = ws.some((w) => ["stats-counter/checklist", "contact-form/contact-card"].includes(kindOf(w)));
+                const sideCards = ws.some((w) => ["stats-counter/checklist", "contact-form/contact-card", "contact-form/contact-panel"].includes(kindOf(w)));
                 return (
                   <div
                     key={col.column_id ?? ci}
                     className={cn(
                       "col-span-12 lg:col-span-(--span) min-w-0 flex flex-col",
-                      ws.length === 1 && isHeader(ws[0]) ? "gap-0" : kind === "compact" ? "gap-[22px]" : sideCards ? "gap-5" : "gap-7",
+                      ws.length === 1 && isHeader(ws[0]) ? "gap-0" : kind === "compact" ? "gap-[22px]" : kind === "stack" ? "gap-6 md:gap-8" : sideCards ? "gap-5" : "gap-7",
                     )}
                     style={{ ["--span" as any]: col.span ?? 12 }}
                   >

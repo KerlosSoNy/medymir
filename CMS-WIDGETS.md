@@ -53,11 +53,11 @@ See also: [SPECS.md](SPECS.md) §7 (data flow) and [AGENTS.md](AGENTS.md) §5 (k
 | `recommended-products` | products-slider | Recommended For You | Product suggestions | ✅ (same product grid) |
 | `products-by-category` | products-slider | Products by Category | Products from a category or a ranking | ✅ |
 | `categories-grid` | categories-grid | Categories | Category cards | ✅ category carousel |
-| `text-image` | text-image | Text + Image | Rich text with image | ✅ (+ our `section-header` variant) |
+| `text-image` | text-image | Text + Image | Rich text with image | ✅ (+ our `section-header`, `split-hero` variants) |
 | `testimonials` | testimonials | Testimonials | Customer quotes | ✅ (+ our `brand-carousel`, `exclusive-brands`, `solutions` variants) |
-| `stats-counter` | stats-counter | Stats / Counters | Numbers & metrics | ✅ (+ our `chips`, `features`, `tabs`, `checklist` variants) |
-| `button-cta` | button-cta | Button / CTA | One call-to-action button | ✅ (+ our `note`, `callout`, `banner` variants) |
-| `contact-form` | contact-form | Contact Form | Form linked to the Contact Us plugin | ✅ (our `quote`, `contact-card` variants) |
+| `stats-counter` | stats-counter | Stats / Counters | Numbers & metrics | ✅ (+ our `chips`, `features`, `tabs`, `checklist`, `link-cards`, `route-cards` variants) |
+| `button-cta` | button-cta | Button / CTA | One call-to-action button | ✅ (+ our `note`, `callout`, `banner`, `band` variants) |
+| `contact-form` | contact-form | Contact Form | Form linked to the Contact Us plugin | ✅ (our `quote`, `contact-card`, `contact`, `contact-panel` variants) |
 | `faq-accordion` | faq-accordion | FAQ / Accordion | Questions & answers saved in the widget | ✅ |
 | `gallery` | gallery | Image Gallery | Grid of images | ✅ |
 | `spacer` | spacer | Spacer | Vertical space | ✅ |
@@ -251,7 +251,7 @@ imageUrl; mobileImageUrl; tabletImageUrl; link;
 title; content (rich HTML); imageUrl; mobileImageUrl; tabletImageUrl;
 imagePosition: 'left' | 'right' | 'top' | 'bottom'; backgroundColor;
 ```
-MedyMar also uses `variant: "section-header"` with `eyebrow`, `eyebrowColor`, `size`, `align`, `linkText`, `linkUrl`, `linkColor`.
+MedyMar also uses `variant: "section-header"` with `eyebrow`, `eyebrowColor`, `size` (`sm` for info pages), `eyebrowLines: false` (no lines beside a centred label), `align`, `linkText`, `linkUrl`, `linkColor`; and `variant: "split-hero"` (info-page hero: navy box, `eyebrow`, `title` as the page heading, `content`, gold button `linkText` + `linkUrl`, picture `imageUrl` / `tabletImageUrl` / `mobileImageUrl`).
 
 #### `testimonials`: Testimonials
 ```ts
@@ -263,14 +263,14 @@ MedyMar variants: `brand-carousel` (`name` = "Brand — tagline", `avatar`, `lin
 ```ts
 title; items: { value; label; prefix; suffix }[]; columns: 2 | 3 | 4;
 ```
-MedyMar variants: `chips`, `features` (`icon`), `tabs`, `checklist`, plus `announcement`, `category-nav`, `footer-column`, `footer-links`, `legal-links` on `site-layout`.
+MedyMar variants: `chips`, `features` (`icon`), `tabs`, `checklist`, `link-cards` and `route-cards` (info-page cards; `route-cards` + `tone: "plain"` = icon without square, arrow on the button; `label` = title, `value` = sentence, `icon` = cart | file-text | chat | warehouse | quote, `linkText` + `link`), plus `announcement`, `category-nav`, `footer-column`, `footer-links`, `legal-links` on `site-layout`.
 
 #### `button-cta`: Button / CTA
 ```ts
 text; link; style: 'primary' | 'secondary' | 'outline' | 'ghost';
 size: 'small' | 'medium' | 'large'; align: 'left' | 'center' | 'right'; fullWidth: boolean;
 ```
-MedyMar variants: `note`, `callout` (+ `title`, `subtitle`, `icon`, `tone`), and `banner`: a boxed navy banner with real text over a picture (+ `eyebrow`, `title`, `subtitle`, `note`, `icon: 'whatsapp'`, `imageUrl`, `tabletImageUrl`, `mobileImageUrl`; button = `text` + `link`). Use it for a boxed banner with a label, a button and a note (e.g. the home WhatsApp banner).
+MedyMar variants: `note`, `callout` (+ `title`, `subtitle`, `icon`, `tone`), and `banner`: a boxed navy banner with real text over a picture (+ `eyebrow`, `title`, `subtitle`, `note`, `icon: 'whatsapp'`, `imageUrl`, `tabletImageUrl`, `mobileImageUrl`; button = `text` + `link`). Use it for a boxed banner with a label, a button and a note (e.g. the home WhatsApp banner). `band`: light grey closing box with centred `title`, `subtitle` and a gold button (`text` + `link`).
 
 #### `faq-accordion`: FAQ / Accordion
 ```ts
@@ -302,7 +302,7 @@ title; subtitle; style: 'card' | 'inline' | 'split'; showMap; mapEmbedUrl;
 contactInfo: { icon; label; value }[]; theme; backgroundColor; pluginSlug: 'contact';
 ```
 Fields of the form itself come from `GET contact-form` (Contact form settings); submit with `POST contact-form`.
-MedyMar variants: `quote` (quotation form with quote-list lines) and `contact-card`.
+MedyMar variants: `quote` (quotation form with quote-list lines), `contact-card`, `contact` (Contact page enquiry form: store fields + `subject`, `privacyNote`, `privacyLinkText`, `privacyLink`, `submitText`, `successTitle`, `successText`, `errorTitle`) and `contact-panel` (navy panel: `title`, `subtitle`, `contactInfo[{ icon: email | whatsapp | pin | clock, label, value, link }]`). Both forms use the **same** store field list.
 
 #### `newsletter`: Newsletter Signup
 ```ts

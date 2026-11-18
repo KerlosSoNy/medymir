@@ -1,6 +1,7 @@
-// Contact Form (contact-form) variants: quote form (default) and contact-card.
+// Contact Form (contact-form) variants: quote form (default), contact-card, contact (enquiry form) and contact-panel.
 import { tr } from "@/lib/format";
-import { Icon } from "../../SmartLink";
+import { Icon, SmartLink } from "../../SmartLink";
+import { EnquiryForm } from "../EnquiryForm";
 import { QuoteForm } from "../QuoteForm";
 import { eyebrow, sideCard, sideTitle } from "../classes";
 import { type P } from "./shared";
@@ -8,8 +9,69 @@ import { type P } from "./shared";
 /* ---------- contact-form variants: quote form, contact card ---------- */
 const CONTACT_ICON: Record<string, string> = { email: "email", mail: "email", hours: "hours", clock: "hours", reply: "reply" };
 
+/** Gold line icons of the Contact page panel (Figma "Contact MEDYMAR"). */
+const PANEL_ICON: Record<string, string> = {
+  email: "contact-email",
+  mail: "contact-email",
+  whatsapp: "contact-whatsapp",
+  pin: "contact-pin",
+  location: "contact-pin",
+  clock: "contact-clock",
+  hours: "contact-clock",
+};
+
 export function ContactForm({ w, ctx }: P) {
   if (w.variant === "footer-contact") return null; // rendered by the footer
+  if (w.variant === "contact")
+    return (
+      <EnquiryForm
+        subject={tr(w.subject)}
+        privacyNote={tr(w.privacyNote)}
+        privacyLinkText={tr(w.privacyLinkText)}
+        privacyLink={w.privacyLink}
+        submitText={tr(w.submitText)}
+        successTitle={tr(w.successTitle)}
+        successText={tr(w.successText)}
+        errorTitle={tr(w.errorTitle)}
+        fallbackEmail={ctx.contactEmail}
+      />
+    );
+  if (w.variant === "contact-panel")
+    // Navy card with the ways to reach the team. contactInfo: [{ icon, label, value, link }];
+    // a value with "@" becomes an email link, "\n" starts a new line.
+    return (
+      <div className="rounded-xl bg-navy-deep px-[26px] py-7 text-white">
+        {w.title && <h2 className="font-head text-xl font-bold">{tr(w.title)}</h2>}
+        {w.subtitle && <p className="mt-2 text-[14.5px] leading-normal text-mist">{tr(w.subtitle)}</p>}
+        <dl className="mt-[22px] grid grid-cols-1 gap-5">
+          {(w.contactInfo ?? []).map((c: any, i: number) => {
+            const value = tr(c.value);
+            const link = c.link || (/^\S+@\S+$/.test(value) ? `mailto:${value}` : "");
+            return (
+              <div key={i} className="flex items-start gap-4">
+                {PANEL_ICON[String(c.icon).toLowerCase()] && (
+                  <span className="flex shrink-0">
+                    <Icon name={PANEL_ICON[String(c.icon).toLowerCase()]} size={22} />
+                  </span>
+                )}
+                <div className="grid min-w-0 flex-1 grid-cols-1 gap-[3px]">
+                  <dt className="text-[15px] font-bold">{tr(c.label)}</dt>
+                  <dd className="text-sm leading-normal break-words whitespace-pre-line text-mist">
+                    {link ? (
+                      <SmartLink to={link} className="underline underline-offset-2 hover:text-white">
+                        {value}
+                      </SmartLink>
+                    ) : (
+                      value
+                    )}
+                  </dd>
+                </div>
+              </div>
+            );
+          })}
+        </dl>
+      </div>
+    );
   if (w.variant === "contact-card")
     return (
       <div className={sideCard}>

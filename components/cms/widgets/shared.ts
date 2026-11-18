@@ -3,7 +3,7 @@ import DOMPurify from "isomorphic-dompurify";
 import type { Brand, Category } from "@/lib/api";
 import { tr } from "@/lib/format";
 
-export type RowKind = "full" | "boxed" | "banner" | "compact" | "bleed";
+export type RowKind = "full" | "boxed" | "banner" | "compact" | "bleed" | "stack";
 
 export interface WidgetCtx {
   currency: string | null;

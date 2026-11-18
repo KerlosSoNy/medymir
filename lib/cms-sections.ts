@@ -175,12 +175,32 @@ export const SECTIONS: SectionRecipe[] = [
     row: one("banner-boxed", [pictureBanner("banner-boxed", { title: "Picture description", link: "#quote" })], { backgroundColor: "#f5f7fa" }),
   },
 
+  {
+    id: "split-hero",
+    name: "Page hero (text + picture)",
+    use: "The top of an info page (About…): navy box with a small label, big title, one line and a gold button on the left, picture on the right.",
+    notes: "Text + Image, look 'split-hero'. The title is the page's main heading. Phone/tablet: text above, picture below.",
+    row: one("split-hero", [
+      w("split-hero", "text-image", {
+        variant: "split-hero",
+        eyebrow: "Small label",
+        title: "Big page title",
+        content: "<p>One or two short sentences.</p>",
+        linkText: "Button text",
+        linkUrl: "/contact",
+        ...IMG,
+        imagePosition: "right",
+        backgroundColor: "",
+      }),
+    ]),
+  },
+
   /* Headings & text */
   {
     id: "section-header",
     name: "Section heading",
     use: "Small label + big title + one line of text + 'View all' link. Put it above a list, grid or carousel.",
-    notes: "eyebrowColor: blue | gold | grey | teal | sky. size: md | lg | xl. linkColor: blue | gold. '{count}' in the link text becomes the number of products.",
+    notes: "eyebrowColor: blue | gold | grey | teal | sky. size: sm (info pages) | md | lg | xl. linkColor: blue | gold. '{count}' in the link text becomes the number of products.",
     row: one("heading", [
       header("heading", {
         eyebrow: "SMALL LABEL",
@@ -281,6 +301,43 @@ export const SECTIONS: SectionRecipe[] = [
           { label: "First number", value: "20", prefix: "", suffix: "+" },
           { label: "Second number", value: "500", prefix: "", suffix: "" },
           { label: "Third number", value: "3", prefix: "", suffix: "" },
+        ],
+      }),
+    ]),
+  },
+
+  {
+    id: "link-cards",
+    name: "Cards with icon and link",
+    use: "Three white cards side by side, each with an icon, a title, one sentence and an underlined link (About page).",
+    notes: "Stats / Counters, look 'link-cards'. label = title, value = sentence. icon: cart | file-text | chat | warehouse | quote. Usually with a small centred Section heading (size 'sm') above it in the same column.",
+    row: one("link-cards", [
+      w("link-cards", "stats-counter", {
+        variant: "link-cards",
+        title: "",
+        columns: 3,
+        items: [
+          stat("First card", { icon: "cart", value: "One sentence about it.", linkText: "Link text", link: "/categories" }),
+          stat("Second card", { icon: "file-text", value: "One sentence about it.", linkText: "Link text", link: "/quote" }),
+          stat("Third card", { icon: "chat", value: "One sentence about it.", linkText: "Link text", link: "/contact" }),
+        ],
+      }),
+    ]),
+  },
+  {
+    id: "route-cards",
+    name: "Two cards with icon and button",
+    use: "Two side-by-side cards with an icon in a gold square, a title, one sentence and an outlined button ('Two ways to buy').",
+    notes: "Stats / Counters, look 'route-cards'. Same fields and icons as 'Cards with icon and link'. tone 'plain': icon without the gold square and an arrow on the button (Contact page 'Have a product list?' card; one card fills its column).",
+    row: one("route-cards", [
+      header("route-cards-head", { align: "center", size: "sm", title: "Section title", content: "<p>One sentence.</p>" }),
+      w("route-cards", "stats-counter", {
+        variant: "route-cards",
+        title: "",
+        columns: 2,
+        items: [
+          stat("First route", { icon: "warehouse", value: "One sentence about it.", linkText: "Button text", link: "/products" }),
+          stat("Second route", { icon: "quote", value: "One sentence about it.", linkText: "Button text", link: "/quote" }),
         ],
       }),
     ]),
@@ -441,6 +498,13 @@ export const SECTIONS: SectionRecipe[] = [
     ),
   },
   {
+    id: "band",
+    name: "Closing band with button",
+    use: "A light grey box with a centred title, one line and a gold button, at the end of an info page.",
+    notes: "Button / CTA, look 'band'.",
+    row: one("band", [cta("band", { variant: "band", title: "Band title", subtitle: "One short sentence.", text: "Button text", link: "/contact", style: "primary", align: "center" })]),
+  },
+  {
     id: "button",
     name: "Single button",
     use: "Just one button. style 'outline' = outlined, anything else = dark. align left | center | right.",
@@ -502,6 +566,66 @@ export const SECTIONS: SectionRecipe[] = [
                 { icon: "reply", label: "Reply", value: "When we reply" },
               ],
               offices: [{ city: "City", note: "Time zone" }],
+            }),
+          ],
+        },
+      ],
+    },
+  },
+
+  {
+    id: "enquiry-form",
+    name: "Enquiry form + contact panel",
+    use: "The Contact page: the enquiry form (left) with a navy 'contact us' panel and a small card (right).",
+    notes: "Contact Form, looks 'contact' and 'contact-panel'. The form fields come from the store's Contact form settings (shared with the quote form). Panel icons: email | whatsapp | pin | clock; a value with '@' becomes an email link, a new line in a value starts a new line; 'link' makes it a link (e.g. WhatsApp).",
+    row: {
+      id: "row-enquiry",
+      columns: [
+        {
+          id: "col-enquiry-form",
+          span: 8,
+          widgets: [
+            w("enquiry-form", "contact-form", {
+              variant: "contact",
+              title: "",
+              subtitle: "",
+              subject: "Contact enquiry",
+              privacyNote: "How we use the details. See our",
+              privacyLinkText: "Privacy policy",
+              privacyLink: "/privacy-policy",
+              submitText: "Send enquiry",
+              successTitle: "Thank you title",
+              successText: "What happens next.",
+              errorTitle: "Not sent title",
+              style: "card",
+              showMap: false,
+              mapEmbedUrl: "",
+              contactInfo: [],
+              theme: "light",
+              backgroundColor: "",
+              pluginSlug: "contact",
+            }),
+          ],
+        },
+        {
+          id: "col-enquiry-side",
+          span: 4,
+          widgets: [
+            w("enquiry-panel", "contact-form", {
+              variant: "contact-panel",
+              title: "Panel title",
+              subtitle: "One sentence.",
+              style: "card",
+              showMap: false,
+              mapEmbedUrl: "",
+              theme: "dark",
+              backgroundColor: "",
+              pluginSlug: "contact",
+              contactInfo: [
+                { icon: "email", label: "Email", value: "name@example.com", link: "" },
+                { icon: "pin", label: "Locations", value: "City\nCity", link: "" },
+                { icon: "clock", label: "Working hours", value: "Opening hours", link: "" },
+              ],
             }),
           ],
         },

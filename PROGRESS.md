@@ -1,6 +1,6 @@
 # MedyMar website: progress
 
-_Last updated: 18 November 2026 (Abbott side card on the home page now has a subtitle and button)_
+_Last updated: 18 November 2026 (About and Contact pages built from Figma and live; About photo and form-field fixes waiting on the owner)_
 
 Where we are, measured against the Figma file. Also see [FEATURES.md](FEATURES.md) (what the site does), [SPECS.md](SPECS.md) (how it's built) and [AGENTS.md](AGENTS.md) (rules for AI assistants).
 
@@ -14,8 +14,9 @@ Where we are, measured against the Figma file. Also see [FEATURES.md](FEATURES.m
   - the tablet/phone menu drawer
   - all card designs (product, category, brand, exclusive brand, solution)
 - **Shop pages work, with simpler layouts:** category, search, product, quote list, account, brands. Their larger Figma page layouts are not built yet.
-- **Not built yet:** About, FAQ, Contact, Policy pages and the special Ready Stock page.
-- **Page builder kit (18 Nov):** a section gallery (`/dev/widgets`, 27 section styles), a draft preview (`/dev/preview/<page>`) and the `/cms-page` command, so new pages (About, FAQ…) can be planned, previewed and approved before anything is saved to the store. Local only; checked at 360–1440 wide.
+- **About and Contact pages are live (18 Nov)**, matching Figma. About still needs its photo; Contact shows the store's quotation fields (see section 3, task 3).
+- **Not built yet:** FAQ, Policy pages and the special Ready Stock page.
+- **Page builder kit (18 Nov):** a section gallery (`/dev/widgets`, 31 section styles), a draft preview (`/dev/preview/<page>`) and the `/cms-page` command, so new pages (About, FAQ…) can be planned, previewed and approved before anything is saved to the store. Local only; checked at 360–1440 wide.
 - **Still waiting on store content:** some photos, the quotation form fields, real products and the info pages.
 
 Preview: `npm run dev` → http://localhost:3000. Production check: `npm run build && npm run start`.
@@ -41,9 +42,9 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | Search: results / no results / empty | 🟡 | 🟡 | 🟡 | Results and "no results" work; the special "empty" design is not built |
 | Quote list | 🟡 | 🟡 | 🟡 | Works; Figma's summary sidebar is not built |
 | Account: signed out / with orders / no orders | 🟡 | 🟡 | 🟡 | SMS login and orders work; Figma's account menu and header are not built |
-| About | ⬜ | ⬜ | ⬜ | Page can be made in the page builder (`about`), but the Figma design isn't built |
+| About | 🟡 | 🟡 | 🟡 | Built to match Figma and live at `/about` (checked at 360–1440). Waiting on the hero photo (owner task 0) |
 | FAQ | ⬜ | ⬜ | ⬜ | |
-| Contact: form / sent / error | ⬜ | ⬜ | ⬜ | |
+| Contact: form / sent / error | 🟡 | 🟡 | 🟡 | Built to match Figma and live at `/contact` (all 3 states checked at 360–1440; sent/error tested with a fake reply, no real enquiry sent). Shows the store's form fields (currently the quotation fields, not Figma's 6 contact fields); WhatsApp line left out until there is a number |
 | Policies (privacy, shipping, refund, terms, contact info) | ⬜ | ⬜ | ⬜ | |
 | "Page not found" | ✅ | ✅ | ✅ | No Figma frame; built in the same style |
 
@@ -64,10 +65,10 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | Filters | ✅ | Sub-category, price range, on sale, featured, in stock (from store settings) |
 | Search | ✅ | |
 | Quote list (cart) | ✅ | Add, change quantity, remove |
-| Quotation form | 🟡 | **No fields set up** in Contact form settings, so it can't be sent yet. Never tested end to end |
+| Quotation form | 🟡 | 7 fields set up in Contact form settings (also used by the Contact page). Problems: the **phone check only accepts Egyptian numbers**, "You are buying as" has **no choices**, some labels are lower-case. Never tested end to end |
 | SMS login + orders | ✅ | |
 | Tracking pixels | ✅ | |
-| Info pages (about, faq, policies, tender-desk…) | ⬜ | None exist in the page builder; footer links show "page not found" |
+| Info pages (about, faq, policies, tender-desk…) | 🟡 | `about` and `contact` exist (drafts, shown publicly). The others don't exist yet; their footer links show "page not found" |
 
 **Photos still missing on the home page:**
 - the 6 exclusive-brand photos (ready in `design-assets/generated/`)
@@ -81,19 +82,21 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 
 | # | Task | Why it matters |
 |---|---|---|
+| 0 | **Add the About page photo:** Page builder → About → first section (Text & Image) → Image → upload `design-assets/upload/A01-about-hero.png` (from Figma, white corners already trimmed), or a better original from the designer | The About hero shows text only until then. The connector can't upload a photo this size (see AGENTS.md §5) |
 | 1 | **Get clean background pictures from the designer** (no drawn-in text or buttons) for the hero, Abbott wide banner, Abbott promo and WhatsApp banner (the WhatsApp banner already shows real text and button; a clean picture just makes it sharper); upload them and fill each banner's title / description / button text | Real, clickable buttons and real text are built and switch on when a banner has button text. The hero already has button text, so its title shows twice until its clean picture is uploaded |
 | 1b | **Replace the Abbott promo picture** with `design-assets/upload/06-promo-abbott-fixed.webp` (until the clean art arrives) | Removes the white strip beside it |
 | 1c | **Upload tightly cropped brand logos** (Products → product details → Brand) for Boston Scientific, Terumo, Biotronik and Edwards; add a logo for MicroPort Orthopedics | These logo files have large empty margins, so the logos look small on the site |
 | 2 | **Upload the missing photos** (section 2) | Cards show placeholders until then |
-| 3 | **Set up the quotation form fields** (Contact form settings) | The form can only show fields configured there. Suggested: Full name*, Organisation, Work email*, Phone / WhatsApp, You are buying as (dropdown), Delivery city & country, What do you need?* (long text) |
+| 3 | **Fix the form fields** (Contact form settings): phone check accepts only Egyptian numbers (Omani customers can't send); add choices to "You are buying as"; capitalise "organization", "work email", "what do you need?" | Both the quotation form and the Contact page show these fields |
 | 4 | **Add real products** (name, Brand, REF/SKU, category, price in OMR, photo) and remove the demo ones | The site currently shows demo products |
 | 5 | **Change the store country** from Egypt to Oman | Can't be changed through the connector |
 | 6 | **Give a MedyMar phone number** (or clear the old café number) | The store still has the café phone |
-| 7 | **Create the footer pages**: `about`, `tender-desk`, `verify-batch`, `distributors`, `help`, `faq`, `privacy-policy`, `shipping-policy`, `refund-policy`, `terms-of-service` | Those links show "page not found" until the pages exist |
+| 7 | **Create the footer pages**: `tender-desk`, `verify-batch`, `distributors`, `help`, `faq`, `privacy-policy`, `shipping-policy`, `refund-policy`, `terms-of-service` | Those links show "page not found" until the pages exist |
 | 8 | **Delete the page "ZZ widget test"** | Leftover test page; the connector can't delete pages |
 | 9 | **Delete or rename the old "Header" menu** (café menu items) | Not used by the new site |
 | 10 | Replace the 7 **placeholder brand cards** in "Shop by brand" (Home page) with real brand photos | They're simple navy cards with the brand name, made by the developer, not official logos |
-| 11 | Give the **WhatsApp number** for the "Request a quote on WhatsApp" banner | The banner's button currently goes to the quote form. With the number it becomes a WhatsApp link (Page builder → home → WhatsApp banner → link) |
+| 11 | Give the **WhatsApp number** for the "Request a quote on WhatsApp" banner and the Contact page | The banner's button currently goes to the quote form. With the number it becomes a WhatsApp link, and the Contact page panel gets its "Chat with our team on WhatsApp" line (in Figma, left out for now) |
+| 13 | **Decide the Contact form fields:** the store has one field list for both forms. Keep the quotation fields on the Contact page too, or change the list so it suits both (e.g. add an "Enquiry type" dropdown with "Quotation" as one choice) | Figma's Contact form has 6 fields (Name, Email, Phone, Organisation, Enquiry type, Message); the page currently shows the 7 quotation fields |
 | 12 | **Check the mega-menu texts** for Endoscopy, Dialysis & Urology, Critical Care & Infusion and Hospital Supplies (`lib/menu.ts`) | These 4 menus aren't in Figma; we wrote their texts |
 
 ---
@@ -129,6 +132,9 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | 18 Nov | _(Owner approved)_ Home page, Abbott block: the right-hand picture beside the products changed from a picture-only **Banners** section to a **Button CTA** with look `banner` (shown as a tall card beside products): title "Abbott — Precision for every procedure", subtitle "Coronary and vascular devices, quoted to your cath lab's needs.", button "View Abbott products" → /brand/abbott; same picture. The hero banner's unused "mid-widget" tag was dropped (the save tool doesn't accept it). Record: `cms-drafts/home-abbott-promo.json` |
 | 18 Nov | _(Owner approved)_ Home page: the WhatsApp banner had gone back to the picture-only **Banners** section (page saved at 11:20 UTC, probably the Abbott save above built from an older copy of the page). Put the **Button CTA** look `banner` back (same texts as `cms-drafts/home-whatsapp-banner.json`); nothing else changed. Checked at 390, 768 and 1440 |
 
+| 18 Nov | _(Owner approved)_ Created page **"About"** (`about`, draft = shown publicly): page hero, intro + 3 link cards, "Two ways to buy" + 2 route cards, closing band, all texts from Figma. Hero photo left empty (owner to upload, section 3 task 0). Record: `cms-drafts/about.json` |
+| 18 Nov | _(Owner approved)_ Created page **"Contact"** (`contact`, draft = shown publicly): heading, enquiry form (fields from Contact form settings), navy contact panel (email, locations, working hours), "Have a product list?" card; texts from Figma. Record: `cms-drafts/contact.json` |
+| 18 Nov | _(Owner approved)_ Site layout: footer "About & Support" → **Contact** link changed from `/#quote` to `/contact` (re-read first; only that link changed, checked by comparing before/after). Record: `cms-drafts/site-layout.json` |
 
 Nothing was deleted by the developer. TheCoins has no delete action.
 
@@ -147,7 +153,7 @@ Nothing was deleted by the developer. TheCoins has no delete action.
 
 ## 7. Next steps
 1. Owner tasks in section 3, especially the Abbott picture, the photos and the quotation form fields
-2. Build the remaining Figma pages: About, FAQ, Contact (3 states), Policies (5), Ready Stock
+2. Build the remaining Figma pages: FAQ, Policies (5), Ready Stock
 3. Bring the shop pages up to their full Figma layouts: category header, product tabs, quote-list summary, account menu, brands page
 4. Products imported, each with its **Brand** set; then switch brand pages from name search to the Brand detail and check the Brand filter
 5. Test a real quotation submission (with the owner's OK)
