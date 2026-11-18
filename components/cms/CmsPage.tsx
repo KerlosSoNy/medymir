@@ -32,6 +32,8 @@ const STACK = new Set([
   "button-cta/band",
   "contact-form/contact",
   "contact-form/contact-panel",
+  "faq-accordion/topics",
+  "button-cta/help",
 ]);
 
 /** What kind of row this is decides its padding and width. */

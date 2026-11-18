@@ -1,4 +1,4 @@
-// Button / CTA (button-cta) and our variants: note, callout, banner, band.
+// Button / CTA (button-cta) and our variants: note, callout, banner, band, help.
 import { cn } from "@/lib/cn";
 import { tr } from "@/lib/format";
 import { btn } from "@/lib/styles";
@@ -62,6 +62,25 @@ export function ButtonCta({ w, ctx }: P) {
         {w.subtitle && <p className="mt-2.5 max-w-[480px] text-[15.5px] leading-[1.55] text-slate">{tr(w.subtitle)}</p>}
         {w.text && (
           <SmartLink to={w.link} className={cn(goldBtn, "mt-[22px] self-center")}>
+            {tr(w.text)}
+            <Icon name="arrow-right-white-14" size={14} />
+          </SmartLink>
+        )}
+      </div>
+    );
+  if (w.variant === "help")
+    // Figma FAQ "Still have a question?": grey bar with an icon, title, one line and a gold button.
+    return (
+      <div className="mx-auto flex w-full max-w-[960px] flex-col items-start gap-4 rounded-xl border border-line-3 bg-surface-alt px-[22px] py-6 sm:flex-row sm:items-center sm:gap-[18px] sm:px-[26px] sm:py-[21px]">
+        <span className="flex shrink-0">
+          <Icon name="about-chat" size={26} />
+        </span>
+        <div className="grid min-w-0 flex-1 grid-cols-1 gap-1">
+          {w.title && <h2 className="font-head text-[17px] font-bold text-navy-deep">{tr(w.title)}</h2>}
+          {w.subtitle && <p className="text-[14.5px] text-slate">{tr(w.subtitle)}</p>}
+        </div>
+        {w.text && (
+          <SmartLink to={w.link} className={cn(goldBtn, "px-[22px]")}>
             {tr(w.text)}
             <Icon name="arrow-right-white-14" size={14} />
           </SmartLink>

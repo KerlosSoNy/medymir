@@ -16,6 +16,7 @@ export const UI = {
   viewDetails: "View details",
   indicativePrice: "Indicative list price",
   noProducts: "No products found.",
+  noResults: "No matching questions.",
   productsComing: "Products will appear here once they're added to the catalogue.",
   filters: "Filters",
   clearFilters: "Clear all",

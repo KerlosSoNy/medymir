@@ -1,0 +1,148 @@
+{
+  "title": "FAQ",
+  "layout": [
+    {
+      "id": "row-faq-head",
+      "columns": [
+        {
+          "id": "col-faq-head",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-faq-head",
+              "type": "text-image",
+              "settings": {
+                "variant": "section-header",
+                "align": "center",
+                "size": "lg",
+                "eyebrow": "FAQ",
+                "eyebrowColor": "gold",
+                "eyebrowLines": false,
+                "title": "How can we help?",
+                "content": "<p>Find answers to common questions about ordering, quotations, delivery and more.</p>",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": "",
+                "linkText": "",
+                "linkUrl": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-faq-main",
+      "columns": [
+        {
+          "id": "col-faq-main",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-faq-list",
+              "type": "faq-accordion",
+              "settings": {
+                "variant": "topics",
+                "title": "",
+                "searchPlaceholder": "Search questions",
+                "allTopicsLabel": "All topics",
+                "noResultsText": "No questions match your search.",
+                "topics": [
+                  "Ordering",
+                  "Quotations",
+                  "Ready stock",
+                  "Delivery",
+                  "Account"
+                ],
+                "items": [
+                  {
+                    "question": "What is the difference between Ready Stock and quotation-only products?",
+                    "answer": "<p><strong>Ready Stock</strong> products are held locally and show an indicative price in OMR.</p><p><strong>Quotation-only</strong> products have no online price. For both, add them to your quote list and send a request: our team confirms pricing, availability and delivery details in a quotation.</p>",
+                    "topic": "Ordering"
+                  },
+                  {
+                    "question": "How do I choose a product option and quantity?",
+                    "answer": "<p>On the product page, choose the option you need (for example size or pack) and set the quantity, then select <strong>Add to quote list</strong>. You can change quantities later on your quote list.</p>",
+                    "topic": "Ordering"
+                  },
+                  {
+                    "question": "Does sending a quotation request place an order?",
+                    "answer": "<p>No. A quotation request asks our team to confirm pricing, availability and delivery for the items on your list. It does not place an order.</p>",
+                    "topic": "Quotations"
+                  },
+                  {
+                    "question": "How do I build and send a quote list?",
+                    "answer": "<p>Select <strong>Add to quote list</strong> on any product. Open your quote list from the top of the page to change quantities or remove lines, then fill in the quotation form and send it. The lines on your list are sent with your request.</p>",
+                    "topic": "Quotations"
+                  },
+                  {
+                    "question": "Can I upload an item list or tender documents?",
+                    "answer": "<p>The quotation form doesn't take attachments yet. Type or paste your item list into the form, or email your documents to <a href=\"mailto:milani@shamhabib.com\">milani@shamhabib.com</a>.</p>",
+                    "topic": "Quotations"
+                  },
+                  {
+                    "question": "How do I ask for bulk pricing?",
+                    "answer": "<p>Add the products to your quote list with the quantities you need, or write the volumes in your message, and send a quotation request. Our team replies with pricing for your request.</p>",
+                    "topic": "Quotations"
+                  },
+                  {
+                    "question": "What does “In stock in Oman” mean?",
+                    "answer": "<p>The product is held locally in Oman as Ready Stock, rather than sourced to order.</p>",
+                    "topic": "Ready stock"
+                  },
+                  {
+                    "question": "What if a Ready Stock product is unavailable?",
+                    "answer": "<p>Its product page shows <strong>Currently unavailable</strong>. <a href=\"/contact\">Contact our team</a> and we will tell you the options for your request.</p>",
+                    "topic": "Ready stock"
+                  },
+                  {
+                    "question": "How are availability and delivery confirmed?",
+                    "answer": "<p>Our team confirms availability and delivery details for your items in the quotation we send you.</p>",
+                    "topic": "Delivery"
+                  },
+                  {
+                    "question": "Do I need an account to request a quotation?",
+                    "answer": "<p>No. You can build a quote list and send a quotation request without signing in. Signing in with your phone number and a text-message code lets you see your orders.</p>",
+                    "topic": "Account"
+                  },
+                  {
+                    "question": "Where can I see my orders?",
+                    "answer": "<p>Sign in and open <strong>Account</strong> at the top of the page. Your orders are listed there.</p>",
+                    "topic": "Account"
+                  },
+                  {
+                    "question": "Can I see my quotation requests in my account?",
+                    "answer": "<p>Not yet. Our team replies to the email address you entered in the quotation form.</p>",
+                    "topic": "Account"
+                  },
+                  {
+                    "question": "How do I update my contact and delivery details?",
+                    "answer": "<p><a href=\"/contact\">Contact our team</a> and we will update them for you.</p>",
+                    "topic": "Account"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "w-faq-help",
+              "type": "button-cta",
+              "settings": {
+                "variant": "help",
+                "title": "Still have a question?",
+                "subtitle": "Contact our team for further support.",
+                "text": "Contact our team",
+                "link": "/contact",
+                "style": "primary",
+                "size": "medium",
+                "align": "center",
+                "fullWidth": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

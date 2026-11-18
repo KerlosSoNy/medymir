@@ -649,6 +649,27 @@ export const SECTIONS: SectionRecipe[] = [
     ]),
   },
   {
+    id: "faq-topics",
+    name: "Questions with search and topics",
+    use: "The FAQ page: a search box, topic buttons and questions that open to show the answer. Ends with a 'Still have a question?' bar.",
+    notes: "FAQ / Accordion, look 'topics': each item has question, answer (rich text) and topic (one of 'topics'). The bar is Button / CTA, look 'help'. Both keep to a 960px column.",
+    row: one("faq-topics", [
+      w("faq-topics", "faq-accordion", {
+        variant: "topics",
+        title: "",
+        searchPlaceholder: "Search questions",
+        allTopicsLabel: "All topics",
+        noResultsText: "No questions match your search.",
+        topics: ["First topic", "Second topic"],
+        items: [
+          { question: "First question?", answer: "<p>The answer.</p>", topic: "First topic" },
+          { question: "Second question?", answer: "<p>The answer.</p>", topic: "Second topic" },
+        ],
+      }),
+      cta("faq-help", { variant: "help", title: "Still have a question?", subtitle: "One short sentence.", text: "Button text", link: "/contact", style: "primary", align: "center" }),
+    ]),
+  },
+  {
     id: "gallery",
     name: "Picture gallery",
     use: "A grid of pictures, each optionally a link.",

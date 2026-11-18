@@ -56,9 +56,9 @@ See also: [SPECS.md](SPECS.md) §7 (data flow) and [AGENTS.md](AGENTS.md) §5 (k
 | `text-image` | text-image | Text + Image | Rich text with image | ✅ (+ our `section-header`, `split-hero` variants) |
 | `testimonials` | testimonials | Testimonials | Customer quotes | ✅ (+ our `brand-carousel`, `exclusive-brands`, `solutions` variants) |
 | `stats-counter` | stats-counter | Stats / Counters | Numbers & metrics | ✅ (+ our `chips`, `features`, `tabs`, `checklist`, `link-cards`, `route-cards` variants) |
-| `button-cta` | button-cta | Button / CTA | One call-to-action button | ✅ (+ our `note`, `callout`, `banner`, `band` variants) |
+| `button-cta` | button-cta | Button / CTA | One call-to-action button | ✅ (+ our `note`, `callout`, `banner`, `band`, `help` variants) |
 | `contact-form` | contact-form | Contact Form | Form linked to the Contact Us plugin | ✅ (our `quote`, `contact-card`, `contact`, `contact-panel` variants) |
-| `faq-accordion` | faq-accordion | FAQ / Accordion | Questions & answers saved in the widget | ✅ |
+| `faq-accordion` | faq-accordion | FAQ / Accordion | Questions & answers saved in the widget | ✅ (+ our `topics` variant) |
 | `gallery` | gallery | Image Gallery | Grid of images | ✅ |
 | `spacer` | spacer | Spacer | Vertical space | ✅ |
 | `divider` | divider | Divider | Horizontal line | ✅ |
@@ -270,12 +270,13 @@ MedyMar variants: `chips`, `features` (`icon`), `tabs`, `checklist`, `link-cards
 text; link; style: 'primary' | 'secondary' | 'outline' | 'ghost';
 size: 'small' | 'medium' | 'large'; align: 'left' | 'center' | 'right'; fullWidth: boolean;
 ```
-MedyMar variants: `note`, `callout` (+ `title`, `subtitle`, `icon`, `tone`), and `banner`: a boxed navy banner with real text over a picture (+ `eyebrow`, `title`, `subtitle`, `note`, `icon: 'whatsapp'`, `imageUrl`, `tabletImageUrl`, `mobileImageUrl`; button = `text` + `link`). Use it for a boxed banner with a label, a button and a note (e.g. the home WhatsApp banner). `band`: light grey closing box with centred `title`, `subtitle` and a gold button (`text` + `link`).
+MedyMar variants: `note`, `callout` (+ `title`, `subtitle`, `icon`, `tone`), and `banner`: a boxed navy banner with real text over a picture (+ `eyebrow`, `title`, `subtitle`, `note`, `icon: 'whatsapp'`, `imageUrl`, `tabletImageUrl`, `mobileImageUrl`; button = `text` + `link`). Use it for a boxed banner with a label, a button and a note (e.g. the home WhatsApp banner). `band`: light grey closing box with centred `title`, `subtitle` and a gold button (`text` + `link`). `help`: grey bar with a chat icon, `title`, `subtitle` and a gold button (FAQ "Still have a question?").
 
 #### `faq-accordion`: FAQ / Accordion
 ```ts
 title; items: { question; answer }[];
 ```
+MedyMar variant `topics` (FAQ page): + `searchPlaceholder`, `allTopicsLabel`, `noResultsText`, `topics: string[]`, and `topic` on each item. Search and topic buttons filter the list in the browser.
 
 #### `spacer`: Spacer
 `height: number` (default 48). **Strict type.**
