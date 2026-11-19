@@ -33,6 +33,9 @@ export async function ProductListing({
   intro,
   sp,
   toolbar,
+  head,
+  sortOnly,
+  empty,
 }: {
   basePath: string;
   categoryId?: string;
@@ -44,6 +47,12 @@ export async function ProductListing({
   sp: SearchParams;
   /** Category page (Figma 87:203): no page title here (the header above has it); "Products", count and Sort by instead. */
   toolbar?: boolean;
+  /** Replaces the page title: rendered above the filters with the number of products found (search page). */
+  head?: (count: number) => React.ReactNode;
+  /** Only the Sort by box above the products (search page). */
+  sortOnly?: boolean;
+  /** Shown instead of the plain "No products found." */
+  empty?: React.ReactNode;
 }) {
   const q = listingQuery(sp);
   const query = { per_page: 24, ...q, ...filter, category_id: q.category_id || categoryId, search: q.search || search };
@@ -64,10 +73,11 @@ export async function ProductListing({
 
   return (
     <div className={cn(container, "pb-14 md:pb-[72px]")}>
-      {!toolbar && title && <h1 className={pageTitle}>{title}</h1>}
-      {!toolbar && (intro || data.category?.description) && <p className={pageIntro}>{intro || data.category?.description}</p>}
-      <div className={cn("grid grid-cols-1 items-start gap-5 lg:gap-7", hasFilters && "lg:grid-cols-[240px_minmax(0,1fr)]")}>
-        {hasFilters && (
+      {head?.(data.pagination?.products_count ?? data.products?.length ?? 0)}
+      {!head && !toolbar && title && <h1 className={pageTitle}>{title}</h1>}
+      {!head && !toolbar && (intro || data.category?.description) && <p className={pageIntro}>{intro || data.category?.description}</p>}
+      <div className={cn("grid grid-cols-1 items-start gap-5 lg:gap-7", hasFilters && (data.products?.length || !empty) && "lg:grid-cols-[240px_minmax(0,1fr)]")}>
+        {hasFilters && (data.products?.length || !empty) && (
           <Suspense>
             <Filters filters={data.filters} labels={{ filters: UI.filters, clear: UI.clearFilters, min: UI.min, max: UI.max, apply: UI.apply }} />
           </Suspense>
@@ -84,12 +94,21 @@ export async function ProductListing({
               </Suspense>
             </div>
           )}
+          {sortOnly && (data.products?.length ?? 0) > 0 && (
+            <div className="mb-3.5 flex justify-end">
+              <Suspense>
+                <SortSelect />
+              </Suspense>
+            </div>
+          )}
           {data.products?.length ? (
             <div className="grid grid-cols-2 gap-2.5 sm:gap-4 md:grid-cols-3">
               {data.products.map((p) => (
                 <ProductCard key={p.id} p={p} currency={currency} />
               ))}
             </div>
+          ) : empty ? (
+            empty
           ) : (
             <p className="grid grid-cols-1 min-h-60 place-items-center rounded-[14px] border border-dashed border-[#c9d2de] p-8 text-center text-sm text-muted-3 gap-0">
               {UI.noProducts}

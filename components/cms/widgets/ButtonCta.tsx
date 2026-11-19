@@ -1,4 +1,4 @@
-// Button / CTA (button-cta) and our variants: note, callout, banner, band, help, product-help, bulk, info.
+// Button / CTA (button-cta) and our variants: note, callout, banner, band, help, product-help, search-help, bulk, info.
 import { cn } from "@/lib/cn";
 import { tr } from "@/lib/format";
 import { btn } from "@/lib/styles";
@@ -120,6 +120,23 @@ export function ButtonCta({ w, ctx }: P) {
       </div>
     );
   if (w.variant === "product-help") return <ProductHelp w={w} />;
+  if (w.variant === "search-help")
+    // Figma Search "Help banner" (94:849): navy gradient bar, file icon, title, one line, gold button.
+    return (
+      <div className="flex flex-col items-start gap-4 rounded-xl bg-gradient-to-r from-navy-deep to-[#123a6e] px-6 py-6 md:min-h-24 md:flex-row md:items-center md:gap-5 md:px-[34px] md:py-4">
+        <Icon name="sr-help-file" size={32} />
+        <div className="grid min-w-0 flex-1 gap-[3px]">
+          {w.title && <h2 className="font-head text-xl font-bold text-white md:text-[22px]">{tr(w.title)}</h2>}
+          {w.subtitle && <p className="text-[14.5px] text-[#c9d3e3]">{tr(w.subtitle)}</p>}
+        </div>
+        {w.text && (
+          <SmartLink to={w.link} className="flex h-12 w-full shrink-0 items-center justify-center gap-2.5 rounded-lg bg-[#b8862b] px-[22px] text-[15px] font-bold whitespace-nowrap text-white transition hover:brightness-110 md:w-auto">
+            {tr(w.text)}
+            <Icon name="ac-arrow-white" size={14} />
+          </SmartLink>
+        )}
+      </div>
+    );
   if (w.variant === "quote-whatsapp") return null; // placed by the quote list page
   if (w.variant === "banner") return ctx.beside ? <TallCtaBanner w={w} /> : <CtaBanner w={w} />;
   if (!w.text) return null;

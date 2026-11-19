@@ -777,6 +777,13 @@ export const SECTIONS: SectionRecipe[] = [
     ]),
   },
   {
+    id: "search-help",
+    name: "Navy help bar (search page)",
+    use: "\"Can't find the right product?\" bar under the search results (CMS page 'search').",
+    notes: "Button / CTA 'search-help': title, subtitle, button text + link (e.g. a WhatsApp link once there is a number).",
+    row: one("search-help", [cta("search-help", { variant: "search-help", title: "Bar title?", subtitle: "One sentence.", text: "Button text", link: "/quote", style: "primary" })]),
+  },
+  {
     id: "gallery",
     name: "Picture gallery",
     use: "A grid of pictures, each optionally a link.",

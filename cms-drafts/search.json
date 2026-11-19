@@ -1,0 +1,31 @@
+{
+  "title": "Search",
+  "layout": [
+    {
+      "id": "row-search-help",
+      "columns": [
+        {
+          "id": "col-search-help",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-search-help",
+              "type": "button-cta",
+              "settings": {
+                "variant": "search-help",
+                "title": "Can’t find the right product?",
+                "subtitle": "Send a product photo, REF number or item list.",
+                "text": "Send your list",
+                "link": "/quote",
+                "style": "primary",
+                "size": "medium",
+                "align": "right",
+                "fullWidth": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

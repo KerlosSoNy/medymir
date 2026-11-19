@@ -53,7 +53,9 @@ export function Filters({
   };
   const set = (k: string, v: string | null) => push((p) => (v ? p.set(k, v) : p.delete(k)));
 
-  const chips = [...sp.entries()].filter(([k]) => k !== "page" && k !== "q");
+  // Not filters: the page number, the search term, the search tab / header category (category_id) and the preview flag.
+  const KEEP = new Set(["page", "q", "category_id", "draft"]);
+  const chips = [...sp.entries()].filter(([k]) => !KEEP.has(k));
   const chipLabel = (k: string, v: string) => {
     if (k === "price_min" || k === "price_max") return `${k === "price_min" ? labels.min : labels.max} ${v}`;
     const f = filters.find((x) => paramFor(x) === k);
@@ -167,7 +169,7 @@ export function Filters({
               {chipLabel(k, v)} ✕
             </button>
           ))}
-          <button type="button" className={cn(chip, "bg-white underline")} onClick={() => push((p) => [...p.keys()].forEach((k) => k !== "q" && p.delete(k)))}>
+          <button type="button" className={cn(chip, "bg-white underline")} onClick={() => push((p) => [...p.keys()].forEach((k) => !KEEP.has(k) && p.delete(k)))}>
             {labels.clear}
           </button>
         </div>
