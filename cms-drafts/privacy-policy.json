@@ -1,0 +1,83 @@
+{
+  "title": "Privacy policy",
+  "layout": [
+    {
+      "id": "row-privacy-policy",
+      "columns": [
+        {
+          "id": "col-privacy-policy-menu",
+          "span": 3,
+          "widgets": [
+            {
+              "id": "w-privacy-policy-menu",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "policy-menu",
+                "title": "Policies & information",
+                "columns": 1,
+                "items": [
+                  {
+                    "label": "Privacy policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/privacy-policy"
+                  },
+                  {
+                    "label": "Shipping policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/shipping-policy"
+                  },
+                  {
+                    "label": "Refund policy",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/refund-policy"
+                  },
+                  {
+                    "label": "Terms of service",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/terms-of-service"
+                  },
+                  {
+                    "label": "Contact information",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": "",
+                    "link": "/contact-information"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "col-privacy-policy-text",
+          "span": 9,
+          "widgets": [
+            {
+              "id": "w-privacy-policy-text",
+              "type": "text-image",
+              "settings": {
+                "variant": "policy",
+                "eyebrow": "Policies & information",
+                "title": "Privacy policy",
+                "content": "<h2>Privacy Policy</h2><p>MedyMar (“we”) supplies medical, surgical and hygiene products to healthcare facilities, distributors and clinicians. This policy explains what information we collect through this website, why we collect it, and the choices you have.</p><h3>1. Information you give us</h3><ul><li><strong>Quotation and enquiry forms:</strong> your name, organisation, work email, phone number, the type of buyer you are, delivery city and country, and what you need. The products in your quote list are sent with your request.</li><li><strong>Account sign-in:</strong> your phone number (we send a one-time SMS code to it) and your name, and your email address if you add it.</li><li><strong>Saved addresses</strong> that you add to your account.</li></ul><h3>2. Information collected automatically</h3><p>Your quote list is kept in our store system under a random identifier saved in your browser, so it is still there when you come back. When you sign in, a sign-in token is saved in your browser until you sign out or it expires. Our store platform may record basic information about visits, such as the pages viewed, to keep the service working and to measure its use.</p><p>If we switch on analytics or advertising tools (for example Google Analytics or Meta), they record the pages you visit and actions such as adding products to your quote list. We will list the tools that are active on this page.</p><h3>3. How we use your information</h3><ul><li>To prepare quotations and answer your enquiries.</li><li>To process and deliver orders, and to handle returns and warranty claims.</li><li>To run your account: sign-in, orders and saved addresses.</li><li>To check batches and support tender and distributor enquiries.</li><li>To improve our website and service.</li><li>To meet legal and regulatory obligations, such as product traceability records.</li></ul><h3>4. Who we share it with</h3><p>We do not sell your information. We share it only with: the platform that runs our store and website and its hosting providers, which store it for us; the provider that sends sign-in SMS codes; manufacturers, carriers and customs agents where this is needed to supply, deliver or service your order; and authorities where the law requires it.</p><h3>5. How long we keep it</h3><p>We keep enquiries and quotations for as long as we need them to answer and follow up, and order and traceability records for as long as the law and the rules for medical products require. You can ask us to delete information we no longer need.</p><h3>6. Your choices and rights</h3><p>You can view and change your name, email and saved addresses in your account at any time. To ask for a copy of your information, a correction or deletion, email <a href=\"mailto:milani@shamhabib.com\">milani@shamhabib.com</a>. We may need to keep some records where the law requires it.</p><h3>7. Security</h3><p>Information is sent over encrypted connections and stored with our store platform. Sign-in uses one-time codes sent to your phone, so we never ask you for a password.</p><h3>8. Changes to this policy</h3><p>We may update this policy. The latest version is always on this page.</p><h3>9. Contact</h3><p>MedyMar · Muscat, Oman · Kigali, Rwanda · Nairobi, Kenya · <a href=\"mailto:milani@shamhabib.com\">milani@shamhabib.com</a></p>",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -73,7 +73,7 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 | Feature | Status | Notes |
 |---|---|---|
 | Add to quote list (cards and product page) | ✅ | Saved in the store's cart for this browser |
-| Quote list page (`/quote`) | ✅ | Built from Figma (19 Nov): title with the 3 steps, "Items for quotation" (change quantity, remove, empty state with "Browse categories", "Add another product or REF" jumps to the free-text field), "Your details" form (the store's form fields, attachment note; a consent tick box appears once its text is set), sidebar with Request summary (lines, total quantity, send button), "Prefer WhatsApp?" card (once a link is set) and "What happens next?". Thank-you message after sending. Texts editable in Page builder → Quote list (CMS page `quote`) |
+| Quote list page (`/quote`) | ✅ | Built from Figma (19 Nov): title with the 3 steps, "Items for quotation" (change quantity, remove, empty state with "Browse categories", "Add another product or REF" jumps to the free-text field), "Your details" form (the store's form fields, attachment note, required consent tick box linking to the Privacy policy), sidebar with Request summary (lines, total quantity, send button), "Prefer WhatsApp?" card (once a link is set) and "What happens next?". Thank-you message after sending. Texts editable in Page builder → Quote list (CMS page `quote`) |
 | Send quotation request | 🟡 | From the home form or the quote list page: sends the form plus all quote-list lines, then empties the list. Never tested with a real submission |
 | Prices shown as "indicative" in OMR | ✅ | |
 
@@ -93,14 +93,14 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 
 | Feature | Status | Notes |
 |---|---|---|
-| Info pages from the page builder | 🟡 | Each has its own route file: About, Contact, FAQ, Tender desk, Verify a batch, Distributor enquiries, Help centre (live). Policy pages are live except Privacy (on hold) |
+| Info pages from the page builder | 🟡 | Each has its own route file: About, Contact, FAQ, Tender desk, Verify a batch, Distributor enquiries, Help centre (live). All policy pages are live |
 | Tender desk, Verify a batch, Distributor enquiries (`/tender-desk`, `/verify-batch`, `/distributors`) | ✅ | No Figma design; same style as About / Contact: navy hero, "How it works" steps (or "Who we work with" cards) and the enquiry form with the contact panel; each form sends with its own subject (Tender enquiry, Batch verification, Distributor enquiry). Texts in the page builder |
 | Help centre (`/help`) | ✅ | Navy hero, "Popular topics" cards (FAQ, quotation, account), "Still need help?" band |
 | About page (`/about`) | 🟡 | Built from Figma (hero, intro, 3 link cards, "Two ways to buy", closing band); texts editable in Page builder → About. Hero photo not uploaded yet |
 | Breadcrumbs on info pages | ✅ | "Home › Page title" above About, Contact, FAQ (and future info pages) |
 | FAQ page (`/faq`) | ✅ | Built from Figma: search box, topic buttons, 13 questions that open and close, "Still have a question?" bar. Questions, answers and topics editable in Page builder → FAQ |
 | Contact page (form, sent, error) | 🟡 | Live at `/contact`, built from Figma: enquiry form, navy contact panel, "Have a product list?" card, thank-you and error messages. Its fields are the store's Contact form fields, the same list as the quotation form. Texts editable in Page builder → Contact |
-| Policy pages with side menu | 🟡 | Built from Figma (menu becomes pill buttons on phones). Live: Shipping, Refund, Terms of service, Contact information (texts in the page builder). Privacy policy on hold until there is a real text, so its links show "page not found" |
+| Policy pages with side menu | ✅ | Built from Figma (menu becomes pill buttons on phones); all 5 live: Privacy, Shipping, Refund, Terms of service, Contact information (texts in the page builder) |
 | "Page not found" page | ✅ | |
 
 ## Page-building tools (on the developer's computer only)
