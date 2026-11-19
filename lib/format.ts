@@ -1,3 +1,4 @@
+import { READY_STOCK_CATEGORY } from "./config";
 /** Shows a price exactly as returned by the API, in the store's currency. */
 export function money(value: number | null | undefined, currency: string | null | undefined) {
   if (value == null || Number.isNaN(Number(value))) return "";
@@ -36,3 +37,11 @@ export const slugify = (s: string) =>
     .replace(/[\s_]+/g, "-");
 
 export const unslug = (s: string) => decodeURIComponent(s).replace(/-/g, " ");
+
+/**
+ * Is this a Ready Stock offer (category "ready-stock-offers")? Only these show a price; every other product is
+ * "Quotation on request" (owner's decision, 19 Nov). Product lists carry only the category name, so fall back to it.
+ */
+export function isReadyStock(p: { category_slug?: string | null; category_name?: string | null }) {
+  return p.category_slug === READY_STOCK_CATEGORY || (!!p.category_name && slugify(p.category_name) === READY_STOCK_CATEGORY);
+}

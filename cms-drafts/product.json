@@ -1,0 +1,46 @@
+{
+  "title": "Product",
+  "layout": [
+    {
+      "id": "row-product-page",
+      "columns": [
+        {
+          "id": "col-product-page",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-product-delivery-tab",
+              "type": "text-image",
+              "settings": {
+                "variant": "product-tab",
+                "title": "Delivery & Ordering",
+                "content": "<p>Every quotation shows a delivery date for your destination and the shipping terms (DDP, CIF or EXW). The date is confirmed on the order acknowledgement.</p><p>Ready stock offers are held locally in Oman. Other products are ordered for you, and their lead time is confirmed with your quotation.</p><p>Each delivery comes with a packing list that matches your quotation line by line. Please report any damage or shortage within 48 hours. See our <a href=\"/shipping-policy\">shipping policy</a> for details.</p>",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            },
+            {
+              "id": "w-product-help",
+              "type": "button-cta",
+              "settings": {
+                "variant": "product-help",
+                "title": "Need help finding the right reference?",
+                "subtitle": "Send us your product list or requirements and our team will assist you.",
+                "text": "Send your list  →",
+                "link": "/quote",
+                "whatsappLink": "",
+                "style": "outline",
+                "size": "medium",
+                "align": "right",
+                "fullWidth": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

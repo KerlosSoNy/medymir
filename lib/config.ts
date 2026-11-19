@@ -25,3 +25,6 @@ export const SITE_LAYOUT_SLUG = "site-layout";
 // Key of the store's "Brand" product detail (dynamic attribute). Brand pages, the brands page and the
 // mega-menu "Featured brands" all read brands from it.
 export const BRAND_ATTRIBUTE = "brand";
+
+/** Store category whose products are Ready Stock offers (own page design, price shown on the product page). */
+export const READY_STOCK_CATEGORY = "ready-stock-offers";

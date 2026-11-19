@@ -743,6 +743,27 @@ export const SECTIONS: SectionRecipe[] = [
     ]),
   },
   {
+    id: "product-page",
+    name: "Product page parts (CMS page \"product\")",
+    use: "Shown on every product page: extra tabs beside Overview and Specifications (e.g. 'Delivery & Ordering') and the help banner under the tabs.",
+    notes: "Only for the CMS page 'product'. Text + Image 'product-tab': title = tab name, content = the tab text (one section per tab). Button / CTA 'product-help': title, subtitle, button text + link; whatsappLink (optional, e.g. https://wa.me/968…) adds 'Need help? Chat on WhatsApp' under the product's buttons. Any other section on this page shows below the product.",
+    row: one("product-page", [
+      w("product-tab", "text-image", { variant: "product-tab", title: "Tab name", content: "<p>Tab text.</p>", ...IMG, imagePosition: "right", backgroundColor: "" }),
+      cta("product-help", { variant: "product-help", title: "Bar title?", subtitle: "One sentence.", text: "Button text  →", link: "/quote", whatsappLink: "" }),
+    ]),
+  },
+  {
+    id: "quote-page",
+    name: "Quote list page parts (CMS page \"quote\")",
+    use: "Texts of the quote list page (/quote): intro line, attachment box, consent line, sidebar note and button, 'What happens next?' steps and the 'Prefer WhatsApp?' card.",
+    notes: "Only for the CMS page 'quote'; the form fields themselves come from the store's Contact form settings. Contact Form 'quote-page': subtitle, attachTitle, attachText, consentText + privacyLinkText + privacyLink (a required tick box), smallPrint, noteTitle, noteText, submitText, footnote, subject (email subject). Stats 'quote-next': title + items (label = one step). Button / CTA 'quote-whatsapp': title, subtitle, text, link (the card only shows when link is set, e.g. https://wa.me/968…). An empty text is left out.",
+    row: one("quote-page", [
+      w("quote-page", "contact-form", { variant: "quote-page", subtitle: "One sentence.", attachTitle: "Attach your list", attachText: "How to send files.", consentText: "I agree to …", privacyLinkText: "Privacy policy", privacyLink: "/privacy-policy", smallPrint: "Small print.", noteTitle: "Note title", noteText: "One sentence.", submitText: "Send", footnote: "Small note under the button.", subject: "Quotation request" }),
+      w("quote-next", "stats-counter", { variant: "quote-next", title: "What happens next?", columns: 3, items: [stat("First step"), stat("Second step"), stat("Third step")] }),
+      cta("quote-whatsapp", { variant: "quote-whatsapp", title: "Card title", subtitle: "One sentence.", text: "Button text", link: "" }),
+    ]),
+  },
+  {
     id: "gallery",
     name: "Picture gallery",
     use: "A grid of pictures, each optionally a link.",

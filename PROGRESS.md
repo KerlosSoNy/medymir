@@ -1,6 +1,6 @@
 # MedyMar website: progress
 
-_Last updated: 18 November 2026 (fixed the "500" error on Vercel by replacing the HTML cleaner; About, Contact, FAQ live; policy pages built, texts waiting for approval; home "Shop by brand" now reads the Brand list; both home carousels on Swiper)_
+_Last updated: 19 November 2026 (product page built from Figma: ready stock, quotation and sold-out looks; "Delivery & Ordering" tab and help banner saved as CMS page `product`; prices now only on Ready Stock product cards; quote list page built from Figma, texts saved as CMS page `quote`)_
 
 Where we are, measured against the Figma file. Also see [FEATURES.md](FEATURES.md) (what the site does), [SPECS.md](SPECS.md) (how it's built) and [AGENTS.md](AGENTS.md) (rules for AI assistants).
 
@@ -13,7 +13,9 @@ Where we are, measured against the Figma file. Also see [FEATURES.md](FEATURES.m
   - home page, header, footer and navbar mega menus, at all three sizes
   - the tablet/phone menu drawer
   - all card designs (product, category, brand, exclusive brand, solution)
-- **Shop pages work, with simpler layouts:** category, search, product, quote list, account, brands. Their larger Figma page layouts are not built yet.
+- **Product page done from Figma (19 Nov)** at all sizes: ready stock, quotation (no price) and sold-out looks, tabs and help banner (texts in Page builder → Product). Prices show only on Ready Stock offers, on product pages and cards.
+- **Quote list page built from Figma (19 Nov)**: list, details form, summary sidebar; texts in Page builder → Quote list.
+- **Shop pages work, with simpler layouts:** search, account, brands. Their larger Figma page layouts are not built yet.
 - **About, Contact and FAQ pages are live (18 Nov)**, matching Figma. About still needs its photo; Contact shows the store's quotation fields (see section 3, task 3).
 - **Not built yet:** Policy pages and the special Ready Stock page.
 - **Page builder kit (18 Nov):** a section gallery (`/dev/widgets`, 31 section styles), a draft preview (`/dev/preview/<page>`) and the `/cms-page` command, so new pages (About, FAQ…) can be planned, previewed and approved before anything is saved to the store. Local only; checked at 360–1440 wide.
@@ -38,14 +40,14 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | Category (e.g. Endoscopy) | ✅ | ✅ | ✅ | Matches Figma (checked at 360–1440): trail, hero (category name, description, picture), sub-category tiles (shown once the store has sub-categories), Featured brands (brands with products in the category), store filters, Products toolbar with Sort by, cards. Per-category promo banner / callout go in an optional CMS page `category-<slug>` (none made yet) |
 | Ready Stock | 🟡 | 🟡 | 🟡 | Built to match Figma and live at `/category/ready-stock-offers` (checked at 360–1440). Hero photo not uploaded (`design-assets/upload/R01-hero-ready-stock.png`). Sidebar shows the store's filters (price, on sale, featured, in stock), not Figma's Categories/Brand/Pack size |
 | Brands | 🟡 | 🟡 | 🟡 | Brand tiles match the card design; the full Figma page is not built |
-| Product: ready stock / quotation / sold out | 🟡 | 🟡 | 🟡 | Gallery, price, REF, options, add to quote list and "unavailable" all work. Figma's tabs and extra blocks are not built |
+| Product: ready stock / quotation / sold out | ✅ | ✅ | ✅ | Matches Figma (checked at 360–1440; tabs, quantity, enlarge picture, add to quote list and "Request bulk pricing" tested). Differences: the gold button says "Add to quote list" (Figma: "Add to cart"; the site has no checkout); thumbnails appear under the photo when a product has several pictures (not in Figma); on phones the photo box is square (Figma's phone frame has a 627px-tall box). "Chat on WhatsApp" waits for the number (task 11). Sold-out look not seen live yet: no product is sold out |
 | Search: results / no results / empty | 🟡 | 🟡 | 🟡 | Results and "no results" work; the special "empty" design is not built |
-| Quote list | 🟡 | 🟡 | 🟡 | Works; Figma's summary sidebar is not built |
+| Quote list | ✅ | ✅ | ✅ | Built to match Figma (checked at 360–1440; quantity, remove, "Add another product", required-field check tested; no real request sent). Texts from the CMS page `quote` (saved 19 Nov). Figma's consent tick box is left out until the privacy policy page exists (owner, 19 Nov). Form shows the store's 7 fields, not Figma's 9. "Prefer WhatsApp?" card waits for the number (task 11). Figma's filled list has no design; rows built in the same style. Phone: the 3 steps stay in one row (Figma's phone frame stacks them) |
 | Account: signed out / with orders / no orders | 🟡 | 🟡 | 🟡 | SMS login and orders work; Figma's account menu and header are not built |
 | About | 🟡 | 🟡 | 🟡 | Built to match Figma and live at `/about` (checked at 360–1440). Waiting on the hero photo (owner task 0) |
 | FAQ | ✅ | ✅ | ✅ | Live at `/faq`, matches Figma (checked at 360–1440; search, topics and open/close tested). Figma had only the first answer; the other 12 were written by the developer and approved by the owner |
 | Contact: form / sent / error | 🟡 | 🟡 | 🟡 | Built to match Figma and live at `/contact` (all 3 states checked at 360–1440; sent/error tested with a fake reply, no real enquiry sent). Shows the store's form fields (currently the quotation fields, not Figma's 6 contact fields); WhatsApp line left out until there is a number |
-| Policies (privacy, shipping, refund, terms, contact info) | 🟡 | 🟡 | 🟡 | Built to match Figma (checked at 360–1440). 4 drafts with Figma texts (`cms-drafts/<slug>.json`), waiting for the owner to confirm the promises in them. Privacy: Figma text is a Shopify template, on hold. Not saved yet |
+| Policies (privacy, shipping, refund, terms, contact info) | 🟡 | 🟡 | 🟡 | Built to match Figma (checked at 360–1440). 4 drafts with Figma texts (`cms-drafts/<slug>.json`), waiting for the owner to confirm the promises in them. Privacy: Figma text is a Shopify template, on hold. Not saved yet. When the privacy page is live, add the consent tick box to Page builder → Quote list (`consentText`, `privacyLinkText`) |
 | "Page not found" | ✅ | ✅ | ✅ | No Figma frame; built in the same style |
 
 **Cards** (Figma Components page): product card, category card and tile, brand card, exclusive-brand card, solution card, menu list item, menu category card and menu promo card are all ✅. Every card handles any photo size and shows a styled placeholder when there's no photo.
@@ -97,13 +99,14 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | 8 | **Delete the page "ZZ widget test"** | Leftover test page; the connector can't delete pages |
 | 9 | **Delete or rename the old "Header" menu** (café menu items) | Not used by the new site |
 | 10 | Replace the 7 **placeholder brand cards** in "Shop by brand" (Home page) with real brand photos | They're simple navy cards with the brand name, made by the developer, not official logos |
-| 11 | Give the **WhatsApp number** for the "Request a quote on WhatsApp" banner and the Contact page | The banner's button currently goes to the quote form. With the number it becomes a WhatsApp link, and the Contact page panel gets its "Chat with our team on WhatsApp" line (in Figma, left out for now) |
+| 11 | Give the **WhatsApp number** for the "Request a quote on WhatsApp" banner, the Contact page and product pages | The banner's button currently goes to the quote form. With the number it becomes a WhatsApp link, the Contact page panel gets its "Chat with our team on WhatsApp" line, and product pages get "Need help? Chat on WhatsApp" (all in Figma, left out for now) |
 | 13 | **Decide the Contact form fields:** the store has one field list for both forms. Keep the quotation fields on the Contact page too, or change the list so it suits both (e.g. add an "Enquiry type" dropdown with "Quotation" as one choice) | Figma's Contact form has 6 fields (Name, Email, Phone, Organisation, Enquiry type, Message); the page currently shows the 7 quotation fields |
 | 12 | **Check the mega-menu texts** for Endoscopy, Dialysis & Urology, Critical Care & Infusion and Hospital Supplies (`lib/menu.ts`) | These 4 menus aren't in Figma; we wrote their texts |
 
 ---
 
 ## 4. Open decisions
+- **Decided 19 Nov (owner):** products outside Ready Stock show **"Quotation on request" with no price** on the product page (Figma). Product cards follow the same rule (owner, 19 Nov): no price outside Ready Stock, "Request a quotation" instead.
 - **How to add the photos:** the owner uploads the originals in the page builder (recommended), or the developer uploads the Figma exports (lower quality).
 - **Category names:** the design's category cards use longer names ("Cardiovascular & Cardiac Surgery") and mention "13 medical categories". The store currently has the 8 names from the menu bar. The menus show the 12 long-name groups as sub-sections.
 - **Sub-categories:** the menus list sub-categories (e.g. "Structural Heart") that don't exist in the store, so they open the category with a search. Creating real sub-categories in the store would make them exact.
@@ -141,6 +144,8 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | 18 Nov | _(Owner approved)_ Home page: "Shop by brand" changed from a **Testimonials** section (8 typed-in cards with taglines, Stryker photo) to a **Product Attributes** section on the Brand list (same 8 brands, same order). Cards now take each brand's banner photo, logo and description from the Brand list; taglines are gone until descriptions are written there. Re-read first (unchanged since 12:11), nothing else changed. Record: `cms-drafts/home.json` |
 | 18 Nov | _(Owner approved)_ Created two product details (dynamic attributes) for the Ready Stock offer cards: **Pack size** (`pack_size`, free text, e.g. "10 dressings / pack") and **Unit** (`unit`, pick-from-list: pack, box, unit, tub). Both shown on the product page, optional |
 | 18 Nov | _(Owner approved)_ Created page **"Ready Stock"** (`ready-stock`, draft = shown publicly) for `/category/ready-stock-offers`: hero, 3 promises, offers area, bulk-order bar, How it works, info line, WhatsApp banner, reservation form; texts from Figma. Saved a second time a minute later to move the offers area from Products by Category (drops our settings publicly) to Text + Image look `offers`; nothing else changed. Hero photo still empty. Record: `cms-drafts/ready-stock.json` |
+| 19 Nov | _(Owner approved)_ Created page **"Product"** (`product`, draft = shown publicly) for every product page: a "Delivery & Ordering" tab (Text + Image look `product-tab`, text written by the developer from the shipping policy draft) and the help banner "Need help finding the right reference?" (Button CTA look `product-help`, Figma text, button → /quote, WhatsApp link empty). New page, nothing else changed; checked on the live product page. Record: `cms-drafts/product.json` |
+| 19 Nov | _(Owner approved)_ Created page **"Quote list"** (`quote`, draft = shown publicly) for `/quote`: intro line, attachment note (home form wording, no upload), small print, sidebar note "No payment required", button text, footnote, "What happens next?" (3 steps) and the "Prefer WhatsApp?" card with an empty link (hidden until the number is added). Consent tick box left empty on purpose. Texts from Figma. New page, nothing else changed; checked on the live page. Record: `cms-drafts/quote.json` |
 
 Nothing was deleted by the developer. TheCoins has no delete action.
 
@@ -160,7 +165,7 @@ Nothing was deleted by the developer. TheCoins has no delete action.
 ## 7. Next steps
 1. Owner tasks in section 3, especially the Abbott picture, the photos and the quotation form fields
 2. Build the remaining Figma pages: Policies (5), Ready Stock
-3. Bring the shop pages up to their full Figma layouts: category header, product tabs, quote-list summary, account menu, brands page
+3. Bring the shop pages up to their full Figma layouts: account menu, brands page
 4. Products imported, each with its **Brand** set; then switch brand pages from name search to the Brand detail and check the Brand filter
 5. Test a real quotation submission (with the owner's OK)
 6. Logo as an image file (optional; the site currently draws the wordmark from the store name)

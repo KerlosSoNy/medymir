@@ -30,6 +30,13 @@ export const btn = (variant: BtnVariant = "dark", size: BtnSize = "md", ...extra
 /** Centered page column with the site gutter (Figma: 16px phone, 24px tablet, 32px desktop). */
 export const container = "w-full max-w-[calc(var(--container-site)+64px)] mx-auto px-4 md:px-6 lg:px-8";
 
+/** Wider page column for the product page (Figma: 1280px content at 1440, same gutters as `container`). */
+export const containerWide = "w-full max-w-[1344px] mx-auto px-4 md:px-6 lg:px-8";
+
+/** Product page "Row / …" (Figma): label column (130px, 104px on small phones) beside its control. */
+export const pdRow = "flex items-center gap-3";
+export const pdRowLabel = "w-[104px] shrink-0 text-[14.5px] leading-snug text-slate sm:w-[130px]";
+
 /** Horizontal padding used by full-width home sections (Figma: 16 / 24 / 56 / 132px). */
 export const sectionX = "px-4 md:px-6 lg:px-14 xl:px-[132px]";
 

@@ -22,6 +22,8 @@ Connection settings: `.env.local` (public storefront keys, see `.env.example`).
 | A product's brand; the list of brands to pick from | Products → product details → **Brand** (add new brands to the Brand list first) |
 | Quotation form fields | Contact form settings |
 | Store name, colours, logo, contact email | Store settings / branding |
+| Product pages: "Delivery & Ordering" tab (and any other extra tab), the "Need help finding the right reference?" banner, the WhatsApp link | Page builder → page **product** (one text section per tab; the WhatsApp link is the banner's `whatsappLink` setting) |
+| Quote list page texts (intro, attachment note, consent line, sidebar note, "What happens next?", "Prefer WhatsApp?" card and its link) | Page builder → page **quote** (the form fields themselves: Contact form settings) |
 | Extra pages (About, FAQ, policies…) | Page builder → new page with that slug, e.g. `about`, `faq`, `privacy-policy` |
 
 Some sections use extra settings (e.g. `variant`, `eyebrow`, `linkText`) that the page builder keeps but may not show as form fields; ask your developer to change those.

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
-import { money, plain } from "@/lib/format";
+import { isReadyStock, money, plain } from "@/lib/format";
 import { btn } from "@/lib/styles";
 import { UI } from "@/lib/ui";
 import { AddToQuote } from "./AddToQuote";
@@ -59,14 +59,15 @@ export function ProductPhoto({
   );
 }
 
-/** B2B product card (Figma Card/Product 87:3): brand/REF, photo, name, description, price, add to quote list. */
+/** B2B product card (Figma Card/Product 87:3): brand/REF, photo, name, description, price (Ready Stock only), add to quote list. */
 export function ProductCard({ p, currency }: { p: any; currency: string | null }) {
   const href = `/product/${p.id}`;
   const brand = p.custom_attributes?.brand ?? p.custom_attributes?.Brand;
   const hasOptions = !Array.isArray(p.modifiers) || p.modifiers.length > 0 || (p.variation_groups?.length ?? 0) > 0;
   const available = p.is_available !== false && p.is_in_stock !== false;
   const onSale = p.compare_at_price != null && Number(p.compare_at_price) > Number(p.price);
-  const hasPrice = p.price != null && Number(p.price) > 0;
+  // Prices only on Ready Stock offers; other products are "Request a quotation" (owner's decision, 19 Nov).
+  const hasPrice = isReadyStock(p) && p.price != null && Number(p.price) > 0;
   return (
     <article className="group flex h-full min-w-0 flex-col rounded-xl border border-[#e6eaf0] bg-white p-2.5 transition hover:border-[#cfd6e0] hover:shadow-[0_12px_30px_rgb(15_31_64/0.1)] sm:p-[15px]">
       {(brand || p.sku) && (
@@ -108,7 +109,7 @@ export function ProductCard({ p, currency }: { p: any; currency: string | null }
               {UI.viewDetails}
             </Link>
           ) : (
-            <AddToQuote productId={p.id} compact />
+            <AddToQuote productId={p.id} />
           ))}
       </div>
     </article>

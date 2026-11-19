@@ -12,7 +12,7 @@ import { useQuoteList } from "../QuoteListProvider";
 import { Icon } from "../SmartLink";
 import { card, eyebrow } from "./classes";
 
-const control =
+export const control =
   "w-full rounded-[7px] border border-input-border bg-white px-[15px] py-[13px] text-sm text-ink-2 transition placeholder:text-muted-3 focus:border-blue focus:outline-none focus:ring-2 focus:ring-blue/15";
 const fieldCls = "grid grid-cols-1 content-start gap-2";
 const full = "md:col-span-2";
@@ -27,13 +27,14 @@ export function options(f: FormField): string[] {
   return [];
 }
 
-function Field({ f }: { f: FormField }) {
+/** One store form field (label + input / select / textarea), Figma Form/Field. Textareas and long fields span 2 columns. */
+export function Field({ f }: { f: FormField }) {
   const t = f.field_type?.toLowerCase();
   const common = { name: f.field_name, required: f.is_required, placeholder: f.placeholder ?? undefined, id: `qf-${f.id}` };
   const label = (
-    <label htmlFor={common.id} className="text-[13px] font-semibold text-ink-2">
+    <label htmlFor={common.id} className="text-sm font-medium text-ink-2">
       {f.field_label}
-      {f.is_required && " *"}
+      {f.is_required && <span className="text-[#d92d20]"> *</span>}
     </label>
   );
   if (t === "textarea")
@@ -69,6 +70,31 @@ function Field({ f }: { f: FormField }) {
   );
 }
 
+/** Store form fields in their saved order (null while loading, [] when the store has none). */
+export function useFormFields() {
+  const [fields, setFields] = useState<FormField[] | null>(null);
+  useEffect(() => {
+    contactFormApi
+      .fields()
+      .then((r) => setFields([...(r.fields ?? [])].sort((a, b) => a.sort_order - b.sort_order)))
+      .catch(() => setFields([]));
+  }, []);
+  return fields;
+}
+
+/** Sends a quotation request: the store fields from `form` plus the quote list lines (as text in "quote_list"). */
+export async function sendQuote(fields: FormField[], form: HTMLFormElement, lines: any[], subject: string) {
+  const fd = new FormData(form);
+  const form_data: Record<string, string> = {};
+  for (const f of fields) form_data[f.field_name] = String(fd.get(f.field_name) ?? "");
+  if (lines.length)
+    form_data["quote_list"] = lines.map((l: any) => `${l.quantity} × ${l.name}${l.sku ? ` (REF ${l.sku})` : ""}`).join("\n");
+  return contactFormApi.submit(form_data, { subject });
+}
+
+/** Readable error from a failed form submission. */
+export const sendError = (e: any) => e?.body?.validation_errors?.map((v: any) => v.message).join(" ") || e?.message || UI.error;
+
 export function QuoteForm(p: {
   anchor: string;
   eyebrow: string;
@@ -81,16 +107,9 @@ export function QuoteForm(p: {
   fallbackEmail: string | null;
 }) {
   const { data, count, clear } = useQuoteList();
-  const [fields, setFields] = useState<FormField[] | null>(null);
+  const fields = useFormFields();
   const [state, setState] = useState<"idle" | "busy" | "done" | "error">("idle");
   const [err, setErr] = useState("");
-
-  useEffect(() => {
-    contactFormApi
-      .fields()
-      .then((r) => setFields([...(r.fields ?? [])].sort((a, b) => a.sort_order - b.sort_order)))
-      .catch(() => setFields([]));
-  }, []);
 
   const firstTextarea = useMemo(() => fields?.findIndex((f) => f.field_type?.toLowerCase() === "textarea") ?? -1, [fields]);
   const lines = data?.items ?? [];
@@ -120,19 +139,12 @@ export function QuoteForm(p: {
     e.preventDefault();
     setState("busy");
     setErr("");
-    const fd = new FormData(e.currentTarget);
-    const form_data: Record<string, string> = {};
-    for (const f of fields ?? []) form_data[f.field_name] = String(fd.get(f.field_name) ?? "");
-    if (lines.length)
-      form_data["quote_list"] = lines
-        .map((l: any) => `${l.quantity} × ${l.name}${l.sku ? ` (REF ${l.sku})` : ""}`)
-        .join("\n");
     try {
-      await contactFormApi.submit(form_data, { subject: p.title || UI.requestQuote });
+      await sendQuote(fields ?? [], e.currentTarget, lines, p.title || UI.requestQuote);
       setState("done");
       if (lines.length) clear();
     } catch (e: any) {
-      setErr(e?.body?.validation_errors?.map((v: any) => v.message).join(" ") || e?.message || UI.error);
+      setErr(sendError(e));
       setState("error");
     }
   }

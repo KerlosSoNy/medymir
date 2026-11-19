@@ -1,6 +1,6 @@
 # MedyMar website: technical specs
 
-_Last updated: 18 November 2026_
+_Last updated: 19 November 2026_
 
 This is the reference for **what the site is built with and the rules it follows**. For what the site can do, see [FEATURES.md](FEATURES.md). For what is finished, see [PROGRESS.md](PROGRESS.md).
 
@@ -122,7 +122,7 @@ Defined in `app/globals.css` (`@theme`). Use them as Tailwind classes, e.g. `tex
 
 - **Tailwind utilities only.** Don't add new CSS files or global class names. (Only exception: Swiper's own core stylesheet `swiper/css`, imported in `components/cms/BrandCarousel.tsx` and `CategoryCarousel.tsx`.) Shared recipes live in `lib/styles.ts`:
   - `btn(variant, size, extra)`: buttons (`dark`, `navy`, `outline`, `white`, `gold`, `plain`; sizes `sm`, `md`, `lg`)
-  - `container`, `sectionX`, `pageTitle`, `pageIntro`, `notice()`, `linkBtn`, `field`, `input`
+  - `container`, `containerWide` (product page, 1280px), `pdRow` / `pdRowLabel` (product page label + control rows), `sectionX`, `pageTitle`, `pageIntro`, `notice()`, `linkBtn`, `field`, `input`
   - CMS sections have their own recipes in `components/cms/classes.ts` (section headers, eyebrows, carousel tracks)
 - Use `cn()` (from `lib/cn.ts`) to combine or conditionally apply classes.
 - **The only global classes:** `.rich` (styles HTML that comes from the CMS, which we can't put classes on) and the `fade-down` animation.
@@ -160,6 +160,8 @@ Defined in `app/globals.css` (`@theme`). Use them as Tailwind classes, e.g. `tex
 - **Brands** come from the store's Brand detail: `/brands` lists them with their uploaded logos, `/brand/[slug]` filters products by `brand=<name>` (falls back to a name search for brands only linked from the CMS, e.g. exclusive brands), the drawer's Brands row and each mega menu use them, and brand cards in the home carousel show the brand's logo.
 - **Never put content images in the project** (`public/`). Every content picture is uploaded to TheCoins and referenced from the CMS. `public/icons/` holds only UI icons.
 - **Banners and hero slides** (`components/cms/widgets/Banners.tsx`, `Carousel.tsx` → `HeroSlider`): a card/slide **with a button text** (`cta_text`) is treated as background art; its badge, title, description/subtitle and a real button are rendered as page content. A card **without** button text is shown as a picture (it may contain its own text) and the whole picture is the link. The plain "Banners" type drops the button text and "Hero Banner" reaches the site empty, so a banner that needs a real button must be a **one-slide Carousel** (see CMS-WIDGETS.md §4). Theme `dark` = navy panel with white text, `light` = light panel with dark text.
+- **Product page** (`app/product/[id]/page.tsx`): one product from `get-menu-items`. Look: category `ready-stock-offers` (`READY_STOCK_CATEGORY` in `lib/config.ts`, checked by `isReadyStock()` in `lib/format.ts`, which product cards use too, so prices only show on Ready Stock) = ready stock (price shown); unavailable or tracked stock 0 = sold out; anything else = quotation (no price). Brand, Pack size / Unit and the Specifications tab come from `custom_attributes_schema` (labels, `show_in_product_page`). The CMS page **`product`** supplies extra tabs (`text-image/product-tab`: title = tab name) and the help banner (`button-cta/product-help`, optional `whatsappLink`); `lib/cms-pick.ts` lifts them out and any other section of that page renders below the product. On a developer's computer `?draft=1` uses `cms-drafts/product.json` instead. Client parts: `ProductGallery`, `ProductBuy` (every button adds to the quote list; the outline button then opens `/quote`), `ProductTabs`. Note: class-name constants exported from a `"use client"` file arrive empty in server components, so shared recipes go in `lib/styles.ts`.
+- **Quote list page** (`app/quote/page.tsx` + `components/QuoteRequest.tsx`): list = the store cart (`useQuoteList`), form fields from `contact-form` GET (`useFormFields`), sending through `sendQuote()` (all three shared with the home form in `components/cms/QuoteForm.tsx`). The sidebar's send button submits the form via `form="quote-request"`. Texts come from the CMS page **`quote`**: `contact-form/quote-page`, `stats-counter/quote-next`, `button-cta/quote-whatsapp` (lifted out with `lib/cms-pick.ts`; these looks render nothing anywhere else). `?draft=1` previews `cms-drafts/quote.json` on a developer's computer.
 - **Two-One Grid** (`two-one-grid`): two titled groups (2/3 + 1/3, or full width when one is empty) of brand, product or category entries.
 - **Page builder kit** (building CMS pages, not showing them):
   - `lib/cms-sections.ts`: `WIDGET_MENU` = the 44 widgets of the TheCoins "Add widget" menu (menu names, groups, whether our site shows them) and the **section catalog** `SECTIONS`. One recipe ("look") per supported section style, each a ready-to-save row in the `manage_page_layout` write shape (`{ id, columns[{ id, span, widgets[{ id, type, settings }] }] }`), plus `layoutToPage()`, which turns that shape into the public shape `CmsPage` renders. When the site learns a new section, add its recipe here too.

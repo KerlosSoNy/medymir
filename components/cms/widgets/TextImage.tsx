@@ -18,6 +18,13 @@ const policyText = cn(
   "[&_a]:break-words [&_a]:text-gold-link [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:no-underline",
 );
 
+/** Product page tab text (Figma "Panel / Overview": 15px, 1.65 line height). Also used for the product description. */
+export const productTabText = cn(
+  "max-w-[860px] text-[15px] leading-[1.65] text-[#2d3b55]",
+  "[&_p]:my-0 [&_p+p]:mt-3 [&_h3]:mt-5 [&_h3]:mb-2 [&_h3]:font-head [&_h3]:text-base [&_h3]:font-bold [&_h3]:text-navy-deep [&_h3:first-child]:mt-0",
+  "[&_strong]:font-semibold [&_strong]:text-navy-deep [&_ul]:my-3 [&_ul]:list-disc [&_ul]:pl-6 [&_li+li]:mt-1.5 [&_a]:text-gold-link [&_a]:underline",
+);
+
 export function TextImage({ w, ctx }: P) {
   if (w.variant === "section-header") return <SectionHeader w={w} ctx={ctx} />;
   if (w.variant === "split-hero") return <SplitHero w={w} />;
@@ -30,6 +37,15 @@ export function TextImage({ w, ctx }: P) {
         {w.eyebrow && <p className="text-xs font-bold tracking-[0.08em] text-gold-link uppercase">{tr(w.eyebrow)}</p>}
         {w.title && <h1 className="mt-[7px] font-head text-[30px] leading-[1.15] font-bold text-navy-deep md:text-[38px]">{tr(w.title)}</h1>}
         <div className={policyText} dangerouslySetInnerHTML={{ __html: html(w.content) }} />
+      </article>
+    );
+  if (w.variant === "product-tab")
+    // CMS page "product": an extra tab on every product page (title = tab name, text = panel). Shown as a
+    // plain titled text when the page is previewed on its own.
+    return (
+      <article className="min-w-0">
+        {w.title && <h2 className="font-head text-xl font-bold text-navy-deep">{tr(w.title)}</h2>}
+        <div className={cn(productTabText, "mt-3")} dangerouslySetInnerHTML={{ __html: html(w.content) }} />
       </article>
     );
   if (w.variant === "payments" || w.variant === "footer-about") return null; // rendered by the footer

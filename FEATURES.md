@@ -64,8 +64,8 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 | Pagination | ✅ | |
 | Brands page (`/brands`) | ✅ | The store's Brand list with each brand's uploaded logo |
 | Brand page (`/brand/…`) | ✅ | Exactly the products whose Brand detail is that brand, plus a Brand filter. Brands not in the store's Brand list (e.g. Hermann) fall back to a name search |
-| Product cards | ✅ | Figma design: REF/SKU, photo shown whole in a fixed frame (any photo size fits), "No product image yet" placeholder, name and text cut to 2 lines, price or "Request a quotation", full-width "Add to quote list"; all cards in a row line up |
-| Product page (`/product/…`) | ✅ | Photo gallery, REF, price, sale price, description, options (size/pack), quantity, add to quote list, "currently unavailable" state |
+| Product cards | ✅ | Figma design: REF/SKU, photo shown whole in a fixed frame (any photo size fits), "No product image yet" placeholder, name and text cut to 2 lines, price only for Ready Stock offers, otherwise "Request a quotation" (owner's decision, 19 Nov), full-width "Add to quote list"; all cards in a row line up |
+| Product page (`/product/…`) | ✅ | Built from Figma (19 Nov), three looks: **Ready stock** (products in Ready Stock Offers: badge, "In stock in Oman", price with old price and "Save %", pack unit), **Sold out** (ready stock that is unavailable or has 0 tracked stock: "Request availability") and **Quotation** (all other products: "Quotation on request", no price, owner's decision). Brand (links to the brand page), photo with enlarge button and thumbnails, options, quantity, "Add to quote list" + "Request bulk pricing / Request a quotation" (adds the line and opens the quote list), product reference. Tabs: Overview (description), Specifications (product details), and extra tabs ("Delivery & Ordering") + help banner from Page builder → Product (CMS page `product`). "Chat on WhatsApp" appears once a WhatsApp link is set there |
 | Ready Stock page (`/category/ready-stock-offers`) | 🟡 | Live, built from Figma (CMS page `ready-stock`, editable in Page builder → Ready Stock): hero, 3 promises, store filters + offer cards (brand, LOCAL STOCK, SAVE %, pack size, price / unit, "Available: X" when stock is tracked, quantity, "Enquire & reserve" adds to the quote list), bulk-order bar, How it works, info line, WhatsApp banner, reservation form. Falls back to the normal category page if that CMS page is removed |
 
 ## Quote list and quotation (instead of a shopping cart)
@@ -73,8 +73,8 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 | Feature | Status | Notes |
 |---|---|---|
 | Add to quote list (cards and product page) | ✅ | Saved in the store's cart for this browser |
-| Quote list page (`/quote`) | ✅ | Change quantity, remove lines, empty state |
-| Send quotation request | 🟡 | Sends the form plus all quote-list lines; waits for form fields in TheCoins |
+| Quote list page (`/quote`) | ✅ | Built from Figma (19 Nov): title with the 3 steps, "Items for quotation" (change quantity, remove, empty state with "Browse categories", "Add another product or REF" jumps to the free-text field), "Your details" form (the store's form fields, attachment note; a consent tick box appears once its text is set), sidebar with Request summary (lines, total quantity, send button), "Prefer WhatsApp?" card (once a link is set) and "What happens next?". Thank-you message after sending. Texts editable in Page builder → Quote list (CMS page `quote`) |
+| Send quotation request | 🟡 | From the home form or the quote list page: sends the form plus all quote-list lines, then empties the list. Never tested with a real submission |
 | Prices shown as "indicative" in OMR | ✅ | |
 
 ## Account

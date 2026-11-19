@@ -1,3 +1,4 @@
+import { READY_STOCK_CATEGORY } from "@/lib/config";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getCmsPage, resolveCategory } from "@/lib/api";
@@ -10,7 +11,7 @@ import { ProductListing, type SearchParams } from "@/components/ProductListing";
 // Ready Stock page (Figma "Ready Stock — Desktop", node 92:50). The store category "ready-stock-offers"
 // gets its own design: CMS page "ready-stock" (hero, promises, offers area, bulk-order bar, how it works,
 // WhatsApp banner, reservation form). Until that CMS page exists, the normal category listing is shown.
-const CATEGORY = "ready-stock-offers";
+const CATEGORY = READY_STOCK_CATEGORY;
 const CMS_SLUG = "ready-stock";
 const PATH = `/category/${CATEGORY}`;
 

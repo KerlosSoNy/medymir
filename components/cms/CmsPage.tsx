@@ -41,6 +41,8 @@ const STACK = new Set([
   "text-image/offers",
   "button-cta/bulk",
   "button-cta/info",
+  "button-cta/product-help",
+  "text-image/product-tab",
 ]);
 
 /** What kind of row this is decides its padding and width. */

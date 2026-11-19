@@ -28,7 +28,7 @@ const infoCard = "rounded-xl border border-line-3 bg-white";
 
 export function Stats({ w, ctx }: P) {
   const items: any[] = w.items ?? [];
-  if (!items.length) return null;
+  if (!items.length || w.variant === "quote-next") return null; // quote-next: placed by the quote list page
   switch (w.variant) {
     case "chips":
       return (

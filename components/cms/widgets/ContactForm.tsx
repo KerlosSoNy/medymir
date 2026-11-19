@@ -22,6 +22,7 @@ const PANEL_ICON: Record<string, string> = {
 
 export function ContactForm({ w, ctx }: P) {
   if (w.variant === "footer-contact") return null; // rendered by the footer
+  if (w.variant === "quote-page") return null; // texts of the quote list page, placed by app/quote/page.tsx
   if (w.variant === "contact")
     return (
       <EnquiryForm

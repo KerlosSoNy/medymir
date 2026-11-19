@@ -1,0 +1,82 @@
+{
+  "title": "Quote list",
+  "layout": [
+    {
+      "id": "row-quote-page",
+      "columns": [
+        {
+          "id": "col-quote-page",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-quote-page",
+              "type": "contact-form",
+              "settings": {
+                "variant": "quote-page",
+                "subtitle": "Review your items and send your requirements to our team.",
+                "attachTitle": "Attach your item list or tender document",
+                "attachText": "Email a PDF, Excel sheet or product photos to milani@shamhabib.com",
+                "consentText": "",
+                "privacyLinkText": "",
+                "privacyLink": "/privacy-policy",
+                "smallPrint": "Product selections are subject to confirmation.",
+                "noteTitle": "No payment required",
+                "noteText": "Our team will confirm pricing, availability and delivery details in your quotation.",
+                "submitText": "Send quotation request",
+                "footnote": "Your request is sent for review. It does not place an order.",
+                "subject": "Quotation request",
+                "style": "card",
+                "showMap": false,
+                "mapEmbedUrl": ""
+              }
+            },
+            {
+              "id": "w-quote-next",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "quote-next",
+                "title": "What happens next?",
+                "columns": 3,
+                "items": [
+                  {
+                    "label": "We review your requirements",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": ""
+                  },
+                  {
+                    "label": "We confirm pricing and availability",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": ""
+                  },
+                  {
+                    "label": "You receive your quotation",
+                    "value": "",
+                    "prefix": "",
+                    "suffix": ""
+                  }
+                ]
+              }
+            },
+            {
+              "id": "w-quote-whatsapp",
+              "type": "button-cta",
+              "settings": {
+                "variant": "quote-whatsapp",
+                "title": "Prefer WhatsApp?",
+                "subtitle": "Send your product list or photos to our team.",
+                "text": "Continue on WhatsApp",
+                "link": "",
+                "style": "outline",
+                "size": "medium",
+                "align": "left",
+                "fullWidth": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

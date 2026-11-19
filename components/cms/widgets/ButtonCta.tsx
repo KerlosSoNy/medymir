@@ -1,4 +1,4 @@
-// Button / CTA (button-cta) and our variants: note, callout, banner, band, help, bulk, info.
+// Button / CTA (button-cta) and our variants: note, callout, banner, band, help, product-help, bulk, info.
 import { cn } from "@/lib/cn";
 import { tr } from "@/lib/format";
 import { btn } from "@/lib/styles";
@@ -119,6 +119,8 @@ export function ButtonCta({ w, ctx }: P) {
         )}
       </div>
     );
+  if (w.variant === "product-help") return <ProductHelp w={w} />;
+  if (w.variant === "quote-whatsapp") return null; // placed by the quote list page
   if (w.variant === "banner") return ctx.beside ? <TallCtaBanner w={w} /> : <CtaBanner w={w} />;
   if (!w.text) return null;
   return (
@@ -126,6 +128,32 @@ export function ButtonCta({ w, ctx }: P) {
       <SmartLink to={w.link} className={btnCls()}>
         {tr(w.text)}
       </SmartLink>
+    </div>
+  );
+}
+
+/**
+ * button-cta variant "product-help": Figma product page "Help banner" (node 76:380), cream bar with a list icon,
+ * title, one line and a navy outline button. Used by the CMS page "product" (shown under every product).
+ */
+export function ProductHelp({ w }: { w: any }) {
+  return (
+    <div className="flex flex-col items-start gap-4 rounded-xl border border-[#f1e2be] bg-[#fffaf0] px-[22px] py-[22px] md:flex-row md:items-center md:gap-5 md:py-[18px]">
+      <span className="flex shrink-0">
+        <Icon name="pd-help" size={32} />
+      </span>
+      <div className="grid min-w-0 flex-1 grid-cols-1 gap-0.5">
+        {w.title && <h2 className="font-head text-[17px] leading-snug font-bold text-navy-deep">{tr(w.title)}</h2>}
+        {w.subtitle && <p className="text-[14.5px] text-slate">{tr(w.subtitle)}</p>}
+      </div>
+      {w.text && (
+        <SmartLink
+          to={w.link}
+          className="flex h-12 w-full shrink-0 items-center justify-center rounded-lg border-[1.5px] border-navy-deep bg-white px-5 text-base font-bold whitespace-pre text-navy-deep transition hover:bg-surface-alt md:w-auto"
+        >
+          {tr(w.text)}
+        </SmartLink>
+      )}
     </div>
   );
 }
