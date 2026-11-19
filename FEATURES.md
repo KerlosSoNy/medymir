@@ -19,7 +19,7 @@ Technical details: [SPECS.md](SPECS.md). Status by Figma screen: [PROGRESS.md](P
 | Category bar with all store categories | ✅ | "Ready Stock Offers" highlighted in gold; "Brands" link from CMS |
 | **Mega menus** (computer) | ✅ | Opens on hover or keyboard focus; "All categories" opens on click too; closes with Esc, outside click or a link click |
 | └ All categories panel | ✅ | 12 numbered groups with sub-categories |
-| └ Category panels (7) | ✅ | Sub-categories, "View all" link, "Request a quote" card, featured brands (from the store: the brands of that category's products) |
+| └ Category panels (7) | ✅ | Sub-categories, "View all" link, "Request a quote" card (opens the quote list), featured brands (from the store: the brands of that category's products) |
 | **Menu drawer** (tablet & phone) | ✅ | As in Figma: ☰ button, slides in, categories open into groups and sub-categories, Brands list, "Delivering to" line; closes with ×, Esc, backdrop or a link |
 | Footer | ✅ | About text, categories, top brands, contact, About & Support links, policy links, payment logos |
 | Brand colours from the store settings | ✅ | Changing colours in TheCoins changes the site |
@@ -55,7 +55,7 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 
 | Feature | Status | Notes |
 |---|---|---|
-| All categories page (`/categories`) | ✅ | Category tiles with photo, name, description; tiles without a photo show initials |
+| All categories page (`/categories`) | ✅ | Built from Figma (19 Nov), page-builder page `categories` (banner photo still to upload): photo banner, "Find a category or specialty" search (matches the start of words), 12 numbered category cards in 3 columns with their specialties (same as the mega menus; each specialty opens the category with a search), "Can't find what you need?" bar. If that page is removed, the cards alone are shown. Figma's 13th card "Laboratory & Diagnostics" is left out (no store category) |
 | Category page (`/category/…`) | ✅ | Figma layout: hero from the store category (name, description, picture), sub-category tiles (when the store has sub-categories), Featured brands (brands of this category's products, with logos, linking to brand pages), store filters, "Products" + count + Sort by (Featured, price, newest, biggest saving, name), pagination. Optional CMS page `category-<slug>` adds sections under the products (e.g. promo banner, "Equipping your … unit?" bar) |
 | Sub-category links from the menus | ✅ | Open the category with a search for the sub-category name (store has no real sub-categories yet) |
 | All products (`/products`) | ✅ | |

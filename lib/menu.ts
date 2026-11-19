@@ -100,6 +100,25 @@ export const MENU_GROUPS: MenuGroup[] = [
   },
 ];
 
+/**
+ * All categories page (Figma 80:325): the cards from MENU_GROUPS in three titled columns.
+ * Card numbers follow MENU_GROUPS order (as in Figma).
+ */
+export const CATEGORY_COLUMNS: { title: string; groups: string[] }[] = [
+  { title: "Cardiovascular & Surgical", groups: ["Cardiovascular & Cardiac Surgery", "Surgery & Operating Room", "Specialty Surgery"] },
+  { title: "Specialist Care", groups: ["Endoscopy & Gastroenterology", "Urology", "Dialysis & Renal Care", "Orthopedics & Trauma"] },
+  {
+    title: "Patient Care & Hospital Supplies",
+    groups: [
+      "Infusion & Vascular Access",
+      "Critical Care, Respiratory & Nutrition",
+      "Wound Care & Dressings",
+      "Infection Control & PPE",
+      "General Medical Consumables",
+    ],
+  },
+];
+
 /** Per-category panels. Cardiovascular, Surgical and Orthopedics are from Figma; the rest follow the same pattern. */
 export const CATEGORY_MENUS: Record<string, CategoryMenu> = {
   cardiovascular: {
@@ -148,8 +167,8 @@ export const CATEGORY_MENUS: Record<string, CategoryMenu> = {
 /** Footer line of the phone/tablet menu drawer (Figma 136:129 "Delivering to"). */
 export const DELIVERING_TO = { label: "Delivering to", value: "Oman · Rwanda · Kenya" };
 
-/** Where "Request a quote" in the promo cards goes (the quotation form on the home page). */
-export const QUOTE_LINK = "/#quote";
+/** Where "Request a quote" in the promo cards goes (the quote list page with the request form). */
+export const QUOTE_LINK = "/quote";
 
 export const groupByTitle = (title: string) => MENU_GROUPS.find((g) => g.title === title);
 

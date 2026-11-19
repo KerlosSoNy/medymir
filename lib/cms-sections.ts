@@ -784,6 +784,17 @@ export const SECTIONS: SectionRecipe[] = [
     row: one("search-help", [cta("search-help", { variant: "search-help", title: "Bar title?", subtitle: "One sentence.", text: "Button text", link: "/quote", style: "primary" })]),
   },
   {
+    id: "categories-page",
+    name: "All categories page parts",
+    use: "The All categories page: photo banner, the searchable numbered category cards and the 'Can't find what you need?' bar.",
+    notes: "Text + Image 'categories-hero': eyebrow, title (line 1), subtitle (line 2), highlight (word of line 2 shown in gold), content, linkText + linkUrl, imageUrl (+ mobileImageUrl). Text + Image 'category-directory': search box + the mega-menu category cards (lib/menu.ts). Button / CTA 'list-bar': title, subtitle, text + link (WhatsApp circle on the left, white button).",
+    row: one("categories-page", [
+      w("categories-hero", "text-image", { variant: "categories-hero", eyebrow: "SMALL LABEL", title: "Line one.", subtitle: "Line two.", highlight: "", content: "<p>One sentence.</p>", linkText: "Button text", linkUrl: "#categories", ...IMG, imagePosition: "right", backgroundColor: "" }),
+      w("category-directory", "text-image", { variant: "category-directory", title: "", content: "", ...IMG, imagePosition: "right", backgroundColor: "" }),
+      cta("list-bar", { variant: "list-bar", title: "Bar title?", subtitle: "One sentence.", text: "Button text", link: "/quote", style: "primary" }),
+    ]),
+  },
+  {
     id: "gallery",
     name: "Picture gallery",
     use: "A grid of pictures, each optionally a link.",

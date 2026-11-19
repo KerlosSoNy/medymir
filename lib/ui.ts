@@ -211,5 +211,9 @@ export const UI = {
   noResultsText: "Check the spelling, or search by product name, brand or REF number. Our team can also find it for you.",
   searchAgain: "Search again",
   browseAllCategories: "Browse all categories",
+  // All categories page (Figma "Categories — Desktop 1440", node 80:236)
+  findCategory: "Find a category or specialty",
+  viewCategory: "View category",
+  noCategoryMatch: "No category or specialty matches your search.",
   itemsForQuotation: (n: number) => `Items for quotation (${n})`,
 };

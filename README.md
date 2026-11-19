@@ -26,6 +26,7 @@ Connection settings: `.env.local` (public storefront keys, see `.env.example`).
 | Quote list page texts (intro, attachment note, consent line, sidebar note, "What happens next?", "Prefer WhatsApp?" card and its link) | Page builder → page **quote** (the form fields themselves: Contact form settings) |
 | Search page help bar ("Can't find the right product?") | Page builder → page **search** |
 | Brands page texts | Page builder → page **brands** |
+| All categories page banner (texts, photo) and "Can't find what you need?" bar | Page builder → page **categories** (the category cards come from the store categories and `lib/menu.ts`) |
 | Extra pages (About, FAQ, policies…) | Page builder → new page with that slug, e.g. `about`, `faq`, `privacy-policy` |
 
 Some sections use extra settings (e.g. `variant`, `eyebrow`, `linkText`) that the page builder keeps but may not show as form fields; ask your developer to change those.

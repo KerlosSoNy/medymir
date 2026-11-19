@@ -1,0 +1,75 @@
+{
+  "title": "Categories",
+  "layout": [
+    {
+      "id": "row-categories-top",
+      "columns": [
+        {
+          "id": "col-categories-top",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-categories-hero",
+              "type": "text-image",
+              "settings": {
+                "variant": "categories-hero",
+                "eyebrow": "EXPLORE ALL CATEGORIES",
+                "title": "Every specialty.",
+                "subtitle": "One procurement partner.",
+                "highlight": "One",
+                "content": "<p>Explore medical devices, surgical instruments and everyday healthcare supplies.</p>",
+                "linkText": "Browse categories",
+                "linkUrl": "#categories",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            },
+            {
+              "id": "w-categories-directory",
+              "type": "text-image",
+              "settings": {
+                "variant": "category-directory",
+                "title": "",
+                "content": "",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-categories-help",
+      "columns": [
+        {
+          "id": "col-categories-help",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-categories-help",
+              "type": "button-cta",
+              "settings": {
+                "variant": "list-bar",
+                "title": "Can’t find what you need?",
+                "subtitle": "Send your item list and let our procurement team help.",
+                "text": "Send your list",
+                "link": "/quote",
+                "style": "primary",
+                "size": "medium",
+                "align": "right",
+                "fullWidth": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

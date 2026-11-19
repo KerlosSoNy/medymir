@@ -1,4 +1,4 @@
-// Button / CTA (button-cta) and our variants: note, callout, banner, band, help, product-help, search-help, bulk, info.
+// Button / CTA (button-cta) and our variants: note, callout, banner, band, help, product-help, search-help, list-bar, bulk, info.
 import { cn } from "@/lib/cn";
 import { tr } from "@/lib/format";
 import { btn } from "@/lib/styles";
@@ -120,6 +120,26 @@ export function ButtonCta({ w, ctx }: P) {
       </div>
     );
   if (w.variant === "product-help") return <ProductHelp w={w} />;
+  if (w.variant === "list-bar")
+    // Figma All categories "CTA / Send your list" (80:627): navy-to-green bar, WhatsApp circle, title, line, white button.
+    return (
+      <div className="flex flex-col items-start gap-5 rounded-2xl bg-gradient-to-r from-[#0b2a5e] via-[#0e3f6e] via-45% to-[#127a4f] px-6 py-7 md:flex-row md:items-center md:gap-6 md:px-10">
+        <span className="grid size-16 shrink-0 place-items-center rounded-full border-4 border-white bg-[#25d366]">
+          <Icon name="ct-whatsapp-white" size={36} />
+        </span>
+        <div className="grid min-w-0 flex-1 gap-1">
+          {w.title && <h2 className="font-head text-[22px] leading-[1.2] font-bold text-white md:text-[26px]">{tr(w.title)}</h2>}
+          {w.subtitle && <p className="text-base leading-[1.45] text-[#dce8f2]">{tr(w.subtitle)}</p>}
+        </div>
+        {w.text && (
+          <SmartLink to={w.link} className="flex h-[52px] w-full shrink-0 items-center justify-center gap-2.5 rounded-xl bg-white px-[26px] text-base font-bold whitespace-nowrap text-navy-deep shadow-[0_6px_18px_rgb(0_0_0/0.18)] transition hover:bg-surface-alt md:w-auto">
+            <Icon name="ct-whatsapp-green" size={24} />
+            {tr(w.text)}
+            <Icon name="ct-arrow-dark" size={16} />
+          </SmartLink>
+        )}
+      </div>
+    );
   if (w.variant === "search-help")
     // Figma Search "Help banner" (94:849): navy gradient bar, file icon, title, one line, gold button.
     return (

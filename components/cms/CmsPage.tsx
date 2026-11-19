@@ -47,6 +47,9 @@ const STACK = new Set([
   "stats-counter/trust-bar",
   "text-image/brand-directory",
   "button-cta/search-help",
+  "text-image/categories-hero",
+  "text-image/category-directory",
+  "button-cta/list-bar",
 ]);
 
 /** What kind of row this is decides its padding and width. */

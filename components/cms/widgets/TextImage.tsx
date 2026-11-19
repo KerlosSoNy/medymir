@@ -11,6 +11,7 @@ import { SectionHeader } from "./SectionHeader";
 import { BrandDirectory } from "../../BrandDirectory";
 import { ByCategory } from "./ProductAttributes";
 import { CategoryTiles } from "./Categories";
+import { CategoryDirectory } from "../../CategoryDirectory";
 
 const policyText = cn(
   "mt-[18px] max-w-[727px] text-base leading-[1.7] text-[#2d3b55]",
@@ -56,6 +57,8 @@ export function TextImage({ w, ctx }: P) {
     );
   if (w.variant === "brands-by-category") return <ByCategory ctx={ctx} />;
   if (w.variant === "category-tiles") return <CategoryTiles ctx={ctx} />;
+  if (w.variant === "categories-hero") return <CategoriesHero w={w} />;
+  if (w.variant === "category-directory") return <CategoryDirectory slugs={ctx.categories.map((c) => c.slug ?? c.id)} />;
   if (w.variant === "product-tab")
     // CMS page "product": an extra tab on every product page (title = tab name, text = panel). Shown as a
     // plain titled text when the page is previewed on its own.
@@ -251,6 +254,62 @@ function BrandsHero({ w, ctx }: P) {
           </div>
         </>
       )}
+    </div>
+  );
+}
+
+/**
+ * All categories banner (Figma 80:303): photo with a navy fade from the left, gold spaced label, two-line title
+ * whose `highlight` word is gold, text and a gold pill button. Without a photo the panel is plain navy.
+ * Fields: eyebrow, title (line 1), subtitle (line 2), highlight, content, linkText, linkUrl, imageUrl, mobileImageUrl.
+ */
+function CategoriesHero({ w }: { w: any }) {
+  const img = url(w.imageUrl);
+  const mobile = url(w.mobileImageUrl) || img;
+  const line2 = tr(w.subtitle);
+  const hi = tr(w.highlight);
+  const at = hi ? line2.indexOf(hi) : -1;
+  return (
+    <div className="relative isolate overflow-hidden rounded-[18px] bg-[#0b1d45]">
+      {img && (
+        <picture>
+          <source media="(min-width: 761px)" srcSet={img} />
+          <img src={mobile} alt="" className="absolute inset-0 -z-10 size-full object-cover object-right" />
+        </picture>
+      )}
+      <span
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(8_24_62/0.92)_0%,rgb(8_24_62/0.6)_45%,rgb(8_24_62/0.15)_80%)] md:bg-[linear-gradient(90deg,rgb(8_24_62/0.9)_0%,rgb(8_24_62/0.55)_38%,rgb(8_24_62/0)_62%)]"
+      />
+      <div className="grid max-w-[762px] content-center justify-items-start gap-3 px-6 py-12 md:min-h-[430px] md:px-14 md:py-16">
+        {w.eyebrow && <p className="text-xs font-semibold tracking-[0.34em] text-[#e2b65a] uppercase">{tr(w.eyebrow)}</p>}
+        <h1 className="font-head text-[34px] leading-[1.06] font-extrabold tracking-[-0.01em] text-white md:text-[46px]">
+          {w.title && <span className="block">{tr(w.title)}</span>}
+          {line2 && (
+            <span className="block">
+              {at >= 0 ? (
+                <>
+                  {line2.slice(0, at)}
+                  <span className="bg-gradient-to-b from-[#f2cf7a] to-[#c9952e] bg-clip-text text-transparent">{hi}</span>
+                  {line2.slice(at + hi.length)}
+                </>
+              ) : (
+                line2
+              )}
+            </span>
+          )}
+        </h1>
+        {w.content && <div className="mt-0.5 max-w-[460px] text-base leading-[1.5] text-mist md:text-lg" dangerouslySetInnerHTML={{ __html: html(w.content) }} />}
+        {w.linkText && (
+          <SmartLink
+            to={w.linkUrl}
+            className="mt-2.5 inline-flex h-[50px] items-center gap-2.5 rounded-full bg-gradient-to-b from-[#f1cd78] to-[#d4a447] px-[26px] text-base font-bold text-navy-deep shadow-[0_8px_22px_rgb(0_0_0/0.25)] transition hover:brightness-105"
+          >
+            {tr(w.linkText)}
+            <Icon name="ct-arrow-down" size={16} />
+          </SmartLink>
+        )}
+      </div>
     </div>
   );
 }
