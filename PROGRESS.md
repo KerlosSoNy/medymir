@@ -175,11 +175,11 @@ Nothing was deleted by the developer. TheCoins has no delete action.
 
 ## 7. Next steps
 1. Owner tasks in section 3, especially the Abbott picture, the photos and the quotation form fields
-3. Products imported, each with its **Brand** set; then switch brand pages from name search to the Brand detail and check the Brand filter
-4. Test a real quotation submission (with the owner's OK)
-5. Sign in with a real phone once and check the account page (addresses, account details) against the live store
-6. Logo as an image file (optional; the site currently draws the wordmark from the store name)
-7. Hosting and domain
+2. Products imported, each with its **Brand** set; then switch brand pages from name search to the Brand detail and check the Brand filter
+3. Test a real quotation submission (with the owner's OK)
+4. Sign in with a real phone once and check the account page (addresses, account details) against the live store
+5. Logo as an image file (optional; the site currently draws the wordmark from the store name)
+6. Hosting and domain
 
 ---
 
