@@ -93,14 +93,14 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 
 | Feature | Status | Notes |
 |---|---|---|
-| Info pages from the page builder | 🟡 | Each has its own route file: About, Contact, FAQ, Tender desk, Verify a batch, Distributor enquiries, Help centre (live). Policy pages are built but not saved yet, so their footer links still show "page not found" |
+| Info pages from the page builder | 🟡 | Each has its own route file: About, Contact, FAQ, Tender desk, Verify a batch, Distributor enquiries, Help centre (live). Policy pages are live except Privacy (on hold) |
 | Tender desk, Verify a batch, Distributor enquiries (`/tender-desk`, `/verify-batch`, `/distributors`) | ✅ | No Figma design; same style as About / Contact: navy hero, "How it works" steps (or "Who we work with" cards) and the enquiry form with the contact panel; each form sends with its own subject (Tender enquiry, Batch verification, Distributor enquiry). Texts in the page builder |
 | Help centre (`/help`) | ✅ | Navy hero, "Popular topics" cards (FAQ, quotation, account), "Still need help?" band |
 | About page (`/about`) | 🟡 | Built from Figma (hero, intro, 3 link cards, "Two ways to buy", closing band); texts editable in Page builder → About. Hero photo not uploaded yet |
 | Breadcrumbs on info pages | ✅ | "Home › Page title" above About, Contact, FAQ (and future info pages) |
 | FAQ page (`/faq`) | ✅ | Built from Figma: search box, topic buttons, 13 questions that open and close, "Still have a question?" bar. Questions, answers and topics editable in Page builder → FAQ |
 | Contact page (form, sent, error) | 🟡 | Live at `/contact`, built from Figma: enquiry form, navy contact panel, "Have a product list?" card, thank-you and error messages. Its fields are the store's Contact form fields, the same list as the quotation form. Texts editable in Page builder → Contact |
-| Policy pages with side menu | 🟡 | Built from Figma (route files for all 5; menu becomes pill buttons on phones). Drafts for Shipping, Refund, Terms and Contact information (`cms-drafts/`); Privacy text on hold (Figma has a Shopify template). Not saved to the store yet |
+| Policy pages with side menu | 🟡 | Built from Figma (menu becomes pill buttons on phones). Live: Shipping, Refund, Terms of service, Contact information (texts in the page builder). Privacy policy on hold until there is a real text, so its links show "page not found" |
 | "Page not found" page | ✅ | |
 
 ## Page-building tools (on the developer's computer only)

@@ -1,6 +1,6 @@
 # MedyMar website: progress
 
-_Last updated: 19 November 2026 (product page built from Figma: ready stock, quotation and sold-out looks; "Delivery & Ordering" tab and help banner saved as CMS page `product`; prices now only on Ready Stock product cards; quote list page built from Figma, texts saved as CMS page `quote`; account page with menu, orders, saved addresses and account details; Brands page built and live; search page built; page overview added at the end; All categories page built and live; footer pages Tender desk, Verify a batch, Distributor enquiries and Help centre live)_
+_Last updated: 19 November 2026 (product page built from Figma: ready stock, quotation and sold-out looks; "Delivery & Ordering" tab and help banner saved as CMS page `product`; prices now only on Ready Stock product cards; quote list page built from Figma, texts saved as CMS page `quote`; account page with menu, orders, saved addresses and account details; Brands page built and live; search page built; page overview added at the end; All categories page built and live; footer pages Tender desk, Verify a batch, Distributor enquiries and Help centre live; Shipping, Refund, Terms and Contact information policies live)_
 
 Where we are, measured against the Figma file. Also see [FEATURES.md](FEATURES.md) (what the site does), [SPECS.md](SPECS.md) (how it's built) and [AGENTS.md](AGENTS.md) (rules for AI assistants).
 
@@ -49,7 +49,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | About | 🟡 | 🟡 | 🟡 | Built to match Figma and live at `/about` (checked at 360–1440). Waiting on the hero photo (owner task 0) |
 | FAQ | ✅ | ✅ | ✅ | Live at `/faq`, matches Figma (checked at 360–1440; search, topics and open/close tested). Figma had only the first answer; the other 12 were written by the developer and approved by the owner |
 | Contact: form / sent / error | 🟡 | 🟡 | 🟡 | Built to match Figma and live at `/contact` (all 3 states checked at 360–1440; sent/error tested with a fake reply, no real enquiry sent). Shows the store's form fields (currently the quotation fields, not Figma's 6 contact fields); WhatsApp line left out until there is a number |
-| Policies (privacy, shipping, refund, terms, contact info) | 🟡 | 🟡 | 🟡 | Built to match Figma (checked at 360–1440). 4 drafts with Figma texts (`cms-drafts/<slug>.json`), waiting for the owner to confirm the promises in them. Privacy: Figma text is a Shopify template, on hold. Not saved yet. When the privacy page is live, add the consent tick box to Page builder → Quote list (`consentText`, `privacyLinkText`) |
+| Policies (privacy, shipping, refund, terms, contact info) | ✅ | ✅ | ✅ | Shipping, Refund, Terms and Contact information live (19 Nov, owner approved, Figma texts; Contact information without the WhatsApp and medymar.com lines until confirmed). Privacy: built, on hold until there is a real text (task 7) |
 | "Page not found" | ✅ | ✅ | ✅ | No Figma frame; built in the same style |
 | Tender desk, Verify a batch, Distributor enquiries, Help centre | ✅ | ✅ | ✅ | No Figma frames; built from the info-page sections (hero, steps or cards, enquiry form + contact panel / help band), live 19 Nov (checked at 360–1440). Hero photos empty |
 
@@ -98,7 +98,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | 4 | **Add real products** (name, Brand, REF/SKU, category, price in OMR, photo) and remove the demo ones | The site currently shows demo products |
 | 5 | **Change the store country** from Egypt to Oman | Can't be changed through the connector |
 | 6 | **Give a MedyMar phone number** (or clear the old café number) | The store still has the café phone |
-| 7 | **Policy pages** (`privacy-policy`, `shipping-policy`, `refund-policy`, `terms-of-service`): confirm the texts so they can be saved; privacy needs a real text | Those footer links show "page not found" until then |
+| 7 | **Privacy policy text:** Figma's text is a Shopify template, so the page is on hold. Give your own text (or ask the developer to draft one from how the site really uses data) | The footer and policy-menu "Privacy policy" links show "page not found" until then; the quote list consent tick box also waits for it |
 | 8 | **Delete the page "ZZ widget test"** | Leftover test page; the connector can't delete pages |
 | 9 | **Delete or rename the old "Header" menu** (café menu items) | Not used by the new site |
 | 10 | Replace the 7 **placeholder brand cards** in "Shop by brand" (Home page) with real brand photos | They're simple navy cards with the brand name, made by the developer, not official logos |
@@ -155,6 +155,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | 19 Nov | _(Owner approved)_ Created page **"Search"** (`search`, draft = shown publicly): the navy "Can't find the right product?" bar (Button CTA look `search-help`), button "Send your list" → /quote (Figma: WhatsApp, no number yet). Checked live; settings kept by the public API. Record: `cms-drafts/search.json` |
 | 19 Nov | _(Owner approved)_ Created page **"Categories"** (`categories`, draft = shown publicly): banner (Text + Image look `categories-hero`, photo empty), category directory (look `category-directory`), "Can't find what you need?" bar (Button CTA look `list-bar`, "Send your list" → /quote); Figma texts. Checked live; settings kept. Record: `cms-drafts/categories.json` |
 | 19 Nov | _(Owner approved)_ Created pages **"Tender desk"** (`tender-desk`), **"Verify a batch"** (`verify-batch`), **"Distributor enquiries"** (`distributors`) and **"Help centre"** (`help`), drafts = shown publicly. No Figma design: hero (split-hero), steps or link cards, and the Contact page's enquiry form + contact panel (Help centre: help band instead); texts written by the developer, approved by the owner; hero photos empty. Checked live. Records: `cms-drafts/<slug>.json` |
+| 19 Nov | _(Owner approved)_ Created pages **"Shipping policy"**, **"Refund policy"**, **"Terms of service"** and **"Contact information"** (`shipping-policy`, `refund-policy`, `terms-of-service`, `contact-information`; drafts = shown publicly) with the Figma texts and the policies side menu. Contact information: the WhatsApp line and "Online store: medymar.com" removed until confirmed. Checked live. Records: `cms-drafts/<slug>.json` |
 
 Nothing was deleted by the developer. TheCoins has no delete action.
 
@@ -173,7 +174,7 @@ Nothing was deleted by the developer. TheCoins has no delete action.
 
 ## 7. Next steps
 1. Owner tasks in section 3, especially the Abbott picture, the photos and the quotation form fields
-2. Policy pages: owner confirms the texts, then they are saved to the store
+2. Privacy policy: a real text (owner's own, or a developer draft for approval), then save it and add the quote list consent tick box
 3. Products imported, each with its **Brand** set; then switch brand pages from name search to the Brand detail and check the Brand filter
 4. Test a real quotation submission (with the owner's OK)
 5. Sign in with a real phone once and check the account page (addresses, account details) against the live store
@@ -202,9 +203,9 @@ One line per page of the website. ✅ finished · 🟡 built, but something is s
 | 12 | About | `/about` | 🟡 | Hero photo (task 0) |
 | 13 | Contact | `/contact` | 🟡 | Decide the form fields (task 13); WhatsApp line (task 11) |
 | 14 | FAQ | `/faq` | ✅ | Nothing |
-| 15 | Shipping, Refund, Terms, Contact information policies | `/shipping-policy` and 3 more | 🟡 | Built; you confirm the texts, then they are saved to the store |
+| 15 | Shipping, Refund, Terms, Contact information policies | `/shipping-policy` and 3 more | ✅ | Nothing (they mention WhatsApp, which needs the number, task 11) |
 | 16 | Privacy policy | `/privacy-policy` | 🟡 | Built; needs a real privacy text (Figma's is a template) |
 | 17 | Tender desk, Verify a batch, Distributor enquiries, Help centre | `/tender-desk`, `/verify-batch`, `/distributors`, `/help` | ✅ | No Figma design; built in the About / Contact style (19 Nov). Optional: hero photos in the page builder |
 | 18 | Page not found | any wrong address | ✅ | Nothing |
 
-**Count:** 12 finished (counting the 4 footer pages as one line) · 6 built but waiting on content or decisions · nothing left unbuilt. Every page in Figma, and every footer link except the policies, now has a live page.
+**Count:** 13 finished (counting grouped lines once) · 5 built but waiting on content or decisions · nothing left unbuilt. Every page in Figma, and every footer link except the policies, now has a live page.
