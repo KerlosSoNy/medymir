@@ -59,7 +59,7 @@ export class ApiError extends Error {
 
 async function call<T = any>(
   path: string,
-  init: { method?: "GET" | "POST"; body?: any; token?: string; query?: Record<string, string> } = {},
+  init: { method?: "GET" | "POST" | "PUT" | "DELETE"; body?: any; token?: string; query?: Record<string, string> } = {},
 ): Promise<T> {
   const url = new URL(`${API_URL}/${path}`);
   for (const [k, v] of Object.entries(init.query ?? {})) url.searchParams.set(k, v);
@@ -140,4 +140,29 @@ export const authApi = {
       body: { phone, code, tenantId: TENANT_ID, ...(name ? { name } : {}) },
     }),
   orders: (token: string) => call<{ orders: any[] }>("get-customer-orders", { method: "GET", token }),
+};
+
+/** A saved delivery address of the signed-in customer (TheCoins customer-addresses). */
+export interface Address {
+  id: string;
+  label: string;
+  address: string;
+  area_name?: string;
+  city?: string;
+  governorate_name?: string;
+  country_code?: string | null;
+  landmark?: string | null;
+  is_default?: boolean;
+}
+
+const list = (r: any): any[] => (Array.isArray(r) ? r : (r?.data ?? r?.addresses ?? []));
+
+/** Signed-in customer: profile and saved addresses (all need the session token from verify-otp). */
+export const customerApi = {
+  profile: (token: string) => call<{ customer: any }>("get-customer", { method: "GET", token }),
+  update: (token: string, updates: Record<string, any>) => call<{ customer: any }>("update-customer-profile", { body: { updates }, token }),
+  addresses: async (token: string): Promise<Address[]> => list(await call("customer-addresses", { method: "GET", token })),
+  addAddress: (token: string, a: Omit<Address, "id">) => call("customer-addresses", { body: a, token }),
+  updateAddress: (token: string, a: Partial<Address> & { id: string }) => call("customer-addresses", { method: "PUT", body: a, token }),
+  deleteAddress: (token: string, id: string) => call("customer-addresses", { method: "DELETE", token, query: { id } }),
 };

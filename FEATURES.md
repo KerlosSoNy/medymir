@@ -81,11 +81,13 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 
 | Feature | Status | Notes |
 |---|---|---|
-| Sign in with phone number + SMS code | ✅ | New customers are asked for their name |
-| Request history (orders) | ✅ | |
-| Loyalty points | ✅ | Shown if the store uses points |
-| Sign out | ✅ | |
-| Account menu (Overview, Orders, Quotation requests, Addresses, Account details) | ⬜ | In Figma, not built |
+| Signed-out page | ✅ | Figma design: "Sign in" (opens the phone + SMS code form; new customers are asked for their name), "Build a quote list", "You do not need an account to request a quotation." |
+| Account menu (Overview, Orders, Quotation requests, Addresses, Account details, Sign out) | ✅ | Side menu on computers, pill buttons on phones (19 Nov) |
+| Overview | ✅ | Figma design: cards with the number of orders and saved addresses, "Recent activity" (last 5 orders: number, date, total, payment and order status), note and buttons about quotation requests |
+| Orders | ✅ | All the customer's orders with their products. Orders appear here only when the team creates them in TheCoins (quotation requests are emails, not orders) |
+| Quotation requests | ✅ | Explains that requests are answered by email; buttons to start one or contact the team |
+| Saved addresses | ✅ | Add, edit, delete and choose the default address (stored in TheCoins) |
+| Account details | ✅ | Change name and email; the phone number is the login and can't be changed |
 
 ## Information pages
 
