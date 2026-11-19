@@ -1,6 +1,6 @@
 # MedyMar website: progress
 
-_Last updated: 19 November 2026 (product page built from Figma: ready stock, quotation and sold-out looks; "Delivery & Ordering" tab and help banner saved as CMS page `product`; prices now only on Ready Stock product cards; quote list page built from Figma, texts saved as CMS page `quote`; account page with menu, orders, saved addresses and account details; Brands page built and live; search page built; page overview added at the end; All categories page built and live; footer pages Tender desk, Verify a batch, Distributor enquiries and Help centre live; Shipping, Refund, Terms and Contact information policies live; Privacy policy live, quote list consent tick box on)_
+_Last updated: 19 November 2026 (product page built from Figma: ready stock, quotation and sold-out looks; "Delivery & Ordering" tab and help banner saved as CMS page `product`; prices now only on Ready Stock product cards; quote list page built from Figma, texts saved as CMS page `quote`; account page with menu, orders, saved addresses and account details; Brands page built and live; search page built; page overview added at the end; All categories page built and live; footer pages Tender desk, Verify a batch, Distributor enquiries and Help centre live; Shipping, Refund, Terms and Contact information policies live; Privacy policy live, quote list consent tick box on; test quotation blocked by the Egyptian phone rule, task 3 now urgent)_
 
 Where we are, measured against the Figma file. Also see [FEATURES.md](FEATURES.md) (what the site does), [SPECS.md](SPECS.md) (how it's built) and [AGENTS.md](AGENTS.md) (rules for AI assistants).
 
@@ -94,7 +94,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | 1b | **Replace the Abbott promo picture** with `design-assets/upload/06-promo-abbott-fixed.webp` (until the clean art arrives) | Removes the white strip beside it |
 | 1c | **Upload tightly cropped brand logos** (Products → product details → Brand) for Boston Scientific, Terumo, Biotronik and Edwards; add a logo for MicroPort Orthopedics | These logo files have large empty margins, so the logos look small on the site |
 | 2 | **Upload the missing photos** (section 2) | Cards show placeholders until then |
-| 3 | **Fix the form fields** (Contact form settings): phone check accepts only Egyptian numbers (Omani customers can't send); add choices to "You are buying as"; capitalise "organization", "work email", "what do you need?" | Both the quotation form and the Contact page show these fields |
+| 3 | **URGENT: fix the form fields** (TheCoins → Contact form settings). **Phone:** change its validation from the Egyptian rule `^(\+?20)?[0-9]{10,11}$` to one that accepts Omani and international numbers, e.g. `^\+?[0-9 ]{8,15}$`, with the message "Please enter a valid phone number". Also add choices to "You are buying as" and capitalise "organization", "work email", "what do you need?" | Tested 19 Nov with an Omani number: the quotation form (and Contact, Tender desk, Verify a batch, Distributor forms) **cannot be sent** ("Please enter a valid Egyptian phone number"). Nothing reached the store. After the fix, the developer re-runs the test |
 | 4 | **Add real products** (name, Brand, REF/SKU, category, price in OMR, photo) and remove the demo ones | The site currently shows demo products |
 | 5 | **Change the store country** from Egypt to Oman | Can't be changed through the connector |
 | 6 | **Give a MedyMar phone number** (or clear the old café number) | The store still has the café phone |
@@ -169,14 +169,14 @@ Nothing was deleted by the developer. TheCoins has no delete action.
 - **Some section types drop settings:** the public API drops or renames some fields (Hero Banner, Logo Cloud, Gallery). The site uses section types that keep everything; see SPECS.md §7.
 - **Hidden settings:** some sections use extra settings (e.g. `variant`, `eyebrow`, `linkText`) that the page builder keeps but may not show as editable fields.
 - **Category bar between 1025 and ~1200px wide:** the category names scroll sideways inside the bar because they don't all fit.
-- **Not tested:** sending a real quotation or contact enquiry (needs the owner's OK, see Next steps).
+- **Forms blocked for Omani phone numbers (19 Nov test):** the store's phone rule only accepts Egyptian numbers, so quotation and enquiry forms can't be sent from Oman (task 3). A complete test send is still to do once that is fixed.
 
 ---
 
 ## 7. Next steps
 1. Owner tasks in section 3, especially the Abbott picture, the photos and the quotation form fields
 2. Products imported, each with its **Brand** set; then switch brand pages from name search to the Brand detail and check the Brand filter
-3. Test a real quotation submission (with the owner's OK)
+3. Test a real quotation submission again once the phone rule is fixed (task 3); the 19 Nov test was stopped by it
 4. Sign in with a real phone once and check the account page (addresses, account details) against the live store
 5. Logo as an image file (optional; the site currently draws the wordmark from the store name)
 6. Hosting and domain
