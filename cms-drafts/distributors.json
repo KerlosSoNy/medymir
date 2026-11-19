@@ -1,0 +1,200 @@
+{
+  "title": "Distributor enquiries",
+  "layout": [
+    {
+      "id": "row-distributors-hero",
+      "columns": [
+        {
+          "id": "col-distributors-hero",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-distributors-hero",
+              "type": "text-image",
+              "settings": {
+                "variant": "split-hero",
+                "eyebrow": "Distributor enquiries",
+                "title": "Partner with MedyMar.",
+                "content": "<p>Manufacturers and distributors: tell us about your products and the markets you want to reach.</p>",
+                "linkText": "Send an enquiry",
+                "linkUrl": "#row-distributors-enquiry",
+                "imageUrl": "",
+                "tabletImageUrl": "",
+                "mobileImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-distributors-cards",
+      "columns": [
+        {
+          "id": "col-distributors-cards",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-distributors-cards-head",
+              "type": "text-image",
+              "settings": {
+                "variant": "section-header",
+                "align": "center",
+                "size": "sm",
+                "eyebrow": "",
+                "eyebrowColor": "gold",
+                "eyebrowLines": false,
+                "title": "Who we work with",
+                "content": "<p>We supply hospitals, clinics and procurement teams from Muscat, Kigali and Nairobi.</p>",
+                "imageUrl": "",
+                "tabletImageUrl": "",
+                "mobileImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": "",
+                "linkText": "",
+                "linkUrl": ""
+              }
+            },
+            {
+              "id": "w-distributors-cards",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "link-cards",
+                "title": "",
+                "columns": 3,
+                "items": [
+                  {
+                    "label": "Manufacturers",
+                    "value": "Bring your products to the healthcare buyers we supply.",
+                    "prefix": "",
+                    "suffix": "",
+                    "icon": "warehouse",
+                    "linkText": "Browse our categories",
+                    "link": "/categories"
+                  },
+                  {
+                    "label": "Distributors",
+                    "value": "Work with us on supply and stock for your region.",
+                    "prefix": "",
+                    "suffix": "",
+                    "icon": "cart",
+                    "linkText": "See our brands",
+                    "link": "/brands"
+                  },
+                  {
+                    "label": "Regional partners",
+                    "value": "Talk to our team about working together.",
+                    "prefix": "",
+                    "suffix": "",
+                    "icon": "chat",
+                    "linkText": "Contact our team",
+                    "link": "/contact"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-distributors-enquiry",
+      "columns": [
+        {
+          "id": "col-distributors-form",
+          "span": 8,
+          "widgets": [
+            {
+              "id": "w-distributors-form",
+              "type": "contact-form",
+              "settings": {
+                "variant": "contact",
+                "title": "",
+                "subtitle": "",
+                "subject": "Distributor enquiry",
+                "privacyNote": "We use your details only to answer your enquiry. See our",
+                "privacyLinkText": "Privacy policy",
+                "privacyLink": "/privacy-policy",
+                "submitText": "Send enquiry",
+                "successTitle": "Thank you. Your enquiry has been sent.",
+                "successText": "Our team will reply to the email address you entered.",
+                "errorTitle": "Your enquiry was not sent.",
+                "style": "card",
+                "showMap": false,
+                "mapEmbedUrl": "",
+                "contactInfo": [],
+                "theme": "light",
+                "backgroundColor": "",
+                "pluginSlug": "contact"
+              }
+            }
+          ]
+        },
+        {
+          "id": "col-distributors-side",
+          "span": 4,
+          "widgets": [
+            {
+              "id": "w-distributors-panel",
+              "type": "contact-form",
+              "settings": {
+                "variant": "contact-panel",
+                "title": "Contact MedyMar",
+                "subtitle": "Get in touch with our team for sales, quotations and general enquiries.",
+                "style": "card",
+                "showMap": false,
+                "mapEmbedUrl": "",
+                "theme": "dark",
+                "backgroundColor": "",
+                "pluginSlug": "contact",
+                "contactInfo": [
+                  {
+                    "icon": "email",
+                    "label": "Email",
+                    "value": "milani@shamhabib.com",
+                    "link": ""
+                  },
+                  {
+                    "icon": "pin",
+                    "label": "Locations",
+                    "value": "Oman & the Gulf: Muscat\nRwanda: Kigali\nEast Africa: Nairobi",
+                    "link": ""
+                  },
+                  {
+                    "icon": "clock",
+                    "label": "Working hours",
+                    "value": "Sunday to Thursday, 8:00 to 18:00 Gulf Standard Time (GMT+4)",
+                    "link": ""
+                  }
+                ]
+              }
+            },
+            {
+              "id": "w-distributors-list",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "route-cards",
+                "tone": "plain",
+                "title": "",
+                "columns": 1,
+                "items": [
+                  {
+                    "icon": "file-text",
+                    "label": "Have a product list?",
+                    "value": "Add your items to a quote list and send them in one quotation request.",
+                    "prefix": "",
+                    "suffix": "",
+                    "linkText": "Request a quotation",
+                    "link": "/quote"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

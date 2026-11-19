@@ -27,6 +27,7 @@ Connection settings: `.env.local` (public storefront keys, see `.env.example`).
 | Search page help bar ("Can't find the right product?") | Page builder → page **search** |
 | Brands page texts | Page builder → page **brands** |
 | All categories page banner (texts, photo) and "Can't find what you need?" bar | Page builder → page **categories** (the category cards come from the store categories and `lib/menu.ts`) |
+| Footer pages Tender desk, Verify a batch, Distributor enquiries, Help centre | Page builder → pages **tender-desk**, **verify-batch**, **distributors**, **help** |
 | Extra pages (About, FAQ, policies…) | Page builder → new page with that slug, e.g. `about`, `faq`, `privacy-policy` |
 
 Some sections use extra settings (e.g. `variant`, `eyebrow`, `linkText`) that the page builder keeps but may not show as form fields; ask your developer to change those.

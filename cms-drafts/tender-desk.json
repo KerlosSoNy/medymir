@@ -1,0 +1,170 @@
+{
+  "title": "Tender desk",
+  "layout": [
+    {
+      "id": "row-tender-hero",
+      "columns": [
+        {
+          "id": "col-tender-hero",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-tender-hero",
+              "type": "text-image",
+              "settings": {
+                "variant": "split-hero",
+                "eyebrow": "Tender desk",
+                "title": "Tenders and framework supply.",
+                "content": "<p>Send us your tender documents or bill of quantities and we prepare a line-by-line offer.</p>",
+                "linkText": "Submit your tender",
+                "linkUrl": "#row-tender-enquiry",
+                "imageUrl": "",
+                "tabletImageUrl": "",
+                "mobileImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-tender-steps",
+      "columns": [
+        {
+          "id": "col-tender-steps",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-tender-steps",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "steps",
+                "title": "How it works",
+                "columns": 3,
+                "items": [
+                  {
+                    "label": "Send your documents",
+                    "value": "Share the tender, bill of quantities or item list, with the closing date.",
+                    "prefix": "",
+                    "suffix": ""
+                  },
+                  {
+                    "label": "We match every line",
+                    "value": "Each item is matched to an authorised product with its REF number.",
+                    "prefix": "",
+                    "suffix": ""
+                  },
+                  {
+                    "label": "You receive our offer",
+                    "value": "Pricing, lead times and registration documents, line by line.",
+                    "prefix": "",
+                    "suffix": ""
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-tender-enquiry",
+      "columns": [
+        {
+          "id": "col-tender-form",
+          "span": 8,
+          "widgets": [
+            {
+              "id": "w-tender-form",
+              "type": "contact-form",
+              "settings": {
+                "variant": "contact",
+                "title": "",
+                "subtitle": "",
+                "subject": "Tender enquiry",
+                "privacyNote": "We use your details only to answer your enquiry. See our",
+                "privacyLinkText": "Privacy policy",
+                "privacyLink": "/privacy-policy",
+                "submitText": "Send tender enquiry",
+                "successTitle": "Thank you. Your enquiry has been sent.",
+                "successText": "Our team will reply to the email address you entered.",
+                "errorTitle": "Your enquiry was not sent.",
+                "style": "card",
+                "showMap": false,
+                "mapEmbedUrl": "",
+                "contactInfo": [],
+                "theme": "light",
+                "backgroundColor": "",
+                "pluginSlug": "contact"
+              }
+            }
+          ]
+        },
+        {
+          "id": "col-tender-side",
+          "span": 4,
+          "widgets": [
+            {
+              "id": "w-tender-panel",
+              "type": "contact-form",
+              "settings": {
+                "variant": "contact-panel",
+                "title": "Contact MedyMar",
+                "subtitle": "Get in touch with our team for sales, quotations and general enquiries.",
+                "style": "card",
+                "showMap": false,
+                "mapEmbedUrl": "",
+                "theme": "dark",
+                "backgroundColor": "",
+                "pluginSlug": "contact",
+                "contactInfo": [
+                  {
+                    "icon": "email",
+                    "label": "Email",
+                    "value": "milani@shamhabib.com",
+                    "link": ""
+                  },
+                  {
+                    "icon": "pin",
+                    "label": "Locations",
+                    "value": "Oman & the Gulf: Muscat\nRwanda: Kigali\nEast Africa: Nairobi",
+                    "link": ""
+                  },
+                  {
+                    "icon": "clock",
+                    "label": "Working hours",
+                    "value": "Sunday to Thursday, 8:00 to 18:00 Gulf Standard Time (GMT+4)",
+                    "link": ""
+                  }
+                ]
+              }
+            },
+            {
+              "id": "w-tender-list",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "route-cards",
+                "tone": "plain",
+                "title": "",
+                "columns": 1,
+                "items": [
+                  {
+                    "icon": "file-text",
+                    "label": "Have a product list?",
+                    "value": "Add your items to a quote list and send them in one quotation request.",
+                    "prefix": "",
+                    "suffix": "",
+                    "linkText": "Request a quotation",
+                    "link": "/quote"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

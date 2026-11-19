@@ -1,0 +1,129 @@
+{
+  "title": "Help centre",
+  "layout": [
+    {
+      "id": "row-help-hero",
+      "columns": [
+        {
+          "id": "col-help-hero",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-help-hero",
+              "type": "text-image",
+              "settings": {
+                "variant": "split-hero",
+                "eyebrow": "Help centre",
+                "title": "How can we help?",
+                "content": "<p>Answers about quotations, ordering and your account, and the quickest way to reach our team.</p>",
+                "linkText": "Read the FAQ",
+                "linkUrl": "/faq",
+                "imageUrl": "",
+                "tabletImageUrl": "",
+                "mobileImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-help-cards",
+      "columns": [
+        {
+          "id": "col-help-cards",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-help-cards-head",
+              "type": "text-image",
+              "settings": {
+                "variant": "section-header",
+                "align": "center",
+                "size": "sm",
+                "eyebrow": "",
+                "eyebrowColor": "gold",
+                "eyebrowLines": false,
+                "title": "Popular topics",
+                "content": "<p>Find what you need, or ask our team.</p>",
+                "imageUrl": "",
+                "tabletImageUrl": "",
+                "mobileImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": "",
+                "linkText": "",
+                "linkUrl": ""
+              }
+            },
+            {
+              "id": "w-help-cards",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "link-cards",
+                "title": "",
+                "columns": 3,
+                "items": [
+                  {
+                    "label": "Frequently asked questions",
+                    "value": "Quotations, delivery, documents and accounts.",
+                    "prefix": "",
+                    "suffix": "",
+                    "icon": "chat",
+                    "linkText": "Read the FAQ",
+                    "link": "/faq"
+                  },
+                  {
+                    "label": "Request a quotation",
+                    "value": "Build a quote list and send it in one request.",
+                    "prefix": "",
+                    "suffix": "",
+                    "icon": "file-text",
+                    "linkText": "Open your quote list",
+                    "link": "/quote"
+                  },
+                  {
+                    "label": "Your account",
+                    "value": "Sign in to see your orders and saved addresses.",
+                    "prefix": "",
+                    "suffix": "",
+                    "icon": "quote",
+                    "linkText": "Go to your account",
+                    "link": "/account"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-help-band",
+      "columns": [
+        {
+          "id": "col-help-band",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-help-band",
+              "type": "button-cta",
+              "settings": {
+                "variant": "band",
+                "title": "Still need help?",
+                "subtitle": "Our team replies during working hours, Sunday to Thursday.",
+                "text": "Contact our team",
+                "link": "/contact",
+                "style": "primary",
+                "size": "medium",
+                "align": "center",
+                "fullWidth": false
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

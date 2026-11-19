@@ -93,7 +93,9 @@ All sections come from CMS page `home` in the page builder; texts, links and ima
 
 | Feature | Status | Notes |
 |---|---|---|
-| Info pages from the page builder | 🟡 | Each has its own route file (About, Contact, FAQ so far). Policy and other footer pages don't exist yet and show "page not found" |
+| Info pages from the page builder | 🟡 | Each has its own route file: About, Contact, FAQ, Tender desk, Verify a batch, Distributor enquiries, Help centre (live). Policy pages are built but not saved yet, so their footer links still show "page not found" |
+| Tender desk, Verify a batch, Distributor enquiries (`/tender-desk`, `/verify-batch`, `/distributors`) | ✅ | No Figma design; same style as About / Contact: navy hero, "How it works" steps (or "Who we work with" cards) and the enquiry form with the contact panel; each form sends with its own subject (Tender enquiry, Batch verification, Distributor enquiry). Texts in the page builder |
+| Help centre (`/help`) | ✅ | Navy hero, "Popular topics" cards (FAQ, quotation, account), "Still need help?" band |
 | About page (`/about`) | 🟡 | Built from Figma (hero, intro, 3 link cards, "Two ways to buy", closing band); texts editable in Page builder → About. Hero photo not uploaded yet |
 | Breadcrumbs on info pages | ✅ | "Home › Page title" above About, Contact, FAQ (and future info pages) |
 | FAQ page (`/faq`) | ✅ | Built from Figma: search box, topic buttons, 13 questions that open and close, "Still have a question?" bar. Questions, answers and topics editable in Page builder → FAQ |

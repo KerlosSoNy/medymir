@@ -1,0 +1,170 @@
+{
+  "title": "Verify a batch",
+  "layout": [
+    {
+      "id": "row-verify-hero",
+      "columns": [
+        {
+          "id": "col-verify-hero",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-verify-hero",
+              "type": "text-image",
+              "settings": {
+                "variant": "split-hero",
+                "eyebrow": "Verify a batch",
+                "title": "Check a batch or lot number.",
+                "content": "<p>Every line we supply is traceable to its batch or lot. Send us the details and our team will confirm them.</p>",
+                "linkText": "Send batch details",
+                "linkUrl": "#row-verify-enquiry",
+                "imageUrl": "",
+                "tabletImageUrl": "",
+                "mobileImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-verify-steps",
+      "columns": [
+        {
+          "id": "col-verify-steps",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-verify-steps",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "steps",
+                "title": "How to check a batch",
+                "columns": 3,
+                "items": [
+                  {
+                    "label": "Find the label",
+                    "value": "Note the product REF and the LOT or batch number printed on the pack.",
+                    "prefix": "",
+                    "suffix": ""
+                  },
+                  {
+                    "label": "Send us the details",
+                    "value": "Use the form below with the REF, the LOT number and where the product was supplied.",
+                    "prefix": "",
+                    "suffix": ""
+                  },
+                  {
+                    "label": "We confirm",
+                    "value": "Our team checks the batch against our supply records and replies by email.",
+                    "prefix": "",
+                    "suffix": ""
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-verify-enquiry",
+      "columns": [
+        {
+          "id": "col-verify-form",
+          "span": 8,
+          "widgets": [
+            {
+              "id": "w-verify-form",
+              "type": "contact-form",
+              "settings": {
+                "variant": "contact",
+                "title": "",
+                "subtitle": "",
+                "subject": "Batch verification",
+                "privacyNote": "We use your details only to answer your enquiry. See our",
+                "privacyLinkText": "Privacy policy",
+                "privacyLink": "/privacy-policy",
+                "submitText": "Send for verification",
+                "successTitle": "Thank you. Your enquiry has been sent.",
+                "successText": "Our team will reply to the email address you entered.",
+                "errorTitle": "Your enquiry was not sent.",
+                "style": "card",
+                "showMap": false,
+                "mapEmbedUrl": "",
+                "contactInfo": [],
+                "theme": "light",
+                "backgroundColor": "",
+                "pluginSlug": "contact"
+              }
+            }
+          ]
+        },
+        {
+          "id": "col-verify-side",
+          "span": 4,
+          "widgets": [
+            {
+              "id": "w-verify-panel",
+              "type": "contact-form",
+              "settings": {
+                "variant": "contact-panel",
+                "title": "Contact MedyMar",
+                "subtitle": "Get in touch with our team for sales, quotations and general enquiries.",
+                "style": "card",
+                "showMap": false,
+                "mapEmbedUrl": "",
+                "theme": "dark",
+                "backgroundColor": "",
+                "pluginSlug": "contact",
+                "contactInfo": [
+                  {
+                    "icon": "email",
+                    "label": "Email",
+                    "value": "milani@shamhabib.com",
+                    "link": ""
+                  },
+                  {
+                    "icon": "pin",
+                    "label": "Locations",
+                    "value": "Oman & the Gulf: Muscat\nRwanda: Kigali\nEast Africa: Nairobi",
+                    "link": ""
+                  },
+                  {
+                    "icon": "clock",
+                    "label": "Working hours",
+                    "value": "Sunday to Thursday, 8:00 to 18:00 Gulf Standard Time (GMT+4)",
+                    "link": ""
+                  }
+                ]
+              }
+            },
+            {
+              "id": "w-verify-list",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "route-cards",
+                "tone": "plain",
+                "title": "",
+                "columns": 1,
+                "items": [
+                  {
+                    "icon": "file-text",
+                    "label": "Have a product list?",
+                    "value": "Add your items to a quote list and send them in one quotation request.",
+                    "prefix": "",
+                    "suffix": "",
+                    "linkText": "Request a quotation",
+                    "link": "/quote"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

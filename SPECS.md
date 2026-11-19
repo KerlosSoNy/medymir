@@ -187,6 +187,7 @@ app/                  routes (pages)
   about/ contact/ faq/  info pages: one route file per page, each = Breadcrumbs + CmsPage for its CMS slug
   category/ready-stock-offers/  Ready Stock page: Breadcrumbs + CmsPage "ready-stock" (ctx.path + ctx.sp for the offers area);
                       falls back to the normal category listing until that CMS page exists
+  tender-desk/ verify-batch/ distributors/ help/  footer info pages (same route file as faq/, no Figma design)
   privacy-policy/ shipping-policy/ refund-policy/ terms-of-service/ contact-information/
                       policy pages: same, plus "Policies & information" in the trail and ctx.path (menu highlight)
                       (a new info page, e.g. privacy-policy, needs its own folder with the same page.tsx)

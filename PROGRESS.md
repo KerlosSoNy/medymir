@@ -1,6 +1,6 @@
 # MedyMar website: progress
 
-_Last updated: 19 November 2026 (product page built from Figma: ready stock, quotation and sold-out looks; "Delivery & Ordering" tab and help banner saved as CMS page `product`; prices now only on Ready Stock product cards; quote list page built from Figma, texts saved as CMS page `quote`; account page with menu, orders, saved addresses and account details; Brands page built and live; search page built; page overview added at the end; All categories page built and live)_
+_Last updated: 19 November 2026 (product page built from Figma: ready stock, quotation and sold-out looks; "Delivery & Ordering" tab and help banner saved as CMS page `product`; prices now only on Ready Stock product cards; quote list page built from Figma, texts saved as CMS page `quote`; account page with menu, orders, saved addresses and account details; Brands page built and live; search page built; page overview added at the end; All categories page built and live; footer pages Tender desk, Verify a batch, Distributor enquiries and Help centre live)_
 
 Where we are, measured against the Figma file. Also see [FEATURES.md](FEATURES.md) (what the site does), [SPECS.md](SPECS.md) (how it's built) and [AGENTS.md](AGENTS.md) (rules for AI assistants).
 
@@ -51,6 +51,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | Contact: form / sent / error | 🟡 | 🟡 | 🟡 | Built to match Figma and live at `/contact` (all 3 states checked at 360–1440; sent/error tested with a fake reply, no real enquiry sent). Shows the store's form fields (currently the quotation fields, not Figma's 6 contact fields); WhatsApp line left out until there is a number |
 | Policies (privacy, shipping, refund, terms, contact info) | 🟡 | 🟡 | 🟡 | Built to match Figma (checked at 360–1440). 4 drafts with Figma texts (`cms-drafts/<slug>.json`), waiting for the owner to confirm the promises in them. Privacy: Figma text is a Shopify template, on hold. Not saved yet. When the privacy page is live, add the consent tick box to Page builder → Quote list (`consentText`, `privacyLinkText`) |
 | "Page not found" | ✅ | ✅ | ✅ | No Figma frame; built in the same style |
+| Tender desk, Verify a batch, Distributor enquiries, Help centre | ✅ | ✅ | ✅ | No Figma frames; built from the info-page sections (hero, steps or cards, enquiry form + contact panel / help band), live 19 Nov (checked at 360–1440). Hero photos empty |
 
 **Cards** (Figma Components page): product card, category card and tile, brand card, exclusive-brand card, solution card, menu list item, menu category card and menu promo card are all ✅. Every card handles any photo size and shows a styled placeholder when there's no photo.
 
@@ -97,7 +98,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | 4 | **Add real products** (name, Brand, REF/SKU, category, price in OMR, photo) and remove the demo ones | The site currently shows demo products |
 | 5 | **Change the store country** from Egypt to Oman | Can't be changed through the connector |
 | 6 | **Give a MedyMar phone number** (or clear the old café number) | The store still has the café phone |
-| 7 | **Create the footer pages**: `tender-desk`, `verify-batch`, `distributors`, `help`, `privacy-policy`, `shipping-policy`, `refund-policy`, `terms-of-service` | Those links show "page not found" until the pages exist |
+| 7 | **Policy pages** (`privacy-policy`, `shipping-policy`, `refund-policy`, `terms-of-service`): confirm the texts so they can be saved; privacy needs a real text | Those footer links show "page not found" until then |
 | 8 | **Delete the page "ZZ widget test"** | Leftover test page; the connector can't delete pages |
 | 9 | **Delete or rename the old "Header" menu** (café menu items) | Not used by the new site |
 | 10 | Replace the 7 **placeholder brand cards** in "Shop by brand" (Home page) with real brand photos | They're simple navy cards with the brand name, made by the developer, not official logos |
@@ -153,6 +154,7 @@ Legend: ✅ done and matches Figma · 🟡 works, but simpler than Figma or wait
 | 19 Nov | Brands page re-saved a minute later (re-read first, unchanged): the directory, "by specialty" and category tiles moved from Product Attributes / Categories sections to Text + Image looks, because the public API dropped their settings and showed carousels. Same texts; checked live |
 | 19 Nov | _(Owner approved)_ Created page **"Search"** (`search`, draft = shown publicly): the navy "Can't find the right product?" bar (Button CTA look `search-help`), button "Send your list" → /quote (Figma: WhatsApp, no number yet). Checked live; settings kept by the public API. Record: `cms-drafts/search.json` |
 | 19 Nov | _(Owner approved)_ Created page **"Categories"** (`categories`, draft = shown publicly): banner (Text + Image look `categories-hero`, photo empty), category directory (look `category-directory`), "Can't find what you need?" bar (Button CTA look `list-bar`, "Send your list" → /quote); Figma texts. Checked live; settings kept. Record: `cms-drafts/categories.json` |
+| 19 Nov | _(Owner approved)_ Created pages **"Tender desk"** (`tender-desk`), **"Verify a batch"** (`verify-batch`), **"Distributor enquiries"** (`distributors`) and **"Help centre"** (`help`), drafts = shown publicly. No Figma design: hero (split-hero), steps or link cards, and the Contact page's enquiry form + contact panel (Help centre: help band instead); texts written by the developer, approved by the owner; hero photos empty. Checked live. Records: `cms-drafts/<slug>.json` |
 
 Nothing was deleted by the developer. TheCoins has no delete action.
 
@@ -202,7 +204,7 @@ One line per page of the website. ✅ finished · 🟡 built, but something is s
 | 14 | FAQ | `/faq` | ✅ | Nothing |
 | 15 | Shipping, Refund, Terms, Contact information policies | `/shipping-policy` and 3 more | 🟡 | Built; you confirm the texts, then they are saved to the store |
 | 16 | Privacy policy | `/privacy-policy` | 🟡 | Built; needs a real privacy text (Figma's is a template) |
-| 17 | Tender desk, Verify a batch, Distributor enquiries, Help centre | footer links | ⬜ | No Figma design yet; the links show "page not found" (task 7) |
+| 17 | Tender desk, Verify a batch, Distributor enquiries, Help centre | `/tender-desk`, `/verify-batch`, `/distributors`, `/help` | ✅ | No Figma design; built in the About / Contact style (19 Nov). Optional: hero photos in the page builder |
 | 18 | Page not found | any wrong address | ✅ | Nothing |
 
-**Count:** 11 finished · 6 built but waiting on content or decisions · 1 group of footer pages not built. Every page designed in Figma is now built.
+**Count:** 12 finished (counting the 4 footer pages as one line) · 6 built but waiting on content or decisions · nothing left unbuilt. Every page in Figma, and every footer link except the policies, now has a live page.
