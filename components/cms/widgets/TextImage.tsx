@@ -8,6 +8,9 @@ import { goldBtn } from "../classes";
 import { OfferListing } from "../../OfferListing";
 import { type P, html, url } from "./shared";
 import { SectionHeader } from "./SectionHeader";
+import { BrandDirectory } from "../../BrandDirectory";
+import { ByCategory } from "./ProductAttributes";
+import { CategoryTiles } from "./Categories";
 
 const policyText = cn(
   "mt-[18px] max-w-[727px] text-base leading-[1.7] text-[#2d3b55]",
@@ -39,6 +42,20 @@ export function TextImage({ w, ctx }: P) {
         <div className={policyText} dangerouslySetInnerHTML={{ __html: html(w.content) }} />
       </article>
     );
+  if (w.variant === "brands-hero") return <BrandsHero w={w} ctx={ctx} />;
+  // Brands page parts that read store data. They live on Text + Image because the public API drops our settings
+  // (variant, texts) on Product Attributes and Categories sections.
+  if (w.variant === "brand-directory")
+    return (
+      <div id={w.anchor || undefined} className="scroll-mt-6">
+        <BrandDirectory
+          brands={ctx.brands.map((b) => ({ name: b.name, slug: b.slug, logo: b.logo }))}
+          request={{ title: tr(w.title), subtitle: tr(w.subtitle), buttonText: tr(w.linkText), link: w.linkUrl ?? "" }}
+        />
+      </div>
+    );
+  if (w.variant === "brands-by-category") return <ByCategory ctx={ctx} />;
+  if (w.variant === "category-tiles") return <CategoryTiles ctx={ctx} />;
   if (w.variant === "product-tab")
     // CMS page "product": an extra tab on every product page (title = tab name, text = panel). Shown as a
     // plain titled text when the page is previewed on its own.
@@ -175,5 +192,65 @@ function Offers({ w, ctx }: P) {
       anchor={w.anchor || "offers"}
       labels={{ badge: tr(w.badge), note: tr(w.note), button: tr(w.buttonText), footnote: tr(w.footnote) }}
     />
+  );
+}
+
+/**
+ * Brands page hero (Figma 17:345): warm panel, gold rule + label, bold title + light second line, text and a dark
+ * button on the left; on the right a wall of the first six brands of the store's Brand list (logo, or the name
+ * when there is no logo) and a small note. Fields: eyebrow, title, subtitle (light line), content, linkText,
+ * linkUrl, noteStrong, note.
+ */
+function BrandsHero({ w, ctx }: P) {
+  const wall = ctx.brands.slice(0, 6);
+  return (
+    <div className="flex flex-col gap-8 rounded-[18px] border border-[#ece8df] bg-[#f8f7f3] px-6 py-8 md:px-[55px] md:py-[46px] lg:flex-row lg:items-center lg:gap-9">
+      <div className="grid min-w-0 flex-1 content-start justify-items-start gap-3.5">
+        <span aria-hidden className="h-[3px] w-[54px] bg-[#c08a2a]" />
+        {w.eyebrow && <p className="text-[11.5px] font-semibold tracking-[0.16em] text-gold-menu uppercase">{tr(w.eyebrow)}</p>}
+        <h1 className="font-head text-[36px] leading-[1.08] tracking-[-0.02em] text-[#1b2a44] md:text-[46px] xl:text-[54px] xl:leading-[56px]">
+          {w.title && <span className="block font-bold">{tr(w.title)}</span>}
+          {w.subtitle && <span className="block font-light">{tr(w.subtitle)}</span>}
+        </h1>
+        {w.content && <div className="max-w-[440px] text-base leading-[26px] text-[#4b5565] md:text-[17px]" dangerouslySetInnerHTML={{ __html: html(w.content) }} />}
+        {w.linkText && (
+          <SmartLink
+            to={w.linkUrl}
+            className="mt-1.5 inline-flex items-center gap-3 rounded-lg bg-[#1e2a44] px-[25px] py-3.5 text-[15px] font-semibold text-white transition hover:brightness-125"
+          >
+            {tr(w.linkText)}
+            <Icon name="br-arrow-white" size={16} />
+          </SmartLink>
+        )}
+      </div>
+      {wall.length > 0 && (
+        <>
+          <span aria-hidden className="hidden h-[300px] w-px shrink-0 bg-[#e3ded3] lg:block" />
+          <div className="grid min-w-0 flex-1 justify-items-center gap-7 border-t border-[#e3ded3] pt-8 lg:border-0 lg:pt-0">
+            <ul className="grid w-full max-w-[460px] grid-cols-2 gap-y-[30px]">
+              {wall.map((b) => (
+                <li key={b.slug} className="flex h-14 items-center justify-center px-2">
+                  {b.logo ? (
+                    <img src={b.logo} alt={b.name} loading="lazy" className="max-h-full max-w-[85%] object-contain" />
+                  ) : (
+                    <span className="text-center font-head text-xl leading-tight font-semibold text-[#1b2a44] md:text-2xl">{b.name}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+            {(w.noteStrong || w.note) && (
+              <p className="flex items-center gap-2.5 text-xs tracking-[0.06em] text-[#4b5565]">
+                <span aria-hidden className="size-2.5 shrink-0 bg-[#b8862e]" />
+                <span>
+                  {w.noteStrong && <strong className="font-bold text-ink-2">{tr(w.noteStrong)}</strong>}
+                  {w.noteStrong && w.note && " · "}
+                  {tr(w.note)}
+                </span>
+              </p>
+            )}
+          </div>
+        </>
+      )}
+    </div>
   );
 }

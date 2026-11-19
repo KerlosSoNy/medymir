@@ -72,7 +72,7 @@ If a document turns out to be wrong, rewrite the wrong part. Don't just add a co
 
 ## 5. Known traps
 
-- **TheCoins public API:** hero-banner, logo-cloud, gallery and some strict widget types drop or reject extra keys. Home sections therefore use text-image, stats-counter, button-cta, testimonials, contact-form and faq with a custom `variant` key (see `components/cms/widgets/`).
+- **TheCoins public API:** hero-banner, logo-cloud, gallery and some strict widget types drop or reject extra keys. Products by Category, Product Attributes and Categories also drop our `variant` (the live Brands page briefly showed carousels on 19 Nov): a section with our own look that reads store data must be a Text + Image look. After saving, always check `get-cms-pages` still has your `variant`. Home sections therefore use text-image, stats-counter, button-cta, testimonials, contact-form and faq with a custom `variant` key (see `components/cms/widgets/`).
 - **Saving a page replaces the whole page:** always re-read the page right before saving and change only your part of that fresh copy. Saving from an older copy or a draft file silently undoes other people's changes (this reverted the home WhatsApp banner on 18 Nov).
 - **Draft pages are public:** the API serves draft CMS pages, so unpublished builder edits show on the site.
 - **Caching:** public data is cached for 60 s, so store changes can take up to a minute to appear (the first visit after that can still show the old version; reload once).

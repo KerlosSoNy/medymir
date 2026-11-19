@@ -1,0 +1,181 @@
+{
+  "title": "Brands",
+  "layout": [
+    {
+      "id": "row-brands-top",
+      "columns": [
+        {
+          "id": "col-brands-top",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-brands-hero",
+              "type": "text-image",
+              "settings": {
+                "variant": "brands-hero",
+                "eyebrow": "SHOP BY BRAND",
+                "title": "Leading brands.",
+                "subtitle": "One procurement partner.",
+                "content": "<p>Explore medical devices and supplies from leading manufacturers.</p>",
+                "linkText": "Browse all brands",
+                "linkUrl": "#all-brands",
+                "noteStrong": "MEDYMAR",
+                "note": "Healthcare procurement simplified",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            },
+            {
+              "id": "w-brands-trust",
+              "type": "stats-counter",
+              "settings": {
+                "variant": "trust-bar",
+                "title": "",
+                "columns": 4,
+                "items": [
+                  {
+                    "label": "Authorised channels",
+                    "value": "Leading medical manufacturers",
+                    "prefix": "",
+                    "suffix": "",
+                    "icon": "channels"
+                  },
+                  {
+                    "label": "Batch traceability",
+                    "value": "On every line",
+                    "prefix": "",
+                    "suffix": "",
+                    "icon": "batch"
+                  },
+                  {
+                    "label": "Registration documents",
+                    "value": "On every line",
+                    "prefix": "",
+                    "suffix": "",
+                    "icon": "documents"
+                  },
+                  {
+                    "label": "Authenticity",
+                    "value": "How every product is traced",
+                    "prefix": "",
+                    "suffix": "",
+                    "icon": "authentic"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "w-brands-directory",
+              "type": "text-image",
+              "settings": {
+                "variant": "brand-directory",
+                "anchor": "all-brands",
+                "title": "Don’t see a brand?",
+                "subtitle": "We can still source it. Tell us the brand and the products you need.",
+                "content": "",
+                "linkText": "Request a brand",
+                "linkUrl": "/quote",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-brands-specialty",
+      "columns": [
+        {
+          "id": "col-brands-specialty",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-brands-specialty-head",
+              "type": "text-image",
+              "settings": {
+                "variant": "section-header",
+                "eyebrow": "",
+                "size": "md",
+                "title": "Brands by specialty",
+                "content": "<p>Leading manufacturers in every clinical area. Availability and supply are confirmed per enquiry.</p>",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": "",
+                "linkText": "",
+                "linkUrl": "",
+                "linkColor": "blue"
+              }
+            },
+            {
+              "id": "w-brands-specialty",
+              "type": "text-image",
+              "settings": {
+                "variant": "brands-by-category",
+                "title": "",
+                "content": "",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "row-brands-categories",
+      "columns": [
+        {
+          "id": "col-brands-categories",
+          "span": 12,
+          "widgets": [
+            {
+              "id": "w-brands-categories-head",
+              "type": "text-image",
+              "settings": {
+                "variant": "section-header",
+                "eyebrow": "",
+                "size": "md",
+                "title": "Shop by category",
+                "content": "<p>Explore products from every clinical area</p>",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": "",
+                "linkText": "All categories",
+                "linkUrl": "/categories",
+                "linkColor": "blue"
+              }
+            },
+            {
+              "id": "w-brands-categories",
+              "type": "text-image",
+              "settings": {
+                "variant": "category-tiles",
+                "title": "",
+                "content": "",
+                "imageUrl": "",
+                "mobileImageUrl": "",
+                "tabletImageUrl": "",
+                "imagePosition": "right",
+                "backgroundColor": ""
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

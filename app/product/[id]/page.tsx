@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { sanitize } from "@/lib/sanitize";
-import { getBrands, getCmsPage, getProduct, getTenant } from "@/lib/api";
+import { getBrands, getProduct, getTenant } from "@/lib/api";
 import { widgetCtx } from "@/lib/ctx";
 import { pickWidgets } from "@/lib/cms-pick";
-import { layoutToPage } from "@/lib/cms-sections";
+import { templatePage } from "@/lib/cms-template";
 import { isReadyStock, money, plain, tr } from "@/lib/format";
 import { UI } from "@/lib/ui";
 import { cn } from "@/lib/cn";
@@ -52,15 +52,6 @@ function attrText(a: any): string {
   return Array.isArray(v) ? v.filter(Boolean).join(", ") : v == null || typeof v === "object" ? "" : String(v).trim();
 }
 
-/** The CMS page "product", or (on a developer's computer, with ?draft=1) the planned cms-drafts/product.json. */
-async function templatePage(draft: boolean) {
-  if (draft && process.env.NODE_ENV === "development") {
-    const { readDraft } = await import("@/lib/cms-preview");
-    const d = await readDraft(CMS_SLUG);
-    if (d) return layoutToPage(d.layout, d.title);
-  }
-  return getCmsPage(CMS_SLUG);
-}
 
 const factRow = "flex flex-wrap gap-x-3 gap-y-1 border-b border-[#e3e8ef] py-[11px] text-sm";
 const factLabel = "w-[150px] shrink-0 font-semibold text-navy-deep";
@@ -69,7 +60,7 @@ const factValue = "min-w-0 break-words text-slate";
 export default async function ProductPage({ params, searchParams }: Props) {
   const { id } = await params;
   const { draft } = await searchParams;
-  const [p, tenant, brands, template, ctx] = await Promise.all([getProduct(id), getTenant(), getBrands(), templatePage(draft === "1"), widgetCtx()]);
+  const [p, tenant, brands, template, ctx] = await Promise.all([getProduct(id), getTenant(), getBrands(), templatePage(CMS_SLUG, draft), widgetCtx()]);
   if (!p) notFound();
 
   const currency = tenant?.locale.currency ?? null;

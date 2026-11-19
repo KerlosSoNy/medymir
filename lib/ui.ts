@@ -188,5 +188,14 @@ export const UI = {
     phone: "Phone number",
     phoneNote: "Your phone number is used to sign in and can't be changed here.",
   },
+  // Brands page (Figma "Brands — Desktop 1440", node 17:276)
+  brandSearch: "Search for a brand…",
+  brandSearchLabel: "Search brands",
+  brandSort: [
+    ["", "Featured"],
+    ["az", "Name: A to Z"],
+    ["za", "Name: Z to A"],
+  ] as [string, string][],
+  noBrandsFound: "No brand matches your search.",
   itemsForQuotation: (n: number) => `Items for quotation (${n})`,
 };

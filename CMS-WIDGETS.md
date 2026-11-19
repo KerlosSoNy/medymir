@@ -52,10 +52,10 @@ See also: [SPECS.md](SPECS.md) §7 (data flow) and [AGENTS.md](AGENTS.md) §5 (k
 | `featured-products` | products-slider | Featured Products | Grid of featured products | ✅ |
 | `recommended-products` | products-slider | Recommended For You | Product suggestions | ✅ (same product grid) |
 | `products-by-category` | products-slider | Products by Category | Products from a category or a ranking | ✅ |
-| `categories-grid` | categories-grid | Categories | Category cards | ✅ category carousel |
-| `text-image` | text-image | Text + Image | Rich text with image | ✅ (+ our `section-header`, `split-hero`, `policy`, `stock-hero`, `offers`, `product-tab` variants) |
+| `categories-grid` | categories-grid | Categories | Category cards | ✅ category carousel (**drops our `variant` publicly**: for category tiles use Text + Image `category-tiles`) |
+| `text-image` | text-image | Text + Image | Rich text with image | ✅ (+ our `section-header`, `split-hero`, `policy`, `stock-hero`, `offers`, `product-tab`, `brands-hero`, `brand-directory`, `brands-by-category`, `category-tiles` variants) |
 | `testimonials` | testimonials | Testimonials | Customer quotes | ✅ (+ our `brand-carousel`, `exclusive-brands`, `solutions` variants) |
-| `stats-counter` | stats-counter | Stats / Counters | Numbers & metrics | ✅ (+ our `chips`, `features`, `tabs`, `checklist`, `link-cards`, `route-cards`, `policy-menu`, `service-bar`, `steps`, `quote-next` variants) |
+| `stats-counter` | stats-counter | Stats / Counters | Numbers & metrics | ✅ (+ our `chips`, `features`, `tabs`, `checklist`, `link-cards`, `route-cards`, `policy-menu`, `service-bar`, `steps`, `quote-next`, `trust-bar` variants) |
 | `button-cta` | button-cta | Button / CTA | One call-to-action button | ✅ (+ our `note`, `callout`, `banner`, `band`, `help`, `product-help`, `quote-whatsapp`, `bulk`, `info` variants) |
 | `contact-form` | contact-form | Contact Form | Form linked to the Contact Us plugin | ✅ (our `quote`, `quote-page`, `contact-card`, `contact`, `contact-panel` variants) |
 | `faq-accordion` | faq-accordion | FAQ / Accordion | Questions & answers saved in the widget | ✅ (+ our `topics` variant) |
@@ -72,7 +72,7 @@ See also: [SPECS.md](SPECS.md) §7 (data flow) and [AGENTS.md](AGENTS.md) §5 (k
 | `offer-card` | offer-card | Offer Card | Offer with price, icon, image | ⬜ |
 | `swiper-grid-cards` | swiper-grid-cards | Swiper Grid Cards | Promo cards with products (slider) | ⬜ |
 | `grid-cards` | grid-cards | Grid Cards | Promo cards with products (grid) | ⬜ |
-| `product-attributes` | product-attributes | Product Attributes | Values of an attribute (e.g. all Brands) | ✅ Brand only: the "Shop by brand" carousel |
+| `product-attributes` | product-attributes | Product Attributes | Values of an attribute (e.g. all Brands) | ✅ Brand only: the "Shop by brand" carousel (**drops our `variant` and extra texts publicly**, tested 19 Nov: the Brands page directory and "by specialty" are Text + Image looks) |
 | `order-history` | order-history | Order History | Customer's orders | ⬜ (we have the Account page) |
 | `customer-service-center` | customer-service-center | Customer Service Center | Help center with recent orders | ⬜ |
 | `newsletter-subscription` | newsletter-subscription | Newsletter Subscription | Newsletter plugin form | ⬜ |
@@ -254,7 +254,7 @@ title; content (rich HTML); imageUrl; mobileImageUrl; tabletImageUrl;
 imagePosition: 'left' | 'right' | 'top' | 'bottom'; backgroundColor;
 ```
 MedyMar also uses `variant: "section-header"` with `eyebrow`, `eyebrowColor`, `size` (`sm` for info pages), `eyebrowLines: false` (no lines beside a centred label), `align`, `linkText`, `linkUrl`, `linkColor`; and `variant: "policy"` (policy page text: `eyebrow`, `title` as the page heading, `content` rich text with h2/h3/p/ul/links); and `variant: "split-hero"` (info-page hero: navy box, `eyebrow`, `title` as the page heading, `content`, gold button `linkText` + `linkUrl`, picture `imageUrl` / `tabletImageUrl` / `mobileImageUrl`).
-`variant: "product-tab"` (only in the CMS page `product`): an extra tab on every product page, `title` = tab name, `content` = tab text.
+`variant: "brands-hero"` (Brands page hero: `eyebrow`, `title` bold line, `subtitle` light line, `content`, `linkText` + `linkUrl`, `noteStrong` + `note`; the logo wall is the first 6 brands of the Brand list). `variant: "brand-directory"` (Brands page: all brands with search and sort; `anchor`, and the "Don't see a brand?" bar `title`, `subtitle`, `linkText` + `linkUrl`), `variant: "brands-by-category"` (one box per store category with the brands of its products) and `variant: "category-tiles"` (all store categories as tiles); these read store data and live on Text + Image because Product Attributes / Categories drop our settings. `variant: "product-tab"` (only in the CMS page `product`): an extra tab on every product page, `title` = tab name, `content` = tab text.
 
 #### `testimonials`: Testimonials
 ```ts
@@ -266,7 +266,7 @@ MedyMar variants: `brand-carousel` (`name` = "Brand — tagline", `avatar`, `lin
 ```ts
 title; items: { value; label; prefix; suffix }[]; columns: 2 | 3 | 4;
 ```
-MedyMar variants: `chips`, `features` (`icon`), `tabs`, `checklist`, `policy-menu` (policies menu: `label` + `link` per item; highlights the current page), `link-cards` and `route-cards` (info-page cards; `route-cards` + `tone: "plain"` = icon without square, arrow on the button; `label` = title, `value` = sentence, `icon` = cart | file-text | chat | warehouse | quote, `linkText` + `link`), `quote-next` (CMS page `quote`: "What happens next?" steps in the quote list sidebar; `title`, `label` per step), plus `announcement`, `category-nav`, `footer-column`, `footer-links`, `legal-links` on `site-layout`.
+MedyMar variants: `chips`, `features` (`icon`), `tabs`, `checklist`, `policy-menu` (policies menu: `label` + `link` per item; highlights the current page), `link-cards` and `route-cards` (info-page cards; `route-cards` + `tone: "plain"` = icon without square, arrow on the button; `label` = title, `value` = sentence, `icon` = cart | file-text | chat | warehouse | quote, `linkText` + `link`), `trust-bar` (Brands page: 4 items, `icon` channels | batch | documents | authentic), `quote-next` (CMS page `quote`: "What happens next?" steps in the quote list sidebar; `title`, `label` per step), plus `announcement`, `category-nav`, `footer-column`, `footer-links`, `legal-links` on `site-layout`.
 
 #### `button-cta`: Button / CTA
 ```ts
@@ -427,6 +427,7 @@ columns: 1 | 2 | 3 | 4; showTitle; backgroundColor;
 |---|---|---|
 | Banner with a real, clickable button | `banners` drops the button text; `hero-banner` returns an empty card publicly | Full-width: a **one-slide `carousel`** (keeps title, subtitle, `ctaText`, `ctaLink`). Boxed, with a small label or a note: `button-cta` variant `banner`. Beside products (side column): the same `button-cta` banner, which then shows as a tall card |
 | Extra keys (our `variant`, `eyebrow`, `linkText`…) | Kept by text-image, stats-counter, button-cta, testimonials, contact-form, faq | Use those types for custom sections |
+| Product Attributes / Categories with extra settings | The public output drops `variant` and our texts (tested 19 Nov) | Store-data sections with our own look are Text + Image looks (`brand-directory`, `brands-by-category`, `category-tiles`) |
 | Products by Category with extra settings | Public output keeps only `title`, `subtitle`, `button`, `view_all` and the resolved products (`data`); `variant`, `categoryId` and our texts are dropped (tested 18 Nov) | Custom product areas (e.g. Ready Stock offers) are a `text-image` with our variant that loads its products itself |
 | Strict types | `hero-banner`, `featured-products`, `spacer`, `gallery` reject or drop extra keys | Only send their exact fields |
 | Images | Stored in TheCoins media (`media.thecoins.app/…`) | Never point a widget at files in the website project |

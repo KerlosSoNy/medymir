@@ -1,9 +1,8 @@
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CmsPage } from "@/components/cms/CmsPage";
 import { QuoteRequest, type QuoteTexts } from "@/components/QuoteRequest";
-import { getCmsPage } from "@/lib/api";
 import { pickWidgets } from "@/lib/cms-pick";
-import { layoutToPage } from "@/lib/cms-sections";
+import { templatePage } from "@/lib/cms-template";
 import { widgetCtx } from "@/lib/ctx";
 import { tr } from "@/lib/format";
 import { cn } from "@/lib/cn";
@@ -23,18 +22,9 @@ const MAIN = "contact-form/quote-page";
 const NEXT = "stats-counter/quote-next";
 const WHATSAPP = "button-cta/quote-whatsapp";
 
-async function templatePage(draft: boolean) {
-  if (draft && process.env.NODE_ENV === "development") {
-    const { readDraft } = await import("@/lib/cms-preview");
-    const d = await readDraft(CMS_SLUG);
-    if (d) return layoutToPage(d.layout, d.title);
-  }
-  return getCmsPage(CMS_SLUG);
-}
-
 export default async function QuotePage({ searchParams }: { searchParams: Promise<{ draft?: string }> }) {
   const { draft } = await searchParams;
-  const [page, ctx] = await Promise.all([templatePage(draft === "1"), widgetCtx()]);
+  const [page, ctx] = await Promise.all([templatePage(CMS_SLUG, draft), widgetCtx()]);
   const { picked, rest } = pickWidgets(page, [MAIN, NEXT, WHATSAPP]);
   const m = picked[MAIN][0] ?? {};
   const n = picked[NEXT][0];

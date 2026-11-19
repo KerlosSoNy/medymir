@@ -764,6 +764,19 @@ export const SECTIONS: SectionRecipe[] = [
     ]),
   },
   {
+    id: "brands-page",
+    name: "Brands page parts",
+    use: "The Brands page: hero with a logo wall, trust bar, brand directory (search, sort, all brands, 'Don't see a brand?' bar), brands by specialty, and category tiles.",
+    notes: "Text + Image 'brands-hero': eyebrow, title (bold line), subtitle (light line), content, linkText + linkUrl, noteStrong + note; the logo wall = first 6 brands of the Brand list. Stats 'trust-bar': 4 items, icon channels | batch | documents | authentic. Text + Image 'brand-directory': all brands of the Brand list with search and sort; anchor, and the bar under the grid: title, subtitle, linkText + linkUrl. Text + Image 'brands-by-category': one box per category with the brands of its products. Text + Image 'category-tiles': all store categories as tiles. (Product Attributes and Categories sections lose these settings publicly, so these parts use Text + Image.) Brands and categories always come from the store.",
+    row: one("brands-page", [
+      w("brands-hero", "text-image", { variant: "brands-hero", eyebrow: "SMALL LABEL", title: "Bold line.", subtitle: "Light line.", content: "<p>One sentence.</p>", linkText: "Button text", linkUrl: "#all-brands", noteStrong: "NAME", note: "Short note", ...IMG, imagePosition: "right", backgroundColor: "" }),
+      w("brands-trust", "stats-counter", { variant: "trust-bar", title: "", columns: 4, items: [stat("First", { icon: "channels", value: "One line" }), stat("Second", { icon: "batch", value: "One line" }), stat("Third", { icon: "documents", value: "One line" }), stat("Fourth", { icon: "authentic", value: "One line" })] }),
+      w("brands-directory", "text-image", { variant: "brand-directory", anchor: "all-brands", title: "Bar title?", subtitle: "One sentence.", content: "", linkText: "Button text", linkUrl: "/quote", ...IMG, imagePosition: "right", backgroundColor: "" }),
+      w("brands-by-category", "text-image", { variant: "brands-by-category", title: "", content: "", ...IMG, imagePosition: "right", backgroundColor: "" }),
+      w("category-tiles", "text-image", { variant: "category-tiles", title: "", content: "", ...IMG, imagePosition: "right", backgroundColor: "" }),
+    ]),
+  },
+  {
     id: "gallery",
     name: "Picture gallery",
     use: "A grid of pictures, each optionally a link.",

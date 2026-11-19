@@ -43,6 +43,9 @@ const STACK = new Set([
   "button-cta/info",
   "button-cta/product-help",
   "text-image/product-tab",
+  "text-image/brands-hero",
+  "stats-counter/trust-bar",
+  "text-image/brand-directory",
 ]);
 
 /** What kind of row this is decides its padding and width. */
@@ -52,7 +55,7 @@ function rowKind(row: any): RowKind {
   const kinds = ws.map(kindOf);
   if (kinds.some((k) => STACK.has(k))) return "stack";
   if (kinds.some((k) => k === "stats-counter/chips" || k === "stats-counter/features")) return "compact";
-  if (kinds.some((k) => k.startsWith("categories-grid/") || k === "testimonials/brand-carousel" || k.startsWith("product-attributes/"))) return "bleed";
+  if (kinds.some((k) => (k.startsWith("categories-grid/") || k === "testimonials/brand-carousel" || k.startsWith("product-attributes/")))) return "bleed";
   if (ws.length > 0 && kinds.every((k) => k.startsWith("banners/") || k.startsWith("hero-banner/") || k === "button-cta/banner")) return "banner";
   return "boxed";
 }

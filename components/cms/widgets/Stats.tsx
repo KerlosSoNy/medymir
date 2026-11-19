@@ -1,5 +1,5 @@
 // Stats / Counters (stats-counter) and our variants: chips, tabs, features, checklist, link-cards, route-cards,
-// policy-menu, service-bar, steps.
+// policy-menu, service-bar, steps, trust-bar.
 import { cn } from "@/lib/cn";
 import { tr } from "@/lib/format";
 import { Icon, SmartLink } from "../../SmartLink";
@@ -25,6 +25,13 @@ const cardIcon = (name: string) => {
   return icon ? <Icon name={icon[0]} size={icon[1]} /> : null;
 };
 const infoCard = "rounded-xl border border-line-3 bg-white";
+/** Brands page trust bar icons (Figma "icon/trust"). */
+const TRUST_ICON: Record<string, string> = {
+  channels: "br-trust-channels",
+  batch: "br-trust-batch",
+  documents: "br-trust-docs",
+  authentic: "br-trust-authentic",
+};
 
 export function Stats({ w, ctx }: P) {
   const items: any[] = w.items ?? [];
@@ -142,6 +149,30 @@ export function Stats({ w, ctx }: P) {
         </div>
         );
       }
+    case "trust-bar":
+      // Figma Brands "Trust bar" (17:377): four promises in one white box with a soft shadow (2 × 2 on tablets, stacked on phones).
+      return (
+        <div className="grid grid-cols-1 overflow-hidden rounded-xl border border-[#e3e7ed] bg-white shadow-[0_6px_16px_rgb(15_31_64/0.06)] sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((it, i) => (
+            <div
+              key={i}
+              className={cn(
+                "flex items-center gap-3.5 py-4 pr-4 pl-[22px]",
+                i > 0 && "border-t border-[#e3e7ed]",
+                i === 1 && "sm:border-t-0 sm:border-l",
+                i === 3 && "sm:border-l",
+                i > 0 && "lg:border-t-0 lg:border-l",
+              )}
+            >
+              {TRUST_ICON[it.icon] && <Icon name={TRUST_ICON[it.icon]} size={22} />}
+              <div className="grid min-w-0 gap-0.5">
+                <p className="text-sm font-semibold text-ink-2">{tr(it.label)}</p>
+                {it.value && <p className="text-[12.5px] text-muted-2">{tr(it.value)}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
     case "service-bar":
       // Figma Ready Stock "Service bar": three promises side by side in one white box (stacked on phones).
       return (

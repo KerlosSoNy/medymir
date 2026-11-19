@@ -12,6 +12,8 @@ export interface WidgetCtx {
   brands: Brand[];
   productCount: number;
   contactEmail: string | null;
+  /** Brand names with products in each category (category slug → names), from the store's brand filter. */
+  categoryBrands?: Record<string, string[]>;
   row?: RowKind;
   beside?: boolean;
   withArrows?: boolean;
